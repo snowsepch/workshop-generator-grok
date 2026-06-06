@@ -58,7 +58,26 @@
   - 注意：gh CLI 目前的 token 缺少 `workflow` scope，所以無法直接 push workflow 檔（安全機制）。建議優先用 GitHub 網頁 UI 新增，或本地 re-auth 後再 push。
 - 原本 repo 的 main 仍維持原版（Grok 版永遠只在這個新 repo）。
 
-## 4. 重要提醒（給未來自己）
+## 4. 資料保護與隱私注意事項（公開 repo 必讀）
+- **已採取的保護措施**（2026-06 更新）：
+  - GITHUB_REPOS_STATUS.md 內的本地路徑已匿名化（從 `/Users/sep/...` 改為 `~/小教室Grok版/` 通用寫法）。
+  - 移除所有 "Lala" 個人提及。
+  - 新增 `.gitignore`：排除 .DS_Store、*.log、local-*、暫存檔等，避免個人檔案或 OS 快取意外上傳。
+  - Git 作者資訊（snowsepch + 個人 email）已存在於歷史中，無法輕易移除（需 rewrite history，風險高）。未來 commit 請使用隱私 email。
+- **未來開發保護規則**：
+  - 絕對不要在任何公開檔案中寫真實本地路徑（用 `~` 或「你的 iCloud 路徑」代替）。
+  - 門市設定只存 LocalStorage（瀏覽器端），不會進 repo。
+  - 截圖（歷史版本/）只保留 UI，注意不要包含真實店名或個人畫面。
+  - 每次 commit 前確認 `git status` 沒有敏感檔。
+- **Git 隱私建議**（在本機執行一次）：
+  ```bash
+  git config user.name "你的顯示名稱"
+  git config user.email "你的名稱+ID@users.noreply.github.com"  # GitHub 隱私 email
+  ```
+  並在 GitHub 帳號設定開啟 "Keep my email addresses private"。
+- 原本 repo 的 main 仍維持原版（Grok 版永遠只在這個新 repo）。
+
+## 5. 重要提醒（給未來自己）
 - 這個資料夾（小教室Grok版）永遠只放 Grok 版。
 - 原本 repo 的 main 已經回復，不要混淆。
 - 所有內容都已依照使用者要求：台灣用語、25-30分動手實作、情境式融合標題、實際操作課程邏輯等完成。

@@ -1,10 +1,11 @@
 # Apple Shop 小教室專案 · Grok 版
 
-> **GitHub**：https://github.com/snowsepch/workshop-generator-grok  
 > **線上直接使用**（推薦）：https://snowsepch.github.io/workshop-generator-grok/  
 > 開啟瀏覽器即可用，無需下載。
 
 這是使用 Grok（xAI）協助開發與持續優化的版本，為單一 HTML 檔案，開啟瀏覽器即可直接使用，無需安裝任何額外程式。
+
+（原始碼僅供維護者內部使用，一般使用者無需關注 GitHub repo。）
 
 ## 與原本版本的主要差異
 

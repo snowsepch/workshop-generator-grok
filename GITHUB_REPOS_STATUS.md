@@ -42,12 +42,15 @@
 - b21e088：docs: add instructions for enabling GitHub Actions Pages deploy（workflow scope limitation noted）。
 - 更早：初始上傳 + .nojekyll + 各種 UI/內容修正（詳見 git log）。
 
-**目前線上連結（Grok 版，推薦使用）：**
-- 原始碼：https://github.com/snowsepch/workshop-generator-grok
-- 線上直接使用（GitHub Pages，永遠最新）：https://snowsepch.github.io/workshop-generator-grok/
-  開啟瀏覽器即可用，無需下載 index.html。每次 push 後 Pages 會自動更新（目前 legacy + .nojekyll；.github/workflows/deploy-pages.yml 已在本機準備好）。
+**給一般使用者（店員/學員）的唯一連結：**
+- 線上直接使用（GitHub Pages）：https://snowsepch.github.io/workshop-generator-grok/
+  開啟瀏覽器即可用，無需下載。請只分享這個連結給需要使用工具的人。
 
-**注意**：工具 UI（topbar）已移除直接 GitHub 按鈕，連結集中在此文件與 README.md 維護，避免干擾操作介面。
+**給維護者/內部參考（非公開分享）：**
+- 原始碼：https://github.com/snowsepch/workshop-generator-grok
+- 本地正本：`~/小教室Grok版/index.html`
+
+**注意**：工具 UI 已完全移除任何 GitHub 按鈕或連結提示。一般使用者只需打開 Pages 連結即可使用所有功能，無需知道原始碼位置。此文件與 README 僅供維護者內部參考。
 - **GitHub Pages 部署**：
   - 目前使用 legacy source + .nojekyll 設定（已推）。**注意**：`.github/workflows/deploy-pages.yml` 檔案已在本機小教室Grok版資料夾內準備完成（標準 static pages deploy action）。
   - 推薦改用 GitHub Actions 部署（更穩定）：

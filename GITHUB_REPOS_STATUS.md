@@ -10,7 +10,7 @@
 - **注意**：這個 repo 的 main 請維持原版，不要再直接 push Grok 內容進去。
 
 ## 2. Grok 版（目前這個資料夾）
-- **本地位置**：`/Users/sep/Library/Mobile Documents/com~apple~CloudDocs/小教室Grok版/`
+- **本地位置**：`~/小教室Grok版/`（或你的 iCloud 路徑，例如 `/Users/你的使用者名稱/Library/Mobile Documents/com~apple~CloudDocs/小教室Grok版/`）
 - **GitHub Repo**（已上傳完成）：
   - **原始碼**：https://github.com/snowsepch/workshop-generator-grok
   - **線上使用（GitHub Pages）**：https://snowsepch.github.io/workshop-generator-grok/
@@ -61,7 +61,7 @@
 ## 4. 重要提醒（給未來自己）
 - 這個資料夾（小教室Grok版）永遠只放 Grok 版。
 - 原本 repo 的 main 已經回復，不要混淆。
-- 所有內容都已依照 Lala 的要求：台灣用語、25-30分動手實作、情境式融合標題、實際操作課程邏輯等完成。
+- 所有內容都已依照使用者要求：台灣用語、25-30分動手實作、情境式融合標題、實際操作課程邏輯等完成。
 - 有任何 repo 相關疑問，可參考本檔案 + README.md。
 
 ---

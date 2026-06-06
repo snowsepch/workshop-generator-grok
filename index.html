@@ -1319,6 +1319,7 @@ const TOPICS = [
 
   {
     n:"Apple Intelligence 入門", ico:"✨",
+    category: 'AI',
     sub:"iOS 26.1 起繁體中文正式支援",
     tagline:"裝置端 AI、隱私至上、深度整合您的生活",
     welcome:"Apple Intelligence 是這一代系統最大的改變，11 月開始繁中正式支援。今天會帶大家看寫作、Genmoji、翻譯這幾個最實用的功能，怎麼融入您日常使用。",
@@ -1975,6 +1976,7 @@ const TOPICS = [
 
   {
     n:"Gemini AI 生活研究術", ico:"✨",
+    category: 'AI',
     sub:"用 Google AI 幫 iPhone 動腦、解答、規劃",
     tagline:"拍照問問題 × 即時語音對話 × 生成圖片存 Photos",
     welcome:"iPhone 拍照很強，但拍完想知道「這是什麼花？怎麼養？」「這張菜單翻譯一下」或「幫我規劃三天兩夜宜蘭行程」，這時候可以請 Gemini 來幫忙。它是 Google 的 AI App，跟 Apple Intelligence 可以互補使用。",
@@ -2743,14 +2745,15 @@ function renderTopics(filterCat = null){
   TOPICS.forEach((t, i) => {
     let cat = t.category || '其他';
     // 簡單推斷未分類的核心主題 (for 現有硬編碼資料)
+    // 注意：AI 檢查必須在 App 檢查之前，避免 "apple" 內的 "app" 誤判；App 檢查避免寬鬆 "app" 以防 "apple xxx" 誤入
     if (!t.category && !t.custom) {
       const n = t.n.toLowerCase();
       if (n.includes('iphone')) cat = 'iPhone';
       else if (n.includes('ipad')) cat = 'iPad';
       else if (n.includes('mac')) cat = 'Mac';
       else if (n.includes('watch')) cat = 'Watch';
-      else if (n.includes('airpods') || n.includes('airtag') || n.includes('app') || n.includes('提醒') || n.includes('日誌')) cat = 'App / 服務';
       else if (n.includes(' ai') || n.includes('ai ') || n.includes('apple intelligence') || n.includes('gemini')) cat = 'AI';
+      else if (n.includes('airpods') || n.includes('airtag') || n.includes('提醒') || n.includes('日誌') || n.includes(' app') || n.includes('app ')) cat = 'App / 服務';
       else cat = '其他';
     }
     if (filterCat && cat !== filterCat) return;
@@ -4864,6 +4867,7 @@ function parseAndPrefillForm(){
   });
 
   // 預選分類（根據產品名稱智慧推斷）
+  // 與 renderTopics 推斷邏輯保持一致：AI 優先、App 檢查嚴謹避免 "apple" 誤判
   const catSelect = document.getElementById('f_category');
   if (catSelect) {
     const nLower = name.toLowerCase();
@@ -4872,8 +4876,8 @@ function parseAndPrefillForm(){
     else if (nLower.includes('ipad')) inferredCat = 'iPad';
     else if (nLower.includes('mac')) inferredCat = 'Mac';
     else if (nLower.includes('watch')) inferredCat = 'Watch';
-    else if (nLower.includes('airpods') || nLower.includes('airtag')) inferredCat = 'App / 服務';
     else if (nLower.includes(' ai') || nLower.includes('ai ') || nLower.includes('apple intelligence') || nLower.includes('gemini')) inferredCat = 'AI';
+    else if (nLower.includes('airpods') || nLower.includes('airtag') || nLower.includes('提醒') || nLower.includes('日誌') || nLower.includes(' app') || nLower.includes('app ')) inferredCat = 'App / 服務';
     catSelect.value = inferredCat;
   }
 

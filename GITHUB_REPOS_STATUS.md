@@ -33,7 +33,15 @@
 ## 3. 上傳紀錄（已完成）
 - 2026-06-06：使用 `gh repo create workshop-generator-grok --public --source . --remote origin --push` 完成首次上傳。
 - 隨即啟用 GitHub Pages（`gh api` + `gh repo edit` 設定 homepage 與 topics）。
-- 之後的開發：在此資料夾直接 `git add`、`git commit`、`git push` 即可同步到 GitHub 與 Pages。
+- 之後的開發：在此資料夾直接 `git add`、`git commit`、`git push` 即可同步到 GitHub 與 Pages（一般檔案OK）。
+- **GitHub Pages 部署**：
+  - 目前使用 legacy source + .nojekyll 設定（已推）。
+  - 推薦改用 GitHub Actions 部署（更穩定）：
+    1. 去 https://github.com/snowsepch/workshop-generator-grok 點「Add file」→「Create new file」
+    2. 檔名輸入 `.github/workflows/deploy-pages.yml`
+    3. 內容從本機資料夾的 `.github/workflows/deploy-pages.yml` 複製貼上（或見下方程式碼）
+    4. Commit 後，Actions 會自動部署，完成後即可用 https://snowsepch.github.io/workshop-generator-grok/ 開啟
+  - 注意：gh CLI 目前的 token 缺少 `workflow` scope，所以無法直接 push workflow 檔（安全機制），需用網頁或重新 `gh auth login` 時勾選 workflow 權限。
 - 原本 repo 的 main 仍維持原版（Grok 版永遠只在這個新 repo）。
 
 ## 4. 重要提醒（給未來自己）

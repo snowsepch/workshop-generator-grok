@@ -30,8 +30,12 @@
   .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:2px solid var(--ui-line);background:var(--ui-cream);z-index:10}
   .brand{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;color:var(--ui-line)}
   .brand .logo{width:30px;height:30px;background:var(--ui-line);color:var(--ui-cream);border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:900} /* 保留供其他地方參考，已不在頂部使用 */
-  .topbar .meta{display:flex;gap:20px;font-size:12px;color:var(--ui-mut)}
-  .topbar .meta b{color:var(--ui-line);font-weight:700;margin-left:6px}
+  .topbar .meta{display:flex;gap:14px;font-size:11px;color:var(--ui-mut)}
+  .topbar .meta b{color:var(--ui-line);font-weight:700;margin-left:4px}
+  /* 工具列按鈕群組更寬鬆好看，避免擠在一起 */
+  .topbar .top-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+  .topbar .top-actions .btn{font-size:12px;padding:6px 12px}
+  .topbar .top-actions .btn:not(.btn){font-size:12px} /* ghost buttons tighter */
   .btn{background:var(--ui-line);color:#fff;border:1.5px solid var(--ui-line);padding:9px 19px;border-radius:980px;font-size:13px;cursor:pointer;font-weight:700;font-family:inherit;transition:.15s}
   .btn:hover{transform:scale(1.04)}
   .btn.ghost{background:transparent;border:1.5px solid var(--ui-line);color:var(--ui-line)}
@@ -44,6 +48,10 @@
   .panel.left{border-right:1.5px solid var(--ui-line)}
   .panel h3{font-size:11px;color:var(--ui-acc);text-transform:uppercase;letter-spacing:.2em;margin-bottom:14px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
   .panel h3 .count{background:var(--ui-line);color:var(--ui-cream);border-radius:980px;padding:2px 9px;font-size:10px;letter-spacing:0;font-weight:700}
+  .panel h3 .t-hd-right{display:flex;align-items:center;gap:6px}
+  .panel h3 .t-clear{background:transparent;border:1px solid var(--ui-bd);color:var(--ui-mut);border-radius:980px;padding:1px 7px;font-size:9px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0;transition:.1s}
+  .panel h3 .t-clear:hover:not(:disabled){background:#fee2e2;color:#b91c1c;border-color:#fecaca}
+  .panel h3 .t-clear:disabled{opacity:.4;cursor:default}
 
   .chip{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1.5px solid var(--ui-bd);border-radius:10px;cursor:pointer;font-size:13px;background:#fff;color:var(--ink);margin-bottom:7px;transition:.15s;font-weight:500}
   .chip:hover{border-color:var(--ui-line)}
@@ -52,6 +60,16 @@
   .chip .num{margin-left:auto;font-weight:800;font-size:13px;color:var(--ui-acc);display:none}
   .chip.on .num{display:inline}
 
+  /* 分類群組樣式 - 持續新增主題用 */
+  .cat-group { margin-bottom: 16px; }
+  .cat-group h4 { 
+    font-size: 11px; color: var(--ui-acc); text-transform: none; 
+    letter-spacing: .05em; margin-bottom: 8px; font-weight: 700; 
+    padding-bottom: 4px; border-bottom: 1px solid var(--ui-bd);
+  }
+  .cat-group .chips { display: flex; flex-direction: column; gap: 4px; }
+  .cat-badge { font-size:9px; background:#e0f2fe; color:#0c4a6e; padding:1px 5px; border-radius:3px; margin-left:4px; font-weight:600; }
+
   .age{padding:14px;border:1.5px solid var(--ui-bd);border-radius:12px;cursor:pointer;background:#fff;color:var(--ink);margin-bottom:9px;transition:.15s}
   .age:hover{border-color:var(--ui-line)}
   .age.on{background:#e0f2fe;border-color:var(--ui-acc);color:#0c4a6e}
@@ -59,6 +77,22 @@
   .age .t span{font-weight:400;font-size:12px;opacity:.6;margin-left:6px}
   .age .d{font-size:11px;color:var(--ui-mut);font-weight:500}
   .age.on .d{color:#0369a1}
+
+  /* 主要語氣（生成時使用的年齡層） */
+  .age.primary {
+    border-color: var(--ui-acc);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.15);
+  }
+  .age.primary .t::after {
+    content: " 主";
+    font-size: 9px;
+    font-weight: 700;
+    color: #0ea5e9;
+    margin-left: 4px;
+    background: #e0f2fe;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
 
   /* CENTER */
   .center{display:flex;flex-direction:column;background:var(--ui-bg);overflow:hidden}
@@ -339,12 +373,7 @@
   body.editing .edit-banner{display:block}
 
   /* ===== 新功能共用：分頁 / 複製鈕 / 提示 ===== */
-  .mtabs{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--ui-bd);padding-bottom:0}
-  .mtab{padding:10px 16px;background:transparent;border:0;border-bottom:2px solid transparent;color:#6e6e73;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:.15s;margin-bottom:-1px}
-  .mtab:hover{color:var(--ink)}
-  .mtab.on{color:var(--ui-acc);border-bottom-color:var(--ui-acc)}
-  .mtab-pane{display:none}
-  .mtab-pane.on{display:block}
+
   .copy-btn{background:var(--ui-line);color:#fff;border:0;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
   .copy-btn:hover{filter:brightness(1.25)}
   .copy-btn.ok{background:var(--green)}
@@ -440,7 +469,7 @@
     <span>人數<b id="mPpl">8</b></span>
     <span>頁數<b id="mCnt">0</b></span>
   </div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+  <div class="top-actions">
     <button class="btn ghost" onclick="openSettingsModal()" id="settingsBtn" title="設定門市名稱與報名方式">⚙️ 門市設定</button>
     <button class="btn ghost" onclick="openPosterModal()" title="依當次選取主題產生宣傳海報">📣 宣傳海報</button>
     <button class="btn ghost" onclick="openSocialModal()" title="依當次選取主題產生社群開課文案">✍️ 社群文案</button>
@@ -453,11 +482,34 @@
 
 <div class="stage">
   <div class="panel left">
-    <h3><span>主題庫</span><span class="count" id="tCount">0</span></h3>
+    <h3><span>主題庫</span><span class="t-hd-right"><span class="count" id="tCount">0</span><button id="clearTBtn" class="t-clear" onclick="clearSelectedTopics()" title="一鍵清除所有已選主題" disabled>清除</button></span></h3>
+    <!-- 一鍵清除：放在主題列表最上方，選取後立即可見，無需捲動 -->
+    <div id="tClearBar" style="margin:6px 0 10px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--ui-bd);border-radius:10px;padding:8px 10px;">
+      <div style="flex:1;font-size:12px;color:var(--ui-mut);">
+        已選 <b id="tSelNum" style="color:var(--ui-line);">00</b> 個
+      </div>
+      <button id="clearTTopBtn" onclick="clearSelectedTopics()" style="background:#fee2e2;border:1.5px solid #fecaca;color:#b91c1c;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;" disabled title="清除左側所有已選取的主題">🗑 一鍵清除</button>
+    </div>
+
+    <!-- 分類篩選 (下拉式，更直覺、不混淆) -->
+    <div style="margin-bottom:8px; font-size:11px; color:var(--ui-acc);">
+      <span style="font-weight:600;">分類篩選：</span>
+      <select id="catFilter" onchange="renderTopics(this.value || null)" style="width:100%; max-width:220px; padding:5px 8px; border:1.5px solid var(--ui-bd); border-radius:6px; font-size:12px; background:#fff; color:var(--ink); cursor:pointer; margin-top:2px;">
+        <option value="">全部分類</option>
+        <option value="iPhone">iPhone</option>
+        <option value="iPad">iPad</option>
+        <option value="Mac">Mac</option>
+        <option value="Watch">Watch</option>
+        <option value="App / 服務">App / 服務</option>
+        <option value="AI">AI</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+
     <div id="topics"></div>
     <div class="topic-actions">
       <button class="add-topic-btn" onclick="openTopicModal()">＋ 新增單一主題</button>
-      <button class="add-topic-btn" style="margin-top:8px;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openLinkModal()">🔗 用官網連結產生主題</button>
+      <button class="add-topic-btn" style="margin-top:8px;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openQuickOfficialModal()">🔗 從官網快速新增</button>
       <button class="add-topic-btn" style="margin-top:8px;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openSmartModal()">🤖 一句話智能組合</button>
     </div>
   </div>
@@ -472,6 +524,7 @@
         <span class="pageinfo" id="pageInfo">00 / 00</span>
         <button onclick="nextSlide()">›</button>
       </div>
+      <span id="genToneNote" style="margin-left:10px;font-size:10px;color:#0c4a6e;background:#e0f2fe;border:1px solid #bae6fd;border-radius:999px;padding:2px 8px;white-space:nowrap;max-width:320px;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:middle;"></span>
     </div>
     <div class="slide-wrap" id="slideWrap">
       <div class="slide empty">
@@ -529,6 +582,27 @@
         <div class="mform-row">
           <label>歡迎開場詞</label>
           <textarea id="f_welcome" rows="3" placeholder="例：今天想跟大家分享 Apple TV，它能怎麼讓您的客廳變得更智慧、更好用…"></textarea>
+        </div>
+      </div>
+
+      <!-- 分類與標籤 (持續新增主題用，方便分類與篩選) -->
+      <div class="mform-section">
+        <div class="mform-shd">🏷️ 分類與標籤</div>
+        <div class="mform-row">
+          <label>分類</label>
+          <select id="f_category" style="width:100%;padding:9px 12px;border:1px solid var(--ui-soft);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink);">
+            <option value="iPhone">iPhone</option>
+            <option value="iPad">iPad</option>
+            <option value="Mac">Mac</option>
+            <option value="Watch">Watch</option>
+            <option value="App">App / 服務</option>
+            <option value="AI">Apple Intelligence / AI</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="mform-row">
+          <label>標籤 (逗號分隔，例如：新品,家庭,健康,創作)</label>
+          <input id="f_tags" placeholder="新品,家庭,健康">
         </div>
       </div>
 
@@ -621,6 +695,42 @@
   </div>
 </div>
 
+<!-- ===== 從官網快速新增 Modal (極簡流程，給多人高量使用) -->
+<div id="quickOfficialModal" class="modal-mask" onclick="if(event.target===this)closeQuickOfficialModal()">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-hd">
+      <div>
+        <h2>🔗 從官網快速新增</h2>
+        <div class="modal-sub">最簡單操作：複製 Apple 官網產品頁文字 → 貼上 → 解析後自動開表單預填。適合多人大量新增。</div>
+      </div>
+      <button class="modal-close" onclick="closeQuickOfficialModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="hint-box" style="margin-bottom:12px">
+        <b>操作步驟（30 秒完成）：</b><br>
+        1. 打開 Apple 官網該產品頁<br>
+        2. 選取主要文字（標題 + 賣點列表 + 規格重點）複製<br>
+        3. 貼到下方 → 按「解析並開表單預填」<br>
+        4. 在表單檢查/補充後按「加入主題庫」
+      </div>
+
+      <div class="field-row">
+        <label>官網連結（選填，僅供記錄來源）</label>
+        <input id="quick_url" placeholder="https://www.apple.com/tw/iphone-17-pro/">
+      </div>
+
+      <div class="field-row">
+        <label>從官網複製的文字內容 *</label>
+        <textarea id="quick_text" style="min-height:160px" placeholder="請貼上產品頁的主要文字（標題、特色、規格等）..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeQuickOfficialModal()">取消</button>
+      <button class="btn" style="background:#0ea5e9" onclick="parseAndPrefillForm()">解析並開表單預填</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== 門市設定 Modal ===== -->
 <div id="settingsModal" class="modal-mask" onclick="if(event.target===this)closeModal('settingsModal')">
   <div class="modal-box">
@@ -649,70 +759,6 @@
   </div>
 </div>
 
-<!-- ===== 官網連結 → 主題 Modal ===== -->
-<div id="linkModal" class="modal-mask" onclick="if(event.target===this)closeModal('linkModal')">
-  <div class="modal-box">
-    <div class="modal-hd">
-      <div>
-        <h2>🔗 用官網連結產生主題</h2>
-        <div class="modal-sub">兩種方式：① 產生 AI 提示詞讓 Claude/ChatGPT 校正出完整資訊　② 貼上官網內容自動解析</div>
-      </div>
-      <button class="modal-close" onclick="closeModal('linkModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="mtabs">
-        <button class="mtab on" onclick="switchTab('link', 'ai', this)">🤖 AI 輔助匯入（推薦）</button>
-        <button class="mtab" onclick="switchTab('link', 'parse', this)">📋 貼內容自動解析</button>
-      </div>
-
-      <!-- AI 模式 -->
-      <div class="mtab-pane on" data-pane="ai">
-        <div class="hint-box">
-          <b>使用步驟：</b>
-          <ol>
-            <li>貼上 Apple 官網該產品頁連結，按「產生 AI 提示詞」</li>
-            <li>複製提示詞，貼到 <b>Claude</b>（能讀網頁、最準）或 ChatGPT</li>
-            <li>把 AI 回傳的 JSON 貼回下方欄位，按「解析並匯入」</li>
-          </ol>
-        </div>
-        <div class="field-row">
-          <label>官網連結 *</label>
-          <input id="ai_url" placeholder="https://www.apple.com/tw/iphone-17-pro/">
-        </div>
-        <div class="field-row">
-          <label>主題名稱（選填，幫助命名）</label>
-          <input id="ai_name" placeholder="例：iPhone 17 Pro 系列">
-        </div>
-        <button class="copy-btn" style="margin-bottom:14px" onclick="genAIPrompt()">⚡ 產生 AI 提示詞</button>
-        <div class="field-row" id="ai_promptRow" style="display:none">
-          <label>提示詞（複製後貼到 Claude / ChatGPT）<button class="copy-btn" style="float:right;padding:3px 12px;font-size:11px" onclick="copyText('ai_prompt', this)">📋 複製</button></label>
-          <textarea id="ai_prompt" class="gen-out" readonly></textarea>
-        </div>
-        <div class="field-row" style="margin-top:8px">
-          <label>把 AI 回傳的 JSON 貼到這裡 ↓</label>
-          <textarea id="ai_json" class="gen-out" placeholder='{ "topics": [ ... ] }　或直接貼陣列 [ ... ]'></textarea>
-        </div>
-        <button class="btn" onclick="importJSONFromText()">✓ 解析並匯入主題庫</button>
-      </div>
-
-      <!-- 解析模式 -->
-      <div class="mtab-pane" data-pane="parse">
-        <div class="hint-box">
-          <b>使用步驟：</b>把官網頁面的文字（標題、特色、規格）整段複製貼上，按「自動解析」，工具會盡量拆解填入新增主題表單，再由您微調確認。
-        </div>
-        <div class="field-row">
-          <label>官網連結（選填，僅記錄來源）</label>
-          <input id="parse_url" placeholder="https://www.apple.com/tw/...">
-        </div>
-        <div class="field-row">
-          <label>貼上官網內容 *</label>
-          <textarea id="parse_text" class="gen-out" style="min-height:220px" placeholder="把產品頁的文字整段貼進來…"></textarea>
-        </div>
-        <button class="btn" onclick="parsePastedContent()">🔍 自動解析並開啟編輯表單</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ===== 宣傳海報 Modal ===== -->
 <div id="posterModal" class="modal-mask" onclick="if(event.target===this)closeModal('posterModal')">
@@ -1234,6 +1280,7 @@ const TOPICS = [
 
   {
     n:"AirTag 2026 全新升級", ico:"🏷",
+    category: 'App / 服務',
     sub:"精確尋找更遠更準、揚聲器更大聲",
     tagline:"定位距離提升 50% × 音量提升 50%",
     welcome:"AirTag 應該很多人聽過，這次出了新一代。今天就跟大家聊聊它能幫您找回什麼、跟舊款差在哪、生活上實際怎麼用。",
@@ -2690,23 +2737,90 @@ function planMinutes(dur){
 }
 const $ = q=>document.querySelector(q);
 
-function renderTopics(){
-  $('#topics').innerHTML = TOPICS.map((t,i)=>{
-    const on = SELECTED_T.has(i);
-    const ord = on ? String([...SELECTED_T].indexOf(i)+1).padStart(2,'0') : '';
-    const customClass = t.custom ? ' custom' : '';
-    const removeBtn = t.custom ? `<span class="chip-remove" onclick="event.stopPropagation();removeCustomTopic(${i})" title="移除自訂主題">✕</span>` : '';
-    return `<div class="chip${customClass} ${on?'on':''}" onclick="toggleT(${i})">
-      <span class="e">${t.ico}</span><span>${t.n}</span>${removeBtn}<span class="num">${ord}</span>
-    </div>`;
-  }).join('');
+function renderTopics(filterCat = null){
+  // 群組 by category (持續新增主題分類用)
+  const groups = {};
+  TOPICS.forEach((t, i) => {
+    let cat = t.category || '其他';
+    // 簡單推斷未分類的核心主題 (for 現有硬編碼資料)
+    if (!t.category && !t.custom) {
+      const n = t.n.toLowerCase();
+      if (n.includes('iphone')) cat = 'iPhone';
+      else if (n.includes('ipad')) cat = 'iPad';
+      else if (n.includes('mac')) cat = 'Mac';
+      else if (n.includes('watch')) cat = 'Watch';
+      else if (n.includes('airpods') || n.includes('airtag') || n.includes('app') || n.includes('提醒') || n.includes('日誌')) cat = 'App / 服務';
+      else if (n.includes(' ai') || n.includes('ai ') || n.includes('apple intelligence') || n.includes('gemini')) cat = 'AI';
+      else cat = '其他';
+    }
+    if (filterCat && cat !== filterCat) return;
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push({t, i});
+  });
+
+  let html = '';
+  const cats = Object.keys(groups).sort((a,b) => {
+    const order = ['iPhone','iPad','Mac','Watch','App / 服務','AI','其他'];
+    return order.indexOf(a) - order.indexOf(b);
+  });
+
+  cats.forEach(cat => {
+    html += `<div class="cat-group"><h4>${cat}</h4><div class="chips">`;
+    groups[cat].forEach(({t,i}) => {
+      const on = SELECTED_T.has(i);
+      const ord = on ? String([...SELECTED_T].indexOf(i)+1).padStart(2,'0') : '';
+      const customClass = t.custom ? ' custom' : '';
+      const removeBtn = t.custom ? `<span class="chip-remove" onclick="event.stopPropagation();removeCustomTopic(${i})" title="移除自訂主題">✕</span>` : '';
+      const catBadge = t.category ? `<span class="cat-badge">${t.category}</span>` : '';
+      const tagsStr = (t.tags && t.tags.length) ? ` <span style="font-size:9px;opacity:.6;">${t.tags.slice(0,2).join(',')}</span>` : '';
+      html += `<div class="chip${customClass} ${on?'on':''}" onclick="toggleT(${i})">
+        <span class="e">${t.ico}</span><span>${t.n}</span>${catBadge}${tagsStr}${removeBtn}<span class="num">${ord}</span>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  $('#topics').innerHTML = html || '<div style="font-size:12px;color:#64748b;padding:8px;">尚無主題</div>';
   $('#tCount').textContent = String(SELECTED_T.size).padStart(2,'0');
+
+  if (SELECTED_T.size === 0) {
+    const note = $('#genToneNote');
+    if (note) note.textContent = '';
+  }
+
+  const selNum = $('#tSelNum');
+  if (selNum) selNum.textContent = String(SELECTED_T.size).padStart(2,'0');
+
+  const clr = $('#clearTBtn');
+  if (clr) clr.disabled = SELECTED_T.size === 0;
+
+  const clrTop = $('#clearTTopBtn');
+  if (clrTop) clrTop.disabled = SELECTED_T.size === 0;
+
+  // 選取時讓清除列更明顯（紅色提示底）
+  const bar = $('#tClearBar');
+  if (bar) {
+    if (SELECTED_T.size > 0) {
+      bar.style.background = '#fef2f2';
+      bar.style.borderColor = '#fecaca';
+    } else {
+      bar.style.background = '#fff';
+      bar.style.borderColor = 'var(--ui-bd)';
+    }
+  }
+
   updateSummary();
 }
 function renderAges(){
+  // 保留多選，但第一個選取的會有視覺提示（作為智慧調整的基礎參考）
+  const selected = [...SELECTED_A].sort((x,y)=>x-y);
+  const primaryIdx = selected.length ? selected[0] : -1;
+
   $('#ages').innerHTML = AGES.map((a,i)=>{
     const on = SELECTED_A.has(i);
-    return `<div class="age ${on?'on':''}" onclick="toggleA(${i})">
+    const isPrimary = (i === primaryIdx);
+    const cls = `age ${on?'on':''} ${isPrimary ? 'primary' : ''}`;
+    return `<div class="${cls}" onclick="toggleA(${i})">
       <div class="t">${a.k} <span>${a.en}</span></div>
       <div class="d">${a.tone}</div>
     </div>`;
@@ -2715,6 +2829,12 @@ function renderAges(){
   updateSummary();
 }
 function toggleT(i){ SELECTED_T.has(i)?SELECTED_T.delete(i):SELECTED_T.add(i); renderTopics(); }
+function clearSelectedTopics(){ 
+  SELECTED_T.clear(); 
+  const note = $('#genToneNote');
+  if (note) note.textContent = '';
+  renderTopics(); 
+}
 function toggleA(i){ SELECTED_A.has(i)?SELECTED_A.delete(i):SELECTED_A.add(i); renderAges(); }
 
 function updateSummary(){
@@ -2727,7 +2847,7 @@ function updateSummary(){
   if(tn === 1){
     const t = topicList[0];
     const fcnt = (t.features || []).length;
-    pagesPerAge = 9 + Math.max(1, Math.ceil(fcnt / 3));
+    pagesPerAge = 9 + Math.ceil( (fcnt || 0) / 3 );   // 與 generate 實際 push 數完全一致
   } else if(tn > 1){
     let totalFeats = 0;
     topicList.forEach(tt => { totalFeats += (tt.features || []).length; });
@@ -2735,7 +2855,7 @@ function updateSummary(){
     const hlPages = Math.max(1, Math.ceil(want / 3));
     pagesPerAge = 8 + hlPages;
   }
-  const cnt = pagesPerAge * an;
+  const cnt = pagesPerAge;  // 頁數固定為一份（多選年齡層時不增加）；內容會智慧型調整涵蓋所選群體
   $('#sCnt').textContent = String(cnt).padStart(2,'0');
   $('#mCnt').textContent = String(cnt).padStart(2,'0');
 
@@ -2743,9 +2863,15 @@ function updateSummary(){
   if(tn > 1){
     list.push(`<div class="mini" style="background:#e0f2fe;padding:8px 10px;border-radius:6px;border-bottom:0;margin-bottom:6px"><span style="color:#0c4a6e;font-weight:700">🔀 融合模式</span><span class="a">${tn} 主題串成 1 場</span></div>`);
   }
-  [...SELECTED_T].forEach(ti=>[...SELECTED_A].forEach(ai=>{
-    list.push(`<div class="mini"><span>${TOPICS[ti].ico} ${TOPICS[ti].n}</span><span class="a">${AGES[ai].k}</span></div>`);
-  }));
+  // 顯示所選組合（供參考）；生成時頁數維持一份，內容智慧調整
+  const ageArr = [...SELECTED_A].map(i=>AGES[i]);
+  const effectiveForList = (ageArr.length > 1) ? ageArr.map(a=>a.k).join('、') : (ageArr[0] ? ageArr[0].k : '');
+  [...SELECTED_T].forEach(ti=>{
+    list.push(`<div class="mini"><span>${TOPICS[ti].ico} ${TOPICS[ti].n}</span><span class="a">${effectiveForList || '—'}</span></div>`);
+  });
+  if (an > 1) {
+    list.push(`<div class="mini" style="font-size:10px;color:#0c4a6e">頁數維持一份，內容已智慧調整涵蓋多個年齡層</div>`);
+  }
   $('#sumList').innerHTML = list.join('') || '<div style="font-size:11px;color:#a8a39a;font-weight:600">— 尚未選擇 —</div>';
 
   // 讓生成按鈕清楚顯示當前模式（點選兩個主題後按鈕文字會變，明確進入融合模式）
@@ -3442,9 +3568,14 @@ function buildAccessories(topic, age, pNum, tNum){
    ============================================ */
 // 共用：把當次選取主題組成「單人旁白·精簡版」段落清單
 function buildPodcastData(){
-  const P = [];
-  const add = (t)=>{ if(t && String(t).trim()) P.push(String(t).replace(/\s+/g,' ').trim()); };
-  const oneSentence = (s)=>{ const m = String(s||'').match(/^[^。！？]*[。！？]/); return m ? m[0] : String(s||''); };
+  const lines = [];
+  const add = (text, indent = 0) => {
+    if (!text || !String(text).trim()) return;
+    const pad = '  '.repeat(indent);
+    const bullet = indent > 0 ? '- ' : '';
+    lines.push(pad + bullet + String(text).trim());
+  };
+  const addSection = (title) => { lines.push(''); lines.push('## ' + title); };
 
   const topicNames = [...SELECTED_T].map(i=>TOPICS[i].n);
   const ageStr = SELECTED_A.size ? [...SELECTED_A].map(i=>AGES[i].k).join('、') : '';
@@ -3472,19 +3603,111 @@ function buildPodcastData(){
 
   const d = new Date();
   const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  return { P, topicNames, dateStr };
+  return { lines, topicNames, dateStr };
 }
 
 function downloadPodcastScript(){
   if(SELECTED_T.size === 0){ alert('請先在左側選擇至少一個主題'); return; }
-  const { P, topicNames, dateStr } = buildPodcastData();
+
+  // 直接產生條列式 + 細項說明的講稿（講者好讀、好抓重點）
+  const lines = [];
+  const add = (text, indent = 0) => {
+    if (!text || !String(text).trim()) return;
+    const pad = '  '.repeat(indent);
+    const bullet = indent > 0 ? '- ' : '';
+    lines.push(pad + bullet + String(text).trim());
+  };
+  const addSection = (title) => { lines.push(''); lines.push('## ' + title); };
+
+  const topicNames = [...SELECTED_T].map(i => TOPICS[i].n);
+  const ageList = [...SELECTED_A].map(i => AGES[i]);
+  const effectiveAge = (typeof getEffectiveAge === 'function') ? getEffectiveAge(ageList) : (ageList[0] || {k: '一般', agendaNote: '', handsNote: '', closeNote: ''});
+  const ageStr = effectiveAge.k;
+
+  lines.push('# Apple Shop 小教室備課講稿');
+  lines.push(`**主題**：${topicNames.join(' + ')}`);
+  lines.push(`**對象**：${ageStr}（內容已智慧調整，兼顧不同年齡層的例子與節奏）`);
+  lines.push(`**建議時長**：約 ${DUR} 分鐘`);
+  lines.push('');
+
+  const M = planMinutes(DUR);
+  addSection('時間分配建議（上台前先看一次）');
+  add(`開場 + 定位：${M[0]} 分`);
+  add(`核心功能亮點：${M[1]} 分`);
+  add(`動手實作（最重要！）：${M[2]} 分（示範 + 學員自己操作 + 分享）`);
+  add(`生活情境 + 快速上手 + 結尾：${M[3] + M[4] + M[5]} 分`);
+
+  addSection('開場（破冰 + 建立共鳴）');
+  add('建議開場白：');
+  add(`「各位好，今天很高興跟大家一起聊 ${topicNames.join('、')}。這些東西我們平常可能只知道它方便，但今天會從真實生活情境出發，讓大家感覺它真的能幫到自己或家人。」`, 1);
+  add(`清楚點出對象：今天特別為 ${ageStr} 準備，步調和例子會盡量貼近大家的日常生活。`, 1);
+  if (ageList.length > 1) {
+    add(`多群體小提醒：內容會同時兼顧不同年齡層，講到相關部分可以多停一下，讓大家對照自己或家人的情況。`, 1);
+  }
+
+  [...SELECTED_T].forEach((ti, idx) => {
+    const t = TOPICS[ti];
+    addSection(`${idx + 1}. ${t.n}（核心亮點）`);
+    add(`一句話定位：${t.tagline || t.sub || ''}`);
+
+    if (t.stats && t.stats.length) {
+      add('上台可以直接報的三大數據（數字最吸睛）：');
+      t.stats.forEach(s => add(`${s.n}${s.u ? ' ' + s.u : ''} — ${s.l}`, 1));
+    }
+
+    if (t.features && t.features.length) {
+      add('核心功能（建議講 3~4 個最有感的，其餘可快速帶過或留 Q&A）：');
+      t.features.forEach(f => {
+        add(`${f.fi || ''} ${f.ft}`, 1);
+        add(`為什麼打動人：${f.fd}`, 2);
+        if (f.req) add(`實作前提醒：${f.req}`, 2);
+      });
+    }
+
+    if (t.accessories && t.accessories.length) {
+      add('配件推薦（結尾自然帶出，不要硬推）：');
+      t.accessories.forEach(a => {
+        add(`${a.i || ''} ${a.n}：${a.p}`, 1);
+        add(`為什麼推薦：${a.why}`, 2);
+      });
+    }
+  });
+
+  addSection('動手實作時間（25~30 分鐘，課程靈魂）');
+  add('推薦流程：');
+  add('講師先示範 1~2 個重點功能（5~7 分鐘，讓大家看清楚步驟）', 1);
+  add('請學員自己動手操作（給清楚步驟卡片或口頭引導）', 1);
+  add('操作後請大家跟旁邊的人分享「我剛剛學到什麼」或「哪裡卡住了」', 1);
+  add('講者巡場，特別留意新手或銀髮族，可能需要多一步一步帶或放大示範。', 1);
+  if (ageList.some(a => /銀髮|家長|長輩/.test(a.k))) {
+    add('對家長 / 銀髮族額外準備：多用「孫子照片」「家庭出遊」「跟家人視訊」等生活例子，比較容易有共鳴。步調可以再放慢一點。', 1);
+  }
+
+  addSection('生活情境與自然結尾');
+  add('挑 1~2 個最貼近今天客群的情境簡單說（不要全部念）：');
+  [...SELECTED_T].forEach(ti => {
+    const t = TOPICS[ti];
+    if (t.scenarios && t.scenarios.length) {
+      t.scenarios.slice(0, 2).forEach(s => {
+        add(`「${s.t}」：${s.d}`, 1);
+      });
+    }
+  });
+  add('');
+  add('結尾建議話術（自然、有溫度的結束）：');
+  add(`「今天我們從生活出發，看了這些工具真正能怎麼幫到自己和家人。回家後挑一個小功能試試看，有問題隨時回門市問我們。下次小教室再見！」`, 1);
+
+  const d = new Date();
+  const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
   const head = [
-    '# Apple Shop 小教室備課講稿（精簡版）',
+    '# Apple Shop 小教室備課講稿（條列式詳解版）',
     `# 主題：${topicNames.join(' + ')}`,
-    '# 上台前照著順一次口條即可：# 開頭為註解，其餘為講稿內容，空行分段。',
+    '# 格式說明：## 為大段，- 為重點，縮排為細項說明。講者可直接照著念或作為提示卡。',
     '', ''
   ].join('\n');
-  const blob = new Blob([head + P.join('\n\n') + '\n'], {type:'text/plain;charset=utf-8'});
+
+  const blob = new Blob([head + lines.join('\n') + '\n'], {type:'text/plain;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `講稿_${topicNames.join('+')}_${dateStr}.txt`;
@@ -3518,7 +3741,10 @@ function downloadPptx(){
   const topicList = [...SELECTED_T].map(i=>TOPICS[i]);
   const ageList   = [...SELECTED_A].map(i=>AGES[i]);
 
-  /* —— 單一主題：完整 9+ 頁流程（功能每 3 個一頁，避免爆版） —— */
+  // 智慧型年齡調整：多選時內容合併調整，產生一份（頁數固定）
+  const effectiveAge = (typeof getEffectiveAge === 'function') ? getEffectiveAge(ageList) : (ageList[0] || AGES[0]);
+
+  /* —— 單一主題：完整 9+ 頁流程（內容智慧調整涵蓋所選年齡層） —— */
   function pptxSingle(t, a){
     const r = t.requirements || {};
     const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || '—');
@@ -3770,9 +3996,9 @@ function downloadPptx(){
   }
 
   if(topicList.length === 1){
-    ageList.forEach(a=>pptxSingle(topicList[0], a));
+    pptxSingle(topicList[0], effectiveAge);
   } else {
-    ageList.forEach(a=>pptxFused(topicList, a));
+    pptxFused(topicList, effectiveAge);
   }
 
   const dateStr = ($('#date').value || new Date().toISOString().slice(0,10)).replace(/\//g,'-');
@@ -3931,6 +4157,30 @@ function getSmartTitle(topics){
   return title;
 }
 
+/* 智慧型年齡層調整：多選時合併語氣與說明，讓單一份簡報內容涵蓋各群體需求（頁數不變） */
+function getEffectiveAge(ageList) {
+  if (!ageList || !ageList.length) return AGES[0];
+  if (ageList.length === 1) return ageList[0];
+
+  // 智慧型合併：為多選年齡層產生自然、涵蓋性的文字，避免過長或生硬串接
+  const names = ageList.map(a => a.k).join('、');
+  const hooks = ageList.map(a => a.hook).join('；');
+  // 簡化 hook 為綜合描述
+  const combinedHook = `為${names}準備，兼顧家庭安心與長輩輕鬆上手`;
+
+  return {
+    k: names,
+    en: ageList.map(a => a.en).join(' / '),
+    tone: '綜合',
+    focus: `同時適合${names}的學習需求`,
+    pitch: ageList.map(a => a.pitch.replace(/<\/?b>/g, '')).join(' '),
+    hook: combinedHook,
+    agendaNote: `本場將智慧調整，兼顧${names}的不同節奏與背景。從家庭場景出發聊共用與管理，也會放慢步調強調好上手與家人聯繫。`,
+    handsNote: `可以想著家裡的情境一起試（家長族群），不用急慢慢來一步一步（銀髮族），有問題隨時問。`,
+    closeNote: `把今天的功能用在家庭生活裡，和家人一起更省心。挑一個今天就試試，下次回來我們再一起練。`,
+  };
+}
+
 function generate(){
   const dur = +$('#dur').value || 60;
   DUR = dur;
@@ -3944,42 +4194,57 @@ function generate(){
   SLIDES = [];
   const topicList = [...SELECTED_T].map(i=>TOPICS[i]);
   const ageList = [...SELECTED_A].map(i=>AGES[i]);
+  if(!ageList.length){
+    alert('請在右側選擇年齡層');
+    return;
+  }
+
+  // 智慧型年齡調整：多選時內容合併調整，頁數固定為一份（不隨年齡層增加）
+  const effectiveAge = getEffectiveAge(ageList);
 
   if(topicList.length === 1){
-    /* 單一主題 — 封面/地圖/定位 + 核心功能(每3個一頁) + 實作/情境/進階/快速/功課/配件 */
-    const combos = [];
-    ageList.forEach(a=>combos.push([topicList[0], a]));
-    const featChunks = chunk(topicList[0].features, 3);
-    const perDeck = 9 + featChunks.length;      // 每個年齡層一份的頁數
-    const total = combos.length * perDeck;       // 多年齡層時連續編號
+    /* 單一主題 — 產生一份簡報，內容已智慧調整涵蓋所選年齡層 */
+    const t = topicList[0];
+    const a = effectiveAge;
+    const featChunks = chunk(t.features, 3);
+    const total = 9 + featChunks.length;
     let p = 0;
-    combos.forEach(([t,a])=>{
-      SLIDES.push(buildCover(t, a, ++p, total));
-      SLIDES.push(buildAgenda(t, a, ++p, total));
-      SLIDES.push(buildWhy(t, a, ++p, total));
-      let start = 0;
-      featChunks.forEach((ch,i)=>{
-        SLIDES.push(buildFeaturesPage(t, a, ch, start, i, featChunks.length, ++p, total));
-        start += ch.length;
-      });
-      SLIDES.push(buildHandsOn(t, a, ++p, total));
-      SLIDES.push(buildScenarios(t, a, ++p, total));
-      SLIDES.push(buildHandbook(t, a, ++p, total));
-      SLIDES.push(buildQuickStart(t, a, ++p, total));
-      SLIDES.push(buildHomework(t, a, ++p, total));
-      SLIDES.push(buildAccessories(t, a, ++p, total));
+    SLIDES.push(buildCover(t, a, ++p, total));
+    SLIDES.push(buildAgenda(t, a, ++p, total));
+    SLIDES.push(buildWhy(t, a, ++p, total));
+    let start = 0;
+    featChunks.forEach((ch,i)=>{
+      SLIDES.push(buildFeaturesPage(t, a, ch, start, i, featChunks.length, ++p, total));
+      start += ch.length;
     });
+    SLIDES.push(buildHandsOn(t, a, ++p, total));
+    SLIDES.push(buildScenarios(t, a, ++p, total));
+    SLIDES.push(buildHandbook(t, a, ++p, total));
+    SLIDES.push(buildQuickStart(t, a, ++p, total));
+    SLIDES.push(buildHomework(t, a, ++p, total));
+    SLIDES.push(buildAccessories(t, a, ++p, total));
   } else {
-    /* 🔀 多主題融合模式 — 一場連貫的整合式分享 */
-    ageList.forEach(a=>{
-      const fused = buildFusedDeck(topicList, a);
-      fused.forEach(s=>SLIDES.push(s));
-    });
+    /* 🔀 多主題融合模式 — 產生一份簡報，內容智慧調整涵蓋所選年齡層 */
+    const fused = buildFusedDeck(topicList, effectiveAge);
+    fused.forEach(s=>SLIDES.push(s));
   }
 
   IDX = 0;
   document.getElementById('pptxBtn').disabled = false;
   document.getElementById('editBtn').disabled = false;
+
+  // 顯示生成語氣提示
+  const toneNote = $('#genToneNote');
+  if (toneNote) {
+    const an = ageList.length;
+    const pageCnt = SLIDES.length;
+    if (an === 1) {
+      toneNote.textContent = `✓ 已使用「${effectiveAge.k}」語氣產生（共 ${pageCnt} 頁）`;
+    } else {
+      toneNote.textContent = `✓ 內容已智慧調整涵蓋「${effectiveAge.k}」（共 ${pageCnt} 頁，頁數維持一份）`;
+    }
+  }
+
   // 將字串轉為 DOM 元素並標記可編輯區塊（保留編輯後內容用）
   SLIDES = SLIDES.map(html=>{
     const wrap = document.createElement('div');
@@ -4008,7 +4273,7 @@ function roundRobin(topics, key){
   }
   return out;
 }
-function buildFusedDeck(topics, age){
+function buildFusedDeck(topics, age, pageOffset = 0, grandTotal = null){
   const title = getSmartTitle(topics);
   const featPool = roundRobin(topics, 'features');
   const scnPool  = roundRobin(topics, 'scenarios');
@@ -4020,23 +4285,24 @@ function buildFusedDeck(topics, age){
   const want = Math.min(featPool.length, Math.max(topics.length, 9));
   const highlights = featPool.slice(0, want);
   const hlPages = Math.max(1, Math.ceil(highlights.length / 3));
-  const total = 8 + hlPages; // 封面/地圖/主軸 + 亮點×hlPages + 動手/情境/快速上手/配件/收尾
-  let p = 0;
+  const localTotal = 8 + hlPages; // 封面/地圖/主軸 + 亮點×hlPages + 動手/情境/快速上手/配件/收尾
+  const tNum = grandTotal || localTotal;
+  let p = pageOffset;
   const deck = [
-    buildFusedCover(topics, age, ++p, total),
-    buildFusedAgenda(topics, age, ++p, total),
-    buildFusedOverview(topics, age, title, ++p, total)
+    buildFusedCover(topics, age, ++p, tNum),
+    buildFusedAgenda(topics, age, ++p, tNum),
+    buildFusedOverview(topics, age, title, ++p, tNum)
   ];
   for(let g = 0; g < hlPages; g++){
     const label = hlPages > 1 ? `精選亮點（${g+1}/${hlPages}）` : '精選亮點';
-    deck.push(buildFusedHighlights(highlights, g, label, ++p, total));
+    deck.push(buildFusedHighlights(highlights, g, label, ++p, tNum));
   }
   deck.push(
-    buildFusedHandsOn(topics, featPool, age, ++p, total),
-    buildFusedScenarios(topics, scnPool, ++p, total),
-    buildFusedQuickAdv(topics, featPool, ++p, total),
-    buildFusedAccessories(topics, accPool, ++p, total),
-    buildFusedClosing(topics, age, ++p, total)
+    buildFusedHandsOn(topics, featPool, age, ++p, tNum),
+    buildFusedScenarios(topics, scnPool, ++p, tNum),
+    buildFusedQuickAdv(topics, featPool, ++p, tNum),
+    buildFusedAccessories(topics, accPool, ++p, tNum),
+    buildFusedClosing(topics, age, ++p, tNum)
   );
   return deck;
 }
@@ -4501,6 +4767,122 @@ function closeTopicModal(){
   document.getElementById('topicModal').classList.remove('show');
 }
 
+/* ===== 極簡官網快速新增（給多人高量使用，最簡單操作） ===== */
+function openQuickOfficialModal(){
+  document.getElementById('quick_url').value = '';
+  document.getElementById('quick_text').value = '';
+  document.getElementById('quickOfficialModal').classList.add('show');
+  setTimeout(() => {
+    document.getElementById('quick_text').focus();
+  }, 80);
+}
+
+function closeQuickOfficialModal(){
+  document.getElementById('quickOfficialModal').classList.remove('show');
+}
+
+// 產品名稱大小寫修正（務必遵守 Apple 官方規則）
+function fixAppleCasing(str) {
+  if (!str) return str;
+  return str
+    .replace(/\bi\s*phone\b/gi, 'iPhone')
+    .replace(/\bi\s*pad\b/gi, 'iPad')
+    .replace(/\bmac\s*book\s*air\b/gi, 'MacBook Air')
+    .replace(/\bmac\s*book\s*pro\b/gi, 'MacBook Pro')
+    .replace(/\bmac\s*book\b/gi, 'MacBook')
+    .replace(/\bapple\s*watch\b/gi, 'Apple Watch')
+    .replace(/\bair\s*pods\b/gi, 'AirPods')
+    .replace(/\bmac\s*mini\b/gi, 'Mac mini')
+    .replace(/\bi\s*mac\b/gi, 'iMac')
+    .replace(/\bapple\s*intelligence\b/gi, 'Apple Intelligence')
+    .replace(/\btime\s*machine\b/gi, 'Time Machine')
+    .replace(/\bshortcuts\b/gi, 'Shortcuts')
+    .replace(/\bair\s*drop\b/gi, 'AirDrop')
+    .replace(/\bhand\s*off\b/gi, 'Handoff')
+    .replace(/\buniversal\s*control\b/gi, 'Universal Control')
+    .replace(/\bstage\s*manager\b/gi, 'Stage Manager')
+    .replace(/\bmission\s*control\b/gi, 'Mission Control');
+}
+
+function parseAndPrefillForm(){
+  const url = document.getElementById('quick_url').value.trim();
+  const text = document.getElementById('quick_text').value.trim();
+
+  if(!text){
+    alert('請先貼上從 Apple 官網複製的文字內容');
+    return;
+  }
+
+  const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
+  if(lines.length < 2){
+    alert('內容太少，請多複製一些標題與特色文字');
+    return;
+  }
+
+  // 簡單智慧解析 + 大小寫修正
+  let name = fixAppleCasing(lines[0]);
+  let sub = lines[1] && lines[1].length < 60 ? fixAppleCasing(lines[1]) : '';
+
+  // 試著找更多標題行當 features（並修正大小寫）
+  const feats = [];
+  for(let i = 2; i < lines.length && feats.length < 6; i++){
+    const l = lines[i];
+    if(l.length >= 6 && l.length <= 45 && !l.includes('。') && !l.includes('，')){
+      const desc = (lines[i+1] && lines[i+1].length > 10) ? fixAppleCasing(lines[i+1]) : '（請補充說明）';
+      feats.push({ fi: '⭐', ft: fixAppleCasing(l), fd: desc });
+    }
+  }
+
+  // 如果解析不到足夠 features，就用後面幾行硬塞
+  if(feats.length < 3){
+    for(let i = 2; i < lines.length && feats.length < 6; i++){
+      if(lines[i].length > 8){
+        feats.push({ fi: '⭐', ft: fixAppleCasing(lines[i].substring(0,40)), fd: fixAppleCasing(lines[i+1] || '（請補充）') });
+      }
+    }
+  }
+
+  // 關閉快速 modal
+  closeQuickOfficialModal();
+
+  // 直接開「新增自訂主題」表單並預填
+  openTopicModal();
+
+  // 預填基本資訊
+  document.getElementById('f_n').value = name;
+  document.getElementById('f_sub').value = sub;
+  if (url) {
+    document.getElementById('f_welcome').value = `（資料來源：${url}）\n今天想跟大家分享「${name}」，...`;
+  }
+
+  // 預填功能（最多6個）
+  const ftEls = document.querySelectorAll('#topicModal .f_feat_t');
+  const fdEls = document.querySelectorAll('#topicModal .f_feat_d');
+  feats.forEach((f, i) => {
+    if (ftEls[i]) ftEls[i].value = f.ft;
+    if (fdEls[i]) fdEls[i].value = f.fd;
+  });
+
+  // 預選分類（根據產品名稱智慧推斷）
+  const catSelect = document.getElementById('f_category');
+  if (catSelect) {
+    const nLower = name.toLowerCase();
+    let inferredCat = '其他';
+    if (nLower.includes('iphone')) inferredCat = 'iPhone';
+    else if (nLower.includes('ipad')) inferredCat = 'iPad';
+    else if (nLower.includes('mac')) inferredCat = 'Mac';
+    else if (nLower.includes('watch')) inferredCat = 'Watch';
+    else if (nLower.includes('airpods') || nLower.includes('airtag')) inferredCat = 'App / 服務';
+    else if (nLower.includes(' ai') || nLower.includes('ai ') || nLower.includes('apple intelligence') || nLower.includes('gemini')) inferredCat = 'AI';
+    catSelect.value = inferredCat;
+  }
+
+  // 提示使用者
+  setTimeout(() => {
+    alert('已從官網解析並預填表單！\n\n請檢查、補充說明、確認分類與標籤後，按「加入主題庫」儲存。');
+  }, 300);
+}
+
 function _val(id){ const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 function _vals(cls){ return [...document.querySelectorAll('#topicModal .'+cls)].map(el=>el.value.trim()); }
 
@@ -4548,6 +4930,11 @@ function saveCustomTopic(){
   const capStr = _val('f_cap');
   const capacity = capStr ? capStr.split('/').map(s=>s.trim()).filter(Boolean) : '—';
 
+  // 分類與標籤 (持續性新增用)
+  const category = _val('f_category') || '其他';
+  const tagsStr = _val('f_tags');
+  const tags = tagsStr ? tagsStr.split(',').map(t=>t.trim()).filter(Boolean) : [];
+
   // 組合主題物件
   const newTopic = {
     n, ico,
@@ -4562,6 +4949,7 @@ function saveCustomTopic(){
       icloud: _val('f_icloud') || '可搭配 iCloud+ 同步'
     },
     stats, features, scenarios, accessories,
+    category, tags,
     custom: true  // 標記為自訂主題
   };
 
@@ -4773,7 +5161,7 @@ loadCustomTopicsFromStorage();
 renderTopics(); renderAges();
 
 /* ============================================================
-   🆕 多門市設定 ｜ 官網連結→主題 ｜ 宣傳海報 ｜ 社群文案
+   🆕 多門市設定 ｜ 宣傳海報 ｜ 社群文案
    ============================================================ */
 
 /* ---------- 共用工具 ---------- */
@@ -4786,12 +5174,7 @@ function requireTopics(){
   if(!SELECTED_T.size){ alert('請先在左側「主題庫」勾選至少一個主題，再產生海報／文案。'); return false; }
   return true;
 }
-function switchTab(group, pane, btn){
-  const modal = document.getElementById(group+'Modal');
-  modal.querySelectorAll('.mtab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  modal.querySelectorAll('.mtab-pane').forEach(p=>p.classList.toggle('on', p.dataset.pane===pane));
-}
+
 function copyText(id, btn){
   const el = document.getElementById(id);
   const txt = (el.value !== undefined && el.tagName !== 'PRE') ? el.value : el.textContent;
@@ -4844,107 +5227,9 @@ function saveSettings(){
   closeModal('settingsModal');
 }
 
-/* ---------- 官網連結 → 主題 ---------- */
-function openLinkModal(){
-  ['ai_url','ai_name','ai_json','parse_url','parse_text'].forEach(id=>{ const e=document.getElementById(id); if(e) e.value=''; });
-  document.getElementById('ai_promptRow').style.display='none';
-  openModal('linkModal');
-}
-function genAIPrompt(){
-  const url=document.getElementById('ai_url').value.trim();
-  const name=document.getElementById('ai_name').value.trim();
-  if(!url){ alert('請先貼上官網連結'); return; }
-  const schema =
-`{
-  "topics": [{
-    "n": "主題名稱（必填）",
-    "ico": "代表 emoji",
-    "sub": "副標一句話",
-    "tagline": "一句話亮點，可用 × 分隔賣點",
-    "welcome": "60-90 字、用『您』對顧客說的開場白",
-    "requirements": { "os":"系統版本", "capacity":["容量A","容量B"], "sim":"SIM/連線", "compat":"相容性與支援功能", "icloud":"iCloud 建議" },
-    "stats": [ {"n":"數字","u":"單位","l":"說明"} ],
-    "features": [ {"fi":"emoji","ft":"功能標題","fd":"50-80字、從顧客好處角度說明"} ],
-    "scenarios": [ {"i":"emoji","t":"情境標題","d":"生活情境描述"} ],
-    "accessories": [ {"i":"emoji","n":"配件名","p":"一句用途","why":"為什麼推薦"} ]
-  }]
-}`;
-  const prompt =
-'請參考這個 Apple 官方產品頁面：'+url+'\n'+
-(name?('主題名稱請用：'+name+'\n'):'')+
-'\n請閱讀該頁面，幫我整理成「Apple Shop 門市小教室」顧客簡報用的主題資料，並「只」輸出符合下列格式的 JSON（不要任何多餘說明、不要 markdown 程式碼框）：\n\n'+
-schema+
-'\n\n撰寫要求：\n'+
-'- 全部用繁體中文，語氣親切、以「您」稱呼顧客，從生活好處出發，不要堆砌工程術語。\n'+
-'- stats 剛好 3 個、features 剛好 6 個、scenarios 剛好 4 個、accessories 剛好 3 個。\n'+
-'- 依官網實際規格撰寫，不確定的數據不要捏造，可改寫成不需數字的描述。\n'+
-'- Apple 產品名稱大小寫需正確（iPhone、iPad、Mac、MacBook、Apple Watch、AirPods、AppleCare）。\n'+
-'- 請直接輸出 JSON 本身。';
-  document.getElementById('ai_prompt').value=prompt;
-  document.getElementById('ai_promptRow').style.display='';
-}
-function importJSONFromText(){
-  const txt=document.getElementById('ai_json').value.trim();
-  if(!txt){ alert('請先貼上 AI 回傳的 JSON'); return; }
-  let raw;
-  try{
-    const clean=txt.replace(/^```(json)?/i,'').replace(/```\s*$/,'').trim();
-    raw=JSON.parse(clean);
-  }catch(err){ alert('JSON 格式錯誤：'+err.message+'\n\n請確認貼上的是完整 JSON（從 { 或 [ 開始）。'); return; }
-  const list=Array.isArray(raw)?raw:(raw.topics||[]);
-  const res=ingestTopics(list);
-  if(res.added) closeModal('linkModal');
-  alert('匯入完成！\n\n✓ 成功新增：'+res.added+' 個主題'+(res.skipped?('\n⚠️ 跳過：'+res.skipped+' 個（重複或缺少必填欄位）'):''));
-}
-function ingestTopics(list){
-  if(!Array.isArray(list)||!list.length){ alert('找不到主題資料'); return {added:0,skipped:0}; }
-  let added=0, skipped=0;
-  const existing=new Set(TOPICS.map(t=>t.n));
-  list.forEach(t=>{
-    if(!t||!t.n||!Array.isArray(t.features)||t.features.length<3){ skipped++; return; }
-    if(existing.has(t.n)){ skipped++; return; }
-    TOPICS.push(normalizeTopic(t));
-    existing.add(t.n); added++;
-  });
-  if(added){ saveCustomTopicsToStorage(); renderTopics(); }
-  return {added, skipped};
-}
-function normalizeTopic(t){
-  const stats=(t.stats&&t.stats.length>=3)?t.stats:[...(t.stats||[]), ...Array(Math.max(0,3-(t.stats||[]).length)).fill().map(()=>({n:'—',u:'',l:'待補充'}))];
-  const feats=t.features.length>=6?t.features:[...t.features, ...Array(6-t.features.length).fill().map((_,i)=>({fi:'⭐',ft:'功能 '+(t.features.length+i+1),fd:'（待補充）'}))];
-  const scns=(t.scenarios&&t.scenarios.length>=4)?t.scenarios:[...(t.scenarios||[]), ...Array(Math.max(0,4-(t.scenarios||[]).length)).fill().map((_,i)=>({i:'💡',t:'情境 '+((t.scenarios||[]).length+i+1),d:'（待補充）'}))];
-  const accs=(t.accessories&&t.accessories.length>=3)?t.accessories:[...(t.accessories||[]), ...Array(Math.max(0,3-(t.accessories||[]).length)).fill().map((_,i)=>({i:'🛍',n:'配件 '+((t.accessories||[]).length+i+1),p:'',why:''}))];
-  return {
-    n:t.n, ico:t.ico||'⭐', sub:t.sub||'', tagline:t.tagline||t.n,
-    welcome:t.welcome||('今天想跟大家分享「'+t.n+'」，接下來會帶大家認識它的功能與應用。'),
-    requirements:t.requirements||{os:'—',capacity:'—',sim:'—',compat:'—',icloud:'—'},
-    sourceUrl:t.sourceUrl||'',
-    stats, features:feats, scenarios:scns, accessories:accs,
-    custom:true
-  };
-}
-function parsePastedContent(){
-  const text=document.getElementById('parse_text').value.trim();
-  const url=document.getElementById('parse_url').value.trim();
-  if(!text){ alert('請先貼上官網內容'); return; }
-  const lines=text.split(/\n+/).map(s=>s.trim()).filter(Boolean);
-  const name=lines[0]||'新主題';
-  const sub=(lines[1]&&lines[1].length<=40)?lines[1]:'';
-  const feats=[];
-  for(let i=2;i<lines.length && feats.length<6;i++){
-    const l=lines[i];
-    if(l.length>=4 && l.length<=40){ feats.push({t:l, d:(lines[i+1]&&lines[i+1].length>l.length)?lines[i+1]:''}); }
-  }
-  closeModal('linkModal');
-  openTopicModal();
-  document.getElementById('f_n').value=name;
-  document.getElementById('f_sub').value=sub;
-  const ftEls=document.querySelectorAll('#topicModal .f_feat_t');
-  const fdEls=document.querySelectorAll('#topicModal .f_feat_d');
-  feats.forEach((f,i)=>{ if(ftEls[i]) ftEls[i].value=f.t; if(fdEls[i]&&f.d) fdEls[i].value=f.d; });
-  if(url) document.getElementById('f_welcome').value='（資料來源：'+url+'）\n';
-  alert('已盡量解析並填入「新增主題」表單。\n自動解析較粗略，請檢查、補齊內容後再按「加入主題庫」。');
-}
+/* ---------- 快速從官網新增（極簡高量版） ---------- */
+
+
 
 /* ---------- Grok 智能推薦（一句話自動組合） ---------- */
 function openSmartModal(){

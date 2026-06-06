@@ -1,6 +1,6 @@
 # GitHub Repos 當前正確狀態（Grok 版獨立後）
 
-**更新日期**：2026 年最新狀態
+**更新日期**：2026-06（最新：Apple Intelligence 分類修正 d9b1f68 + v4 同步 2a3aba2）
 
 ## 1. 原本小教室專案 Repo（不要動）
 - **網址**：https://github.com/snowsepch/workshop-generator
@@ -34,14 +34,25 @@
 - 2026-06-06：使用 `gh repo create workshop-generator-grok --public --source . --remote origin --push` 完成首次上傳。
 - 隨即啟用 GitHub Pages（`gh api` + `gh repo edit` 設定 homepage 與 topics）。
 - 之後的開發：在此資料夾直接 `git add`、`git commit`、`git push` 即可同步到 GitHub 與 Pages（一般檔案OK）。
+
+### 最近開發紀錄（持續更新）
+- d9b1f68：修正 Apple Intelligence 未正確歸入 AI 分類問題（為硬編碼主題明確加上 `category: 'AI'`；同步強化 renderTopics() 與快速新增預填的推斷邏輯 — AI 檢查前置、App 檢查嚴謹避免 "apple" 誤中 'app'；更新除錯待辦.md）。
+- 2a3aba2：v4 除錯完成同步 + 更新連結（一鍵清除、多選年齡智慧合併、從官網快速新增、分類優化、fixAppleCasing、備課講稿 restructure、除錯待辦.md 紀錄、docs 連結校正）。
+- b21e088：docs: add instructions for enabling GitHub Actions Pages deploy（workflow scope limitation noted）。
+- 更早：初始上傳 + .nojekyll + 各種 UI/內容修正（詳見 git log）。
+
+**目前線上連結（Grok 版，推薦使用）：**
+- 原始碼：https://github.com/snowsepch/workshop-generator-grok
+- 線上直接使用（GitHub Pages，永遠最新）：https://snowsepch.github.io/workshop-generator-grok/
+  開啟瀏覽器即可用，無需下載 index.html。每次 push 後 Pages 會自動更新（目前 legacy + .nojekyll；.github/workflows/deploy-pages.yml 已在本機準備好）。
 - **GitHub Pages 部署**：
-  - 目前使用 legacy source + .nojekyll 設定（已推）。
+  - 目前使用 legacy source + .nojekyll 設定（已推）。**注意**：`.github/workflows/deploy-pages.yml` 檔案已在本機小教室Grok版資料夾內準備完成（標準 static pages deploy action）。
   - 推薦改用 GitHub Actions 部署（更穩定）：
     1. 去 https://github.com/snowsepch/workshop-generator-grok 點「Add file」→「Create new file」
     2. 檔名輸入 `.github/workflows/deploy-pages.yml`
-    3. 內容從本機資料夾的 `.github/workflows/deploy-pages.yml` 複製貼上（或見下方程式碼）
+    3. 內容從本機資料夾的 `.github/workflows/deploy-pages.yml` 複製貼上（或直接在本機 `git add .github/ && git commit && git push`，但需先用 `gh auth login` 帶 `workflow` scope 刷新 token）。
     4. Commit 後，Actions 會自動部署，完成後即可用 https://snowsepch.github.io/workshop-generator-grok/ 開啟
-  - 注意：gh CLI 目前的 token 缺少 `workflow` scope，所以無法直接 push workflow 檔（安全機制），需用網頁或重新 `gh auth login` 時勾選 workflow 權限。
+  - 注意：gh CLI 目前的 token 缺少 `workflow` scope，所以無法直接 push workflow 檔（安全機制）。建議優先用 GitHub 網頁 UI 新增，或本地 re-auth 後再 push。
 - 原本 repo 的 main 仍維持原版（Grok 版永遠只在這個新 repo）。
 
 ## 4. 重要提醒（給未來自己）

@@ -63,7 +63,7 @@
 
 ## 4. 資料保護與隱私注意事項（公開 repo 必讀）
 - **已採取的保護措施**（2026-06 更新）：
-  - GITHUB_REPOS_STATUS.md 內的本地路徑已匿名化（從 `/Users/sep/...` 改為 `~/小教室Grok版/` 通用寫法）。
+  - GITHUB_REPOS_STATUS.md 內的本地路徑已匿名化為通用寫法（`~/小教室Grok版/`），避免公開 repo 洩露 macOS 使用者名稱。
   - 移除所有 "Lala" 個人提及。
   - 新增 `.gitignore`：排除 .DS_Store、*.log、local-*、暫存檔等，避免個人檔案或 OS 快取意外上傳。
   - Git 作者資訊（snowsepch + 個人 email）已存在於歷史中，無法輕易移除（需 rewrite history，風險高）。未來 commit 請使用隱私 email。

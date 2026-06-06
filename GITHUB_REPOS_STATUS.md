@@ -11,31 +11,30 @@
 
 ## 2. Grok 版（目前這個資料夾）
 - **本地位置**：`/Users/sep/Library/Mobile Documents/com~apple~CloudDocs/小教室Grok版/`
-- **目前狀態**：
-  - 這是一個**全新的獨立 git repo**（已移除舊 .git 歷史）。
-  - 只有 Grok 版的內容：
-    - index.html（完整最新版，包含所有修正）
-    - README.md（詳細說明差異與使用方式）
-    - 歷史版本/（舊版 UI 截圖）
-    - 各階段版本對照 JPG
-  - 目前 branch：main
-  - 初始 commit：339768c "Initial commit: Apple Shop 小教室專案 Grok 版"
-  - **尚未設定任何 remote**（準備好推到全新的獨立 GitHub repo）
-- **建議新 repo 名稱**（建立時使用）：
-  - `小教室Grok版`
-  - 或 `apple-shop-xiao-jiao-shi-grok`
-  - 或 `workshop-generator-grok`
+- **GitHub Repo**（已上傳完成）：
+  - **原始碼**：https://github.com/snowsepch/workshop-generator-grok
+  - **線上使用（GitHub Pages）**：https://snowsepch.github.io/workshop-generator-grok/
+    - 開啟即用，無需下載 index.html
+  - **目前狀態**：
+    - 這是一個**全新的獨立 git repo**（已移除舊 .git 歷史）。
+    - 只有 Grok 版的內容：
+      - index.html（完整最新版，包含所有修正）
+      - README.md（詳細說明差異與使用方式）
+      - 歷史版本/（舊版 UI 截圖）
+      - 各階段版本對照 JPG
+      - GITHUB_REPOS_STATUS.md（本狀態紀錄檔）
+    - branch：main
+    - remote：origin → https://github.com/snowsepch/workshop-generator-grok.git
+    - 初始 commit：339768c
+    - 上傳 commit：eaa352b（包含本狀態檔）
+    - **GitHub Pages 已啟用**（來源：main 分支 + / 根目錄）
+- **Repo 名稱選擇**：使用 `workshop-generator-grok`（與原本 `workshop-generator` 平行，易分享且 URL 乾淨）
 
-## 3. 未來上傳方式
-1. 在 GitHub 建立全新空白 repo（不要自動產生 README）。
-2. 複製新 repo 的 HTTPS 或 SSH 網址。
-3. 在本資料夾執行：
-   ```bash
-   git remote add origin <新repo網址>
-   git branch -M main
-   git push -u origin main
-   ```
-4. 以後所有 Grok 版的開發與上傳，都在這個新 repo 進行。
+## 3. 上傳紀錄（已完成）
+- 2026-06-06：使用 `gh repo create workshop-generator-grok --public --source . --remote origin --push` 完成首次上傳。
+- 隨即啟用 GitHub Pages（`gh api` + `gh repo edit` 設定 homepage 與 topics）。
+- 之後的開發：在此資料夾直接 `git add`、`git commit`、`git push` 即可同步到 GitHub 與 Pages。
+- 原本 repo 的 main 仍維持原版（Grok 版永遠只在這個新 repo）。
 
 ## 4. 重要提醒（給未來自己）
 - 這個資料夾（小教室Grok版）永遠只放 Grok 版。

@@ -5585,16 +5585,40 @@ function renderQRInto(elId, text, size){
   if(typeof QRCode==='undefined'){ el.innerHTML='<div style="font-size:11px;color:#c00">QR 元件載入失敗，請檢查網路後重開</div>'; return; }
   new QRCode(el, { text:text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M });
 }
-/* 用 html2canvas 把節點轉成圖片再列印（高解析度，確保 QR / emoji 完整呈現） */
+/* 用 html2canvas 把節點轉成圖片再列印（高解析度，確保 QR / emoji 完整呈現）
+   走隱藏 iframe 列印，不開彈出視窗、不讓主視窗進入列印模式；圖片依節點實際寬高比換算成 mm，
+   確保縮放後整張圖恰好落在單頁 A4 內，不會因比例算錯多印出一張空白頁。 */
 function printNodeViaCanvas(node, title){
   if(typeof html2canvas==='undefined'){ alert('列印元件載入中，請稍候再試'); return; }
+  const nodeW=node.offsetWidth, nodeH=node.offsetHeight;
   html2canvas(node, {scale:3, backgroundColor:'#ffffff', useCORS:true}).then(canvas=>{
-    const w = window.open('', '_blank');
-    if(!w){ alert('列印視窗被瀏覽器封鎖，請允許彈出視窗後再試'); return; }
-    const img = canvas.toDataURL('image/png');
-    w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+title+'</title><style>@page{margin:0}body{margin:0;display:flex;justify-content:center;align-items:flex-start}img{max-width:100%}</style></head><body><img src="'+img+'"></body></html>');
-    w.document.close();
-    setTimeout(()=>{ w.focus(); w.print(); }, 350);
+    const img=canvas.toDataURL('image/png');
+    const MAXW=180, MAXH=277; /* A4 210x297mm 扣邊界後的可印範圍 */
+    let w=MAXW, h=MAXW*(nodeH/nodeW);
+    if(h>MAXH){ h=MAXH; w=MAXH*(nodeW/nodeH); }
+    const docHTML='<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>'+title+'</title>'+
+      '<style>*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}'+
+      '@page{size:A4 portrait;margin:10mm;}html,body{margin:0;padding:0;background:#fff;}'+
+      'body{display:flex;justify-content:center;align-items:flex-start;}'+
+      'img{width:'+w+'mm;height:'+h+'mm;display:block;}</style></head>'+
+      '<body><img src="'+img+'"></body></html>';
+    const old=document.getElementById('print-frame');if(old)old.remove();
+    const ifr=document.createElement('iframe');ifr.id='print-frame';ifr.setAttribute('aria-hidden','true');
+    ifr.style.cssText='position:fixed;left:-9999px;top:0;width:794px;height:1123px;border:0;opacity:0;';
+    document.body.appendChild(ifr);
+    let done=false;
+    const fire=()=>{ if(done)return; done=true;
+      try{ ifr.contentWindow.focus(); ifr.contentWindow.print(); }
+      catch(e){ alert('列印失敗：'+(e&&e.message||e)); }
+      setTimeout(()=>{ try{ ifr.remove(); }catch(e){} }, 2000);
+    };
+    ifr.onload=()=>{
+      const iw=ifr.contentWindow, imgEl=iw.document.querySelector('img');
+      if(imgEl && !imgEl.complete){ imgEl.onload=()=>setTimeout(fire,150); imgEl.onerror=()=>setTimeout(fire,150); }
+      else setTimeout(fire,150);
+    };
+    const d=ifr.contentWindow.document; d.open(); d.write(docHTML); d.close();
+    setTimeout(fire,2500); /* 後備：onload／圖片載入未觸發也能印 */
   }).catch(e=>{ alert('列印準備失敗：'+e.message); });
 }
 

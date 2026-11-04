@@ -1,0 +1,14 @@
+# Personal / local only
+.DS_Store
+*.log
+*.tmp
+local-*.*
+# Avoid committing real personal store data if any
+# (門市設定 is in browser LocalStorage, not here)
+# Screenshots or history may contain UI only, but be careful
+# .github/ is committed for Pages deploy
+
+# Standard
+node_modules/
+*.swp
+*~

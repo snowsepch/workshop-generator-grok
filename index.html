@@ -1018,22 +1018,22 @@
           <button type="button" class="safe-combo-card" onclick="applySafeCombo(1)">
             <div class="sc-name">⭐ 安全牌 1：iPhone 入門十招 ＋ 相機日常實拍</div>
             <div class="sc-desc">最適合剛換機的新手與 Android 轉過來的學員，手勢互動多、絕不冷場！</div>
-            <div class="sc-tags"><span>🌱 難度 1 星</span><span>⏱ 60 分鐘</span><span>💡 互動率 100%</span></div>
+            <div class="sc-tags"><span>🌱 入門好上手</span><span>⭐⭐⭐⭐⭐ 5 星首選</span><span>💡 互動率 100%</span></div>
           </button>
           <button type="button" class="safe-combo-card" onclick="applySafeCombo(2)">
             <div class="sc-name">⭐ 安全牌 2：換機無痛搬家 ＋ LINE 完整備份</div>
             <div class="sc-desc">門市顧客最高頻剛需！教大家照片、對話紀錄怎麼搬，學員最感謝的實戰課。</div>
-            <div class="sc-tags"><span>🌱 難度 1 星</span><span>📲 剛需第一</span><span>💬 LINE 零痛點</span></div>
+            <div class="sc-tags"><span>🌱 入門好上手</span><span>⭐⭐⭐⭐⭐ 5 星首選</span><span>💬 LINE 零痛點</span></div>
           </button>
           <button type="button" class="safe-combo-card" onclick="applySafeCombo(3)">
             <div class="sc-name">⭐ 安全牌 3：長輩 iPhone 友善設定 ＋ 字大防詐與視訊</div>
             <div class="sc-desc">放慢步調、溫馨有感！大字體、放大鏡、防詐提醒與家人 FaceTime 視訊。</div>
-            <div class="sc-tags"><span>🌱 難度 1 星</span><span>👴 長輩最愛</span><span>❤️ 節奏極穩</span></div>
+            <div class="sc-tags"><span>🌱 入門好上手</span><span>⭐⭐⭐⭐⭐ 5 星首選</span><span>❤️ 節奏極穩</span></div>
           </button>
           <button type="button" class="safe-combo-card" onclick="applySafeCombo(4)">
             <div class="sc-name">⭐ 安全牌 4：照片大掃除 ＋ 一鍵釋放 20GB 空間</div>
             <div class="sc-desc">每個人手機照片都破萬張！現場直接帶學員清出數十 GB 容量，成效立即可見。</div>
-            <div class="sc-tags"><span>🌱 難度 1 星</span><span>💾 現場超有感</span><span>🔥 必學技巧</span></div>
+            <div class="sc-tags"><span>🌱 入門好上手</span><span>⭐⭐⭐⭐⭐ 5 星首選</span><span>🔥 必學技巧</span></div>
           </button>
         </div>
       </div>
@@ -4158,9 +4158,22 @@ function renderTopics(filterCat = null){
       const customClass = t.custom ? ' custom' : '';
       const removeBtn = t.custom ? `<span class="chip-remove" onclick="event.stopPropagation();removeCustomTopic(${i})" title="移除自訂主題">✕</span>` : '';
       const catBadge = t.category ? `<span class="cat-badge">${t.category}</span>` : '';
-      const tagsStr = (t.tags && t.tags.length) ? ` <span style="font-size:9px;opacity:.6;">${t.tags.slice(0,2).join(',')}</span>` : '';
-            const diffStars = `<span class="diff-stars" title="難易度：${t.difficulty} 星">${'⭐'.repeat(t.difficulty || 2)}</span>`;
-      const badgesHtml = (t.badges || []).map(b => {
+      // 推薦星等（如同飲料 Menu 上的招牌推薦指數，新手首選全數為滿分 5 星 ⭐⭐⭐⭐⭐）
+      const isBeginner = (t.badges || []).includes('⭐ 新手首選');
+      const isHot = (t.badges || []).includes('🔥 門市超熱門');
+      const recStarsCount = (isBeginner || isHot) ? 5 : ((t.difficulty <= 3 || t.level?.includes('入門') || t.level?.includes('進階')) ? 4 : 3);
+      const starsTitle = isBeginner ? '新手首選力推：5 星滿分' : (isHot ? '門市熱門力推：5 星滿分' : `門市推薦度：${recStarsCount} 星`);
+      const diffStars = `<span class="diff-stars" title="${starsTitle}">${'⭐'.repeat(recStarsCount)}</span>`;
+
+      // 徽章列：包含明確難易度標籤與特色徽章
+      const allBadges = [];
+      if (t.level) allBadges.push(t.level);
+      if (t.badges) {
+        t.badges.forEach(b => {
+          if (!allBadges.includes(b)) allBadges.push(b);
+        });
+      }
+      const badgesHtml = allBadges.map(b => {
         const cls = b.includes('新手') ? 'badge-beginner' : b.includes('熱門') ? 'badge-hot' : 'badge-neutral';
         return `<span class="t-badge ${cls}">${b}</span>`;
       }).join('');

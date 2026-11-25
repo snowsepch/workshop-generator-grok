@@ -3780,6 +3780,111 @@ function toggleNotesPanel() {
   if (btn) btn.textContent = isNotesCollapsed ? '▲ 展開' : '▼ 收合';
 }
 
+
+/* =========================================================
+   通用講師備忘錄引擎（同時支援網頁即時連動與 PPTX 備忘稿寫入）
+   ========================================================= */
+function getFullSpeakerNotes(type, info) {
+  let speech = '';
+  let question = '';
+  let action = '';
+  let pitfall = '';
+
+  const topicName = info.topicName || 'Apple 智慧生活';
+  const pageTitle = info.pageTitle || '';
+
+  switch(type) {
+    case 'cover':
+      speech = `「各位朋友大家午安！歡迎來到我們 Apple Shop 小教室。今天的主題是【${topicName}】。大家千萬不用把這當成生硬的科技課，今天我們不背複雜規格，只講最實用的生活技巧，並且帶大家親自用手機做一次。下課後每個人一定都能學會幾招回去跟家人炫耀！」`;
+      question = `「在開始前想先調查一下：大家平常使用手機時，最常遇到的困擾是什麼？是容量常常滿出來、拍照抓不到感覺，還是很多功能想用卻不知道藏在哪裡？大家可以跟我點個頭或舉個手！」`;
+      action = `面帶微笑環視全場學員；眼神與前排長輩對視，確認大家坐得舒適；請大家先將手機拿出來放在桌上，營造輕鬆自在、隨時準備動手的氛圍。`;
+      pitfall = `剛開場時學員通常比較害羞拘謹，切忌一開場就大談硬體晶片或規格代號，多從生活瑣事破冰拉近距離。`;
+      break;
+
+    case 'agenda':
+      speech = `「大家看大螢幕，今天我們的節奏很輕鬆，主要分成三段：第一段先認識這幾項核心功能在生活裡有多好用；第二段是大家拿起手機親自一步一步做；最後一段是看怎麼用在家庭與工作裡。中間有任何疑問隨時舉手，我們慢慢來不用急！」`;
+      question = `「今天這幾個環節，大家最期待哪一個功能的實作呢？等一下實作時間我會把大家最想學的放在最前面！」`;
+      action = `側身站在投影螢幕右側，右手指向目錄流程，切勿擋住投影光束；說到『動手實作』時加重語氣，讓學員知道等一下會有充足時間練習。`;
+      pitfall = `強調『等一下有專屬的實作時間』，避免部分學員現在就低頭忙著滑手機找按鈕而漏聽了整體的架構。`;
+      break;
+
+    case 'overview':
+    case 'why':
+      speech = `「很多人常會問：『這個新機型或新功能，到底跟以前差在哪裡？』其實核心就一句話：它幫我們把生活中最麻煩的這幾件事變簡單了。今天把這幾個主題放在一起，看它們在日常生活裡怎麼搭起來，讓家人的聯繫與工作都更順心。」`;
+      question = `「大家是不是也曾經遇過出門到下午手機就亮紅燈，或者開幾個 App 就卡住的情況？這時候是不是覺得很心累？」`;
+      action = `以抑揚頓挫的語氣強調數字或主題整合帶來的真實改變（如不用帶行動電源、不卡頓）；手指大螢幕上的關鍵重點。`;
+      pitfall = `不要生硬念出規格術語，轉換為『大太陽底下看導航清清楚楚』或『未來 4 到 5 年都不會卡』的生活語言。`;
+      break;
+
+    case 'features':
+    case 'highlight':
+      speech = `「現在我們來看這幾項精選功能：${info.featuresSummary || '這幾項重要特色'}。這幾招都是平常大家最常用到、但最容易被忽略的神技。大家先看大螢幕我的示範，看一下它的位置藏在哪裡...」`;
+      question = `「現場有學員以前發現過這個小功能嗎？知道它在哪裡操作的請舉手跟我們分享一下！」`;
+      action = `手持示範機面向學員，操作手勢放慢放大；操作完成後將螢幕畫面轉向台下學員，確保大家看到即時變化。`;
+      pitfall = `若有學員手上的 iOS 版本不同或機型不同導致介面稍有差異，立刻提醒大家『不同系統位置略有不同，先看我示範，等一下實作時我過去幫您看』。`;
+      break;
+
+    case 'handsOn':
+      speech = `「現在進入今天最核心的【動手試一試】時間！自己親自做一次，印象最深刻。我們總共準備了這幾個小任務，大家現在拿起手機，跟著大螢幕上的步驟，我們一起做第一個任務...」`;
+      question = `「大家的螢幕上有成功跳出這個選單嗎？有成功的請舉手或跟隔壁同學點個頭！」`;
+      action = `【關鍵動作】立刻走下講台巡場！主動走向表情猶豫或動作較慢的長輩身邊，輕聲提示，鼓勵學員大膽點擊螢幕，排解不安感。`;
+      pitfall = `入門手勢課：提醒手掌不要壓到螢幕邊緣導致誤觸；相機課：提醒鏡頭擦拭乾淨，對焦時點擊主體人臉；備份課：提醒切勿點到『重置或清除』！`;
+      break;
+
+    case 'scenarios':
+      speech = `「功能學會了，最重要的是在生活裡怎麼用！想想看這些情境：過年過節全家聚餐拍大合照、出門旅遊不迷路、或是跟出國工作的孩子視訊連線。把今天學到的用上去，生活立刻更順手。」`;
+      question = `「大家最近一次出遊或聚餐是什麼時候？最想把今天學到的哪一招用在家人身上？」`;
+      action = `眼神溫暖，分享一則自己門市顧客的真實生活小故事，引發現場學員強烈的心理共鳴與認同感。`;
+      pitfall = `避免只講科技情境，多著重在『親情、家庭連結、生活便利與回憶保存』，學員接受度最高。`;
+      break;
+
+    case 'quickStart':
+    case 'handbook':
+      speech = `「大家看這一頁的快速查閱清單，把我們今天聊到的關鍵步驟整理成 5 個核心重點。大家可以用手機把這頁拍下來，回家後只要照著清單操作，就不怕忘記！」`;
+      question = `「大家看這張清單，有沒有哪一步是覺得回家可能容易忘記的？我們現場再複習一次！」`;
+      action = `條理分明地逐點點出核心步驟，鼓勵學員用手機將這頁拍下來帶回家看。`;
+      pitfall = `步調切忌過快，給學員留出足夠時間記錄或提問。`;
+      break;
+
+    case 'accessories':
+    case 'closing':
+      speech = `「大家今天表現太棒了，所有任務都順利達標！如果平時想用得更省心，門市現場展示的這三款配件非常推薦一起搭配。另外，如果大家今天帶來的舊手機想換新，我們門市現場有專人可以免費檢測估價直折新機，還會免費協助把照片和 LINE 完整搬移！下課後如果有任何問題，請不要客氣，留下來找我一對一慢慢聊！」`;
+      question = `「大家平時出門最怕手機沒電，還是最怕手滑摔裂螢幕呢？」`;
+      action = `手指指向門市展示櫃與配件陳列區，熱情邀請大家課後留步體驗實機；帶領全場學員為彼此的認真學習熱烈鼓掌！`;
+      pitfall = `態度始終保持貼心顧問與協助解決問題的角度，絕不給予推銷壓力，讓學員感受到滿滿的專業與信任感。`;
+      break;
+
+    default:
+      speech = `「這一頁是為大家準備的重點整理，把關鍵精華濃縮在此。跟著步驟走，隨時都能輕鬆回顧。」`;
+      question = `「大家對這個部分有沒有什麼疑問或想進一步了解的？」`;
+      action = `觀察全場反應，適時停頓留白，解答個別學員的疑難。`;
+      pitfall = `確保全場學員進度一致，不要漏掉任何一位舉手發問的朋友。`;
+      break;
+  }
+
+  return { speech, question, action, pitfall };
+}
+
+function formatNotesText(notes, pageTitle) {
+  return `【Apple Shop 小教室講師備忘錄 · ${pageTitle}】
+
+` +
+         `🗣️ 參考講法與轉場話術（口語可直接照唸）：
+${notes.speech}
+
+` +
+         `🙋‍♂️ 現場互動提問句（破冰活躍氣氛）：
+${notes.question}
+
+` +
+         `💡 講師動作指引（站位與手勢）：
+${notes.action}
+
+` +
+         `⚠️ 常見卡關與避坑提醒：
+${notes.pitfall}`;
+}
+
 function updateSpeakerNotes(idx) {
   const body = document.getElementById('speakerNotesContent');
   const sub = document.getElementById('snPageSub');
@@ -3795,91 +3900,54 @@ function updateSpeakerNotes(idx) {
   const pNum = idx + 1;
   const topicList = [...SELECTED_T].map(i => TOPICS[i]);
   const currentTopic = topicList[0] || { n: 'Apple 智慧生活', features: [], scenarios: [] };
+  const topicNames = topicList.map(t => t.n).join(' ＋ ');
 
   const titleEl = slideEl.querySelector('.title') || slideEl.querySelector('h1') || slideEl.querySelector('.big');
-  const titleText = titleEl ? titleEl.textContent.trim() : currentTopic.n;
+  const titleText = titleEl ? titleEl.textContent.trim() : (topicList.length > 1 ? '多主題綜合講座' : currentTopic.n);
   const labelEl = slideEl.querySelector('.label');
+  const labelText = labelEl ? labelEl.textContent.trim() : '';
+  const slideHtml = slideEl.innerHTML;
 
   let slideType = 'general';
   if (idx === 0) slideType = 'cover';
-  else if (labelEl && (labelEl.textContent.includes('學習地圖') || labelEl.textContent.includes('目錄')) || titleText.includes('學習地圖') || titleText.includes('目錄')) slideType = 'agenda';
-  else if (labelEl && (labelEl.textContent.includes('為什麼需要') || labelEl.textContent.includes('整體主軸')) || titleText.includes('為什麼需要')) slideType = 'why';
-  else if (labelEl && (labelEl.textContent.includes('換您試試看') || labelEl.textContent.includes('動手')) || titleText.includes('動手')) slideType = 'handsOn';
-  else if (labelEl && labelEl.textContent.includes('生活好幫手') || titleText.includes('生活好幫手') || titleText.includes('生活應用')) slideType = 'scenarios';
-  else if (labelEl && labelEl.textContent.includes('操作手冊') || titleText.includes('操作手冊') || titleText.includes('避坑指南')) slideType = 'handbook';
-  else if (labelEl && labelEl.textContent.includes('回家快速查') || titleText.includes('快速上手')) slideType = 'quickStart';
-  else if (labelEl && labelEl.textContent.includes('今天試一個') || titleText.includes('小挑戰')) slideType = 'homework';
-  else if (idx === total - 1 || labelEl && labelEl.textContent.includes('小東西') || titleText.includes('配件')) slideType = 'accessories';
-  else if (labelEl && (labelEl.textContent.includes('亮點') || labelEl.textContent.includes('值得看')) || titleText.includes('亮點') || titleText.includes('精選')) slideType = 'features';
+  else if (labelText.includes('學習地圖') || titleText.includes('學習地圖') || titleText.includes('安排')) slideType = 'agenda';
+  else if (labelText.includes('整體主軸') || labelText.includes('先給您') || labelText.includes('為什麼') || slideHtml.includes('整體主軸') || slideHtml.includes('同一段生活')) slideType = 'overview';
+  else if (labelText.includes('換您試試看') || labelText.includes('動手') || slideHtml.includes('動手實作')) slideType = 'handsOn';
+  else if (labelText.includes('生活好幫手') || labelText.includes('生活應用') || slideHtml.includes('生活好幫手') || slideHtml.includes('日常裡會遇到的時刻')) slideType = 'scenarios';
+  else if (labelText.includes('回家快速查') || labelText.includes('快速上手') || slideHtml.includes('五個重點')) slideType = 'quickStart';
+  else if (labelText.includes('今天試一個') || labelText.includes('小挑戰')) slideType = 'homework';
+  else if (idx === total - 1 || labelText.includes('小東西') || labelText.includes('配件') || slideHtml.includes('現場專屬四大貼心服務')) slideType = 'accessories';
+  else if (labelText.includes('亮點') || labelText.includes('值得看') || slideHtml.includes('值得一看的功能') || slideHtml.includes('核心功能')) slideType = 'highlight';
 
-  if (sub) sub.textContent = `第 ${String(pNum).padStart(2,'0')} / ${String(total).padStart(2,'0')} 頁 · ${titleText.slice(0, 26)}`;
+  if (sub) sub.textContent = `第 ${String(pNum).padStart(2,'0')} / ${String(total).padStart(2,'0')} 頁 · ${titleText.slice(0, 24)}`;
 
-  let speech = '';
-  let question = '';
-  let action = '';
-  let pitfall = '';
+  // 提取該頁功能名稱列表（若有）
+  const featItems = slideEl.querySelectorAll('.feat-t, .fcard-t, .af-t, .task-t');
+  const fNames = Array.from(featItems).map(el => el.textContent.trim()).slice(0, 3).join('、');
 
-  if (slideType === 'cover') {
-    speech = `「各位朋友大家午安！歡迎來到我們 Apple Shop 小教室。今天的主題是【${currentTopic.n}】。大家千萬不用把這當成生硬的科技課，今天我們不背複雜規格，只講最實用的生活技巧，並且帶大家親自用手機做一次。下課後每個人一定都能學會幾招回去跟家人炫耀！」`;
-    question = `「在開始前想先調查一下：大家平常使用手機時，最常遇到的困擾是什麼？是容量常常滿出來、拍照抓不到感覺，還是很多功能想用卻不知道藏在哪裡？大家可以跟我點個頭或舉個手！」`;
-    action = `面帶微笑環視全場學員；眼神與前排長輩對視，確認大家坐得舒適；請大家先將手機拿出來放在桌上，營造輕鬆自在、隨時準備動手的氛圍。`;
-    pitfall = `剛開場時學員通常比較害羞拘謹，切忌一開場就大談硬體晶片或規格代號，多從生活瑣事破冰拉近距離。`;
-  } else if (slideType === 'agenda') {
-    speech = `「大家看大螢幕，今天我們的節奏很輕鬆，主要分成三段：第一段先認識這幾項核心功能在生活裡有多好用；第二段是大家拿起手機親自一步一步做；最後一段是看怎麼用在家庭與工作裡。中間有任何疑問隨時舉手，我們慢慢來不用急！」`;
-    question = `「今天這幾個環節，大家最期待哪一個功能的實作呢？等一下實作時間我會把大家最想學的放在最前面！」`;
-    action = `側身站在投影螢幕右側，右手指向目錄流程，切勿擋住投影光束；說到『動手實作』時加重語氣，讓學員知道等一下會有充足時間練習。`;
-    pitfall = `強調『等一下有專屬的實作時間』，避免部分學員現在就低頭忙著滑手機找按鈕而漏聽了整體的架構。`;
-  } else if (slideType === 'why') {
-    speech = `「很多人常會問：『這個新機型或新功能，到底跟以前差在哪裡？』其實核心就一句話：它幫我們把生活中最麻煩的這幾件事變簡單了。大家看大螢幕上的這幾個數字，它們代表的就是更快的速度、更長的電力、以及更安心的陪伴。」`;
-    question = `「大家是不是也曾經遇過出門到下午手機就亮紅燈，或者開幾個 App 就卡住的情況？這時候是不是覺得很心累？」`;
-    action = `以抑揚頓挫的語氣強調數字帶來的真實改變（如不用帶行動電源、不卡頓）；手指大螢幕上的關鍵數據。`;
-    pitfall = `不要生硬念出『3000 nits』或『A19 晶片』等術語，轉換為『大太陽底下看導航清清楚楚』或『未來 4 到 5 年都不會卡』。`;
-  } else if (slideType === 'features') {
-    const featItems = slideEl.querySelectorAll('.feat-t, .fcard-t, .af-t');
-    const fNames = Array.from(featItems).map(el => el.textContent.trim()).slice(0, 3).join('、');
-    speech = `「現在我們來看這幾項精選功能：${fNames || '這幾項重要特色'}。這幾招都是平常大家最常用到、但最容易被忽略的神技。大家先看大螢幕我的示範，看一下它的位置藏在哪裡...」`;
-    question = `「現場有學員以前發現過這個小功能嗎？知道它在哪裡操作的請舉手跟我們分享一下！」`;
-    action = `手持示範機面向學員，操作手勢放慢放大；操作完成後將螢幕畫面轉向台下學員，確保大家看到即時變化。`;
-    pitfall = `若有學員手上的 iOS 版本不同或機型不同導致介面稍有差異，立刻提醒大家『不同系統位置略有不同，先看我示範，等一下實作時我過去幫您看』。`;
-  } else if (slideType === 'handsOn') {
-    speech = `「現在進入今天最核心的【動手試一試】時間！自己親自做一次，印象最深刻。我們總共準備了這幾個小任務，大家現在拿起手機，跟著大螢幕上的步驟，我們一起做第一個任務...」`;
-    question = `「大家的螢幕上有成功跳出這個選單嗎？有成功的請舉手或跟隔壁同學點個頭！」`;
-    action = `【關鍵動作】立刻走下講台巡場！主動走向表情猶豫或動作較慢的長輩身邊，輕聲提示，鼓勵學員大膽點擊螢幕，排解不安感。`;
-    pitfall = `入門手勢課：提醒手掌不要壓到螢幕邊緣導致誤觸；相機課：提醒鏡頭擦拭乾淨，對焦時點擊主體人臉；備份課：提醒切勿點到『重置或清除』！`;
-  } else if (slideType === 'scenarios') {
-    speech = `「功能學會了，最重要的是在生活裡怎麼用！想想看這些情境：過年過節全家聚餐拍大合照、出門旅遊不迷路、或是跟出國工作的孩子視訊連線。把今天學到的用上去，生活立刻更順手。」`;
-    question = `「大家最近一次出遊或聚餐是什麼時候？最想把今天學到的哪一招用在家人身上？」`;
-    action = `眼神溫暖，分享一則自己門市顧客的真實生活小故事，引發現場學員強烈的心理共鳴與認同感。`;
-    pitfall = `避免只講科技情境，多著重在『親情、家庭連結、生活便利與回憶保存』，學員接受度最高。`;
-  } else if (slideType === 'accessories' || slideType === 'homework' || idx === total - 1) {
-    speech = `「大家今天表現太棒了，所有任務都順利達標！如果平時想用得更省心，門市現場展示的這三款配件非常推薦一起搭配。另外，如果大家今天帶來的舊手機想換新，我們門市現場有專人可以免費檢測估價直折新機，還會免費協助把照片和 LINE 完整搬移！下課後如果有任何問題，請不要客氣，留下來找我一對一慢慢聊！」`;
-    question = `「大家平時出門最怕手機沒電，還是最怕手滑摔裂螢幕呢？」`;
-    action = `手指指向門市展示櫃與配件陳列區，熱情邀請大家課後留步體驗實機；帶領全場學員為彼此的認真學習熱烈鼓掌！`;
-    pitfall = `態度始終保持貼心顧問與協助解決問題的角度，絕不給予推銷壓力，讓學員感受到滿滿的專業與信任感。`;
-  } else {
-    speech = `「大家看這一頁的重點整理，把我們今天聊到的關鍵步驟化繁為簡。回家後照著這份清單操作，就能隨時回顧！」`;
-    question = `「大家看這張清單，有沒有哪一步是覺得回家可能容易忘記的？我們現場再複習一次！」`;
-    action = `條理分明地逐點點出核心步驟，鼓勵學員用手機將這頁拍下來帶回家看。`;
-    pitfall = `步調切忌過快，給學員留出足夠時間記錄或提問。`;
-  }
+  const notes = getFullSpeakerNotes(slideType, {
+    topicName: topicNames,
+    pageTitle: titleText,
+    featuresSummary: fNames
+  });
 
   body.innerHTML = `
     <div class="sn-card primary">
       <div class="sn-hd blue">🗣️ 參考講法與轉場話術（口語可直接照唸）</div>
-      <div class="sn-text">${speech}</div>
+      <div class="sn-text">${notes.speech}</div>
     </div>
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="sn-card accent">
         <div class="sn-hd green">🙋‍♂️ 現場互動提問句（破冰活躍氣氛）</div>
-        <div class="sn-text">${question}</div>
+        <div class="sn-text">${notes.question}</div>
       </div>
       <div class="sn-card warm">
         <div class="sn-hd amber">💡 講師動作指引（站位與手勢）</div>
-        <div class="sn-text">${action}</div>
+        <div class="sn-text">${notes.action}</div>
       </div>
       <div class="sn-card alert">
         <div class="sn-hd red">⚠️ 常見卡關與避坑提醒</div>
-        <div class="sn-text">${pitfall}</div>
+        <div class="sn-text">${notes.pitfall}</div>
       </div>
     </div>
   `;
@@ -5003,6 +5071,7 @@ function downloadPptx(){
     s1.addText(t.sub, { x:0.5, y:4.0, w:12, h:0.6, fontSize:20, color:'FFFFFF', fontFace:FONT });
     s1.addText(t.welcome, { x:0.5, y:5.0, w:12, h:1.5, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
     s1.addText(`✨ ${t.tagline}    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    s1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: t.n }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const s2 = pptx.addSlide();
@@ -5023,6 +5092,7 @@ function downloadPptx(){
       s2.addText(it[2], { x:1.2, y:y+0.4, w:8, h:0.3, fontSize:12, color:C.muted, fontFace:FONT });
       s2.addText(it[3], { x:11, y:y+0.15, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
+    s2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: t.n }), '第 2 頁：學習地圖'));
 
     // 為什麼是它 + 規格
     const s3 = pptx.addSlide();
@@ -5040,6 +5110,7 @@ function downloadPptx(){
       s3.addText(sp[1], { x:3.1, y:y, w:9.5, h:0.4, fontSize:12, color:C.ink, fontFace:FONT });
     });
     s3.addText(`💡 ${a.pitch.replace(/<\/?b>/g,'')}`, { x:0.5, y:6.6, w:12, h:0.6, fontSize:12, color:C.green, fontFace:FONT, italic:true });
+    s3.addNotes(formatNotesText(getFullSpeakerNotes('why', { topicName: t.n }), '第 3 頁：核心定位與規格'));
 
     // 核心功能（每 3 個一頁）
     const fChunks = chunk(t.features, 3);
@@ -5055,6 +5126,7 @@ function downloadPptx(){
         sf.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
         sf.addText(f.fd + (f.req?`\n⚙️ 系統需求：${f.req}`:''), { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
+      sf.addNotes(formatNotesText(getFullSpeakerNotes('features', { topicName: t.n, featuresSummary: ch.map(f=>f.ft).join('、') }), `重點功能 ${part}`));
     });
 
     // 動手實作
@@ -5073,6 +5145,7 @@ function downloadPptx(){
       s6.addText(tk[1], { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
       s6.addText(`⏱ ${tk[2]}`, { x:11, y:y+0.2, w:1.8, h:0.5, fontSize:12, color:C.warm, fontFace:FONT, bold:true, align:'right' });
     });
+    s6.addNotes(formatNotesText(getFullSpeakerNotes('handsOn', { topicName: t.n }), '動手實作時間'));
 
     // 生活情境
     const s7 = pptx.addSlide();
@@ -5085,6 +5158,7 @@ function downloadPptx(){
       s7.addText(sc.t, { x:x+0.9, y:y, w:5, h:0.5, fontSize:17, color:C.ink, fontFace:FONT, bold:true });
       s7.addText(sc.d, { x:x+0.9, y:y+0.55, w:5, h:1.8, fontSize:12, color:'555555', fontFace:FONT, valign:'top' });
     });
+    s7.addNotes(formatNotesText(getFullSpeakerNotes('scenarios', { topicName: t.n }), '融入您的日常'));
 
     // 進階技巧
     const s8 = pptx.addSlide();
@@ -5137,6 +5211,7 @@ function downloadPptx(){
     c1.addText(title, { x:0.5, y:2.6, w:12, h:1.2, fontSize:46, color:'FFFFFF', fontFace:FONT, bold:true });
     c1.addText(`今天把 ${topics.length} 個有關聯的主題放在一起聊，看它們在生活裡怎麼搭起來、讓日子更順手。`, { x:0.5, y:4.2, w:12, h:1.4, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
     c1.addText(`✨ ${topics.length} 個主題一起聊    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    c1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: title }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const c2 = pptx.addSlide();
@@ -5156,6 +5231,7 @@ function downloadPptx(){
       c2.addText(it[2], { x:1.2, y:y+0.38, w:8.5, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
       c2.addText(it[3]+' 分鐘', { x:11, y:y+0.1, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
+    c2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: title }), '第 2 頁：今日學習地圖'));
 
     // 整體主軸（列出每個主題）
     const c3 = pptx.addSlide();
@@ -5169,6 +5245,7 @@ function downloadPptx(){
       c3.addText(t.n, { x:x+0.8, y:y, w:5.2, h:0.4, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
       c3.addText(t.tagline || t.sub || '', { x:x+0.8, y:y+0.38, w:5.2, h:0.45, fontSize:10, color:'555555', fontFace:FONT });
     });
+    c3.addNotes(formatNotesText(getFullSpeakerNotes('overview', { topicName: title }), '第 3 頁：整體主軸與生活面向'));
 
     // 精選亮點（每 3 個一頁，跨主題打散）
     const hChunks = chunk(highlights, 3);
@@ -5184,6 +5261,7 @@ function downloadPptx(){
         sh.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
         sh.addText(f.fd + `\n📦 來自：${f.topic.ico} ${f.topic.n}`, { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
+      sh.addNotes(formatNotesText(getFullSpeakerNotes('highlight', { topicName: title, featuresSummary: ch.map(f=>f.ft).join('、') }), `精選亮點 ${part}`));
     });
 
     // 動手實作
@@ -5200,6 +5278,7 @@ function downloadPptx(){
       c6.addText(`【來自 ${f.topic.n}】${f.fd}`, { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
       c6.addText(`⏱ ${fhMins[i]} 分鐘`, { x:11, y:y+0.2, w:1.8, h:0.5, fontSize:12, color:C.warm, fontFace:FONT, bold:true, align:'right' });
     });
+    c6.addNotes(formatNotesText(getFullSpeakerNotes('handsOn', { topicName: title }), '動手實作時間'));
 
     // 生活情境（跨主題挑 4 個）
     const c7 = pptx.addSlide();
@@ -5212,6 +5291,7 @@ function downloadPptx(){
       c7.addText(`${sc.topic.ico} ${sc.t}`, { x:x+0.9, y:y, w:5, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
       c7.addText(sc.d, { x:x+0.9, y:y+0.55, w:5, h:1.8, fontSize:12, color:'555555', fontFace:FONT, valign:'top' });
     });
+    c7.addNotes(formatNotesText(getFullSpeakerNotes('scenarios', { topicName: title }), '日常情境融入'));
 
     // 快速上手（跨主題抽 5 個重點）
     const c8 = pptx.addSlide();
@@ -5224,6 +5304,7 @@ function downloadPptx(){
       c8.addText(`${f.fi} ${f.ft.replace(/[ · ·].*/,'').trim()}`, { x:1.2, y:y, w:9, h:0.45, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
       c8.addText(`來自 ${f.topic.n}`, { x:1.2, y:y+0.42, w:9, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
     });
+    c8.addNotes(formatNotesText(getFullSpeakerNotes('quickStart', { topicName: title }), '快速上手回家清單'));
 
     // 配件搭配（跨主題挑最多 6 款）+ 收尾
     const c9 = pptx.addSlide();
@@ -5237,6 +5318,7 @@ function downloadPptx(){
       c9.addText(`💬 ${ac.why}`, { x:x, y:y+0.9, w:3.9, h:0.55, fontSize:10, color:'FFFFFF', fontFace:FONT, italic:true, valign:'top' });
     });
     c9.addText('🙏 謝謝您今天的參與，下次小教室再見！', { x:0.5, y:6.6, w:12, h:0.5, fontSize:15, color:'FFFFFF', fontFace:FONT, bold:true });
+    c9.addNotes(formatNotesText(getFullSpeakerNotes('accessories', { topicName: title }), '配件搭配與門市專屬服務'));
   }
 
   if(topicList.length === 1){
@@ -6082,12 +6164,14 @@ function showSlide(){
   if(!SLIDES.length){
     wrap.innerHTML = `<div class="slide empty"><div class="big">準備您的小教室簡報</div><div style="font-size:13px">左側勾選主題 · 右側選擇年齡層 · 按下「生成簡報」<br><span style="font-size:10px;opacity:.6">Grok 獨立版 · 實作步驟已更新為實際 App 操作邏輯</span></div></div>`;
     $('#pageInfo').textContent = '00 / 00';
+    updateSpeakerNotes(-1);
     return;
   }
   wrap.innerHTML = '';
   wrap.appendChild(SLIDES[IDX]);
   wrap.scrollTop = 0;
   $('#pageInfo').textContent = `${String(IDX+1).padStart(2,'0')} / ${String(SLIDES.length).padStart(2,'0')}`;
+  updateSpeakerNotes(IDX);
 }
 function prevSlide(){ if(SLIDES.length){ IDX=(IDX-1+SLIDES.length)%SLIDES.length; showSlide(); } }
 function nextSlide(){ if(SLIDES.length){ IDX=(IDX+1)%SLIDES.length; showSlide(); } }

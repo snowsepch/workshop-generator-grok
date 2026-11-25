@@ -610,7 +610,7 @@
     <div class="cat-filter-wrap">
       <!-- 快捷藥丸：最常用的兩個選項，點一下直接過濾，免展開選單 -->
       <div class="cat-quick-pills">
-        <button type="button" class="cat-pill-btn active" id="pillCatAll" onclick="selectCategoryFilter('', '全部分類 (60)')">🏷 全部分類</button>
+        <button type="button" class="cat-pill-btn active" id="pillCatAll" onclick="selectCategoryFilter('', '全部分類 (61)')">🏷 全部分類</button>
         <button type="button" class="cat-pill-btn beginner-pill" id="pillCatBeginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')">⭐ 新手首選</button>
       </div>
 
@@ -618,36 +618,36 @@
       <div class="custom-dropdown" id="customCatDropdown">
         <input type="hidden" id="catFilter" value="">
         <button type="button" class="custom-dropdown-btn" onclick="toggleCustomCategoryDropdown(event)">
-          <span id="customCatBtnLabel">📂 全部分類 (60)</span>
+          <span id="customCatBtnLabel">📂 全部分類 (61)</span>
           <span class="custom-dropdown-arrow">▼</span>
         </button>
         <div class="custom-dropdown-menu" id="customCatMenu">
-          <div class="custom-dropdown-item selected" data-val="" onclick="selectCategoryFilter('', '全部分類 (60)')">
-            <span>🏷 全部分類</span><span style="font-size:10.5px;opacity:.65">60 門</span>
+          <div class="custom-dropdown-item selected" data-val="" onclick="selectCategoryFilter('', '全部分類 (61)')">
+            <span>🏷 全部分類</span><span style="font-size:10.5px;opacity:.65">61 門</span>
           </div>
           <div class="custom-dropdown-item" data-val="beginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')" style="color:#b45309">
             <span>⭐ 新手首選 · 安全牌</span><span style="font-size:10.5px;opacity:.85">10 門</span>
           </div>
-          <div class="custom-dropdown-item" data-val="iPhone" onclick="selectCategoryFilter('iPhone', '📱 iPhone 系列 (10)')">
-            <span>📱 iPhone 系列</span><span style="font-size:10.5px;opacity:.65">10 門</span>
+          <div class="custom-dropdown-item" data-val="iPhone" onclick="selectCategoryFilter('iPhone', '📱 iPhone 系列 (12)')">
+            <span>📱 iPhone 系列</span><span style="font-size:10.5px;opacity:.65">12 門</span>
           </div>
-          <div class="custom-dropdown-item" data-val="iPad" onclick="selectCategoryFilter('iPad', '📟 iPad 系列 (2)')">
-            <span>📟 iPad 系列</span><span style="font-size:10.5px;opacity:.65">2 門</span>
+          <div class="custom-dropdown-item" data-val="iPad" onclick="selectCategoryFilter('iPad', '📟 iPad 系列 (3)')">
+            <span>📟 iPad 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span>
           </div>
           <div class="custom-dropdown-item" data-val="Mac" onclick="selectCategoryFilter('Mac', '💻 Mac 系列 (5)')">
             <span>💻 Mac 系列</span><span style="font-size:10.5px;opacity:.65">5 門</span>
           </div>
-          <div class="custom-dropdown-item" data-val="Watch" onclick="selectCategoryFilter('Watch', '⌚ Apple Watch 系列 (4)')">
-            <span>⌚ Watch 系列</span><span style="font-size:10.5px;opacity:.65">4 門</span>
+          <div class="custom-dropdown-item" data-val="Watch" onclick="selectCategoryFilter('Watch', '⌚ Watch 系列 (3)')">
+            <span>⌚ Watch 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span>
           </div>
-          <div class="custom-dropdown-item" data-val="App / 服務" onclick="selectCategoryFilter('App / 服務', '📲 App 與生活服務 (13)')">
-            <span>📲 App 與生活服務</span><span style="font-size:10.5px;opacity:.65">13 門</span>
+          <div class="custom-dropdown-item" data-val="App / 服務" onclick="selectCategoryFilter('App / 服務', '📲 App 與生活服務 (11)')">
+            <span>📲 App 與生活服務</span><span style="font-size:10.5px;opacity:.65">11 門</span>
           </div>
           <div class="custom-dropdown-item" data-val="AI" onclick="selectCategoryFilter('AI', '⚡ AI 智慧功能 (3)')">
             <span>⚡ AI 智慧功能</span><span style="font-size:10.5px;opacity:.65">3 門</span>
           </div>
-          <div class="custom-dropdown-item" data-val="其他" onclick="selectCategoryFilter('其他', '📦 其他好用技巧 (23)')">
-            <span>📦 其他好用技巧</span><span style="font-size:10.5px;opacity:.65">23 門</span>
+          <div class="custom-dropdown-item" data-val="其他" onclick="selectCategoryFilter('其他', '📦 其他好用技巧 (24)')">
+            <span>📦 其他好用技巧</span><span style="font-size:10.5px;opacity:.65">24 門</span>
           </div>
         </div>
       </div>
@@ -3632,7 +3632,23 @@ function setDiffFilter(type, btn) {
   currentDiffFilter = type;
   document.querySelectorAll('.q-filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
+
+  // 若在下方 Menu 點選「⭐ 新手首選」，自動連動至新手首選分類
+  if (type === 'beginner') {
+    selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)');
+    return;
+  }
+
   const catSel = document.getElementById('catFilter');
+  if (catSel && catSel.value === 'beginner') {
+    catSel.value = '';
+    const btnLabel = document.getElementById('customCatBtnLabel');
+    if (btnLabel) btnLabel.textContent = '📂 全部分類 (61)';
+    document.querySelectorAll('.cat-pill-btn').forEach(btn => {
+      if (btn.id === 'pillCatAll') btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
   renderTopics(catSel ? catSel.value || null : null);
 }
 
@@ -4048,7 +4064,7 @@ function selectCategoryFilter(val, label){
   if(input) input.value = val;
 
   const btnLabel = document.getElementById('customCatBtnLabel');
-  if(btnLabel) btnLabel.textContent = label || '📂 全部分類 (60)';
+  if(btnLabel) btnLabel.textContent = label || '📂 全部分類 (61)';
 
   document.querySelectorAll('.custom-dropdown-item').forEach(el=>{
     if(el.getAttribute('data-val') === val){
@@ -4062,6 +4078,13 @@ function selectCategoryFilter(val, label){
     if(btn.id === 'pillCatAll' && val === '') btn.classList.add('active');
     else if(btn.id === 'pillCatBeginner' && val === 'beginner') btn.classList.add('active');
     else btn.classList.remove('active');
+  });
+
+  // 切換分類時，將下方 Menu 篩選重設為「全部」，避免條件互相疊加而過濾掉主題
+  currentDiffFilter = 'all';
+  document.querySelectorAll('.q-filter-btn').forEach(b => {
+    if (b.textContent.trim() === '全部') b.classList.add('active');
+    else b.classList.remove('active');
   });
 
   closeCustomCategoryDropdown();
@@ -4098,9 +4121,19 @@ function renderTopics(filterCat = null){
       else if (n.includes('airpods') || n.includes('airtag') || n.includes('提醒') || n.includes('日誌') || n.includes(' app') || n.includes('app ')) cat = 'App / 服務';
       else cat = '其他';
     }
-    if (filterCat && cat !== filterCat) return;
 
-    // 難易度快速篩選 (Menu 推薦邏輯)
+    // 1. 分類篩選（包含新手首選安全牌專用篩選）
+    if (filterCat) {
+      if (filterCat === 'beginner') {
+        const isBeginner = (t.badges && t.badges.includes('⭐ 新手首選'));
+        if (!isBeginner) return;
+        cat = '⭐ 新手首選 · 安全牌推薦';
+      } else if (cat !== filterCat) {
+        return;
+      }
+    }
+
+    // 2. 難易度快速篩選 (Menu 推薦邏輯)
     if (currentDiffFilter === 'beginner' && (!t.badges || !t.badges.includes('⭐ 新手首選'))) return;
     if (currentDiffFilter === 'hot' && (!t.badges || !t.badges.includes('🔥 門市超熱門'))) return;
     if (currentDiffFilter === 'easy' && (t.difficulty > 2)) return;
@@ -4113,7 +4146,7 @@ function renderTopics(filterCat = null){
 
   let html = '';
   const cats = Object.keys(groups).sort((a,b) => {
-    const order = ['iPhone','iPad','Mac','Watch','App / 服務','AI','其他'];
+    const order = ['⭐ 新手首選 · 安全牌推薦','iPhone','iPad','Mac','Watch','App / 服務','AI','其他'];
     return order.indexOf(a) - order.indexOf(b);
   });
 

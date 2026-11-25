@@ -540,7 +540,7 @@
   .compare-desc{color:#374151}
   .compare-tip{font-size:10.5px;color:#4b5563;margin-top:8px;background:#f9fafb;padding:5px 8px;border-radius:6px}
 
-  /* ===== 燦坤右昌 Apple Shop 現場專屬服務 ===== */
+  /* ===== Apple Shop 門市現場專屬服務 ===== */
   .services-section{margin-top:14px;background:#ffffff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px}
   .services-hd{font-size:12px;font-weight:800;color:#0369a1;margin-bottom:8px;display:flex;align-items:center;gap:6px}
   .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -871,7 +871,7 @@
     <div class="modal-body">
       <div class="field-row">
         <label>門市名稱（會顯示在海報、文案上）</label>
-        <input id="set_store" placeholder="例：右昌 Apple Shop">
+        <input id="set_store" placeholder="例：Apple Shop 門市專櫃">
       </div>
       <div class="field-row">
         <label>報名／洽詢方式（顯示於海報、文案結尾）</label>
@@ -3852,7 +3852,7 @@ function updateSpeakerNotes(idx) {
     action = `眼神溫暖，分享一則自己門市顧客的真實生活小故事，引發現場學員強烈的心理共鳴與認同感。`;
     pitfall = `避免只講科技情境，多著重在『親情、家庭連結、生活便利與回憶保存』，學員接受度最高。`;
   } else if (slideType === 'accessories' || slideType === 'homework' || idx === total - 1) {
-    speech = `「大家今天表現太棒了，所有任務都順利達標！如果平時想用得更省心，門市現場展示的這三款配件非常推薦一起搭配。另外，如果大家今天帶來的舊手機想換新，我們燦坤右昌店現場有專人可以免費檢測估價直折新機，還會免費協助把照片和 LINE 完整搬移！下課後如果有任何問題，請不要客氣，留下來找我一對一慢慢聊！」`;
+    speech = `「大家今天表現太棒了，所有任務都順利達標！如果平時想用得更省心，門市現場展示的這三款配件非常推薦一起搭配。另外，如果大家今天帶來的舊手機想換新，我們門市現場有專人可以免費檢測估價直折新機，還會免費協助把照片和 LINE 完整搬移！下課後如果有任何問題，請不要客氣，留下來找我一對一慢慢聊！」`;
     question = `「大家平時出門最怕手機沒電，還是最怕手滑摔裂螢幕呢？」`;
     action = `手指指向門市展示櫃與配件陳列區，熱情邀請大家課後留步體驗實機；帶領全場學員為彼此的認真學習熱烈鼓掌！`;
     pitfall = `態度始終保持貼心顧問與協助解決問題的角度，絕不給予推銷壓力，讓學員感受到滿滿的專業與信任感。`;
@@ -4754,9 +4754,9 @@ function buildAccessories(topic, age, pNum, tNum){
       <div class="acc-foot">💰 詳細價格、現場庫存與優惠請洽門市同仁</div>
     </div>
 
-    <!-- 燦坤右昌 Apple Shop 現場專屬四大貼心服務 -->
+    <!-- Apple Shop 門市現場專屬四大貼心服務 -->
     <div class="services-section">
-      <div class="services-hd">🏬 燦坤 3C 右昌 Apple Shop 門市現場專屬四大貼心服務</div>
+      <div class="services-hd">🏬 ${(typeof SETTINGS !== 'undefined' && SETTINGS.store) ? SETTINGS.store : 'Apple Shop 門市'} 現場專屬四大貼心服務</div>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-ico">🔄</div>
@@ -5917,9 +5917,9 @@ function buildFusedAccessories(topics, accPool, pNum, tNum){
       <div class="acc-foot">💰 詳細價格、現場庫存與優惠請洽門市同仁</div>
     </div>
 
-    <!-- 燦坤右昌 Apple Shop 現場專屬四大貼心服務 -->
+    <!-- Apple Shop 門市現場專屬四大貼心服務 -->
     <div class="services-section">
-      <div class="services-hd">🏬 燦坤 3C 右昌 Apple Shop 門市現場專屬四大貼心服務</div>
+      <div class="services-hd">🏬 ${(typeof SETTINGS !== 'undefined' && SETTINGS.store) ? SETTINGS.store : 'Apple Shop 門市'} 現場專屬四大貼心服務</div>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-ico">🔄</div>

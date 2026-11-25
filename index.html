@@ -12,7 +12,7 @@
     --ink:#1d1d1f; --paper:#f5f5f7; --accent:#0071e3;
     --warm:#c2410c; --green:#15803d; --purple:#5e5ce6;
     --sans:"Noto Sans TC","PingFang TC","Helvetica Neue",-apple-system,sans-serif;
-    /* ===== Grok 版 UI 配色（獨立開發版，柔和淺色科技風 — 操作者閱讀舒適，不影響簡報/海報內容） ===== */
+    /* ===== Grok 版 UI 配色（獨立開發版，柔和淺色科技風 · 操作者閱讀舒適，不影響簡報/海報內容） ===== */
     --ui-acc:#0ea5e9;   /* Grok 藍：重點 / 按鈕 */
     --ui-bg:#f8fafc;    /* 極淺灰：舞台 / 底 */
     --ui-cream:#f1f5f9; /* 淺灰：topbar / 面板 / 卡片底 */
@@ -395,7 +395,7 @@
   .seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
   .poster-preview{display:flex;justify-content:center;padding:10px;background:#e8e8ed;border-radius:12px;overflow:auto}
 
-  /* 海報底版 — 奶油底 #F5F3EE + 炭黑 #1A1A1A + 單一強調色（可切換）·不漸層·Noto Sans TC */
+  /* 海報底版 · 奶油底 #F5F3EE + 炭黑 #1A1A1A + 單一強調色（可切換）·不漸層·Noto Sans TC */
   .poster{--ac:#F5A623;width:760px;background:#F5F3EE;color:#1A1A1A;font-family:"Noto Sans TC",var(--sans);position:relative;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;border-top:11px solid var(--ac)}
   .poster.a4{min-height:1075px;padding:52px 56px 46px}
   .poster.sq{width:760px;height:760px;padding:44px 50px}
@@ -455,16 +455,111 @@
   .copy-card pre{white-space:pre-wrap;word-break:break-word;font-family:var(--sans);font-size:13.5px;line-height:1.75;color:var(--ink);margin:0}
 
 
+
+  /* ===== 難易度星等、徽章與快速篩選 ===== */
+  .diff-stars{font-size:10px;color:#f59e0b;letter-spacing:1px;margin-left:4px}
+  .t-badge{font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px;display:inline-block;line-height:1.3;white-space:nowrap}
+  .badge-beginner{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+  .badge-hot{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}
+  .badge-neutral{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0}
+  .chip-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .chip-title{display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-weight:600;font-size:12.5px;color:var(--ink)}
+  .chip-badges{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:2px}
+  .quick-filter-bar{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0 10px}
+  .q-filter-btn{padding:4px 8px;border:1px solid var(--ui-bd);border-radius:6px;font-size:11px;font-weight:600;background:#fff;color:var(--ink);cursor:pointer;transition:.15s}
+  .q-filter-btn:hover{background:#f8fafc;border-color:var(--ui-line)}
+  .q-filter-btn.active{background:#0284c7;color:#fff;border-color:#0284c7}
+  .q-filter-btn.beginner{color:#047857}
+  .q-filter-btn.beginner.active{background:#059669;color:#fff;border-color:#059669}
+  .q-filter-btn.hot{color:#be123c}
+  .q-filter-btn.hot.active{background:#e11d48;color:#fff;border-color:#e11d48}
+
+  /* ===== 第一次上台安全牌組合 (新手推薦) ===== */
+  .safe-combo-section{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px;margin-bottom:14px}
+  .safe-combo-title{font-size:12px;font-weight:800;color:#0369a1;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .safe-combo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .safe-combo-card{background:#fff;border:1px solid #bae6fd;border-radius:8px;padding:9px 11px;cursor:pointer;text-align:left;transition:.15s}
+  .safe-combo-card:hover{border-color:#0284c7;box-shadow:0 2px 6px rgba(2,132,199,.12);transform:translateY(-1px)}
+  .sc-name{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:3px}
+  .sc-desc{font-size:10.5px;color:#475569;line-height:1.4;margin-bottom:5px}
+  .sc-tags{display:flex;gap:4px;flex-wrap:wrap}
+  .sc-tags span{font-size:9px;background:#f8fafc;color:#0284c7;padding:1px 5px;border-radius:3px;border:1px solid #e0f2fe;font-weight:600}
+
+  /* ===== 本頁講師備忘錄面板 (Speaker Notes) ===== */
+  .speaker-notes-panel{margin-top:14px;background:#fff;border:1.5px solid var(--ui-bd);border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow:hidden;transition:all .2s ease}
+  .speaker-notes-hd{background:#f8fafc;border-bottom:1px solid var(--ui-bd);padding:9px 14px;display:flex;justify-content:space-between;align-items:center}
+  .sn-title{display:flex;align-items:center;gap:8px}
+  .sn-badge{background:#0284c7;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+  .sn-sub{font-size:11.5px;font-weight:600;color:#475569}
+  .sn-actions{display:flex;gap:6px;align-items:center}
+  .sn-btn{background:#fff;border:1px solid var(--ui-bd);border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;transition:.12s}
+  .sn-btn:hover{background:#f1f5f9;border-color:#cbd5e1}
+  .speaker-notes-body{padding:14px;display:grid;grid-template-columns:1.35fr 1fr;gap:12px;background:#ffffff;line-height:1.65;font-size:12.5px;max-height:360px;overflow-y:auto}
+  .speaker-notes-body.collapsed{display:none}
+  .speaker-notes-body.font-sm{font-size:11.5px}
+  .speaker-notes-body.font-md{font-size:13px}
+  .speaker-notes-body.font-lg{font-size:14.5px}
+  .sn-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px}
+  .sn-card.primary{background:#eff6ff;border-color:#bfdbfe}
+  .sn-card.accent{background:#f0fdf4;border-color:#bbf7d0}
+  .sn-card.warm{background:#fffbeb;border-color:#fde68a}
+  .sn-card.alert{background:#fef2f2;border-color:#fecaca}
+  .sn-hd{font-size:11.5px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+  .sn-hd.blue{color:#1d4ed8}
+  .sn-hd.green{color:#15803d}
+  .sn-hd.amber{color:#b45309}
+  .sn-hd.red{color:#b91c1c}
+  .sn-text{color:#1e293b;white-space:pre-wrap;word-break:break-word}
+  .sn-empty-hint{grid-column:1 / -1;text-align:center;padding:24px 16px;color:#94a3b8;font-size:12px}
+
+  /* ===== 課前 3 分鐘速覽卡 Modal ===== */
+  .rundown-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .rundown-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px}
+  .rundown-box-title{font-size:12.5px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .rundown-timeline{display:flex;flex-direction:column;gap:7px}
+  .rd-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;background:#fff;border-radius:6px;border:1px solid #f1f5f9}
+  .rd-time{font-size:11px;font-weight:800;color:#0284c7;background:#e0f2fe;padding:2px 6px;border-radius:4px;white-space:nowrap}
+  .rd-body{font-size:11.5px;color:#334155;flex:1}
+  .rd-body b{color:#0f172a}
+  .check-list{display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:#334155}
+  .check-item{display:flex;align-items:center;gap:7px;background:#fff;padding:6px 9px;border-radius:6px;border:1px solid #f1f5f9}
+  .qa-card{background:#fff;border:1px solid #fed7aa;border-radius:8px;padding:9px 12px;margin-bottom:7px}
+  .qa-q{font-size:11.5px;font-weight:700;color:#9a3412;margin-bottom:3px;display:flex;align-items:center;gap:5px}
+  .qa-a{font-size:11px;color:#431407;line-height:1.45}
+
+  /* ===== 避坑指南與前後對比卡片 ===== */
+  .pitfall-box{margin-top:8px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:7px 10px;font-size:11px;color:#991b1b;line-height:1.45}
+  .pitfall-box b{color:#7f1d1d}
+  .compare-box{margin-top:12px;background:#fff;border:1px solid var(--ui-bd);border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.03)}
+  .compare-title{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .compare-card{padding:9px 11px;border-radius:8px;font-size:11px;line-height:1.45}
+  .compare-card.before{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+  .compare-card.after{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+  .compare-tag{font-weight:800;margin-bottom:4px;font-size:11.5px}
+  .compare-desc{color:#374151}
+  .compare-tip{font-size:10.5px;color:#4b5563;margin-top:8px;background:#f9fafb;padding:5px 8px;border-radius:6px}
+
+  /* ===== Apple Shop 門市現場專屬服務 ===== */
+  .services-section{margin-top:14px;background:#ffffff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px}
+  .services-hd{font-size:12px;font-weight:800;color:#0369a1;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .service-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;text-align:center}
+  .service-ico{font-size:18px;margin-bottom:3px}
+  .service-t{font-size:11px;font-weight:800;color:#0f172a;margin-bottom:2px}
+  .service-d{font-size:9.5px;color:#475569;line-height:1.35}
+  .after-class-tip{margin-top:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:7px 11px;font-size:11px;color:#1e40af;line-height:1.4;display:flex;align-items:center;gap:6px}
+
 </style>
 </head>
 <body>
 
-<div class="edit-banner">✏️ 編輯模式 — 點擊任何文字即可修改 · 修改完成後可下載 .pptx</div>
+<div class="edit-banner">✏️ 編輯模式 · 點擊任何文字即可修改 · 修改完成後可下載 .pptx</div>
 
 <div class="topbar">
   <div class="brand"><span style="white-space:nowrap">Apple Shop 小教室專案</span> <span style="font-size:10px;font-weight:600;color:var(--grok-accent);margin-left:6px">GROK 版</span></div>
   <div class="meta">
-    <span>日期<b id="mDate">—</b></span>
+    <span>日期<b id="mDate">-</b></span>
     <span>時長<b id="mDur">60</b> 分</span>
     <span>人數<b id="mPpl">8</b></span>
     <span>頁數<b id="mCnt">0</b></span>
@@ -474,6 +569,7 @@
     <button class="btn ghost" onclick="openPosterModal()" title="依當次選取主題產生宣傳海報">📣 宣傳海報</button>
     <button class="btn ghost" onclick="openSocialModal()" title="依當次選取主題產生社群開課文案">✍️ 社群文案</button>
     <button class="btn ghost" onclick="toggleEditMode()" id="editBtn" disabled>✏️ 編輯</button>
+    <button class="btn ghost" onclick="openRunDownModal()" id="rundownBtn" title="課前 3 分鐘速覽卡：時間配速表、器材檢查與現場常見救援 Q&A">📋 課前速覽</button>
     <button class="btn ghost" onclick="downloadPodcastScript()" title="把選取主題轉成單人旁白備課講稿(.txt)下載，可直接照著練口條">📻 備課講稿</button>
     <button class="btn ghost" onclick="downloadPptx()" id="pptxBtn" disabled>📥 下載 .pptx</button>
     <button class="btn" id="genBtn" onclick="generate()">生成簡報</button>
@@ -507,6 +603,16 @@
       </select>
     </div>
 
+    <!-- 難易度與推薦快速篩選 (如飲料 Menu 推薦) -->
+    <div class="quick-filter-bar">
+      <button type="button" class="q-filter-btn active" onclick="setDiffFilter('all', this)">全部</button>
+      <button type="button" class="q-filter-btn beginner" onclick="setDiffFilter('beginner', this)">⭐ 新手首選</button>
+      <button type="button" class="q-filter-btn hot" onclick="setDiffFilter('hot', this)">🔥 門市熱門</button>
+      <button type="button" class="q-filter-btn" onclick="setDiffFilter('easy', this)">🌱 入門</button>
+      <button type="button" class="q-filter-btn" onclick="setDiffFilter('mid', this)">🌿 進階</button>
+      <button type="button" class="q-filter-btn" onclick="setDiffFilter('pro', this)">🔥 專業</button>
+    </div>
+
     <div id="topics"></div>
     <div class="topic-actions">
       <button class="add-topic-btn" onclick="openTopicModal()">＋ 新增單一主題</button>
@@ -532,6 +638,24 @@
         <div class="big">準備您的小教室簡報</div>
         <div style="font-size:13px;font-weight:500">左側勾選主題 · 右側選擇年齡層 · 按下「生成簡報」 <span style="font-size:10px;opacity:.5">(Grok 版 · 實作已優化為實際可操作步驟)</span></div>
         <div style="font-size:11px;color:#b91c1c;margin-top:8px;font-weight:600;">此為內部共用工具，請勿外傳連結</div>
+      </div>
+    </div>
+
+    <!-- 🎙️ 本頁講師備忘錄（Speaker Notes） -->
+    <div class="speaker-notes-panel" id="speakerNotesPanel">
+      <div class="speaker-notes-hd">
+        <div class="sn-title">
+          <span class="sn-badge">🎙️ 講師備忘錄</span>
+          <span class="sn-sub" id="snPageSub">第 00 / 00 頁 · 準備就緒</span>
+        </div>
+        <div class="sn-actions">
+          <button class="sn-btn" onclick="toggleNotesSize()" id="snSizeBtn" title="切換備忘錄字級大小">🔠 字級: 中</button>
+          <button class="sn-btn" onclick="copyCurrentNote()" title="複製本頁講稿備忘錄">📋 複製本頁講稿</button>
+          <button class="sn-btn" onclick="toggleNotesPanel()" id="snToggleBtn" title="收合或展開備忘錄">▼ 收合</button>
+        </div>
+      </div>
+      <div class="speaker-notes-body font-md" id="speakerNotesContent">
+        <div class="sn-empty-hint">產生簡報後，此處將同步呈現當前頁面的講師口語講法、轉場話術、互動提問句與動作提示。</div>
       </div>
     </div>
   </div>
@@ -747,7 +871,7 @@
     <div class="modal-body">
       <div class="field-row">
         <label>門市名稱（會顯示在海報、文案上）</label>
-        <input id="set_store" placeholder="例：右昌 Apple Shop">
+        <input id="set_store" placeholder="例：Apple Shop 門市專櫃">
       </div>
       <div class="field-row">
         <label>報名／洽詢方式（顯示於海報、文案結尾）</label>
@@ -835,6 +959,33 @@
       <button class="modal-close" onclick="closeSmartModal()">✕</button>
     </div>
     <div class="modal-body">
+      <!-- 🔰 第一次上台安全牌組合 (新手推薦) -->
+      <div class="safe-combo-section">
+        <div class="safe-combo-title">🔰 第一次上台安全牌組合（新手推薦 · 零冷場好掌控）</div>
+        <div class="safe-combo-grid">
+          <button type="button" class="safe-combo-card" onclick="applySafeCombo(1)">
+            <div class="sc-name">⭐ 安全牌 1：iPhone 入門十招 ＋ 相機日常實拍</div>
+            <div class="sc-desc">最適合剛換機的新手與 Android 轉過來的學員，手勢互動多、絕不冷場！</div>
+            <div class="sc-tags"><span>🌱 難度 1 星</span><span>⏱ 60 分鐘</span><span>💡 互動率 100%</span></div>
+          </button>
+          <button type="button" class="safe-combo-card" onclick="applySafeCombo(2)">
+            <div class="sc-name">⭐ 安全牌 2：換機無痛搬家 ＋ LINE 完整備份</div>
+            <div class="sc-desc">門市顧客最高頻剛需！教大家照片、對話紀錄怎麼搬，學員最感謝的實戰課。</div>
+            <div class="sc-tags"><span>🌱 難度 1 星</span><span>📲 剛需第一</span><span>💬 LINE 零痛點</span></div>
+          </button>
+          <button type="button" class="safe-combo-card" onclick="applySafeCombo(3)">
+            <div class="sc-name">⭐ 安全牌 3：長輩 iPhone 友善設定 ＋ 字大防詐與視訊</div>
+            <div class="sc-desc">放慢步調、溫馨有感！大字體、放大鏡、防詐提醒與家人 FaceTime 視訊。</div>
+            <div class="sc-tags"><span>🌱 難度 1 星</span><span>👴 長輩最愛</span><span>❤️ 節奏極穩</span></div>
+          </button>
+          <button type="button" class="safe-combo-card" onclick="applySafeCombo(4)">
+            <div class="sc-name">⭐ 安全牌 4：照片大掃除 ＋ 一鍵釋放 20GB 空間</div>
+            <div class="sc-desc">每個人手機照片都破萬張！現場直接帶學員清出數十 GB 容量，成效立即可見。</div>
+            <div class="sc-tags"><span>🌱 難度 1 星</span><span>💾 現場超有感</span><span>🔥 必學技巧</span></div>
+          </button>
+        </div>
+      </div>
+
       <div style="margin-bottom:8px; font-size:11px; color:#64748b;">更多根據 Apple 產品的智能推薦預設（點一下直接套用，門市最常用）：</div>
       <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; max-height:78px; overflow-y:auto; padding-right:4px;">
         <button onclick="quickSmartPreset(this, '平板成為小幫手，教 iPad 筆記與學習')" class="quick-chip">📓 平板小幫手（筆記學習）</button>
@@ -901,10 +1052,32 @@
     </div>
   </div>
 </div>
+<!-- ===== 課前 3 分鐘速覽卡 Modal ===== -->
+<div id="runDownModal" class="modal-mask" onclick="if(event.target===this)closeRunDownModal()">
+  <div class="modal-box" style="max-width:720px;">
+    <div class="modal-hd">
+      <div>
+        <h2>📋 課前 3 分鐘準備速覽卡</h2>
+        <div class="modal-sub">新手講師定心丸：現場配速時間表、器材環境 3 分鐘速檢、以及現場三大常見救援話術。</div>
+      </div>
+      <button class="modal-close" onclick="closeRunDownModal()">✕</button>
+    </div>
+    <div class="modal-body" id="runDownModalBody">
+      <!-- 動態產生速覽卡內容 -->
+    </div>
+    <div class="modal-foot" style="justify-content:space-between;">
+      <button class="btn ghost" onclick="closeRunDownModal()">關閉</button>
+      <div style="display:flex; gap:8px;">
+        <button class="btn" onclick="copyRunDownCard()" style="background:#0284c7; color:#fff; font-weight:700;">📋 一鍵複製速覽卡到備忘錄</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
 /* =========================================================
-   主題庫 — 內容以「顧客視角」撰寫（用「您」對話）
+   主題庫 · 內容以「顧客視角」撰寫（用「您」對話）
    每個主題會自動產生 4 頁簡報：
    ① 開場歡迎  ② 核心功能特色  ③ 生活應用情境  ④ 配件帶回家
    ========================================================= */
@@ -929,7 +1102,7 @@ const TOPICS = [
     features:[
       {fi:"📺",ft:"螢幕，太陽底下也看得清楚",fd:"拿在手裡第一個會注意到的就是螢幕。3000 nits 聽起來很抽象，簡單說就是您站在大太陽底下看訊息、看導航，畫面不會反光到看不到。120Hz 滑動的順暢感，用過就回不去了。"},
       {fi:"⚡",ft:"速度比 iPhone 13 快五成",fd:"如果您手上是用了 4 年的 iPhone 13，會明顯感覺速度回來了。多開幾個 App、追劇、用 LINE 視訊都不會卡。這個快不是給您看跑分的，是讓您未來 4-5 年都不會覺得慢。"},
-      {fi:"📸",ft:"相機這次很有感",fd:"主鏡頭跟超廣角都升級到 4800 萬畫素。實際拍起來，您會發現細節多了 — 孫子毛衣的紋理、街景的招牌、旅行的遠景，看起來都比以前細緻。"},
+      {fi:"📸",ft:"相機這次很有感",fd:"主鏡頭跟超廣角都升級到 4800 萬畫素。實際拍起來，您會發現細節多了 · 孫子毛衣的紋理、街景的招牌、旅行的遠景，看起來都比以前細緻。"},
       {fi:"🤳",ft:"自拍會自動把人都拍進去",fd:"全家合照常常會缺一角嗎？這代的前鏡頭會自動擴大畫面，把每個人都納進來。橫拍直拍也不用轉手機，鏡頭自己會處理。"},
       {fi:"🔋",ft:"出門一整天不用擔心電量",fd:"現在影片可以連續播 30 小時。如果您像我以前一樣早上充飽就出門，這代不太需要中午找地方充電。趕時間的話 20 分鐘就能充到一半。"},
       {fi:"🎨",ft:"五個顏色，您挑一個喜歡的",fd:"薰衣草紫、鼠尾草綠、霧藍、白、黑色。容量有 256GB 跟 512GB 兩種。顏色就是看您喜歡，沒有所謂的『買哪個比較好』。"}
@@ -1003,11 +1176,11 @@ const TOPICS = [
       {n:"2",u:"TB",l:"Pro Max 最大容量"}
     ],
     features:[
-      {fi:"🌡",ft:"散熱解決了 — 不再降頻",fd:"以前 Pro 機型用久了會發燙、效能會下降，這個叫『降頻』。這代第一次裝了均溫板，導熱很快，長時間錄 4K 或玩遊戲，速度都不會掉。"},
+      {fi:"🌡",ft:"散熱解決了 · 不再降頻",fd:"以前 Pro 機型用久了會發燙、效能會下降，這個叫『降頻』。這代第一次裝了均溫板，導熱很快，長時間錄 4K 或玩遊戲，速度都不會掉。"},
       {fi:"📷",ft:"等於有八支鏡頭可選",fd:"廣角、超廣角、望遠都升級到 4800 萬畫素。從超廣角到 200mm 望遠，焦段範圍很大。常拍照的人會發現，旅遊時不用一直走來走去找角度。"},
-      {fi:"🎬",ft:"專業拍片用得上",fd:"如果您拍片或剪片，這代支援 ProRes RAW — 後製空間比一般檔案大很多。Genlock 多機同步、Open Gate 全片幅這些以前要專業攝影機才有的。"},
+      {fi:"🎬",ft:"專業拍片用得上",fd:"如果您拍片或剪片，這代支援 ProRes RAW · 後製空間比一般檔案大很多。Genlock 多機同步、Open Gate 全片幅這些以前要專業攝影機才有的。"},
       {fi:"⚡",ft:"剪片、AI 都跑得動",fd:"GPU 比 iPhone 14 Pro 強了一倍，加上 12GB RAM。在手機上剪 4K、修圖、跑 AI 運算，都不會等到不耐煩。"},
-      {fi:"🔌",ft:"USB 3.0 — 傳檔案快很多",fd:"以前傳一支 4K 影片要等很久，這代用 USB 3.0 接外接硬碟，速度差很多。如果您常處理大檔案，差距會很明顯。"},
+      {fi:"🔌",ft:"USB 3.0 · 傳檔案快很多",fd:"以前傳一支 4K 影片要等很久，這代用 USB 3.0 接外接硬碟，速度差很多。如果您常處理大檔案，差距會很明顯。"},
       {fi:"💎",ft:"航太級鋁合金，耐摔多了",fd:"7000 系列鋁合金一體成形。螢幕抗刮提升 3 倍，背面玻璃抗裂提升 4 倍。藏藍色、宇宙橙、銀色三種顏色。"}
     ],
     scenarios:[
@@ -1024,12 +1197,133 @@ const TOPICS = [
   },
 
   {
+    n:"iPhone 18 Pro 系列", ico:"🏅",
+    sub:"A20 Pro 蒸發冷卻散熱 × 四段可變光圈主相機 × 出廠搭載 iOS 27",
+    tagline:"四段可變光圈 × 全新動態島 × 43 小時超長續航",
+    welcome:"今天要向大家介紹 Apple 最新旗艦 iPhone 18 Pro 與 iPhone 18 Pro Max。這代最重大的突破在於 4800 萬像素融合主相機導入『可變光圈』，能像專業相機一樣自由掌控景深與進光量；搭配新一代蒸發冷卻均溫板的 A20 Pro 晶片、全新動態島同時掌握三則即時動態，以及出廠預載 iOS 27 的全新 Siri AI。今天帶大家實機體驗，看看這款旗艦機如何為生活與創作帶來質的躍升。",
+        compare: {
+      title: "📸 實拍對比：四段可變光圈前後差異",
+      beforeTag: "🔴 傳統小光圈 ƒ/8.0（全景深）",
+      beforeDesc: "背景雜亂、路人與雜物全在焦點內，搶走主體風采；夜間進光量小，容易產生噪點與手震模糊。",
+      afterTag: "🟢 四段可變大光圈 ƒ/1.48（極致淺景深）",
+      afterDesc: "主體如同單眼般立體浮現，背景化為奶油般柔和散景；夜間進光量暴增數倍，純淨無噪點！",
+      tip: "💡 講師示範小撇步：在照片 App 點『編輯』，拍完後隨時能再次滑動調整『ƒ』光圈數值大小與虛化深度，隨心所欲！"
+    },
+    requirements:{
+      os:"iOS 27（隨機出廠預載）",
+      capacity:["256GB","512GB","1TB","2TB"],
+      sim:"支援雙 eSIM / 實體 SIM + eSIM（依 Apple 台灣官網為準，門市現場協助轉移與啟用）",
+      compat:"完整支援 Apple 智慧與全新 Siri、MagSafe 與 Qi2 無線充電、USB 3 極速傳輸（最高達 10Gb/s）",
+      icloud:"支援 ProRAW 與 4K 120 fps ProRes 錄影，建議搭配 iCloud+ 200GB 或 2TB 方案"
+    },
+    stats:[
+      {n:"ƒ/1.48",u:"",l:"四段可變光圈最明亮"},
+      {n:"43",u:"小時",l:"Pro Max 影片播放續航"},
+      {n:"3",u:"倍",l:"超瓷晶盾 2 抗刮提升"}
+    ],
+    features:[
+      {fi:"📷",ft:"4800 萬像素融合主相機：四段可變光圈",fd:"告別固定光圈！iPhone 18 Pro 主鏡頭支援 ƒ/1.48、ƒ/1.8、ƒ/2.8、ƒ/4.0 四段光圈調節。拍單人人像能帶來自然的單眼級淺景深，拍大合照或風景能確保前後都銳利清晰，夜拍進光量更是歷來最強。",req:"iPhone 18 Pro、iPhone 18 Pro Max",practice:["打開相機 App 切換主相機光圈數值","近拍公仔或人像體驗自然光學景深","切換至 ƒ/4.0 拍攝深景深大合照"]},
+      {fi:"⚡",ft:"A20 Pro 晶片與蒸發冷卻散熱均溫板",fd:"全新 A20 Pro 晶片配備雙 16 核心神經網路引擎，並首次加入新一代蒸發冷卻均溫板，大幅降低高效能負載時的溫度，長時間 4K 剪片、玩高畫質遊戲或運行本機 AI 模型都不降頻發燙。",req:"A20 Pro 晶片機型",practice:["開啟高效能剪輯 App 或大型 3A 遊戲","體驗連續操作下的機身溫控與穩定影格率","感受多工與 Apple 智慧運算的瞬間反應"]},
+      {fi:"🏝️",ft:"全新設計動態島：同時掌握 3 則即時動態",fd:"動態島精巧進化，顯示架構全面升級，現在一次最多可並排顯示三則即時動態（Live Activities），外送進度、球賽比分與計時器一目了然。",req:"iPhone 18 Pro、iPhone 18 Pro Max",practice:["同時開啟計時器、音樂與外送 App","在動態島長按切換不同即時動態卡片","體驗多工作業無縫切換"]},
+      {fi:"🔭",ft:"新一代 4800 萬像素望遠與攝影風格 3",fd:"全鏡頭皆為 4800 萬像素融合系統，望遠端提供 100mm（4倍）與 200mm（8倍）光學品質變焦；搭配新一代『攝影風格 3』，能細緻微調膚色基調、質感與膠卷顆粒感。",practice:["滑動變焦轉盤至 4倍與 8倍望遠端","開啟攝影風格 3 即時預覽色調與顆粒","拍攝並儲存專屬個人化風格檔"]},
+      {fi:"🔋",ft:"43 小時超長續航與超瓷晶盾 2 防護",fd:"iPhone 18 Pro Max 影片播放時間長達 43 小時（比前代大幅增加 6 小時）；機身正面採用『超瓷晶盾 2』，抗刮與耐磨能力比前代提升 3 倍，堅固耐用。",practice:["檢視設定中的電池健康度與長效最佳化設定","體驗超瓷晶盾 2 的抗眩光與抗指紋手感","體驗 20 分鐘快速充入 50% 電量"]},
+      {fi:"🎨",ft:"四款雅緻外觀與完整專業規格",fd:"提供勃根地紅色、冰川藍色、銀色、黑色四款精緻外觀。容量從 256GB 起跳至最高 2TB。支援 USB 3 高速傳輸（最高 10Gb/s），拍完影片可直接錄製到外接硬碟。",practice:["現場鑑賞勃根地紅色等實機色澤","比較 6.3 吋與 6.9 吋螢幕手感與握持感","體驗連接 USB-C 外接 SSD 錄製 4K 120fps ProRes 影片"]}
+    ],
+    scenarios:[
+      {i:"📸",t:"追求極致畫質的攝影愛好者",d:"可變光圈帶來真正的光學景深控制，夜拍純淨細膩，拍人拍景都更具專業相機質感。"},
+      {i:"🎬",t:"自媒體創作者與拍片剪輯師",d:"A20 Pro 配合蒸發冷卻散熱，支援 4K 120fps ProRes 外錄，長時間拍片剪片穩定不發燙。"},
+      {i:"🤖",t:"想完整發揮全新 Siri AI 的科技迷",d:"出廠預載 iOS 27，雙 16 核心神經網路引擎帶來最順暢的螢幕感知與跨 App 智慧操作。"},
+      {i:"🔄",t:"手上 iPhone 用了 3-4 年的老使用者換機",d:"從 iPhone 13、14 或更早機型升級，螢幕亮度、速度、拍照與電池續航都有感大躍升；門市享現場資料轉移與舊機折抵。"}
+    ],
+    accessories:[
+      {i:"💾",n:"Thunderbolt 5 / USB 3 SSD",p:"發揮 10Gb/s 極速外接儲存",why:"拍完 4K 120fps ProRes 影片可直接錄製外接，專業工作流必備，省下手機內部空間"},
+      {i:"🛡",n:"原廠 MagSafe 保護殼",p:"精準保護鏡頭模組與機身",why:"針對新一代相機模組設計，貼合度最佳，完整保留磁吸功能，手感與防護兼具"},
+      {i:"🎧",n:"AirPods Pro 3",p:"主動降噪提升 3 倍與自訂 EQ",why:"搭配 iPhone 18 Pro 體驗即時語音翻譯與空間音訊，通話、工作與娛樂絕佳拍檔"}
+    ]
+  },
+
+  {
+    n:"iPhone Duo 摺疊新體驗", ico:"📖",
+    sub:"Apple 首款可摺疊 iPhone · 7.6 吋雙螢幕 · A20 Pro 旗艦效能",
+    tagline:"打開是 7.6 吋超大視野，闔起是精巧 5.4 吋手機",
+    welcome:"iPhone Duo 是 Apple 第一款可摺疊 iPhone。展開時是極致纖薄的 7.6 吋超 Retina XDR 顯示器，面積比 iPhone 18 Pro Max 還大 50%，配備特製奈米紋理抗眩光表面；闔起來則是好拿好握的 5.4 吋外螢幕。搭配雙面預覽、可立可坐免持拍攝與分割多工，今天帶大家實機上手這款革命性裝置！",
+    requirements:{
+      os:"iOS 27（隨機出廠預載，專屬 Duo 摺疊多工與雙面拍攝介面）",
+      capacity:["256GB","512GB","1TB","2TB"],
+      sim:"支援雙 eSIM / 實體 SIM + eSIM（依 Apple 台灣官網為準，門市現場協助設定與轉移）",
+      compat:"完整支援 Apple 智慧、全新 Siri、Apple Pencil (USB-C)、MagSafe 與 Qi2 無線充電",
+      icloud:"大螢幕多工與高畫質影音常用，建議搭配 iCloud+ 200GB 以上方案"
+    },
+    stats:[
+      {n:"7.6",u:"吋",l:"展開奈米紋理內螢幕"},
+      {n:"44",u:"小時",l:"外螢幕影片播放最長"},
+      {n:"2",u:"個",l:"App 分割並排多工"}
+    ],
+    features:[
+      {fi:"📖",ft:"展開即見 7.6 吋超 Retina XDR 奈米紋理大螢幕",fd:"展開時厚度極致纖薄，7.6 吋內螢幕面積比 iPhone 18 Pro Max 大 50%，並採用特製奈米紋理表面有效減少反光眩光；闔起時外螢幕為 5.4 吋，單手操作輕鬆無負擔。",req:"iPhone Duo",practice:["單手用外螢幕回覆一則訊息","雙手展開至 7.6 吋大螢幕瀏覽網頁與雜誌","在頂光環境下觀察奈米紋理防眩光效果"]},
+      {fi:"🪟",ft:"分割顯示雙 App 與 App 配對儲存",fd:"內螢幕支援兩個 App 左右分割並排，例如一邊查地圖一邊排行程，或一邊看郵件一邊核對試算表；將常用組合儲存為『App 配對』，點一下就能同時雙開。",req:"iPhone Duo 搭配 iOS 27",practice:["從 Dock 拖曳第二個 App 開啟分割畫面","自由拖曳中間分隔線調整視窗比例","將常用的兩個 App 儲存為桌面快捷配對"]},
+      {fi:"📷",ft:"Duo 雙面預覽、智慧拍攝與『看這裡』",fd:"利用內外雙螢幕實現獨家功能：『雙面預覽』讓被拍者即時看到自己表情；『看這裡』在外螢幕播放趣味動畫吸引小孩看鏡頭；『智慧拍攝』在全員準備就緒時自動按下快門。",practice:["開啟雙面預覽讓對方對著外螢幕照鏡子","切換『看這裡』模式吸引寵物或小朋友視線","開啟智慧拍攝體驗免倒數自動捕捉笑容"]},
+      {fi:"📐",ft:"隨擺隨用：可坐、可立免持操作",fd:"精密 5 級鈦金屬鉸鏈支援任意角度懸停。半摺平放『可坐』在桌上進行 FaceTime 視訊或自拍；側立『可立』進入待機模式，免接電源即是智慧床頭時鐘。",practice:["將手機折疊至 90 度放置桌上開啟 FaceTime 視訊","免手持桌面上拍照與錄影","將手機立起體驗全天候待機時鐘顯示"]},
+      {fi:"⚡",ft:"A20 Pro 雙 16 核心神經網路引擎與散熱均溫板",fd:"搭載強悍 A20 Pro 晶片與蒸發冷卻散熱技術，配備雙組 16 核心神經網路引擎，專為摺疊大螢幕的高負載多工與即時 AI 計算提供充沛動能，低溫穩定且極度省電。",practice:["並排同時執行兩款運算密集 App","在內螢幕使用 Apple 智慧即時生成摘要與重寫文字","感受流暢的多工視窗拖曳互動"]},
+      {fi:"🎨",ft:"5 級鈦金屬工藝、夜空色與星光白色",fd:"機身邊框與軸承蓋採用精密 5 級鈦金屬，機身前後覆蓋超瓷晶盾面板，具備 IP68 等級防潑抗水與防塵。提供夜空色與星光白色兩種典雅色彩，電源鍵整合 Touch ID 指紋辨識。",practice:["現場體驗星光白與夜空色的鈦金屬霧面質感","反覆開闔感受精密鉸鏈的紮實阻尼回饋","使用側邊 Touch ID 體驗秒速解鎖"]}
+    ],
+    scenarios:[
+      {i:"🗺",t:"自由行旅人：一邊查地圖一邊訂票",d:"7.6 吋大螢幕分割顯示，一邊看 Google 地圖導航，一邊對照訂房憑證或翻譯，旅行省心不手忙腳亂。"},
+      {i:"💼",t:"商務專業人士：行動辦公新利器",d:"一邊看郵件附件一邊確認行程，大螢幕審閱 PDF 或試算表一覽無遺，還能搭配 Apple Pencil 簽署文件。"},
+      {i:"📸",t:"家庭合照與自拍達人：免腳架隨處拍",d:"手機折起隨手立在桌上，利用雙面預覽與外螢幕即時確認，全家都能輕鬆入鏡，不必再找路人幫忙。"},
+      {i:"🎬",t:"追劇與閱讀愛好者：隨身頂級小劇院",d:"奈米紋理抗眩光 7.6 吋大螢幕，看 Netflix、讀電子書沉浸感十足，闔起來又能輕鬆放進口袋帶著走。"}
+    ],
+    accessories:[
+      {i:"✏️",n:"Apple Pencil (USB-C)",p:"大螢幕書寫與筆記",why:"7.6 吋奈米紋理內螢幕支援 Apple Pencil，隨手寫筆記、簽署文件就像在紙上書寫一樣自然"},
+      {i:"🛡",n:"iPhone Duo 專用保護殼",p:"精準保護機身與軸承",why:"針對雙螢幕與摺疊鉸鏈量身打造，完整防摔抗震，同時維持絲滑順暢的開闔手感"},
+      {i:"🔋",n:"MagSafe 充電器",p:"磁吸快充隨放隨充",why:"雙電池系統支援 MagSafe 與 Qi2 無線充電，桌邊床頭一吸即充，輕鬆維持全天滿電"}
+    ]
+  },
+
+  {
+    n:"iPhone 17e 超值入門新選", ico:"📱",
+    sub:"A19 晶片 × 4800 萬像素融合相機 × 動作按鈕",
+    tagline:"超瓷晶盾 2 防護 · 256GB 起跳 · 超值 NT$21,900 起",
+    welcome:"今天要向大家介紹 Apple 專為日常生活打造的超值新選 iPhone 17e。搭載強大 A19 晶片、4800 萬像素融合相機（具備 2 倍無損光學品質變焦），機身正面採用堅固的『超瓷晶盾 2』，並配備旗艦級動作按鈕與 256GB 超大起始容量。如果您想用最親民的預算換上最新一代 iPhone，17e 就是最均衡超值的選擇！",
+    requirements:{
+      os:"iOS 27（隨機出廠預載）",
+      capacity:["256GB","512GB"],
+      sim:"支援雙 eSIM / 實體 SIM + eSIM（依 Apple 台灣官網為準，門市現場協助設定）",
+      compat:"支援 Apple 智慧基礎功能、動作按鈕快捷自訂、MagSafe 15W 與 USB-C 充電",
+      icloud:"建議搭配 iCloud+ 50GB 或 200GB 方案備份珍貴照片與對話"
+    },
+    stats:[
+      {n:"21,900",u:"元起",l:"台灣官網超值售價"},
+      {n:"256",u:"GB",l:"超大起始容量起跳"},
+      {n:"4800",u:"萬",l:"融合相機 2 倍光學變焦"}
+    ],
+    features:[
+      {fi:"⚡",ft:"A19 晶片搭配 C1X 數據機：順暢省電新標竿",fd:"採用最新一代 A19 晶片與自研 C1X 行動網路數據機，日常開啟 App、玩遊戲、瀏覽網頁極致順暢，連線功耗大幅降低，電池續航充沛耐用。",req:"iPhone 17e",practice:["開啟常用社群與地圖 App 感受啟動速度","體驗多工切換時的滑順流暢度","檢視全天電池用量與健康度設定"]},
+      {fi:"📷",ft:"4800 萬像素融合主鏡頭：自帶 2 倍無損望遠",fd:"一顆鏡頭抵兩顆！4800 萬像素高解析主相機，點一下就能切換為 2 倍光學品質望遠，拍小孩、寵物或美食特寫都能保有銳利細節與真實色彩。",req:"iPhone 17e",practice:["打開相機 App 在 1x 與 2x 變焦間切換","近拍桌面小物觀察 2 倍變焦細節表現","實測夜間模式低光源自動對焦"]},
+      {fi:"🛡️",ft:"超瓷晶盾 2 與堅固耐用航太級鋁金屬",fd:"正面配備最新一代『超瓷晶盾 2』面板，抗刮耐摔能力比前代提升 3 倍；搭配輕盈堅固的航太級鋁金屬邊框，通過 IP68 防潑抗水與防塵認證。",practice:["現場觸摸感受超瓷晶盾 2 滑順抗指紋手感","體驗鋁金屬邊框的輕盈握持手感","了解生活抗潑水與日常防護注意事項"]},
+      {fi:"🔘",ft:"旗艦級動作按鈕：一按啟動你最常用的功能",fd:"原本 Pro 機型專屬的『動作按鈕』正式下放！長按即可快速打開手電筒、啟動相機、錄製語音備忘錄，或一鍵觸發你自訂的捷徑自動化。",practice:["長按動作按鈕快速點亮手電筒","在設定中將動作按鈕自訂為開啟相機或靜音","體驗設定一鍵觸發捷徑的便利性"]},
+      {fi:"💾",ft:"256GB 起步大容量與豐富清爽色彩",fd:"容量不再捉襟見肘！iPhone 17e 徹底告別 128GB，直接以 256GB 大容量起跳，不用擔心照片拍滿。提供嫩粉色、白色、黑色三款清新質感外觀。",practice:["現場鑑賞嫩粉色等實機優雅質感","檢視手機儲存空間與照片管理規劃","評估 256GB 與 512GB 最符合需求的容量"]},
+      {fi:"🔋",ft:"全天長效續航與 MagSafe 磁吸充電",fd:"優異能源效率帶來最長 26 小時影片播放續航力；支援 MagSafe 與 Qi2 無線充電，回到家往磁吸充電座隨手一放即充，出門再也不用手忙腳亂找傳輸線。",practice:["體驗將手機吸附至 MagSafe 充電座","檢視電池最佳化充電保護設定","了解快速充電 30 分鐘充入 50% 電量技巧"]}
+    ],
+    scenarios:[
+      {i:"💰",t:"追求極致 CP 值的聰明換機族",d:"以 NT$21,900 起的親民售價獲得 A19 晶片、48MP 鏡頭與 256GB 大容量，效能耐用三至五年。"},
+      {i:"👴",t:"長輩與學生的第一支新世代 iPhone",d:"螢幕清楚、防摔耐磨，動作按鈕一按就開手電筒或相機，簡單好上手，容量大不卡頓。"},
+      {i:"🔄",t:"iPhone 8、XR、11、12 老機型使用者升級",d:"從舊機升級能立刻感受到螢幕畫質、相機細節與電池續航的倍數躍進，門市專人現場資料轉移超省心。"}
+    ],
+    accessories:[
+      {i:"🛡",n:"原廠保護殼 + 鋼化玻璃保護貼",p:"全面保護新機",why:"搭配超瓷晶盾 2 提供全方位抗摔防刮保護，門市專員提供現場專業貼膜服務"},
+      {i:"🔋",n:"MagSafe 充電器",p:"磁吸隨放即充",why:"支援磁吸快充，桌邊床頭隨手一放告別插拔傳輸線，保護充電連接埠壽命"},
+      {i:"🎧",n:"AirPods 5",p:"完美生態系音訊搭檔",why:"開蓋秒連，享受個人化空間音訊與清晰通話品質，外出運動娛樂好幫手"}
+    ]
+  },
+
+  {
     n:"iPad Pro M5 極致體驗", ico:"✏️",
     sub:"M5 晶片帶來的 AI 創作躍升",
     tagline:"AI 效能比 M4 快 3.5 倍、比 M1 快 5.6 倍",
     welcome:"M5 iPad Pro 已經不只是平板，工作流程其實很接近筆電。今天會帶大家看它的螢幕、晶片，還有搭配 Apple Pencil、巧控鍵盤後可以做哪些事。",
     requirements:{
-      os:"iPadOS 26 或以上版本（隨機出廠預載）",
+      os:"iPadOS 27（隨機出廠預載）",
       capacity:["256GB","512GB","1TB","2TB"],
       sim:"提供 Wi-Fi 版與 Wi-Fi + 行動網路版（C1X 晶片支援 5G）",
       compat:"支援 Apple Pencil Pro、巧控鍵盤、Wi-Fi 7、Thunderbolt / USB 4、完整 Apple Intelligence",
@@ -1044,8 +1338,8 @@ const TOPICS = [
       {fi:"⚡",ft:"M5 晶片新世代 GPU",fd:"每個 GPU 核心內建神經網路加速器，第三代光線追蹤引擎讓視覺效果更逼真。繪圖、剪片、3D 設計效能接近專業電腦。"},
       {fi:"🧠",ft:"16 核神經網路引擎",fd:"高效處理各種 AI 任務，本地端就能跑 Apple Intelligence，無需上傳雲端，您的隱私獲得完整保護。"},
       {fi:"📱",ft:"Ultra Retina XDR 顯示器",fd:"11 吋與 13 吋兩種尺寸供您選擇，全新更輕薄設計，提供太空黑與銀色兩種典雅色彩。"},
-      {fi:"📶",ft:"N1 + C1X 無線晶片",fd:"支援 Wi-Fi 7，行動數據效能最高提升 50%，蜂巢機型 5G 連線更穩定，外出創作不中斷。"},
-      {fi:"🪟",ft:"iPadOS 26 全新視窗系統",fd:"多任務管理大躍進，外接顯示器支援更完整。打開多個 App 並排作業，工作流程接近 Mac。"},
+      {fi:"📶",ft:"N1 + C1X 無線晶片",fd:"支援 Wi-Fi 7，行動數據效能最高提升 50%，行動網路機型 5G 連線更穩定，外出創作不中斷。"},
+      {fi:"🪟",ft:"iPadOS 26 全新視窗系統",fd:"多工處理大躍進，外接顯示器支援更完整。打開多個 App 並排作業，工作流程接近 Mac。"},
       {fi:"🎨",ft:"專業創作軟體舞台",fd:"Procreate、Affinity Designer、Lightroom、Final Cut Pro for iPad 全面發揮 M5 效能。"}
     ],
     scenarios:[
@@ -1062,40 +1356,76 @@ const TOPICS = [
   },
 
   {
-    n:"iPad Air M3 重量級表現", ico:"💎",
-    sub:"旗艦級性能帶到中階價位",
-    tagline:"重量級表現，輕裝上陣的萬用平板",
-    welcome:"iPad Air M3 算是中價位裡最均衡的一台。學生記筆記、家裡追劇看影片、出門開個會做點輕創作都很好用。今天會帶大家看看它能做到哪些事。",
+    n:"iPad Air M4 輕巧強悍大展身手", ico:"💎",
+    sub:"M4 晶片效能大躍升 × 11 吋與 13 吋雙尺寸選擇",
+    tagline:"強悍 M4 晶片 · 橫向 12MP 視訊相機 · 支援 Apple Pencil Pro",
+    welcome:"iPad Air M4 是兼顧強大效能與極佳便攜性的全能平板。搭載新一代 M4 晶片，帶來令人驚豔的運算與圖形處理能力；提供 11 吋與全新 13 吋兩種尺寸，視訊相機移至橫向中央，全面支援具備側旋與雙指擠壓的 Apple Pencil Pro。無論是學生學習筆記、商務差旅處理文件，或是個人影音創作，都能輕鬆勝任！",
     requirements:{
-      os:"iPadOS 18 或以上版本（隨機出廠預載，可升級至 iPadOS 26）",
+      os:"iPadOS 27（隨機出廠預載）",
       capacity:["128GB","256GB","512GB","1TB"],
-      sim:"提供 Wi-Fi 版與 Wi-Fi + 行動網路版",
-      compat:"支援 Apple Pencil Pro、新版妙控鍵盤、Wi-Fi 6E、USB-C、完整 Apple Intelligence",
-      icloud:"建議搭配 iCloud+ 50GB 或 200GB 方案"
+      sim:"提供 Wi-Fi 版與 Wi-Fi + 行動網路版（支援 5G 與 eSIM）",
+      compat:"支援 Apple Pencil Pro、Apple Pencil (USB-C)、巧控鍵盤、Wi-Fi 6E、USB-C",
+      icloud:"建議搭配 iCloud+ 200GB 方案備份學習筆記與創作檔案"
     },
     stats:[
-      {n:"250",u:"億",l:"M3 晶片電晶體數"},
-      {n:"40%",u:"",l:"圖形性能 vs M1 提升"},
-      {n:"1",u:"TB",l:"最大儲存容量"}
+      {n:"M4",u:"",l:"新一代強悍晶片"},
+      {n:"11/13",u:"吋",l:"兩種螢幕尺寸可選"},
+      {n:"10",u:"小時",l:"全天候長效電池續航"}
     ],
     features:[
-      {fi:"⚡",ft:"M3 晶片 3 奈米製程",fd:"8 核 CPU + 9 核 GPU，圖形性能比 M1 提升 40%、比 M2 提升 20%。日常使用未來 5 年都不會慢。"},
-      {fi:"💾",ft:"8GB RAM 充裕容量",fd:"儲存空間 128GB 起跳，最高 1TB。從學生筆記到創作者素材庫都裝得下。"},
-      {fi:"✏️",ft:"Apple Pencil Pro 支援",fd:"插畫師、設計師、攝影師都能流暢運行 Procreate、Affinity Designer、Lightroom 等專業 App。"},
-      {fi:"⌨️",ft:"全新妙控鍵盤",fd:"更大觸控板、14 鍵功能列，價格比前代更實惠。配上鍵盤幾乎能完全取代筆電。"},
-      {fi:"🎓",ft:"學生族群最佳夥伴",fd:"記筆記、瀏覽講義、標注 PDF，搭配鍵盤可寫報告、做網路研究，是學習生活的全方位工具。"},
-      {fi:"🎬",ft:"創意領域折衷方案",fd:"繪圖設計、影片剪輯、音樂製作都能勝任，性能接近 iPad Pro 卻更實惠。"}
+      {fi:"⚡",ft:"M4 晶片強大效能：創作與多工游刃有餘",fd:"搭載先進 M4 晶片，配備更強大的神經網路引擎，支援硬體加速網格著色與光線追蹤，日常多重視窗處理、4K 影片剪輯或玩高畫質遊戲順暢不延遲。",req:"iPad Air M4",practice:["開啟高畫質遊戲體驗流暢影格率","使用幕前調度同時並排三個 App 進行多工操作","感受 Apple 智慧快速處理文字摘要與圖片分析"]},
+      {fi:"📺",ft:"11 吋與 13 吋 Liquid Retina 顯示器",fd:"除了經典便攜的 11 吋，更提供全新 13 吋超大視野版本！顯示面積增加 30%，看樂譜、閱讀雙頁 PDF、繪圖創作視野無比開闊，配備抗反光鍍膜與原彩顯示。",practice:["比較 11 吋與 13 吋實機握持與視覺感受","在室內光線下觀察抗反光鍍膜效果","體驗 P3 廣色域鮮豔真實的色彩表現"]},
+      {fi:"✏️",ft:"支援 Apple Pencil Pro：掌上專業畫布",fd:"支援雙指擠壓呼叫工具盤、側旋改變畫筆方向，以及精準觸覺回饋；筆身磁吸在側邊即可配對充電，搭配手寫計算機與無邊記，激發無限創意靈感。",practice:["體驗 Apple Pencil Pro 雙指擠壓快速切換筆刷","在備忘錄中旋轉筆桿觀察筆觸粗細變化","在手寫計算機上書寫算式即時計算答案"]},
+      {fi:"📹",ft:"橫向 1200 萬像素視訊相機與人物居中",fd:"前置鏡頭移至橫向長邊中央，視訊開會或與家人 FaceTime 通話時視線自然對視；支援『人物居中』功能，走動時畫面自動跟隨縮放，搭配立體揚聲器聲音清晰洪亮。",practice:["開啟 FaceTime 體驗橫向鏡頭的自然視角","起身走動實測相機自動追蹤的人物居中效果","播放音樂體驗橫向空間音訊揚聲器"]},
+      {fi:"⌨️",ft:"巧控鍵盤：打字如筆電般舒適流暢",fd:"懸臂設計讓 iPad Air 自由調整最佳觀看角度，內建背光按鈕與觸控板，出門開會打報告就像隨身帶了一台輕便筆電，打完字闔上即是防護外殼。",practice:["將 iPad Air 磁吸上巧控鍵盤體驗懸臂角度調節","使用觸控板多指手勢切換桌面與 App","體驗鍵盤背光打字手感"]},
+      {fi:"🎨",ft:"四款清新典雅色彩與極致輕薄機身",fd:"機身採用 100% 再生鋁金屬，厚度僅約 6.1mm。提供太空灰色、星光色、紫色與藍色四款高雅色彩，重量極輕，隨身放進包包出門無負擔。",practice:["現場鑑賞星光色與藍色實機鋁金屬質感","單手托起感受極致輕薄的機身配重","了解電池續航保養與快速充電技巧"]}
     ],
     scenarios:[
-      {i:"📚",t:"學生的學習筆電替代",d:"記筆記、看影片教學、寫報告、做簡報，iPad Air 配鍵盤就能搞定學業所有需求。"},
-      {i:"🎨",t:"親子共創的畫板",d:"小朋友畫畫、爸媽看書、全家一起看 Netflix，一台滿足全家娛樂與學習。"},
-      {i:"📺",t:"客廳裡的家用平板",d:"追劇看球、視訊家人、瀏覽新聞，輕便好拿，長輩也能輕鬆上手。"},
-      {i:"💼",t:"商務人士的次要裝置",d:"開會記錄、查資料、回 Email 一機完成。出差只帶 iPad Air 就能搞定。"}
+      {i:"📚",t:"學生族群的筆電級學習神器",d:"上課記筆記、閱讀 PDF 劃重點、分組報告製作簡報，搭配 Apple Pencil Pro 與鍵盤搞定所有學業。"},
+      {i:"💼",t:"行動商務人士的輕量辦公主力",d:"出差拜訪客戶只帶一台 iPad Air，開會做筆記、審閱合約、回郵件極致靈活輕便。"},
+      {i:"🎬",t:"影音娛樂與輕創作愛好者",d:"13 吋超大螢幕追劇看電影沉浸感十足，搭配 Procreate 畫畫或 CapCut 剪輯社群短片游刃有餘。"}
     ],
     accessories:[
-      {i:"✒️",n:"Apple Pencil Pro",p:"完整的創作體驗",why:"擠壓功能、觸覺回饋、滾動筆觸，讓繪圖與筆記更自然"},
-      {i:"⌨️",n:"新版妙控鍵盤",p:"筆電級操作體驗",why:"觸控板 + 功能列大升級，價格更實惠，是 iPad Air 最值得搭配的配件"},
-      {i:"🛡",n:"Smart Folio",p:"輕巧雙面保護",why:"輕薄不增加負擔，磁吸貼合精準，保護 iPad 的同時還能立著看影片"}
+      {i:"✏️",n:"Apple Pencil Pro",p:"筆記繪圖必備利器",why:"支援雙指擠壓、側旋與觸覺回饋，磁吸在側邊隨時滿電，靈感隨手記錄"},
+      {i:"⌨️",n:"iPad 巧控鍵盤",p:"筆電級打字與觸控板操作",why:"懸臂吸附設計，內建觸控板與功能列，瞬間將 iPad Air 化身便攜工作站"},
+      {i:"🛡",n:"原廠 Smart Folio 雙面夾",p:"輕巧防護立架",why:"磁吸超輕薄貼合，掀開喚醒闔上睡眠，折疊即可作為舒適的打字與追劇支架"}
+    ]
+  },
+
+  {
+    n:"iPad mini A20 Pro 掌中全能 OLED", ico:"📱",
+    sub:"A20 Pro 旗艦晶片 × 8.5 吋 OLED 螢幕 × Apple Pencil Pro",
+    tagline:"8.5 吋極窄邊框 OLED · 掌中最強 AI 行動筆記平板",
+    welcome:"今天要向大家介紹 Apple 歷來最強大的掌中旗艦：全新 iPad mini。首次搭載極致豔麗的 8.5 吋超 Retina XDR OLED 顯示器（可選配奈米紋理玻璃），核心躍升為強悍的 A20 Pro 晶片，並全面支援具備雙擊與旋轉感應的 Apple Pencil Pro。單手就能輕鬆握持，卻擁有媲美專業工作站的運算力！",
+    requirements:{
+      os:"iPadOS 27（隨機出廠預載）",
+      capacity:["128GB","256GB","512GB"],
+      sim:"提供 Wi-Fi 版與 Wi-Fi + 行動網路版（支援 5G 與 eSIM）",
+      compat:"完整支援 Apple Pencil Pro、Apple Pencil (USB-C)、藍牙巧控鍵盤、Wi-Fi 7",
+      icloud:"建議搭配 iCloud+ 200GB 方案同步隨手筆記與手繪創作"
+    },
+    stats:[
+      {n:"8.5",u:"吋",l:"極窄邊框 OLED 大螢幕"},
+      {n:"A20",u:"Pro",l:"雙 16 核旗艦晶片"},
+      {n:"16,900",u:"元起",l:"台灣官網超值售價"}
+    ],
+    features:[
+      {fi:"📺",ft:"8.5 吋 OLED 超 Retina XDR：極窄邊框視覺饗宴",fd:"機身尺寸維持極致輕巧，螢幕升級為 8.5 吋 OLED 顯示器，黑色極致深邃、對比高達 2,000,000:1，並可選配奈米紋理玻璃減少反光，戶外閱讀看電子書與追劇無比舒適。",req:"全新 iPad mini",practice:["現場體驗單手握持手感與極窄邊框視覺沉浸感","在燈光下觀察 OLED 對比度與抗反光效果","體驗 P3 廣色域與原彩顯示色彩細節"]},
+      {fi:"⚡",ft:"A20 Pro 雙 16 核心旗艦晶片：小身材大能量",fd:"跳過普通晶片，直接搭載與頂級旗艦同級的 A20 Pro 晶片！配備雙組 16 核心神經網路引擎，本機即時執行 Apple 智慧運算、玩大型 3A 遊戲或剪輯 4K 影片均行雲流水。",practice:["開啟大型繪圖 App 或高畫質 3D 遊戲","使用 Apple 智慧即時摘要長篇文章或語音筆記","感受多 App 快速切換時零延遲的極速反應"]},
+      {fi:"✏️",ft:"全面支援 Apple Pencil Pro：掌上數位繪圖本",fd:"磁吸在側邊即時充電。支援 Apple Pencil Pro 的『雙指擠壓』快捷選單、側旋旋轉畫筆角度與觸覺回饋，搭配全新手寫計算機與數學解題，是學生與創作者的隨身神器。",practice:["磁吸配對 Apple Pencil Pro 並體驗擠壓呼叫工具盤","在備忘錄中旋轉筆桿感受筆觸粗細即時變化","在計算機手寫數學算式體驗即時解題"]},
+      {fi:"📹",ft:"橫向 12MP Center Stage 視訊相機與立體雙揚聲器",fd:"前置相機正式移至橫向長邊中央！視訊會議或與家人 FaceTime 通話時視線更自然；具備人物居中功能自動跟隨走動，搭配橫向立體聲揚聲器，影音效果絕佳。",practice:["將 iPad mini 橫放開啟 FaceTime 視訊體驗人物居中","體驗走動時相機視角自動縮放跟隨","播放高音質音樂感受橫向立體聲音場"]},
+      {fi:"🚀",ft:"Wi-Fi 7 與 USB-C 高速傳輸（最高 10Gb/s）",fd:"連網全面升級至最新世代 Wi-Fi 7，下載檔案與同步圖庫速度提升數倍；配備 USB 3 高速連接埠（10Gb/s），可直連相機、隨身碟或外接 4K 顯示器輸出畫面。",practice:["連接 USB-C 隨身碟體驗高速讀取大檔案","實測將畫面輸出至外接大螢幕進行簡報展示","了解 Wi-Fi 7 與 5G 行動網路版連線優勢"]},
+      {fi:"🎨",ft:"輕巧便攜與四款雅緻外觀",fd:"整機重量僅約 290 克，能輕鬆塞進外套口袋或隨身小包。提供午夜色、星光色、太空灰色與藍色四種經典色彩，全天候 10 小時長效電池續航，隨時隨地激發靈感。",practice:["現場體驗星光色與藍色實機鋁金屬質感","放入隨身包感受極致羽量便攜性","了解電池全天候續航與最佳化保養"]}
+    ],
+    scenarios:[
+      {i:"📓",t:"隨行筆記愛好者與醫護外勤族",d:"口袋大小隨抽隨記，單手拿著查病歷、查資料或巡場紀錄完全不手痠，Apple Pencil 筆記秒同步。"},
+      {i:"🎮",t:"手遊玩家與掌機娛樂愛好者",d:"8.5 吋 OLED 螢幕加上 A20 Pro 頂級效能，握在手上玩手遊手感最均衡，操作視野遠大於手機。"},
+      {i:"✈️",t:"差旅人士與通勤閱讀追劇族",d:"高鐵、飛機小桌板隨手一擺，看 Netflix、讀 Kindle 電子書極致舒適，不佔隨身行李重量。"}
+    ],
+    accessories:[
+      {i:"✏️",n:"Apple Pencil Pro",p:"雙指擠壓與側旋感應",why:"掌上筆記與繪圖必備，磁吸在 iPad mini 側邊隨時滿電，靈感隨手記錄"},
+      {i:"🛡",n:"Smart Folio 雙面夾保護套",p:"輕薄防護與雙角度立架",why:"磁吸吸附超輕薄，打開喚醒、闔上睡眠，折疊即可作為打字與追劇觀看支架"},
+      {i:"🔌",n:"20W USB-C 電源轉接器與充電線",p:"原廠快充配件",why:"出差旅行快速補充電量，維持整天高效使用"}
     ]
   },
 
@@ -1105,7 +1435,7 @@ const TOPICS = [
     tagline:"纖薄，飛快，強大又好攜帶",
     welcome:"MacBook Air M5 是這次新機裡 CP 值很高的一台。今天會帶大家認識 M5 晶片帶來的改變、容量升級、以及它適合什麼樣的使用場景。",
     requirements:{
-      os:"macOS 26 Tahoe 或以上版本（隨機出廠預載）",
+      os:"macOS 27 Golden Gate（隨機出廠預載）",
       capacity:["512GB","1TB","2TB"],
       sim:"不適用（筆電產品）",
       compat:"支援 Apple Intelligence、Wi-Fi 7、藍牙 6、Thunderbolt 4 / USB 4、MagSafe 3 充電",
@@ -1119,7 +1449,7 @@ const TOPICS = [
     features:[
       {fi:"⚡",ft:"M5 晶片 AI 大躍進",fd:"每個 GPU 核心內建神經網路加速器，本地端跑大型語言模型、AI 影像生成快 4 倍。Apple Intelligence 完整體驗。"},
       {fi:"📊",ft:"全面效能提升",fd:"單核提升 13%、多核最高 50%、GPU 繪圖提升 23-34%、記憶體頻寬達 153GB/s。日常使用快人一步。"},
-      {fi:"💾",ft:"基礎容量直接翻倍",fd:"從 256GB 升至 512GB，售價 35,900 元變相降價，性價比達到 MacBook Air 歷代新高。"},
+      {fi:"💾",ft:"基礎容量直接翻倍",fd:"從 256GB 升至 512GB，售價 35,900 元變相降價，CP 值達到 MacBook Air 歷代新高。"},
       {fi:"⚡",ft:"SSD 讀寫速度翻倍",fd:"突破 10,000 MB/s，大檔案處理、開機、軟體啟動全面提速。剪片素材秒讀秒寫。"},
       {fi:"📶",ft:"全新 N1 無線晶片",fd:"Wi-Fi 7 + Bluetooth 6，網速更快、延遲更低、連線品質更穩定。視訊會議不再卡頓。"},
       {fi:"🪶",ft:"無風扇靜音設計",fd:"輕薄機身、長續航，外帶咖啡廳工作完全聽不到風扇聲，圖書館裡也不會打擾別人。"}
@@ -1133,134 +1463,168 @@ const TOPICS = [
     accessories:[
       {i:"🖥",n:"Studio Display",p:"5K 外接螢幕",why:"在家辦公變成雙螢幕工作站，效率瞬間翻倍，搭配 Mac 完美整合"},
       {i:"🖱",n:"Magic Mouse / Trackpad",p:"完整 macOS 手勢體驗",why:"完整體驗 Mac 的手勢操作，剪片、瀏覽都更直覺"},
-      {i:"🔌",n:"USB-C Hub",p:"擴充更多接口",why:"接外接螢幕、隨身碟、SD 卡、HDMI，一個 Hub 解決所有接口需求"}
+      {i:"🔌",n:"USB-C Hub",p:"擴充更多連接埠",why:"接外接螢幕、隨身碟、SD 卡、HDMI，一個 Hub 解決所有連接埠需求"}
     ]
   },
 
   {
-    n:"MacBook Pro M5 Pro/Max", ico:"⚡",
-    sub:"為專業創作者打造的 AI 工作站",
-    tagline:"AI 效能比 M4 Max 快 3.8 倍、比 M1 Max 快 8 倍",
-    welcome:"如果您是剪片、做 3D、或會接觸 AI 應用的工作者，MacBook Pro M5 Pro/Max 就是為這些需求設計的。今天會聊聊 M5 Pro 和 Max 的差別，以及它在實際工作上的表現。",
+    n:"MacBook Neo 時尚羽量新生活", ico:"💻",
+    sub:"A18 Pro 晶片 × 1.05kg 極致羽量 × 繽紛四色",
+    tagline:"極致輕薄無風扇靜音 · 22 小時長效續航 · NT$24,900 起超親民",
+    welcome:"今天要向大家介紹 Apple 震撼登場的最新筆電系列：MacBook Neo！專為學生、上班族與年輕世代量身打造，搭載高能源效率的 A18 Pro 晶片與 13 吋 Liquid Retina 顯示器。整機羽量僅 1.05 公斤、採用無風扇極靜音設計，更帶來胭粉色、青橘黃色、靛青色與銀色四款亮眼外觀，售價只要超親民的 NT$24,900 起！",
     requirements:{
-      os:"macOS 26 Tahoe 或以上版本（隨機出廠預載）",
-      capacity:["M5 Pro：1TB / 2TB / 4TB / 8TB","M5 Max：2TB / 4TB / 8TB"],
-      sim:"不適用（筆電產品）",
-      compat:"支援 Apple Intelligence、Wi-Fi 7、3× Thunderbolt 5、HDMI 8K、SDXC 卡槽、MagSafe 3",
-      icloud:"專業工作者建議搭配 iCloud+ 2TB 方案或外接 Thunderbolt 5 SSD"
+      os:"macOS 27 Golden Gate（隨機出廠預載）",
+      capacity:["256GB","512GB"],
+      sim:"不適用（支援 Wi-Fi 6E 與藍牙 5.3）",
+      compat:"支援 iPhone 鏡像輸出、AirDrop、巧控滑鼠與巧控板、外接 4K 顯示器",
+      icloud:"建議搭配 iCloud+ 方案實現 iPhone 與 Mac 桌面檔案即時無縫同步"
     },
     stats:[
-      {n:"18",u:"核",l:"CPU 核心總數"},
-      {n:"614",u:"GB/s",l:"M5 Max 記憶體頻寬"},
-      {n:"24",u:"小時",l:"電池續航"}
+      {n:"1.05",u:"kg",l:"極致羽量隨身便攜"},
+      {n:"22",u:"小時",l:"超長效電池續航力"},
+      {n:"24,900",u:"元起",l:"台灣官網超親民定價"}
     ],
     features:[
-      {fi:"🚀",ft:"突破性融合架構",fd:"兩顆第三代 3 奈米晶粒整合，6 個全球最快超級核心 + 12 個效能核心。專業多執行緒任務較前代提升 30%。"},
-      {fi:"🧠",ft:"AI 硬體加速器全面導入",fd:"每個 GPU 核心內建 Neural Accelerator，本地端跑 LLM 大語言模型比 M4 Pro/Max 快 3.9-4 倍。"},
-      {fi:"💾",ft:"頂級統一記憶體",fd:"M5 Pro 最高 64GB、M5 Max 最高 128GB，輕鬆應對大型 AI 模型與 8K 渲染。"},
-      {fi:"🎬",ft:"專業創作大躍進",fd:"DaVinci Resolve 影像特效快 3 倍、Topaz Video AI 快 3.5 倍、3D 算繪快 1.4 倍。"},
-      {fi:"💽",ft:"SSD 讀寫速度翻倍",fd:"M5 Pro 直接 1TB、M5 Max 直接 2TB 起跳，讀寫速度高達 14.5 GB/s。"},
-      {fi:"🖥",ft:"奈米紋理玻璃選項",fd:"Liquid Retina XDR 顯示器、HDR 峰值 1600 nits，新增減少反光的奈米紋理玻璃選項。"}
+      {fi:"🪶",ft:"1.05kg 極致羽量與極致纖薄機身",fd:"比 MacBook Air 還要輕巧！採用一體成型再生鋁金屬工藝，厚度極致纖薄，單手即可輕鬆托起，放進任何托特包或後背包幾乎感受不到重量。",req:"MacBook Neo",practice:["單手端起筆電感受 1.05kg 極致羽量質感","體驗單指輕鬆掀開螢幕轉軸的精緻阻尼","放進隨身包體驗隨行零負擔感"]},
+      {fi:"🎨",ft:"四款繽紛潮流新色：展現你的個人態度",fd:"告別傳統黑灰銀單調感！MacBook Neo 帶來充滿活力的胭粉色、明亮的青橘黃色、深邃沉穩的靛青色，以及經典耐看的銀色，鍵盤底板與機身色彩完美融合。",practice:["現場鑑賞胭粉色與青橘黃色等潮流實機","觀察陽極氧化鋁金屬在不同光線下的細膩光澤","挑選最符合個人穿搭風格的專屬色彩"]},
+      {fi:"⚡",ft:"A18 Pro 晶片高效無風扇靜音運作",fd:"搭載強大能源效率的 A18 Pro 晶片，日常文書處理、開數十個 Safari 分頁、觀看 4K 影片或輕量修圖剪片行雲流水；全機無散熱風扇，任何環境下皆 100% 絕對安靜無聲。",practice:["同時開啟 Pages、Safari 與音樂 App 體驗順暢反應","在安靜環境下感受完全零風扇噪音的靜音體驗","體驗觸控板順暢縮放與多工手勢切換"]},
+      {fi:"🔋",ft:"最長達 22 小時驚人續航力：出門不必帶充電器",fd:"極高能源效率帶來長達 22 小時的長效影片播放續航力。去咖啡廳讀書、整天在學校上課或出差拜訪客戶，從早用到晚都不需要尋找插座。",practice:["檢視 macOS 27 電池用量分析與節能模式設定","體驗闔上螢幕睡眠、掀開即開機的秒醒體驗","了解外出免帶充電線的輕裝生活體驗"]},
+      {fi:"📺",ft:"13 吋 Liquid Retina 顯示器與 1080p FaceTime 鏡頭",fd:"配備 500 nits 高亮度 Liquid Retina 顯示器，支援 P3 廣色域與原彩顯示技術；上方內建 1080p FaceTime HD 相機與錄音室等級三麥克風陣列，遠距開會線上上課清晰動人。",practice:["觀看高畫質風景影片體驗色彩飽和度與清晰細節","開啟 Photo Booth 或 FaceTime 檢視視訊畫質","實測環境降噪麥克風的純淨收音效果"]},
+      {fi:"📱",ft:"macOS 27 與 iPhone 深度連動：iPhone 鏡像輸出",fd:"隨機預載最新 macOS 27 Golden Gate。利用『iPhone 鏡像輸出』直接在 Mac 螢幕上檢視並操作 iPhone，還能直接把照片從手機拖曳進 Mac 報告中，跨裝置生態極致無縫！",practice:["在 Mac 畫面上啟動『iPhone 鏡像輸出』無線操作手機","在 Mac 鍵盤上直接回覆 iPhone 收到的一則 LINE 訊息","體驗剪貼簿跨裝置複製貼上的神奇魔法"]}
     ],
     scenarios:[
-      {i:"🎬",t:"專業影像剪輯",d:"DaVinci Resolve 即時 8K 預覽、Final Cut Pro 多軌剪輯完全不掉幀，工作流程順暢無比。"},
-      {i:"🎨",t:"3D 設計與動畫",d:"Maxon Redshift、Blender 渲染速度大躍進，3D 藝術家的最佳行動工作站。"},
-      {i:"🤖",t:"AI 開發與訓練",d:"本地端跑 70B 大型語言模型、AI 影像生成，128GB 統一記憶體讓您不必上雲端。"},
-      {i:"📊",t:"資料科學與分析",d:"大型資料集分析、機器學習模型訓練，M5 Max 的效能讓您不必再依賴桌機。"}
+      {i:"🎓",t:"大學生與高中生的第一台 Mac",d:"NT$24,900 起入手門檻超低，打報告、做簡報、看論文極致流暢，全天去圖書館不用帶充電頭。"},
+      {i:"☕",t:"自由工作者與行動辦公族",d:"1.05kg 極致輕便，去咖啡廳或外出開會隨手拎著就走，無風扇絕對安靜，外型時尚吸睛。"},
+      {i:"🔄",t:"想從 Windows 輕薄筆電換過來的族群",d:"價格媲美一般 Windows 文書機，卻擁有超長 22 小時電力與絲滑順暢的系統體驗，門市專人引導上手。"}
     ],
     accessories:[
-      {i:"🖥",n:"Studio Display XDR",p:"專業校色 27 吋螢幕",why:"2000 nits 峰值亮度 + 120Hz ProMotion，專業影像創作者的夢幻搭配"},
-      {i:"💾",n:"Thunderbolt 5 SSD",p:"極速外接儲存",why:"發揮 M5 Pro/Max 的最強傳輸速度，大檔案備份秒完成"},
-      {i:"🎧",n:"AirPods Max 2",p:"專業監聽音質",why:"USB-C 有線連接支援 24-bit/48kHz 無損音訊，剪片混音的最佳監聽工具"}
+      {i:"🖱️",n:"巧控滑鼠 / 巧控板",p:"無線精準操控",why:"無線藍牙秒速配對，多點觸控手勢滑動桌面與翻頁順暢無比"},
+      {i:"🔌",n:"USB-C 對 USB 轉接器 / 多功能 Hub",p:"外接隨身碟與螢幕",why:"擴充外接隨身碟、記憶卡或 HDMI 投影機，做簡報分享必備搭檔"},
+      {i:"💼",n:"專屬防震筆電內袋",p:"日常防刮防碰撞保護",why:"針對 1.05kg 輕巧機身剪裁，隨身放入後背包更安心"}
+    ]
+  },
+
+  {
+    n:"MacBook Pro PROLED XDR 觸控與極致效能", ico:"⚡",
+    sub:"PROLED XDR 觸控螢幕 × 動態島 × M5 Pro/Max 旗艦晶片",
+    tagline:"串聯式 OLED 觸控顯示器 · 首次導入動態島 · 24 小時極限續航",
+    welcome:"今天要向大家介紹專業工作者的終極夢幻機種：配備 PROLED XDR 顯示器的全新 MacBook Pro！這是 Mac 歷史上首次導入串聯式 OLED 觸控手勢螢幕與『動態島』，搭載強大的 M5 Pro 與 M5 Max 晶片、全線支援 Thunderbolt 5 極速傳輸。今天帶大家實機上手，感受頂級影音創作與軟硬體整合的極致境界！",
+    requirements:{
+      os:"macOS 27 Golden Gate（隨機出廠預載）",
+      capacity:["512GB","1TB","2TB","4TB","8TB"],
+      sim:"不適用（支援 Wi-Fi 7 與藍牙 5.3）",
+      compat:"支援 Apple Pencil 觸控手勢、Thunderbolt 5、外接最多 4 部高解析顯示器",
+      icloud:"建議搭配 iCloud+ 2TB 方案同步大型專案檔案與 8K 影片素材"
+    },
+    stats:[
+      {n:"PROLED",u:"XDR",l:"串聯式 OLED 觸控螢幕"},
+      {n:"120",u:"Gb/s",l:"Thunderbolt 5 極速頻寬"},
+      {n:"24",u:"小時",l:"Mac 史上最長電池續航"}
+    ],
+    features:[
+      {fi:"📺",ft:"PROLED XDR 串聯式 OLED：首次支援觸控手勢",fd:"結合雙層串聯式 OLED 技術，峰值亮度高達 1600 nits，對比度達 2,000,000:1，黑色深邃純淨！更首度加入手勢觸控支援，在畫布上捏合縮放、快速點選時間軸更加直覺。",req:"全新 MacBook Pro",practice:["用手指在螢幕上體驗流暢的縮放與滑動畫布","在暗室中觀察 OLED 純黑與 HDR 亮部高光層次","檢視專業色彩描述檔設定"]},
+      {fi:"🏝️",ft:"Mac 首次導入動態島：背景工作一目了然",fd:"頂部視訊鏡頭區域全新進化為『動態島』，剪片算圖進度、音樂播放、計時器、AirDrop 傳輸進度即時動態呈現，隨時點擊即可展開控制，不佔用任何工作桌面視窗空間。",practice:["啟動大檔案 AirDrop 傳輸觀察動態島動態展開","點擊動態島控制音樂播放與計時器","體驗多工背景任務即時監控"]},
+      {fi:"⚡",ft:"M5 Pro 與 M5 Max 晶片：AI 與圖形運算極致飛躍",fd:"採用新一代架構，圖形效能與神經網路運算能力大步躍升，支援硬體加速光線追蹤與網格著色；能輕鬆應對複雜 3D 算圖、百軌 8K 影片剪輯或本機運行大型語言模型。",practice:["開啟專業剪輯或 3D 渲染專案觀察秒速即時預覽","體驗多軌 4K/8K 影片即時調色不掉格","感受高效散熱架構在高負載下的靜音表現"]},
+      {fi:"🚀",ft:"Thunderbolt 5 極速連接：頻寬高達 120Gb/s",fd:"配備最新 Thunderbolt 5 連接埠，傳輸頻寬比 Thunderbolt 4 提升高達 3 倍！外接極速 RAID SSD、高速外接顯示卡或同時驅動多部 8K 專業顯示器游刃有餘。",practice:["連接 Thunderbolt 5 高速外接硬碟體驗秒傳百 GB 檔案","檢視外接多部顯示器的設定介面","了解 SDXC 讀卡機、HDMI 與 MagSafe 3 完整連接埠"]},
+      {fi:"🔋",ft:"Mac 史上最長 24 小時續航力與極速快充",fd:"無與倫比的電源效率，帶來最長 24 小時影片播放續航力；即使拔掉電源插頭，效能依舊 100% 全速發揮不降頻，搭配 MagSafe 3 快充 30 分鐘即可充入 50% 電量。",practice:["檢視電池健康度與高效能模式切換","拔除電源線對比運算效能表現","體驗 MagSafe 3 磁吸快充的安全與便利"]},
+      {fi:"🎨",ft:"太空黑色與銀色：經典耐用的極致工藝",fd:"採用陽極氧化封裝技術打造深邃『太空黑』外觀，大幅減少指紋沾染；搭配六揚聲器音響系統與空間音訊，帶來震撼人心的劇院級聆聽體驗。",practice:["現場鑑賞太空黑外觀的抗指紋霧面質感","播放杜比全景聲展示片體驗沉浸式空間音訊","實測鍵盤打字回饋感與巨大觸控板手勢"]}
+    ],
+    scenarios:[
+      {i:"🎬",t:"專業影視剪輯師與調色師",d:"PROLED XDR 帶來極致精準的 HDR 調色監看，M5 Max 輕鬆剪輯多軌 8K ProRes 影片。"},
+      {i:"💻",t:"軟體架構師與 AI 演算法工程師",d:"強大 CPU 與雙倍神經網路引擎，本機編譯龐大專案與跑本機 AI 模型極致迅速。"},
+      {i:"🎵",t:"音樂製作人與錄音室工程師",d:"高負載混音插件同時掛載不卡頓，24 小時續航力讓創作靈感隨走隨錄。"}
+    ],
+    accessories:[
+      {i:"🖥️",n:"Studio Display XDR",p:"頂級外接專業顯示器",why:"色彩完全一致，提供最高 27 吋或 32 吋超大專業調色工作畫布"},
+      {i:"💾",n:"Thunderbolt 5 SSD",p:"120Gb/s 極速素材硬碟",why:"發揮新連接埠全速，即時讀寫 8K 無損素材毫不拖泥帶水"},
+      {i:"🎧",n:"AirPods Max 2",p:"主動降噪與空間音訊耳罩耳機",why:"USB-C 無損音質輸出，專業混音監聽與長途差旅必備搭檔"}
     ]
   },
 
   {
     n:"AirPods Pro 3 全新登場", ico:"🎧",
-    sub:"全世界最出色的入耳主動降噪耳機",
-    tagline:"降噪翻倍 × 心率感測 × 即時翻譯",
-    welcome:"AirPods Pro 3 這次升級不少，降噪、運動心率、即時翻譯都加進來了。今天會帶大家實際聽聽它的差異，也聊聊它能怎麼搭進日常生活。",
+    sub:"H3 晶片 × 3 倍主動降噪 × 運動心率感測",
+    tagline:"主動降噪提升 3 倍 · 面對面即時語音翻譯 · IP57 防塵抗水",
+    welcome:"AirPods Pro 3 帶來全方位革命性升級！搭載全新 H3 晶片，主動降噪效果比前代強悍 3 倍；耳機內建運動心率感測器，運動跑步時免戴手錶也能測心率；深度整合 Apple 智慧面對面即時翻譯功能，出國對話輕鬆流暢；更有專屬的高中低音自訂等化器（EQ）與更長效的電池電力！",
     requirements:{
-      os:"配對裝置需 iOS 26 / iPadOS 26 / macOS 26 或以上版本",
-      capacity:"含充電盒（U2 晶片）· 五種尺寸泡棉耳塞",
-      sim:"需配對 iPhone / iPad / Mac 使用",
-      compat:"支援 Apple Intelligence 即時翻譯、心率感測、IP57 防塵抗水、空間音訊",
-      icloud:"使用相同 Apple ID 即可在所有裝置自動切換"
+      os:"配對裝置需 iOS 27 / iPadOS 27 / macOS 27 Golden Gate 或 watchOS 27",
+      capacity:"不適用",
+      sim:"不適用",
+      compat:"完整支援 Apple 智慧即時翻譯、個人化空間音訊、自訂 EQ、MagSafe 與 USB-C 充電",
+      icloud:"透過 Apple 帳號無縫於 iPhone、iPad、Mac 與 Apple Watch 間自動切換"
     },
     stats:[
-      {n:"2×",u:"",l:"降噪效果翻倍"},
-      {n:"10",u:"小時",l:"通透模式續航"},
-      {n:"IP57",u:"",l:"防塵抗汗抗水"}
+      {n:"3",u:"倍",l:"主動降噪效果提升"},
+      {n:"心率",u:"感測",l:"內建耳道運動心率"},
+      {n:"IP57",u:"",l:"耳機與充電盒防護"}
     ],
     features:[
-      {fi:"🔇",ft:"降噪比上代強一倍",fd:"如果您搭過捷運就知道，吵雜的環境戴 AirPods 還是聽得到外面的聲音。這代降噪幾乎翻倍，捷運、咖啡廳、辦公室戴起來會比想像中還安靜。"},
-      {fi:"👂",ft:"五種尺寸讓您挑",fd:"很多人以前戴 AirPods Pro 會掉、會痛。這代多了泡棉耳塞、五種尺寸，您可以挑最貼合的。長時間戴不脹、不痛。"},
-      {fi:"💓",ft:"運動時可以看心率",fd:"裡面有心率感測器。跑步、健身、瑜伽的時候，搭配 iPhone 健身 App，可以看到您運動的強度跟消耗。喜歡運動的人會用得到。"},
-      {fi:"🌐",ft:"出國對話可以即時翻譯",fd:"如果對方也戴 AirPods Pro 3，講不同語言時會自動翻譯給您聽。日本、韓國、歐美玩，問路、點餐都不用比手畫腳。"},
-      {fi:"💧",ft:"運動下雨都不怕",fd:"從 IP54 升到 IP57，防水防塵都更強。汗水、運動、雨天通通沒問題，不用擔心會壞。"},
-      {fi:"👴",ft:"輕度聽損也能用",fd:"通過臨床驗證，可以當非處方助聽器用。如果家裡長輩聽力開始退化，這個功能滿有幫助 — 看電視、講話都聽得清楚。"}
+      {fi:"🔇",ft:"新一代主動降噪：效果提升整整 3 倍",fd:"全新 H3 晶片加上最佳化的聲學架構與微孔透氣設計，捷運轟鳴、咖啡廳人聲與辦公室鍵盤聲幾乎完全隔絕，安靜效果令人驚嘆。",req:"AirPods Pro 3",practice:["在嘈雜環境下一指切換降噪與通透模式","感受降噪效果提升 3 倍的極致寧靜感","體驗適應性音訊根據周遭環境自動調節音量"]},
+      {fi:"💓",ft:"內建耳道運動心率感測：跑步免戴手錶",fd:"耳機內側加入微型光學心率感測器，運動健身時能持續監測心率數據並回傳至健康與體能訓練 App，語音即時播報心率區間，運動更安心。",practice:["戴上耳機在健康 App 檢視即時心率量測","設定運動時的心率區間警示","了解耳道心率感測的精準優勢"]},
+      {fi:"🌐",ft:"Apple 智慧面對面即時翻譯：跨語言自然對話",fd:"出國旅遊或接待外賓神器！一人戴一邊或搭配 iPhone 螢幕，雙方說不同語言時耳機即時語音翻譯入耳，問路、點餐、洽公不用再比手畫腳。",practice:["開啟即時翻譯 App 體驗對話模式","戴上耳機聆聽語音翻譯的即時回饋","了解離線語言包下載設定"]},
+      {fi:"🎛️",ft:"iOS 27 專屬自訂等化器（EQ）與個人化空間音訊",fd:"終於可以自己調音了！iOS 27 設定中直接提供高中低音滑桿，能依個人喜好強化重低音或提升人聲清晰度；搭配動態頭部追蹤空間音訊，宛如置身現場演唱會。",practice:["前往設定中的 AirPods 選項自訂高中低音 EQ","切換不同音樂風格感受自訂等化器音色差異","體驗頭部轉動時空間音訊的方位鎖定感"]},
+      {fi:"🔋",ft:"長達 10 小時單次聆聽與 MagSafe 充電盒",fd:"能源效率大升級，開啟降噪下單次聆聽時間長達 10 小時；搭配充電盒總續航最長達 40 小時。充電盒支援尋找精確定位、揚聲器警示音與內建掛繩孔。",practice:["檢視 iPhone 桌面小工具的耳機與充電盒電量","在『尋找』App 觸發充電盒揚聲器發聲尋找","體驗 MagSafe 磁吸無線充電盤隨放隨充"]},
+      {fi:"🛡️",ft:"IP57 防塵抗水與五款耳塞套尺寸",fd:"耳機與充電盒皆具備 IP57 等級防塵抗水保護，激烈運動流汗或戶外遇雨完全無憂；包裝內附 XS、S、M、L 等多種尺寸矽膠耳塞套，提供最佳密封貼合度。",practice:["在 iPhone 上執行『耳塞套服貼程度測試』","挑選最舒適隔音的專屬耳塞尺寸","了解耳機汗水清潔與日常保養方式"]}
     ],
     scenarios:[
-      {i:"🚇",t:"通勤路上的安靜空間",d:"想想您每天搭捷運、公車的路上。戴上 AirPods Pro 3，外面的吵雜聲幾乎消失。聽 Podcast、追劇、放空都很享受。"},
-      {i:"🏃",t:"運動帶著一起跑",d:"心率感測加上防水防汗，跑步、重訓、瑜伽都可以戴。流再多汗也不會壞，運動完還能順便看自己當天的強度數據。"},
-      {i:"✈️",t:"出國少一個障礙",d:"以前出國最怕語言不通。即時翻譯讓您在日本問路、在歐洲點餐都直接聽懂對方在說什麼。問路、買東西都順很多。"},
-      {i:"👴",t:"幫家中長輩聽得清楚",d:"如果家裡長輩聽力開始有點退化，這個其實滿適合的。看電視、聊天、講電話都會清楚很多，比叫長輩買助聽器自然多了。"}
+      {i:"🚇",t:"每日搭捷運通勤與差旅飛行族",d:"3 倍強悍降噪打造專屬寧靜空間，聽音樂、看劇或專注文書不受打擾。"},
+      {i:"🏃",t:"戶外跑步與健身運動愛好者",d:"耳道即時心率感測加上 IP57 防汗防水，運動免帶手錶也能完整記錄訓練強度。"},
+      {i:"✈️",t:"熱愛出國自由行與商務溝通人士",d:"即時翻譯讓外語溝通無障礙，出國問路點餐像身邊帶了一位隨身口譯員。"}
     ],
     accessories:[
-      {i:"🛡",n:"矽膠保護套",p:"防刮防摔保護充電盒",why:"日常攜帶不擔心刮傷、掉落，多種顏色可挑選"},
-      {i:"🪢",n:"掛繩防丟組",p:"運動配戴更安心",why:"運動時即使掉出耳朵也不會遺失，是運動愛好者必備"},
-      {i:"🔋",n:"無線充電盤",p:"放上就充更方便",why:"床頭、桌邊放一個，回家就充電，永遠不會沒電"}
+      {i:"🛡",n:"矽膠保護套（附防丟掛繩）",p:"保護充電盒防刮防摔",why:"精準開孔保留揚聲器與掛繩孔，外出掛在背包上拿取超方便"},
+      {i:"🔋",n:"MagSafe / Qi2 磁吸充電盤",p:"桌邊床頭隨放即充",why:"回家隨手一放即開始補充電力，隔天出門隨時滿電"},
+      {i:"🧼",n:"原廠耳機專用清潔組",p:"定期清理耳垢與濾網",why:"保持麥克風收音孔與耳塞清潔，維持最佳降噪效果與衛生"}
     ]
   },
 
   {
-    n:"Apple Watch Series 11", ico:"⌚",
-    sub:"歷來最纖薄、抗刮雙倍、健康功能再進化",
-    tagline:"高血壓風險通知 × 睡眠分數 × 5G 連線",
-    welcome:"Apple Watch 對很多人來說是健康管家。Series 11 多了高血壓提醒、睡眠分數，今天會帶大家看看它平常怎麼幫您觀察身體狀況。",
+    n:"Apple Watch Series 12 全能健康與準備指數", ico:"⌚",
+    sub:"S11 晶片 × 準備指數評估 × 每 5 秒高頻心率追蹤",
+    tagline:"全新健康感測系統 · 身體準備指數 · 精密陶瓷與拋光鈦金屬",
+    welcome:"今天要向大家介紹 Apple 守護健康與體能的最新代表作：Apple Watch Series 12！搭載強大 S11 晶片，帶來全新健康感測系統，新增備受期待的『準備指數（Readiness Score）』，能綜合評估昨夜睡眠、心率變異與活動量，每天早晨告訴你今天的身體能量狀態；更支援每 5 秒高頻心率跟測與高頻 HRV 分析。今天帶大家完整體驗這款全能健康守護者！",
     requirements:{
-      os:"watchOS 26 或以上版本（隨機出廠預載）",
-      capacity:"42mm / 46mm 兩種尺寸 · 鋁金屬或鈦金屬錶殼",
-      sim:"提供 GPS 版與 GPS + 行動網路版（5G 連線）",
-      compat:"需搭配 iPhone XS 或更新機型（iOS 26 以上）· 高血壓通知需 Series 9/10/11",
-      icloud:"需 Apple ID 與 iPhone 配對"
+      os:"watchOS 27（隨機出廠預載）",
+      capacity:"64GB",
+      sim:"提供 GPS 版與 GPS + 行動網路版（支援獨立通話與上網）",
+      compat:"需搭配 iPhone 11 或更新機型（需搭載 iOS 27）",
+      icloud:"健康與體能訓練數據全面端對端加密同步於 iCloud"
     },
     stats:[
-      {n:"2×",u:"",l:"抗刮能力 vs S10"},
-      {n:"2000",u:"nits",l:"陽光下也清晰"},
-      {n:"24",u:"小時",l:"全天電池續航"}
+      {n:"準備",u:"指數",l:"每日身體能量評估"},
+      {n:"5",u:"秒",l:"高頻率心率跟測週期"},
+      {n:"2000",u:"nits",l:"廣視角 OLED 螢幕"}
     ],
     features:[
-      {fi:"🩺",ft:"高血壓風險通知",fd:"當錶偵測到您持續上升的血壓趨勢，會主動推送「可能高血壓」提醒，讓您及早與醫師討論。"},
-      {fi:"😴",ft:"睡眠分數功能",fd:"綜合睡眠時長、規律性、中斷次數、各階段時間，量化評估每晚睡眠品質，幫您改善作息。"},
-      {fi:"📱",ft:"5G 連線 + 衛星通訊",fd:"離開 iPhone 也能接電話、收訊息，登山、戶外運動時還能透過衛星求救。"},
-      {fi:"📺",ft:"廣視角 OLED 螢幕",fd:"從傾斜角度觀看亮度更高，最高 2000 nits 戶外清晰可見。看時間、看通知都不必再轉手腕。"},
-      {fi:"💨",ft:"歷來最纖薄機身",fd:"抗刮能力是 S10 的雙倍，搭配 7 款錶殼選色（玫瑰金、銀、曜黑等），男女都適合。"},
-      {fi:"⚡",ft:"S10 晶片 + 快充",fd:"充 15 分鐘可用 8 小時，低耗電模式最長可達 38 小時，連續運動不擔心斷電。"}
+      {fi:"❤️",ft:"全新健康感測系統：每日『準備指數』評估",fd:"告別盲目訓練！Series 12 結合每夜睡眠深淺、高頻 HRV 心率變異度與前日負荷，每天早晨自動計算出『準備指數』，告訴你今天適合挑戰高強度運動，還是該放慢步調充分休息。",req:"Apple Watch Series 12 搭配 watchOS 27",practice:["在手錶上開啟健康 App 檢視今日準備指數","了解各項身體指標如何影響能量評估","查看個人化活動建議指南"]},
+      {fi:"💓",ft:"每 5 秒高頻率心率跟測與高頻 HRV 分析",fd:"心率感測精準度全面躍升！運動與全天追蹤間隔縮短至每 5 秒一次，高頻 HRV 追蹤縮短至每 5 分鐘一次，能更敏感、更提早察覺心律異常或身體疲勞狀況。",practice:["在手錶上進行即時心率量測觀察秒速更新","檢視心率變異度（HRV）全天趨勢圖表","了解高低心率通知與心律不整警示設定"]},
+      {fi:"😴",ft:"睡眠呼吸中止偵測與進階睡眠階段",fd:"利用內建感測器偵測睡眠過程中的呼吸中斷現象，若持續出現中重度跡象會發出就醫提醒通知；完整記錄清醒、REM 快速動眼、核心與深層睡眠時間。",practice:["檢視昨夜各睡眠階段詳細時間分佈","了解睡眠呼吸干擾指標的意義與安全標準","設定就寢時間與睡眠專注模式連動"]},
+      {fi:"⚡",ft:"S11 晶片與全新智慧堆疊：操作更快更懂你",fd:"全新 S11 雙核心處理器讓 Siri 本機即時運算秒速回覆；智慧堆疊（Smart Stack）會根據你的所在位置、時間與活動狀態，主動浮現最相關的小工具卡片。",practice:["轉動數位錶冠滑出智慧堆疊動態卡片","對著手錶呼叫 Siri 查詢健康數據：『我昨晚睡多久？』","體驗手錶震動回饋與介面流暢度"]},
+      {fi:"🏃",ft:"進階體能訓練與自訂配速目標",fd:"支援跑步功率、步幅、觸地時間等專業跑步指標；可自訂間歇訓練與配速目標，在手錶上即時查看領先或落後幅度，戶外 GPS 定位無比精準。",practice:["開啟跑步體能訓練檢視即時配速與心率區間","設定自訂間歇訓練的運動與休息時間","體驗訓練結束後的活動記錄圓圈結算"]},
+      {fi:"🎨",ft:"精密陶瓷與拋光鈦金屬：精緻美學新境界",fd:"除了輕盈的鋁金屬外，Series 12 隆重推出拋光鈦金屬與極致優雅的精密陶瓷錶殼（珍珠白、夜藍色）；配備 2000 nits 廣視角 OLED 隨顯螢幕，斜看也清晰無比。",practice:["現場鑑賞珍珠白精密陶瓷錶殼的溫潤光澤","體驗廣角隨顯螢幕在不同視角下的清晰度","試戴各種快拆錶帶搭配個人風格"]}
     ],
     scenarios:[
-      {i:"💪",t:"健身運動好夥伴",d:"心率追蹤、運動偵測、訓練負荷分析，幫您科學化規劃運動強度，避免運動傷害。"},
-      {i:"😴",t:"睡眠品質管家",d:"每晚自動分析睡眠分數、睡眠呼吸中止症通知，幫您找出影響睡眠的原因。"},
-      {i:"🚨",t:"緊急時刻守護者",d:"跌倒偵測、心率異常通知、衛星求救功能，長輩配戴讓家人更安心。"},
-      {i:"📞",t:"獨立通訊不受限",d:"5G 蜂巢版可獨立打電話、傳訊息、播音樂，運動時不必帶 iPhone 出門。"}
+      {i:"🏃",t:"熱愛路跑與健身的運動愛好者",d:"每日準備指數與每 5 秒高頻心率追蹤，精準調配訓練強度，防止運動過度受傷。"},
+      {i:"❤️",t:"關心長輩健康與睡眠品質的家庭",d:"心率異常警示、跌倒偵測、車禍偵測加上睡眠呼吸中止提醒，隨時守護長輩安全。"},
+      {i:"💼",t:"壓力大、重視身心平衡的上班族",d:"透過高頻 HRV 與準備指數掌握身體壓力狀態，提醒自己適時深呼吸、調整生活作息。"}
     ],
     accessories:[
-      {i:"⌚",n:"運動/編織單圈錶帶",p:"運動更舒適透氣",why:"運動時不悶汗、不刺癢，可水洗清潔，是運動族必備"},
-      {i:"🔋",n:"快速充電座",p:"床頭便利充電",why:"角度適合查看時間、磁力對位充電，是夜間充電的最佳搭檔"},
-      {i:"🛡",n:"螢幕保護殼",p:"邊框防撞防刮",why:"螢幕完整保護不傷錶面，運動撞擊也安心"}
+      {i:"⌚",n:"運動型錶帶 / 編織單圈錶帶",p:"透氣舒適親膚貼合",why:"確保感測器緊密貼合手腕，讓心率與準備指數數據量測更精準穩定"},
+      {i:"🔋",n:"Apple Watch 快速磁性充電座",p:"45 分鐘充至 80%",why:"支援快速充電，每天出門前或洗澡時充一下，整天整夜配戴無負擔"},
+      {i:"🛡",n:"專用螢幕保護貼",p:"防刮耐磨防撞保護",why:"保護 2000 nits 大螢幕日常不慎碰撞刮傷，門市提供現場代貼服務"}
     ]
   },
 
   {
     n:"Apple Watch SE 3", ico:"⌚",
-    sub:"入門級錶款 × 高性價比健康神器",
+    sub:"入門級錶款 × 超高 CP 值健康神器",
     tagline:"S10 同級晶片 × 首次支援隨顯螢幕",
     welcome:"SE 3 是這次 Apple Watch 系列裡比較親民的選擇。雖然是入門款，但晶片跟旗艦同級。如果您第一次用 Apple Watch，或想送長輩、孩子，今天可以好好認識它。",
     requirements:{
-      os:"watchOS 26 或以上版本（隨機出廠預載）",
+      os:"watchOS 27（隨機出廠預載）",
       capacity:"40mm / 44mm 兩種尺寸 · 鋁金屬錶殼（星光/午夜色）",
       sim:"提供 GPS 版與 GPS + 行動網路版（5G 連線）",
-      compat:"需搭配 iPhone XS 或更新機型（iOS 26 以上）· 不支援心電圖與血氧",
+      compat:"需搭配 iPhone 11 或更新機型（iOS 27 以上）· 不支援心電圖與血氧",
       icloud:"需 Apple ID 與 iPhone 配對；可加入家庭共享"
     },
     stats:[
@@ -1274,13 +1638,13 @@ const TOPICS = [
       {fi:"🌡",ft:"手腕溫度感測",fd:"首次支援，可透過生命徵象 App 瞭解更多健康資訊，掌握身體微小變化。"},
       {fi:"😴",ft:"完整睡眠功能",fd:"支援睡眠偵測、睡眠分數、睡眠呼吸中止症通知，全方位守護您的休息品質。"},
       {fi:"⚡",ft:"首次支援快充",fd:"充電 15 分鐘可提供 8 小時電力，低耗電模式最長 32 小時，比上代更省心。"},
-      {fi:"📱",ft:"5G 連線獨立通訊",fd:"5G 蜂巢版獨立通訊不必帶手機，內建喇叭可直接播放音樂、Siri 對話。"}
+      {fi:"📱",ft:"5G 連線獨立通訊",fd:"5G 行動網路版獨立通訊不必帶手機，內建喇叭可直接播放音樂、Siri 對話。"}
     ],
     scenarios:[
       {i:"👴",t:"送給長輩的關心",d:"跌倒偵測、緊急 SOS、心率異常通知，配戴起來讓您更安心，長輩也更獨立。"},
       {i:"🧒",t:"孩子的第一支智慧錶",d:"搭配家庭設定，孩子配戴 SE 3 也能傳訊息、打電話給家人，不必買 iPhone。"},
       {i:"🏃",t:"開始運動的好夥伴",d:"基本運動追蹤、心率監測、活動圓環激勵，幫您建立規律運動習慣。"},
-      {i:"💰",t:"首次體驗 Apple Watch",d:"高性價比進入 Apple Watch 生態系，所有核心功能都有，體驗完整不打折。"}
+      {i:"💰",t:"首次體驗 Apple Watch",d:"超高 CP 值進入 Apple Watch 生態系，所有核心功能都有，體驗完整不打折。"}
     ],
     accessories:[
       {i:"⌚",n:"運動錶帶（多色）",p:"搭配心情換色",why:"快換式設計輕鬆換色，每天都有新心情"},
@@ -1347,7 +1711,7 @@ const TOPICS = [
       {n:"8",u:"種",l:"新增支援語言"}
     ],
     features:[
-      {fi:"✍️",ft:"書寫工具 — 您的隨身編輯",fd:"在任何 App 都能校對、重寫、生成摘要。寫公文太正式？聊天訊息太隨便？一鍵調整語氣。"},
+      {fi:"✍️",ft:"書寫工具 · 您的隨身編輯",fd:"在任何 App 都能校對、重寫、生成摘要。寫公文太正式？聊天訊息太隨便？一鍵調整語氣。"},
       {fi:"😀",ft:"Genmoji 客製表情符號",fd:"用文字描述就能生成獨一無二的表情符號。「戴墨鏡的柴犬」、「跳舞的章魚」通通做得出來。"},
       {fi:"🎨",ft:"影像樂園",fd:"用文字、概念、或照片圖庫的人物製作獨特原創影像。動畫、插畫、塗鴉風格任選。"},
       {fi:"🗣",ft:"全新升級 Siri",fd:"理解能力大幅提升，可連結 ChatGPT 取得專業知識。文字、語音自由切換，溝通更自然。"},
@@ -1443,9 +1807,6 @@ const TOPICS = [
     ]
   },
 
-  /* ============================================
-     📚 軟體 App 主題系列 — 基於 Apple 官方使用手冊
-     ============================================ */
   {
     n:"照片 App 整理術", ico:"🖼",
     sub:"用 AI 整理累積的相片",
@@ -1517,7 +1878,7 @@ const TOPICS = [
     ],
     accessories:[
       {i:"✒️",n:"Apple Pencil Pro",p:"手寫筆記神器",why:"擠壓、滾動、觸覺回饋，搭配備忘錄是您 iPad 使用體驗的最佳搭檔"},
-      {i:"⌨️",n:"妙控鍵盤",p:"打字筆記更快",why:"長篇文字筆記、會議紀錄用鍵盤效率最高"},
+      {i:"⌨️",n:"巧控鍵盤",p:"打字筆記更快",why:"長篇文字筆記、會議紀錄用鍵盤效率最高"},
       {i:"📄",n:"類紙膜保護貼",p:"擬真書寫手感",why:"用 Apple Pencil 寫字像在真的紙上，長時間使用不傷手"}
     ]
   },
@@ -1545,7 +1906,7 @@ const TOPICS = [
       {fi:"⏰",ft:"稍後傳送",fd:"半夜想到的訊息可排程隔天早上才送出，避免打擾對方休息。"},
       {fi:"😀",ft:"Genmoji 自訂表情",fd:"用文字描述生成獨一無二的表情符號（需 Apple Intelligence），聊天更有個性。"},
       {fi:"🎥",ft:"FaceTime 人物居中",fd:"鏡頭自動追蹤您的臉，視訊時移動也保持在畫面中央，不必再喬位置。這是 iPhone 17 系列與 iPhone Air 前鏡頭的新功能。",req:"iPhone 前鏡頭人物居中目前僅 iPhone 17、iPhone 17 Pro、iPhone Air 支援（隨 iOS 26 出貨）；較舊 iPhone 不支援"},
-      {fi:"🌐",ft:"FaceTime 跨平台",fd:"傳連結給 Android 或 Windows 用戶也能加入通話，全家不同手機都能視訊。"}
+      {fi:"🌐",ft:"FaceTime 跨平台",fd:"傳連結給 Android 或 Windows 使用者也能加入通話，全家不同手機都能視訊。"}
     ],
     scenarios:[
       {i:"👨‍👩‍👧",t:"家庭群組更熱絡",d:"用動畫文字效果、Genmoji 讓您與家人的對話更有趣，連長輩、孩子都會喜歡。"},
@@ -1564,7 +1925,7 @@ const TOPICS = [
     n:"和家人一起｜FaceTime 團聚", ico:"📹",
     sub:"再遠，也像坐在同一張桌子旁",
     tagline:"群組視訊 × 一起看 × 看得到也看得懂",
-    welcome:"很多人家裡的孩子在外地工作、唸書，或是孫子住得遠，一年見不到幾次面。今天想跟大家分享，怎麼用 iPhone 本來就有的 FaceTime，跟家人視訊、甚至一起看同一部劇 —— 就算隔著一座城市，感覺還是像坐在同一張桌子旁邊。",
+    welcome:"很多人家裡的孩子在外地工作、唸書，或是孫子住得遠，一年見不到幾次面。今天想跟大家分享，怎麼用 iPhone 本來就有的 FaceTime，跟家人視訊、甚至一起看同一部劇  ·  ·  就算隔著一座城市，感覺還是像坐在同一張桌子旁邊。",
     requirements:{
       os:"iOS 26 / iPadOS 26 / macOS 26 或以上版本（舊版本也大多支援）",
       capacity:"不限容量（視訊通話不佔手機空間）",
@@ -1712,9 +2073,6 @@ const TOPICS = [
     ]
   },
 
-  /* ============================================
-     📚 iPhone 進階使用系列 — 基於 Apple 官方使用手冊
-     ============================================ */
   {
     n:"iPhone 個人化設定", ico:"⚙️",
     sub:"把 iPhone 調整成最順手的樣子",
@@ -1733,12 +2091,12 @@ const TOPICS = [
       {n:"1",u:"鍵",l:"切換深色模式"}
     ],
     features:[
-      {fi:"🔒",ft:"鎖定畫面 — 不只一張桌布",fd:"按住鎖定畫面可以建立多組桌布。一張上班用、一張週末用、一張運動時用。每組還可以放不同的小工具，例如行事曆、天氣、活動。"},
-      {fi:"🏠",ft:"主畫面整理 — 常用的放近一點",fd:"長按 App 可以拖移、放進資料夾。建議把常用的 App 放第一頁，其他丟進資料夾。也可以隱藏整頁讓畫面清爽。"},
-      {fi:"🔠",ft:"字體放大 — 看訊息不再瞇眼",fd:"設定 > 顯示與亮度 > 文字大小，往右拉就會變大。也可以在『輔助使用』裡開『更大文字』，字級可以放到很大。對長輩特別實用。"},
-      {fi:"🌗",ft:"深色模式 — 晚上看眼睛舒服",fd:"設定 > 顯示與亮度 > 深色。也可以設『自動』，白天淺色、晚上自動切深色。晚上滑手機眼睛比較不會累。"},
-      {fi:"🔔",ft:"通知整理 — 不要一直被打擾",fd:"在『通知』設定可以針對每個 App 個別調。重要的（家人、銀行）保留聲音，不重要的（廣告、遊戲）關掉或只放通知中心。"},
-      {fi:"🤚",ft:"輔助觸控 — 一個浮動小圓點",fd:"如果 Home 鍵或音量鍵不好按，可以開『輔助觸控』。畫面會出現小圓點，點一下可以叫出常用功能。手不太靈活的人很好用。"}
+      {fi:"🔒",ft:"鎖定畫面 · 不只一張桌布",fd:"按住鎖定畫面可以建立多組桌布。一張上班用、一張週末用、一張運動時用。每組還可以放不同的小工具，例如行事曆、天氣、活動。"},
+      {fi:"🏠",ft:"主畫面整理 · 常用的放近一點",fd:"長按 App 可以拖移、放進資料夾。建議把常用的 App 放第一頁，其他丟進資料夾。也可以隱藏整頁讓畫面清爽。"},
+      {fi:"🔠",ft:"字體放大 · 看訊息不再瞇眼",fd:"設定 > 顯示與亮度 > 文字大小，往右拉就會變大。也可以在『輔助使用』裡開『更大文字』，字級可以放到很大。對長輩特別實用。"},
+      {fi:"🌗",ft:"深色模式 · 晚上看眼睛舒服",fd:"設定 > 顯示與亮度 > 深色。也可以設『自動』，白天淺色、晚上自動切深色。晚上滑手機眼睛比較不會累。"},
+      {fi:"🔔",ft:"通知整理 · 不要一直被打擾",fd:"在『通知』設定可以針對每個 App 個別調。重要的（家人、銀行）保留聲音，不重要的（廣告、遊戲）關掉或只放通知中心。"},
+      {fi:"🤚",ft:"輔助觸控 · 一個浮動小圓點",fd:"如果 Home 鍵或音量鍵不好按，可以開『輔助觸控』。畫面會出現小圓點，點一下可以叫出常用功能。手不太靈活的人很好用。"}
     ],
     scenarios:[
       {i:"👴",t:"幫長輩設定大字體",d:"長輩看訊息常常瞇著眼。把文字大小往右拉到第二大，再開『更大文字』，一個畫面只看到幾行字，但訊息一目了然。"},
@@ -1810,10 +2168,10 @@ const TOPICS = [
     ],
     features:[
       {fi:"👆",ft:"點一下對焦、長按鎖定",fd:"拍照前點一下要拍的主體，畫面會出現黃框，相機就會對那邊對焦。長按會看到『AE/AF 鎖定』，相機就不會亂跑焦。"},
-      {fi:"☀️",ft:"曝光調整 — 太暗太亮自己拉",fd:"點一下對焦後，旁邊有個太陽圖示。往上拉變亮、往下拉變暗。拍逆光、夜景特別有用，不用相信相機自動判斷。"},
-      {fi:"📐",ft:"開啟九宮格 — 構圖立刻穩",fd:"設定 > 相機 > 構圖 > 格線。畫面會出現九宮格，把主體放交叉點，照片瞬間有專業感。攝影界的『三分法』就是這樣用的。"},
-      {fi:"🌃",ft:"夜間模式 — 晚上也能拍出明亮照",fd:"光線不足時相機左上會自動出現月亮圖示，可以調整曝光秒數。手要拿穩 1-3 秒，拍出來的照片會超乎想像的明亮乾淨。"},
-      {fi:"🎬",ft:"連拍 — 抓住小孩、寵物的瞬間",fd:"按住快門不放會連拍，每秒 10 張。拍小孩跑來跑去、寵物跳起來都可以這樣，事後再挑最好的一張。"},
+      {fi:"☀️",ft:"曝光調整 · 太暗太亮自己拉",fd:"點一下對焦後，旁邊有個太陽圖示。往上拉變亮、往下拉變暗。拍逆光、夜景特別有用，不用相信相機自動判斷。"},
+      {fi:"📐",ft:"開啟九宮格 · 構圖立刻穩",fd:"設定 > 相機 > 構圖 > 格線。畫面會出現九宮格，把主體放交叉點，照片瞬間有專業感。攝影界的『三分法』就是這樣用的。"},
+      {fi:"🌃",ft:"夜間模式 · 晚上也能拍出明亮照",fd:"光線不足時相機左上會自動出現月亮圖示，可以調整曝光秒數。手要拿穩 1-3 秒，拍出來的照片會超乎想像的明亮乾淨。"},
+      {fi:"🎬",ft:"連拍 · 抓住小孩、寵物的瞬間",fd:"按住快門不放會連拍，每秒 10 張。拍小孩跑來跑去、寵物跳起來都可以這樣，事後再挑最好的一張。"},
       {fi:"🤳",ft:"用音量鍵當快門",fd:"自拍的時候按音量鍵就會拍照，比按螢幕的快門穩得多。也可以用 AirPods 上的按鈕當遙控。"}
     ],
     scenarios:[
@@ -1847,11 +2205,11 @@ const TOPICS = [
       {n:"PDF",u:"",l:"掃描文件直接存"}
     ],
     features:[
-      {fi:"📁",ft:"資料夾分類 — 找檔案不再翻半天",fd:"建幾個常用的資料夾：工作、家庭、旅遊、發票。看到檔案就丟進對的資料夾，下次要用秒找。"},
+      {fi:"📁",ft:"資料夾分類 · 找檔案不再翻半天",fd:"建幾個常用的資料夾：工作、家庭、旅遊、發票。看到檔案就丟進對的資料夾，下次要用秒找。"},
       {fi:"☁️",ft:"整合所有雲端服務",fd:"iCloud Drive、Google Drive、Dropbox 全部在同一個 App 裡看得到。不用裝一堆 App 切來切去。"},
       {fi:"📸",ft:"掃描紙本文件變 PDF",fd:"點右上角的『...』可以掃描文件。對著合約、收據、名片拍一下，自動變成清楚的 PDF。"},
-      {fi:"🏷",ft:"標籤 — 跨資料夾分類",fd:"重要的檔案可以打上『緊急』『待辦』『已完成』標籤。不用移動位置，但可以用標籤一次看完所有相關檔案。"},
-      {fi:"🔍",ft:"全文搜尋 — 連 PDF 內文都找",fd:"在搜尋欄輸入關鍵字，連 PDF 文件裡的文字都會找出來。掃描的合約找一個條款不用一頁一頁翻。"},
+      {fi:"🏷",ft:"標籤 · 跨資料夾分類",fd:"重要的檔案可以打上『緊急』『待辦』『已完成』標籤。不用移動位置，但可以用標籤一次看完所有相關檔案。"},
+      {fi:"🔍",ft:"全文搜尋 · 連 PDF 內文都找",fd:"在搜尋欄輸入關鍵字，連 PDF 文件裡的文字都會找出來。掃描的合約找一個條款不用一頁一頁翻。"},
       {fi:"📤",ft:"分享給其他人共同編輯",fd:"右上角分享，選『加入聯絡人』。對方可以一起編輯這份檔案，不用 LINE 來 LINE 去傳檔。"}
     ],
     scenarios:[
@@ -1884,17 +2242,87 @@ const TOPICS = [
       {n:"3",u:"步內",l:"每招都好上手"},
       {n:"0",u:"門檻",l:"從頭開始學沒問題"}
     ],
-    features:[
-      {fi:"☝️",ft:"從底部往上滑 — 回主畫面",fd:"沒有 Home 鍵了。從螢幕底部往上滑就是回首頁。滑到一半停住會看到所有開過的 App，可以切換。"},
-      {fi:"🔙",ft:"從邊緣往內滑 — 上一頁",fd:"在 App 裡想回上一頁，從螢幕左邊往右滑。不用找『返回』按鈕，所有 App 都是這個手勢。"},
-      {fi:"🔍",ft:"主畫面往下拉 — 搜尋一切",fd:"在主畫面從中間往下拉會出現搜尋欄。可以搜 App、聯絡人、訊息、設定。找東西最快的方法。"},
-      {fi:"🎛",ft:"右上角往下滑 — 控制中心",fd:"螢幕右上角往下滑可以叫出控制中心。Wi-Fi、藍牙、手電筒、亮度、音量都在這裡，不用進設定。"},
-      {fi:"🔔",ft:"左上角往下滑 — 通知中心",fd:"螢幕左上角往下滑，漏接的訊息、提醒、App 通知都收在這裡。當下沒空看，回頭再慢慢翻。"},
-      {fi:"💡",ft:"問 Siri — 不用記功能藏在哪",fd:"按住電源鍵或對著手機說『嘿 Siri』，直接告訴它您要做什麼。例如『打電話給媽媽』『開鬧鐘 7 點』。"},
-      {fi:"📲",ft:"AirDrop — 跟其他蘋果裝置傳檔案",fd:"想傳照片或檔案給旁邊的 Apple 用戶？點分享 > AirDrop，幾秒就到對方手機。比 LINE 快又不壓縮。"},
-      {fi:"✊",ft:"長按 App 圖示 — 移動、刪除、快捷選單",fd:"手指按住 App 不放會跳出選單；圖示開始抖動時就能拖曳排列、或點角落刪除。長按相機、相簿還能直接跳到常用功能。"},
-      {fi:"📸",ft:"側邊鍵＋音量加 — 螢幕截圖",fd:"同時按右側電源鍵和左側音量加鍵，螢幕閃一下、左下出現縮圖，就是把畫面拍下來了。存票券、對帳、傳畫面都用得到。"},
-      {fi:"🔠",ft:"放大字級 — 看得更清楚",fd:"覺得字太小？到「設定 > 顯示與亮度 > 文字大小」拉一下，全系統的字一起變大，長輩用起來立刻舒服很多。"}
+        features:[
+      {
+        fi:"☝️", ft:"從底部往上滑 · 回主畫面",
+        fd:"沒有 Home 鍵了。從螢幕底部往上滑就是回首頁。滑到一半停住會看到所有開過的 App，可以切換。",
+        path:"螢幕底端白色橫條 › 向上快速輕滑",
+        feedback:"當前 App 縮小飛回桌面，主畫面立即呈現",
+        practice:["【示範】看講師拇指由底部白色橫條向上快撥","【自己做】打開任意 App（如設定），快速上滑回主畫面","【互看】確定螢幕順利回到主畫面桌布"],
+        pitfall:"按住螢幕太久或滑太慢，會不小心叫出背景多工切換列；只要像撥水一樣快速輕拂即可！"
+      },
+      {
+        fi:"🔙", ft:"從邊緣往內滑 · 上一頁",
+        fd:"在 App 裡想回上一頁，從螢幕左邊往右滑。不用找『返回』按鈕，所有 App 都是這個手勢。",
+        path:"拇指切齊螢幕最左側邊框 › 往右撥動",
+        feedback:"畫面像翻書一樣從左邊被拉回上一頁",
+        practice:["【示範】看講師在設定頁面層層進入再左滑返回","【自己做】進入設定 › 一般 › 關於本機，用左邊緣右滑退回設定首頁","【確認】完全不需要點擊左上角的返回箭頭"],
+        pitfall:"滑動位置如果從螢幕中間滑是無效的，拇指一定要緊貼螢幕最左邊的金屬邊框往內撥！"
+      },
+      {
+        fi:"🔍", ft:"主畫面往下拉 · 搜尋一切",
+        fd:"在主畫面從中間往下拉會出現搜尋欄。可以搜 App、聯絡人、訊息、設定。找東西最快的方法。",
+        path:"主畫面任意空白處 › 手指向下拉約 2 公分",
+        feedback:"螢幕中央滑出搜尋框與常用 App 建議",
+        practice:["【示範】看講師下拉並輸入『計算機』直接打開","【自己做】在主畫面中間下拉，輸入『LINE』或家人名字試試看","【掌握】以後找找不到的 App，一秒就能搜到"],
+        pitfall:"千萬不要從螢幕最頂端邊緣下拉，最頂端拉下來會變成通知中心；要從主畫面中間圖示空白處下拉！"
+      },
+      {
+        fi:"🎛", ft:"右上角往下滑 · 控制中心",
+        fd:"螢幕右上角往下滑可以叫出控制中心。Wi-Fi、藍牙、手電筒、亮度、音量都在這裡，不用進設定。",
+        path:"螢幕最右上角電池圖示處 › 單手向下滑動",
+        feedback:"滑出包含手電筒、計算機、螢幕亮度與音量的快捷面板",
+        practice:["【示範】看講師下拉開啟手電筒，並長按調整手電筒亮度","【自己做】自己下拉點擊手電筒圖示點亮，再點一次關閉","【長按技巧】長按手電筒圖示，上下拖動調節 4 段光線強度"],
+        pitfall:"從中間或左上角下拉會變成通知中心！一定要對準右上角電池百分比那個角落往下拉。"
+      },
+      {
+        fi:"🔔", ft:"左上角往下滑 · 通知中心",
+        fd:"螢幕左上角往下滑，漏接的訊息、提醒、App 通知都收在這裡。當下沒空看，回頭再慢慢翻。",
+        path:"螢幕最左上角時間處 › 單手向下滑動",
+        feedback:"展開所有未讀通知與通知摘要清單",
+        practice:["【示範】看講師下拉查看歷史通知並向左滑動清除單則","【自己做】下拉檢視最近通知，體驗向上滑動收起","【確認】不再害怕漏掉家人的 LINE 或重要未接來電"],
+        pitfall:"通知堆疊太長時，點右上角的『✕』可以一鍵清除所有歷史通知，不必一張一張滑掉。"
+      },
+      {
+        fi:"💡", ft:"長按電源鍵問 Siri · 口說直接辦到",
+        fd:"按住側邊電源鍵 1 秒直到光暈出現，直接說出指令。例如『打電話給媽媽』『設定明天早上 7 點鬧鐘』。",
+        path:"長按機身右側電源鍵約 1 秒 › 底部光暈亮起直接說話",
+        feedback:"螢幕底部亮起多彩智慧光暈，即時聽取語音並執行",
+        practice:["【示範】看講師示範：『設定明天早上 7 點 30 分鬧鐘』","【自己做】長按電源鍵，對著手機說：『今天天氣如何？』","【體會】口說速度正常即可，不用等它回應，一口氣說完最靈敏"],
+        pitfall:"很多長輩會按住講話講完才放開，其實只要按住 1 秒看到光暈就可以放開手，直接對著手機說話即可！"
+      },
+      {
+        fi:"📲", ft:"AirDrop · 點分享免壓縮秒傳照片",
+        fd:"想傳照片或檔案給旁邊的 Apple 使用者？點分享 > AirDrop，幾秒就到對方手機。比 LINE 快又不壓縮畫質。",
+        path:"照片 App › 點左下角分享按鈕 › 點選 AirDrop › 點選旁邊同學頭像",
+        feedback:"對方手機螢幕立刻跳出接受提示，1 秒傳送原畫質照片",
+        practice:["【示範】看講師將展示機照片秒傳給現場學員","【自己做】跟旁邊的同學互相 AirDrop 一張風景照片","【驗證】點進照片看資訊，畫質與細節 100% 完整保留"],
+        pitfall:"對方必須先解鎖螢幕！且在『設定 › 一般 › AirDrop』確認開啟『所有人 10 分鐘』，並保持藍牙與 Wi-Fi 開啟。"
+      },
+      {
+        fi:"✊", ft:"長按 App 圖示 · 移動、刪除與快捷選單",
+        fd:"手指按住 App 不放會跳出快捷選單；繼續按住抖動時能拖曳排列、或點角落刪除。",
+        path:"手指輕壓桌面 App 圖示約 1 秒放開",
+        feedback:"跳出專屬快捷選單，點『編輯主畫面』圖示開始抖動",
+        practice:["【示範】看講師長按相機圖示，直接捷徑點『自拍』","【自己做】長按任一 App 體驗快捷選單，點空白處取消","【進階】長按直到圖示抖動，試著將常用 App 拖移到最順手位置"],
+        pitfall:"手指不要太用力按壓螢幕，只要輕輕放著停留 1 秒即可；刪除時若只想從桌面拿掉，選『從主畫面移除』即可保留 App 於 App 資料庫。"
+      },
+      {
+        fi:"📸", ft:"側邊電源鍵＋音量增加鍵 · 螢幕截圖",
+        fd:"同時按右側電源鍵和左側音量加鍵，按一下立即放開。螢幕閃一下、左下出現縮圖，就是拍下來了。",
+        path:"右手拇指按側邊電源鍵 ＋ 左手食指按音量增加鍵 › 同時按一下立刻放開",
+        feedback:"螢幕閃白並發出快門聲，左下角跳出截圖縮圖",
+        practice:["【示範】看講師雙手同時『按一下就放』完成截圖","【自己做】自己練習一次螢幕截圖，點擊左下角縮圖塗鴉畫圈","【完成】點左上角『完成』，選擇儲存至照片"],
+        pitfall:"千萬不要長按不放！長按超過 2 秒會變成關機與 SOS 緊急求救畫面；口訣是『同時按一下立刻放手』！"
+      },
+      {
+        fi:"🔠", ft:"設定 › 顯示與亮度 › 文字大小",
+        fd:"覺得字太小？到『設定 > 顯示與亮度 > 文字大小』向右拉，全系統的字一起變大，長輩用起來立刻舒適。",
+        path:"設定 › 顯示與亮度 › 文字大小 › 向右拖動滑桿",
+        feedback:"系統所有文字、LINE 訊息、通訊錄字級同步放大清晰呈現",
+        practice:["【示範】看講師將字級拉到最大，對比前後閱讀舒適度","【自己做】進入設定親自拖動滑桿，調到自己眼睛最舒服的字級","【額外技巧】若還想要更大，在『輔助使用 › 顯示與文字大小』開啟更大輔助字級"],
+        pitfall:"調大字級不會讓 App 跑版，iPhone 會自動重新折行排版，長輩不用戴老花眼鏡也能看得清清楚楚！"
+      }
     ],
     scenarios:[
       {i:"📞",t:"我要打電話給小明",d:"對 Siri 說『打電話給小明』，不用解鎖、不用開 App，直接撥出去。開車的時候特別方便。"},
@@ -1927,12 +2355,12 @@ const TOPICS = [
       {n:"f/1.5",u:"",l:"主鏡頭光圈"}
     ],
     features:[
-      {fi:"📷",ft:"主鏡頭（1×）— 大多時候用這顆",fd:"光圈最大、畫質最好。日常拍人、拍食物、拍景都用這顆。1× 大概就是您眼睛看到的視野範圍。"},
-      {fi:"🌄",ft:"超廣角（0.5×）— 拍大場景",fd:"按 0.5× 切換到超廣角。拍風景、拍建築物、拍一群人合照、拍房間室內擺設特別有用。可以塞進更多東西。"},
-      {fi:"🔭",ft:"望遠（2× / 3× / 5×）— 拉近遠處主體",fd:"想拍遠處的東西（孩子在台上表演、寵物在公園跑）用望遠鏡頭拉近。比手動放大畫質好很多。"},
-      {fi:"👤",ft:"人像模式 — 背景模糊像單眼",fd:"主鏡頭旁邊有『人像』模式，按一下會自動把背景模糊。拍人、拍物品都好用。模糊程度也可以後製調整。"},
-      {fi:"🎬",ft:"電影級模式（iPhone 13+）— 影片背景模糊",fd:"錄影也可以背景模糊。對話拍兩個人時，相機會自動追蹤誰在講話、切換焦點。像專業電影一樣。"},
-      {fi:"📐",ft:"全景模式 — 拍超寬畫面",fd:"切到『全景』模式，按下快門慢慢平移手機。可以拍出超寬的景色，山景、海景、城市夜景特別美。"}
+      {fi:"📷",ft:"主鏡頭（1×） ·  大多時候用這顆",fd:"光圈最大、畫質最好。日常拍人、拍食物、拍景都用這顆。1× 大概就是您眼睛看到的視野範圍。"},
+      {fi:"🌄",ft:"超廣角（0.5×） ·  拍大場景",fd:"按 0.5× 切換到超廣角。拍風景、拍建築物、拍一群人合照、拍房間室內擺設特別有用。可以塞進更多東西。"},
+      {fi:"🔭",ft:"望遠（2× / 3× / 5×） ·  拉近遠處主體",fd:"想拍遠處的東西（孩子在台上表演、寵物在公園跑）用望遠鏡頭拉近。比手動放大畫質好很多。"},
+      {fi:"👤",ft:"人像模式 · 背景模糊像單眼",fd:"主鏡頭旁邊有『人像』模式，按一下會自動把背景模糊。拍人、拍物品都好用。模糊程度也可以後製調整。"},
+      {fi:"🎬",ft:"電影級模式（iPhone 13+） ·  影片背景模糊",fd:"錄影也可以背景模糊。對話拍兩個人時，相機會自動追蹤誰在講話、切換焦點。像專業電影一樣。"},
+      {fi:"📐",ft:"全景模式 · 拍超寬畫面",fd:"切到『全景』模式，按下快門慢慢平移手機。可以拍出超寬的景色，山景、海景、城市夜景特別美。"}
     ],
     scenarios:[
       {i:"🏖",t:"出國拍風景",d:"超廣角（0.5×）拍下整個海岸、整個古蹟。一張照片就把感覺帶回來，不用拼接。"},
@@ -2082,9 +2510,9 @@ const TOPICS = [
     features:[
       {fi:"🎥",ft:"直接匯入 iPhone 電影級與多鏡頭片",fd:"CapCut 完美相容 iPhone 拍的 4K、電影級模式（背景虛化追焦）、超廣角、慢動作。匯入後時間線上每一個片段都保留原始品質。",practice:["準備 (30秒): 用 iPhone 相機 App 拍 8-10 秒電影級或多鏡頭短片 (講師可預先準備備用片)","操作 (2分): 開 CapCut > 新專案 > 匯入影片 → 確認時間線畫質保留","反思 (2.5分): 簡單播放，討論 '為什麼 iPhone 拍的片在 CapCut 看起來專業？'"]},
       {fi:"🤖",ft:"AI 自動產生字幕超快",fd:"按一下自動字幕，AI 聽聲音自動產生逐字稿，還會依不同模板風格排版（有高亮、跳動、卡拉OK 式）。省去自己打字的時間，發出去專業感立刻提升。",practice:["準備 (15秒): 在時間線選取有對話的片段","操作 (2.5分): 點字幕 > 自動生成 → 選樣式 (高亮/卡拉OK) → 播放檢查，微調 1-2 個字","反思 (2分): 討論 '自動字幕對分享影片有多重要？' 分享 1 個使用情境"]},
-      {fi:"✨",ft:"一鍵套用流行模板",fd:"CapCut 有大量官方與用戶模板，針對 Reels、短影音、vlog 類型。選一個喜歡的，自己的片段一放就自動配好轉場、音樂、文字動畫。10 分鐘做出像花 2 小時的成果。",practice:["準備 (15秒): 匯入短片或用講師準備片段","操作 (2.5分): 切模板分頁 → 挑 1 個適合的套用 → 預覽並微調文字/長度","反思 (2分): 討論 '模板怎麼幫忙快速出片？' 分享 1 個想做的短影片類型"]},
+      {fi:"✨",ft:"一鍵套用流行模板",fd:"CapCut 有大量官方與創作者模板，針對 Reels、短影音、vlog 類型。選一個喜歡的，自己的片段一放就自動配好轉場、音樂、文字動畫。10 分鐘做出像花 2 小時的成果。",practice:["準備 (15秒): 匯入短片或用講師準備片段","操作 (2.5分): 切模板分頁 → 挑 1 個適合的套用 → 預覽並微調文字/長度","反思 (2分): 討論 '模板怎麼幫忙快速出片？' 分享 1 個想做的短影片類型"]},
       {fi:"✂️",ft:"iPad 大畫面 + Pencil 精準剪",fd:"把專案 AirDrop 到 iPad 版 CapCut，用大螢幕看時間線更清楚，Apple Pencil 可以精準切點、畫遮罩、寫手寫文字。適合想認真剪的人。",practice:["準備 (30秒): 在 iPhone 完成基本剪後 AirDrop 專案給 iPad (或講師示範)","操作 (2分): 在 iPad 用 Pencil 精準切點或加手寫文字/遮罩","反思 (2.5分): 存回 → 討論 'iPad + Pencil 適合什麼進階剪輯？' (若無 iPad 觀察示範)"]},
-      {fi:"🎵",ft:"內建音樂與音效庫免版權煩惱",fd:"直接在 App 內挑選流行歌、音效、配音，系統會標示是否可商用。配好音樂後影片情緒完全不同。",practice:["準備 (15秒): 點音頻 > 熱門或搜尋","操作 (2分): 挑 1 首加到片段 → 調整音量/淡入淡出，注意商用標示","反思 (2.5分): 播放比較有無音樂的差別，討論 '怎麼挑適合的音樂不侵權？'"]},
+      {fi:"🎵",ft:"內建音樂與音效庫免版權煩惱",fd:"直接在 App 內挑選流行歌、音效、配音，系統會標示是否可商用。配好音樂後影片情緒完全不同。",practice:["準備 (15秒): 點音訊 > 熱門或搜尋","操作 (2分): 挑 1 首加到片段 → 調整音量/淡入淡出，注意商用標示","反思 (2.5分): 播放比較有無音樂的差別，討論 '怎麼挑適合的音樂不侵權？'"]},
       {fi:"🚀",ft:"直接匯出分享到 LINE、YouTube",fd:"選好社群尺寸（直式 9:16），一鍵匯出高畫質檔。匯出後可直接分享到 LINE 群組或 YouTube，不用再轉檔。",practice:["準備 (15秒): 設定直式 9:16 1080p 匯出","操作 (2分): 匯出 → 直接分享到 LINE 測試群組 或存照片","反思 (2.5分): 在手機播放檢查，討論 '什麼解析度/尺寸適合不同平台？'"] }
     ],
     scenarios:[
@@ -2241,7 +2669,7 @@ const TOPICS = [
       {fi:"🔑",ft:"房間鑰匙與車鑰匙",fd:"很多飯店和部分車款支援，用手機就能開門，不用實體卡或鑰匙。",practice:["飯店 check-in 時選擇「用 Wallet」","抵達時手機靠近門鎖","車輛支援的話也能當鑰匙"]},
       {fi:"🪪",ft:"身份證明與證件",fd:"部分國家/地區可放駕照、身份證，未來台灣也可能支援。",practice:["如果支援，在 Wallet 加證件","需要時出示手機","比實體卡更不容易遺失"]},
       {fi:"📍",ft:"位置感知自動跳出",fd:"一到機場，登機證就會自動出現在鎖定畫面；到電影院，電影票也會跳出來。",practice:["把票券加到 Wallet","到達地點時注意鎖定畫面","票券會自動出現"]},
-      {fi:"🔒",ft:"安全與隱私設計",fd:"信用卡號不會存手機，交易用一次性代碼，遺失手機可遠端鎖定。",practice:["設定好「尋找」功能","遺失時用另一台裝置鎖定","或致電銀行凍結"] }
+      {fi:"🔒",ft:"安全與隱私設計",fd:"信用卡號不會存手機，交易用一次性安全虛擬碼，遺失手機可遠端鎖定。",practice:["設定好「尋找」功能","遺失時用另一台裝置鎖定","或致電銀行凍結"] }
     ],
     scenarios:[
       {i:"✈️",t:"出國旅行一機搞定",d:"護照資料、機票、飯店房卡、當地交通卡、會員卡全部在 Wallet，不用翻包包。"},
@@ -2446,8 +2874,6 @@ const TOPICS = [
     ]
   },
 
-
-
   {
     n:"YouTube 影片觀看與短影音創作", ico:"▶️",
     sub:"iPhone / iPad 上的影音平台經營",
@@ -2485,10 +2911,6 @@ const TOPICS = [
       {i:"💻",n:"iPad + 鍵盤",p:"高效剪輯",why:"用 iPad 搭配 Final Cut 或 CapCut 剪長影片"}
     ]
   },
-
-
-
-
 
   {
     n:"Canva 設計海報與簡報", ico:"🎨",
@@ -2608,7 +3030,7 @@ const TOPICS = [
     n:"Spotify 音樂發現與播放清單", ico:"🎵",
     sub:"iPhone / iPad 免費音樂串流平台",
     tagline:"播放清單 × 每日推薦 × 離線下載 × 社群分享",
-    welcome:"Spotify 是台灣人最愛的免費音樂串流 App，有海量音樂、播客、每日推薦播放清單，完美搭配 AirPods 和 HomePod。今天會教您建立播放清單、發現新音樂、離線聽歌等實用功能。",
+    welcome:"Spotify 是台灣人最愛的免費音樂串流 App，有海量音樂、Podcast、每日推薦播放清單，完美搭配 AirPods 和 HomePod。今天會教您建立播放清單、發現新音樂、離線聽歌等實用功能。",
     requirements:{
       os:"iOS 13 以上",
       capacity:"下載音樂會用空間，免費版有限制",
@@ -2617,7 +3039,7 @@ const TOPICS = [
       icloud:"不需，Spotify 有自己的帳號同步"
     },
     stats:[
-      {n:"海",u:"量",l:"數億首歌曲與播客"},
+      {n:"海",u:"量",l:"數億首歌曲與 Podcast"},
       {n:"個",u:"性",l:"每日推薦與 AI 播放清單"},
       {n:"離",u:"線",l:"下載聽歌不耗流量"}
     ],
@@ -2625,14 +3047,14 @@ const TOPICS = [
       {fi:"🎧",ft:"播放清單建立與管理",fd:"自訂播放清單、協作清單、排序、封面設計。",practice:["新建播放清單加歌曲","邀請朋友協作清單","設計封面與描述"]},
       {fi:"🔍",ft:"每日推薦與 Discover Weekly",fd:"AI 根據您的聽歌習慣推薦新歌、播放清單，每週更新。",practice:["聽完一週歌單","查看 Discover Weekly","儲存喜歡的推薦"]},
       {fi:"📱",ft:"離線下載與快取",fd:"下載播放清單或單曲，無網路也能聽，適合通勤或旅行。",practice:["下載播放清單","設定離線模式","管理下載空間"]},
-      {fi:"🎙️",ft:"播客與有聲書",fd:"訂閱播客、追蹤更新、倍速播放、離線下載。",practice:["搜尋並訂閱播客","設定倍速與睡眠計時","下載集數離線聽"]},
+      {fi:"🎙️",ft:"Podcast 與有聲書",fd:"訂閱 Podcast、追蹤更新、倍速播放、離線下載。",practice:["搜尋並訂閱 Podcast","設定倍速與睡眠計時","下載集數離線聽"]},
       {fi:"👥",ft:"社群分享與合作",fd:"分享播放清單到 IG、FB、Twitter，或與朋友共享清單。",practice:["分享播放清單連結","在社群貼文加音樂","建立合作清單"]},
       {fi:"🔊",ft:"裝置整合與 AirPlay",fd:"完美支援 AirPods、HomePod、Apple TV，支援 AirPlay 2 與 CarPlay。",practice:["連線 AirPods 自動切換","用 AirPlay 投到 HomePod","在車上用 CarPlay 控制"]}
     ],
     scenarios:[
       {i:"🚗",t:"通勤與運動音樂",d:"建立通勤播放清單，下載離線聽，搭配 AirPods 運動模式。"},
       {i:"👨‍👩‍👧",t:"家庭派對與分享",d:"建立家庭播放清單，分享給家人，AirPlay 到 HomePod 一起聽。"},
-      {i:"✈️",t:"旅行與離線娛樂",d:"下載播放清單和播客，飛機或國外無網路也能聽。"},
+      {i:"✈️",t:"旅行與離線娛樂",d:"下載播放清單和Podcast，飛機或國外無網路也能聽。"},
       {i:"💼",t:"上班族專注與放鬆",d:"建立工作專注清單和睡前放鬆清單，用推薦發現新音樂。"}
     ],
     accessories:[
@@ -2757,8 +3179,6 @@ const TOPICS = [
       {i:"⌨️",n:"Magic Keyboard 與 Trackpad",p:"舒適長時間使用",why:"搭配外接螢幕使用，姿勢正確不累，觸控板手勢操作進階功能更順手"}
     ]
   },
-
-  /* ====== 以下 6 個主題來源：搜尋洞察 A 軌（實抓 Google 搜尋密度反推的「解決問題型」課程），2026-06-12 加入 ====== */
 
   {
     n:"照片大掃除：整理、備份、清出容量", ico:"🗂",
@@ -2969,8 +3389,6 @@ const TOPICS = [
     ]
   },
 
-  /* ====== 以下 2 個主題來源：Apple 官網 iOS 頁面，2026-06-12 加入。iOS 26 用 Apple 台灣官網官方繁中名稱；iOS 27 為今秋預覽、功能名稱暫譯（正式名稱以 Apple 台灣官網為準） ====== */
-
   {
     n:"iOS 26 升級必學：新功能一次上手", ico:"🆕",
     sub:"升級後最該學會的幾個新功能",
@@ -3008,38 +3426,38 @@ const TOPICS = [
   },
 
   {
-    n:"iOS 27 搶先看：今秋登場的新功能", ico:"🔮",
-    sub:"今年秋天即將推出，先帶您認識",
-    tagline:"全新 Siri、照片更聰明、升級就變快",
-    welcome:"iOS 27 預計今年秋天推出。今天先帶大家搶先認識幾個最受矚目的新功能，等正式更新推送，您就能第一時間上手。",
+    n:"iOS 27 升級必學：全新 Siri 與實用新功能", ico:"🔮",
+    sub:"全新 Siri AI 亮相 · 智慧照片編輯 · 系統效能大躍升",
+    tagline:"對話式 Siri AI × 智慧照片編輯 × 系統速度大升級",
+    welcome:"iOS 27 已經正式推出了！這代作業系統由 Apple 智慧全面驅動，最受矚目的就是擁有獨立 App、能自然對話且具備螢幕感知的『全新 Siri AI』；同時帶來照片『空間重構』與『清除增強』、更自由調節的 Liquid Glass 透明度滑桿，以及讓舊機也能大幅提速的系統優化。今天小教室帶大家把最有感的新功能一次練熟！",
     requirements:{
-      os:"預計今年秋天推出；實際支援機型與功能以 Apple 正式公布為準",
-      capacity:"不適用",
-      sim:"不適用",
-      compat:"以下功能名稱為暫譯，正式繁體中文名稱以 Apple 台灣官網為準；全新 Siri 等 Apple 智慧功能的繁中與台灣開放時程，Apple 尚未明確公布",
-      icloud:"部分功能仍會搭配 iCloud 同步，正式版細節以 Apple 公告為準"
+      os:"iOS 27；支援 iPhone 11、iPhone SE（第 2 代）及後續機型升級",
+      capacity:"系統更新檔約 10~14GB，建議保留 20GB 以上可用空間",
+      compat:"全新 Siri AI、相機 Siri 模式與 Apple 智慧照片重構功能需 iPhone 15 Pro、iPhone 16 系列、iPhone 17 系列、iPhone Air、iPhone 18 Pro 系列或 iPhone Duo；語言支援以 Apple 台灣官網公告為準",
+      icloud:"建議升級前先透過 iCloud 進行完整整機備份，安心無憂"
     },
     stats:[
-      {n:"今",u:"秋",l:"預計推出"},
-      {n:"30",u:"%",l:"App 開啟更快"},
-      {n:"80",u:"%",l:"AirDrop 傳輸更快"}
+      {n:"30",u:"%",l:"App 啟動速度最快提升"},
+      {n:"70",u:"%",l:"照片圖庫載入最快加速"},
+      {n:"80",u:"%",l:"AirDrop 傳輸速度提升"}
     ],
     features:[
-      {fi:"🗣",ft:"全新 Siri：能對話、幫你找東西、幫你動作（暫譯）",fd:"全新的對話式 Siri 可以自然來回對話、依個人情境幫你找照片或郵件，還能直接在訊息、音樂等 App 裡幫你完成操作。",practice:["更新後用日常話跟 Siri 來回對話","請 Siri 找出你某次旅行的照片","在相機裡問 Siri 眼前看到的東西"]},
-      {fi:"🖼",ft:"照片更聰明：空間重構、清除、延伸（暫譯）",fd:"拍完還能事後重新構圖（空間重構）、移除畫面中較大的雜物（清除工具加強）、把畫面往外延伸補滿。",practice:["更新後用空間重構調整已拍照片的構圖","用清除工具移除較大的雜物","用延伸工具把畫面補滿"]},
-      {fi:"🎨",ft:"Liquid Glass 進化：色調滑桿（暫譯）",fd:"介面可讀性更好、圖示更銳利，還多了一個色調滑桿，可以從清透一路調到濃色，依喜好調整整體質感。",practice:["更新後開色調滑桿從清透調到濃色","比較圖示與控制中心的變化","挑一個最順眼的色調設定"]},
-      {fi:"⚡",ft:"升級就變快：App、照片、AirDrop",fd:"官方表示 App 開啟最快提升 30%、照片載入最快提升 70%、AirDrop 傳輸最快提升 80%，日常用起來更順。",practice:["更新後開常用 App 感受啟動速度","打開大相簿看照片載入","用 AirDrop 傳一批照片給朋友"]},
-      {fi:"👨‍👩‍👧",ft:"家長控制升級：通訊安全、時間配額、請求瀏覽（暫譯）",fd:"通訊安全新增防血腥暴力、可依娛樂／遊戲／社群分類設定使用時間配額，孩子要看新網站時可請求、家長用訊息核准。",practice:["更新後挑選孩子可用的系統 App","設定娛樂類的使用時間上限","體驗孩子請求新網站、家長核准的流程"]},
-      {fi:"🗺",ft:"生活小升級：Maps Flyover、AirPods 自訂 EQ、字幕翻譯",fd:"地圖 Flyover 結合視覺智慧呈現更細緻的立體建築與樹木、AirPods 可自訂高中低音 EQ、自動產生的同步字幕還能翻譯。",practice:["更新後看城市的 3D Flyover","在設定調整 AirPods 的高中低音","開啟自動字幕並開啟翻譯"]}
+      {fi:"🗣",ft:"全新 Siri AI：能對談、懂情境、跨 App 執行操作",fd:"全新 Siri AI 具備更強大的語言理解能力，能像真人一樣來回對談並記住上下文；具備『畫面感知』能看懂你螢幕上的內容；並擁有獨立專屬『Siri App』可跨裝置同步歷史對話，甚至在相機中啟動『Siri 模式』隨問隨答。",req:"支援 Apple 智慧之機型",practice:["用日常自然口語連續向 Siri 詢問兩至三個延伸問題","在瀏覽網頁時呼叫 Siri：『把畫面上這個景點加進週六行程』","打開獨立 Siri App 查看跨裝置同步的對話紀錄"]},
+      {fi:"🖼",ft:"照片 App 智慧編輯：空間重構、延伸與清除工具增強",fd:"拍完照還能事後後悔！全新『空間重構』能讓你旋轉與微調視角；『延伸』工具能運用生成式 AI 自動拓展照片四周邊界；增強版『清除』工具能一鍵圈選並無痕消除畫面中較大的干擾路人或背景物件。",req:"支援 Apple 智慧之機型",practice:["挑選一張路人較多的旅遊照，使用『清除』一鍵抹除","使用『空間重構』調整已拍攝照片的透視角度","使用『延伸』工具補齊被截斷的風景邊緣"]},
+      {fi:"🎨",ft:"Liquid Glass 設計進化：晶透度與色調調節滑桿",fd:"全新的 Liquid Glass 設計呈現更均勻的折射感與高對比度文字。iOS 27 特別新增外觀調節滑桿，讓使用者自由在『超透明清透』到『深色高對比』之間微調，兼顧美感與閱讀舒適性。",practice:["前往設定中的『螢幕顯示與亮度』找到外觀調節選項","滑動 Liquid Glass 滑桿體驗清透與高對比風格切換","挑選並保存最適合自己雙眼閱讀的介面通透度"]},
+      {fi:"⚡",ft:"系統底層全面加速：App 開啟 +30%、照片載入 +70%",fd:"iOS 27 最佳化 CPU 排程與快取架構，即使是前幾代 iPhone 升級後也能明顯感受到順暢度躍升：App 開啟速度最快提升 30%、大型照片圖庫滑動載入加速 70%、AirDrop 傳輸加快 80%！",practice:["升級後連續開啟多款常用 App 體驗啟動反應","在照片 App 中快速滑動千張照片感受載入流暢度","體驗新一代 AirDrop 秒傳超大影音檔案"]},
+      {fi:"🛡️",ft:"更嚴密的兒少安全防護與螢幕使用時間",fd:"家長控制功能全面升級：支援『設定輔助程式』自訂孩子可用系統 App；『詢問可否瀏覽』讓孩子瀏覽新網站時需先由家長於訊息 App 核准；『通訊安全』更進一步即時防範敏感暴力與不當影像。",practice:["在『螢幕使用時間』中檢視升級後的家長管理控制面板","設定『詢問可否瀏覽』網站核准機制","實測孩子裝置發出訪問請求、家長端即時核准"]},
+      {fi:"🧭",ft:"生活貼心升級：Safari 智慧標籤頁、鬧鐘獨立音量、AirPods 自訂 EQ",fd:"超實用日常細節升級：鬧鐘與來電鈴聲音量終於可以分開獨立調整；Safari 自動依主題分組標籤頁並支援商品降價補貨『通知我』；AirPods 設定內建高中低音等化器（EQ）；『密碼』App 還能自動修復外洩弱密碼。",practice:["前往設定分別調整鬧鐘音量與來電鈴聲","在 Safari 體驗智慧標籤頁分類與設定降價通知","戴上 AirPods 在設定中調整專屬的高中低音 EQ"]}
     ],
     scenarios:[
-      {i:"🆕",t:"想知道今年的更新有什麼新東西",d:"每年秋天大更新最讓人期待。今天先帶您看 iOS 27 的重點，等推送來就能馬上上手。"},
-      {i:"🤖",t:"最期待全新的 AI Siri",d:"對話式的全新 Siri 是這次最大亮點。先了解它能做什麼，正式上線就知道怎麼用。"},
-      {i:"👨‍👩‍👧",t:"家長想先了解新的管控功能",d:"通訊安全、時間配額、請求瀏覽都升級了。先認識一遍，孩子用得更安心。"}
+      {i:"🆕",t:"剛升級 iOS 27，想把新功能一次摸熟",d:"由門市專員親自帶您走過全新 Siri、照片編輯與系統速度提升，讓手機立刻煥然一新。"},
+      {i:"🤖",t:"期待 AI 助手真正能幫上忙的使用者",d:"實測 Siri AI 如何幫您看懂螢幕、排行程、找照片，不再只是查天氣，而是成為生活真正的智慧助理。"},
+      {i:"👨‍👩‍👧",t:"希望全家孩子安全上網的家長",d:"現場一步步協助您完成兒少安全設定與網頁核准機制，給孩子健康安心的數位環境。"}
     ],
     accessories:[
-      {i:"🎧",n:"AirPods Pro 3",p:"自訂 EQ 與更多新功能",why:"新版可自訂高中低音 EQ，搭配新功能體驗更完整，現在入手秋天更新就能享受"},
-      {i:"🛡",n:"保護貼 + 保護殼",p:"準備好迎接大更新",why:"大更新前後把機身保護好，玩新功能玩得安心，現場可代貼"}
+      {i:"📱",n:"iPhone 18 Pro 系列",p:"完整發揮 iOS 27 旗艦實力",why:"出廠預載 iOS 27，搭載 A20 Pro 與可變光圈相機，能完整享受全新 Siri 與極速 AI 體驗；門市享現場資料轉移與舊機折抵"},
+      {i:"🎧",n:"AirPods Pro 3",p:"支援自訂 EQ 與即時翻譯",why:"iOS 27 深度整合 AirPods 自訂等化器與 Apple 智慧即時翻譯功能，聆聽與跨語言溝通體驗更極致"},
+      {i:"🛡",n:"門市現場專業貼膜 + 保護殼",p:"系統大升級，機身防護同步到位",why:"玩新功能頻繁操作，門市提供專人現場貼膜與防摔殼搭配，買完帶走立即安心使用"}
     ]
   }
 ];
@@ -3074,13 +3492,492 @@ function planMinutes(dur){
 }
 const $ = q=>document.querySelector(q);
 
+
+/* =========================================================
+   難易度評級、推薦標籤與新手安全牌（Menu 推薦系統）
+   ========================================================= */
+const TOPIC_METAS = {
+  'iPhone 入門必學十招': [1, '🌱 入門好上手', ['⭐ 新手首選', '⏱ 節奏好掌控', '💡 換機必學']],
+  '換新機無痛搬家：資料 + LINE 全搬': [1, '🌱 入門好上手', ['⭐ 新手首選', '🔥 門市超熱門', '📲 剛需必推']],
+  '長輩的 iPhone：字大、好按、看得清': [1, '🌱 入門好上手', ['⭐ 新手首選', '👴 長輩最愛', '⏱ 節奏好掌控']],
+  '照片大掃除：整理、備份、清出容量': [1, '🌱 入門好上手', ['⭐ 新手首選', '💾 立刻有感', '🔥 門市超熱門']],
+  'iPhone 拍照變強：人像模式 + 夜景': [2, '🌱 入門好上手', ['⭐ 新手首選', '📸 拍照必學', '✨ 成效即時']],
+  'AirPods 連不上？三步驟自己排除': [1, '🌱 入門好上手', ['⭐ 新手首選', '🎧 疑難排解', '⏱ 快速上手']],
+  'Mac 簡易操作': [2, '🌱 入門好上手', ['⭐ 新手首選', '💻 Mac 新手', '⏱ 節奏好掌控']],
+  'iPhone 17e 超值入門新選': [2, '🌱 入門好上手', ['⭐ 新手首選', '💰 CP 首選', '📱 新機體驗']],
+  'iPhone 個人化設定': [1, '🌱 入門好上手', ['⭐ 新手首選', '🎨 打造專屬', '⏱ 節奏好掌控']],
+  'Wallet 數位錢包與生活': [1, '🌱 入門好上手', ['⭐ 新手首選', '💳 出門免帶卡', '⚡ 快速感應']],
+  
+  'iPhone 17 全面解析': [2, '🌱 入門好上手', ['🔥 門市超熱門', '📱 主力推薦']],
+  'iPhone Air 纖薄登場': [2, '🌱 入門好上手', ['🔥 門市超熱門', '🪶 極致輕薄']],
+  'iPhone 17 Pro 系列': [3, '🌿 進階實用', ['🔥 門市超熱門', '📸 旗艦影像']],
+  'iPhone 18 Pro 系列': [4, '🔥 旗艦專業', ['🔥 門市超熱門', '🎯 可變光圈', '🚀 頂尖旗艦']],
+  'iPhone Duo 摺疊新體驗': [4, '🔥 旗艦專業', ['🔥 門市超熱門', '📱 摺疊大螢幕', '✨ 未來體驗']],
+  'iPad Air M4 輕巧強悍大展身手': [2, '🌱 入門好上手', ['🔥 門市超熱門', '🎓 學生首選']],
+  'iPad mini A20 Pro 掌中全能 OLED': [2, '🌱 入門好上手', ['🔥 門市超熱門', '📖 掌中全能']],
+  'MacBook Air M5 纖薄，飛快': [2, '🌱 入門好上手', ['🔥 門市超熱門', '💻 輕薄長效']],
+  'MacBook Neo 時尚羽量新生活': [2, '🌱 入門好上手', ['🔥 門市超熱門', '🌈 潮流羽量', '💰 超值新選']],
+  'AirPods Pro 3 全新登場': [2, '🌱 入門好上手', ['🔥 門市超熱門', '🎧 頂級降噪', '❤️ 心率感測']],
+  'Apple Watch Series 12 全能健康與準備指數': [2, '🌱 入門好上手', ['🔥 門市超熱門', '⌚ 健康首選']],
+  'Apple Watch SE 3': [1, '🌱 入門好上手', ['🔥 門市超熱門', '⌚ 入門無負擔']],
+  'AirTag 2026 全新升級': [1, '🌱 入門好上手', ['🔥 門市超熱門', '🏷 防丟神器']],
+  'iOS 26 升級必學：新功能一次上手': [2, '🌱 入門好上手', ['🔥 門市超熱門', '📲 升級必讀']],
+  'iOS 27 升級必學：全新 Siri 與實用新功能': [3, '🌿 進階實用', ['🔥 門市超熱門', '🤖 新世代 Siri', '✨ 系統進化']],
+
+  'iPad Pro M5 極致體驗': [4, '🔥 旗艦專業', ['⚡ M5 巔峰', '🎨 專業創作']],
+  'MacBook Pro PROLED XDR 觸控與極致效能': [5, '🔥 旗艦專業', ['💻 PROLED 觸控', '🚀 極致工作站']],
+  'Apple Intelligence 入門': [3, '🌿 進階實用', ['🤖 智慧助理', '💡 寫作修圖']],
+  'iCloud 與裝置整合': [3, '🌿 進階實用', ['☁️ 雲端無縫', '🔄 跨裝置']],
+  '家庭共享與兒童帳號': [3, '🌿 進階實用', ['👨‍👩‍👧 家庭守護', '🔒 兒少防護']],
+  '照片 App 整理術': [2, '🌱 入門好上手', ['📸 智慧搜尋', '🧹 空間管理']],
+  '備忘錄與筆記術': [2, '🌱 入門好上手', ['📝 數位筆記', '✍️ 掃描塗鴉']],
+  '訊息與 FaceTime': [2, '🌱 入門好上手', ['💬 趣味貼圖', '📹 高畫質通話']],
+  '和家人一起｜FaceTime 團聚': [2, '🌱 入門好上手', ['👨‍👩‍👧 跨代連線', '📺 同播共享']],
+  '提醒事項與行事曆': [2, '🌱 入門好上手', ['✅ 待辦清單', '📍 地點提醒']],
+  'Keynote 簡報製作': [4, '🔥 旗艦專業', ['📊 神奇移動', '🎤 專業發表']],
+  'Pages 文書處理': [3, '🌿 進階實用', ['📄 精美排版', '📚 電子書']],
+  'iCloud 同步與備份': [2, '🌱 入門好上手', ['☁️ 資料安全', '💾 自動備份']],
+  'iPhone 相機進階': [3, '🌿 進階實用', ['📸 攝影大師', '🎛 手動曝光']],
+  '檔案 App 與管理': [3, '🌿 進階實用', ['📁 檔案管理', '🗂 隨身碟讀取']],
+  'iPhone 鏡頭與構圖技巧': [3, '🌿 進階實用', ['📐 九宮格構圖', '🌟 視覺焦點']],
+  '和家人一起｜LINE 群組日常': [2, '🌱 入門好上手', ['💬 家族群組', '📸 高畫質分享']],
+  'Gemini AI 生活研究術': [3, '🌿 進階實用', ['🤖 跨平台 AI', '✈️ 行程規劃']],
+  'NotebookLM 你的 AI 筆記本': [3, '🌿 進階實用', ['📚 論文研讀', '🎙️ 語音導讀']],
+  'CapCut 短影音剪輯術': [4, '🔥 旗艦專業', ['🎬 直式短影音', '⚡ 自動字幕']],
+  '捷徑 自動化小幫手': [4, '🔥 旗艦專業', ['⚙️ 效率神器', '🤖 一鍵執行']],
+  '無邊記': [3, '🌿 進階實用', ['🖼 靈感白板', '👥 多人協作']],
+  '日誌與回憶': [2, '🌱 入門好上手', ['📔 每日紀錄', '🔒 隱私上鎖']],
+  '照片 App 智慧回憶與編輯': [3, '🌿 進階實用', ['🎨 風格濾鏡', '🎞 回憶微電影']],
+  '訊息 App 豐富溝通體驗': [2, '🌱 入門好上手', ['💬 螢幕效果', '🪄 貼圖製作']],
+  'FaceTime 高畫質視訊體驗': [2, '🌱 入門好上手', ['📹 人像光線', '🎧 空間音訊']],
+  '地圖 App 導航與生活探索': [2, '🌱 入門好上手', ['🗺 街景導航', '☕ 私房清單']],
+  '健康 App 個人洞察與追蹤': [2, '🌱 入門好上手', ['❤️ 步數心率', '💊 用藥提醒']],
+  'YouTube 影片觀看與短影音創作': [3, '🌿 進階實用', ['▶️ 影音創作', '📱 Shorts 實戰']],
+  'Canva 設計海報與簡報': [3, '🌿 進階實用', ['🎨 社群設計', '📐 快速出圖']],
+  'CapCut 影片剪輯與特效': [4, '🔥 旗艦專業', ['🎬 特效濾鏡', '🎵 節奏卡點']],
+  'Notion 筆記與知識管理': [4, '🔥 旗艦專業', ['📝 模組化筆記', '🗄 資料庫架構']],
+  'Spotify 音樂發現與播放清單': [2, '🌱 入門好上手', ['🎵 每日推薦', '🎧 離線收聽']],
+  '即時翻譯 跨語言溝通': [2, '🌱 入門好上手', ['🗣️ 出國神隊友', '🌐 對話即翻']],
+  'Mac 進階實用': [4, '🔥 旗艦專業', ['💻 終端機與自動化', '⚡ 威力使用者']],
+  'Apple Watch 健康功能全開': [3, '🌿 進階實用', ['❤️ 心電圖', '🩸 血氧追蹤', '🏃 體能訓練']],
+};
+
+// 注入主題難易度與標籤元資料
+TOPICS.forEach(t => {
+  if (TOPIC_METAS[t.n]) {
+    t.difficulty = TOPIC_METAS[t.n][0];
+    t.level = TOPIC_METAS[t.n][1];
+    t.badges = TOPIC_METAS[t.n][2];
+  } else {
+    t.difficulty = t.difficulty || 2;
+    t.level = t.level || '🌱 入門好上手';
+    t.badges = t.badges || ['⭐ 新手首選'];
+  }
+});
+
+let currentDiffFilter = 'all';
+function setDiffFilter(type, btn) {
+  currentDiffFilter = type;
+  document.querySelectorAll('.q-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const catSel = document.getElementById('catFilter');
+  renderTopics(catSel ? catSel.value || null : null);
+}
+
+function applySafeCombo(comboId) {
+  SELECTED_T.clear();
+  SELECTED_A.clear();
+
+  if (comboId === 1) {
+    const t1 = TOPICS.findIndex(t => t.n.includes('iPhone 入門必學十招'));
+    const t2 = TOPICS.findIndex(t => t.n.includes('iPhone 拍照變強'));
+    if (t1 !== -1) SELECTED_T.add(t1);
+    if (t2 !== -1) SELECTED_T.add(t2);
+    const aIdx = AGES.findIndex(a => a.k.includes('30-55') || a.k.includes('一般'));
+    if (aIdx !== -1) SELECTED_A.add(aIdx); else SELECTED_A.add(0);
+  } else if (comboId === 2) {
+    const t1 = TOPICS.findIndex(t => t.n.includes('換新機無痛搬家'));
+    const t2 = TOPICS.findIndex(t => t.n.includes('LINE 群組日常'));
+    if (t1 !== -1) SELECTED_T.add(t1);
+    if (t2 !== -1) SELECTED_T.add(t2);
+    const aIdx = AGES.findIndex(a => a.k.includes('30-55') || a.k.includes('一般'));
+    if (aIdx !== -1) SELECTED_A.add(aIdx); else SELECTED_A.add(0);
+  } else if (comboId === 3) {
+    const t1 = TOPICS.findIndex(t => t.n.includes('長輩的 iPhone'));
+    const t2 = TOPICS.findIndex(t => t.n.includes('FaceTime 團聚') || t.n.includes('FaceTime'));
+    if (t1 !== -1) SELECTED_T.add(t1);
+    if (t2 !== -1) SELECTED_T.add(t2);
+    const aIdx = AGES.findIndex(a => a.k.includes('55+') || a.k.includes('長輩'));
+    if (aIdx !== -1) SELECTED_A.add(aIdx); else SELECTED_A.add(0);
+  } else if (comboId === 4) {
+    const t1 = TOPICS.findIndex(t => t.n.includes('照片大掃除'));
+    const t2 = TOPICS.findIndex(t => t.n.includes('iCloud 同步與備份') || t.n.includes('iCloud'));
+    if (t1 !== -1) SELECTED_T.add(t1);
+    if (t2 !== -1) SELECTED_T.add(t2);
+    const aIdx = AGES.findIndex(a => a.k.includes('30-55') || a.k.includes('一般'));
+    if (aIdx !== -1) SELECTED_A.add(aIdx); else SELECTED_A.add(0);
+  }
+
+  const durInput = document.getElementById('dur');
+  if (durInput) durInput.value = '60';
+  DUR = 60;
+
+  renderTopics();
+  renderAges();
+  closeSmartModal();
+  generate();
+}
+
+/* =========================================================
+   課前 3 分鐘準備速覽卡 (Run-down + 設備檢查 + 救援 Q&A)
+   ========================================================= */
+function openRunDownModal() {
+  renderRunDownContent();
+  document.getElementById('runDownModal').classList.add('show');
+}
+function closeRunDownModal() {
+  document.getElementById('runDownModal').classList.remove('show');
+}
+
+function renderRunDownContent() {
+  const dur = DUR || 60;
+  const topicList = [...SELECTED_T].map(i => TOPICS[i]);
+  const topicNames = topicList.length ? topicList.map(t => t.n).join(' ＋ ') : '未選取主題（預設體驗課程）';
+  
+  let tOpen = Math.round(dur * 0.1);
+  let tFeat = Math.round(dur * 0.25);
+  let tHands = Math.round(dur * 0.45);
+  let tClose = dur - tOpen - tFeat - tHands;
+
+  const m1End = tOpen;
+  const m2End = tOpen + tFeat;
+  const m3End = m2End + tHands;
+
+  const html = `
+    <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-size:12px; color:#1e40af;">
+      <b>當前課程設定：</b>【${topicNames}】｜ 建議時長：<b>${dur} 分鐘</b> ｜ 狀態：已為新手講師配置最佳節奏
+    </div>
+
+    <div class="rundown-grid">
+      <div class="rundown-box">
+        <div class="rundown-box-title">⏱️ 現場時間配速表（掌握節奏不超時）</div>
+        <div class="rundown-timeline">
+          <div class="rd-item">
+            <span class="rd-time">00~${String(m1End).padStart(2,'0')} 分</span>
+            <div class="rd-body"><b>開場暖身與破冰（${tOpen} 分鐘）</b><br>熱情招呼、說明今天能學會什麼，引導學員拿出手機放在桌上，建立輕鬆氛圍。</div>
+          </div>
+          <div class="rd-item">
+            <span class="rd-time">${String(m1End).padStart(2,'0')}~${String(m2End).padStart(2,'0')} 分</span>
+            <div class="rd-body"><b>核心功能與生活場景（${tFeat} 分鐘）</b><br>大螢幕展示精選特色，連結生活實用情境，說明為什麼需要它，激發想學動機。</div>
+          </div>
+          <div class="rd-item">
+            <span class="rd-time">${String(m2End).padStart(2,'0')}~${String(m3End).padStart(2,'0')} 分</span>
+            <div class="rd-body"><b>學員動手實作（${tHands} 分鐘 · 重頭戲）</b><br>分步帶練！講師走下講台巡場，及時走到卡關學員身旁引導操作，確保人人學會。</div>
+          </div>
+          <div class="rd-item">
+            <span class="rd-time">${String(m3End).padStart(2,'0')}~${String(dur).padStart(2,'0')} 分</span>
+            <div class="rd-body"><b>交流、解答、配件與門市服務（${tClose} 分鐘）</b><br>互看成果、解答疑難，介紹門市四大現場服務（舊換新直折、免費搬家），邀請課後諮詢。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rundown-box">
+        <div class="rundown-box-title">🔌 器材與環境 3 分鐘速檢清單</div>
+        <div class="check-list">
+          <div class="check-item"><span>📱</span> <b>展示機 2~4 台：</b>電量 80% 以上，已登入測試帳號供學員試用</div>
+          <div class="check-item"><span>📲</span> <b>系統版本檢查：</b>確認展示機已升級至 iOS 18/26/27 最新正式版</div>
+          <div class="check-item"><span>📶</span> <b>門市 Wi-Fi 確認：</b>確認網路連線順暢，備妥學員連線 Wi-Fi 帳密卡</div>
+          <div class="check-item"><span>📺</span> <b>大螢幕 AirPlay 投影：</b>測試畫面鏡像同步是否流暢、字體清晰</div>
+          <div class="check-item"><span>🔌</span> <b>線材與清潔布：</b>備妥 USB-C 充電線、轉接頭與螢幕擦拭布</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rundown-box" style="margin-bottom:0;">
+      <div class="rundown-box-title">🚨 現場三大常見救援 Q&A（新手講師定心丸）</div>
+      <div class="qa-card">
+        <div class="qa-q"><span>❓ 狀況 1：</span>學員忘記 Apple ID 密碼，無法下載 App 或登入？</div>
+        <div class="qa-a"><b>👉 救援話術：</b>「大哥/大姊不用慌！現場展示機都已經登入並設定好了，我們先用展示機練習操作手感。下課後我親自協助您透過官方安全機制找回密碼，請放心！」</div>
+      </div>
+      <div class="qa-card">
+        <div class="qa-q"><span>❓ 狀況 2：</span>學員拿較舊款機型（有 Home 鍵或鏡頭不同），找不到投影片上的按鈕？</div>
+        <div class="qa-a"><b>👉 救援話術：</b>「如果是 iPhone SE 或有 Home 鍵機型，手勢略有不同（例如由下往上滑叫出控制中心）。功能邏輯是一模一樣的，您先看我示範，未來換新機時您就提前學會了！」</div>
+      </div>
+      <div class="qa-card" style="margin-bottom:0;">
+        <div class="qa-q"><span>❓ 狀況 3：</span>學員不敢大膽操作，害怕按錯會把手機弄壞或資料刪除？</div>
+        <div class="qa-a"><b>👉 救援話術：</b>「請放一百個心！iPhone 設計非常安全，只要不是進去按『清除所有內容』，平時拍照、滑動、調字體怎麼按都不會壞，就算按錯也隨時能復原，大膽試試看！」</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('runDownModalBody').innerHTML = html;
+}
+
+function copyRunDownCard() {
+  const dur = DUR || 60;
+  const topicList = [...SELECTED_T].map(i => TOPICS[i]);
+  const topicNames = topicList.length ? topicList.map(t => t.n).join(' ＋ ') : '小教室精選課程';
+  
+  const text = `【Apple Shop 小教室 · 課前 3 分鐘速覽卡】
+課程主題：${topicNames}
+課程時長：${dur} 分鐘
+
+⏱️ 現場時間配速：
+- 00~${Math.round(dur*0.1)}分：開場暖身破冰（招呼、引導學員拿手機放桌上）
+- ${Math.round(dur*0.1)}~${Math.round(dur*0.35)}分：核心功能與生活場景（大螢幕展示，說明為什麼需要）
+- ${Math.round(dur*0.35)}~${Math.round(dur*0.8)}分：學員動手實作（分步帶練，走下講台巡場排解卡關）
+- ${Math.round(dur*0.8)}~${dur}分：交流解答與門市專屬服務（互看成果、舊換新直折、課後諮詢）
+
+🔌 器材環境 3 分鐘速檢：
+1. 準備展示機 2~4 台（電量 80%+，已登入）
+2. 確認系統升級至最新正式版
+3. 確認門市 Wi-Fi 連線與大螢幕 AirPlay 投影正常
+4. 備妥 USB-C 充電線、轉接頭與專用擦拭布
+
+🚨 現場常見救援話術：
+- 忘記密碼：先借用現場已登入之展示機練習，課後再由專員協助透過官方流程找回。
+- 舊款機型：說明核心邏輯一致，先看大螢幕操作，提前掌握新機技巧。
+- 害怕按壞：安撫學員 iPhone 安全機制完善，平常操作絕不會弄壞，鼓勵大膽動手試！`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert('✓ 課前速覽卡已複製到剪貼簿！可直接貼至備忘錄或 LINE。');
+  }).catch(() => {
+    prompt('請複製以下速覽卡內容：', text);
+  });
+}
+
+/* =========================================================
+   本頁講師備忘錄 (Speaker Notes) 動態生成與切換
+   ========================================================= */
+let currentNoteFontSize = 'font-md';
+let isNotesCollapsed = false;
+
+function toggleNotesSize() {
+  const body = document.getElementById('speakerNotesContent');
+  const btn = document.getElementById('snSizeBtn');
+  if (currentNoteFontSize === 'font-sm') {
+    currentNoteFontSize = 'font-md';
+    if (btn) btn.textContent = '🔠 字級: 中';
+  } else if (currentNoteFontSize === 'font-md') {
+    currentNoteFontSize = 'font-lg';
+    if (btn) btn.textContent = '🔠 字級: 大';
+  } else {
+    currentNoteFontSize = 'font-sm';
+    if (btn) btn.textContent = '🔠 字級: 小';
+  }
+  if (body) {
+    body.className = `speaker-notes-body ${currentNoteFontSize}${isNotesCollapsed ? ' collapsed' : ''}`;
+  }
+}
+
+function toggleNotesPanel() {
+  isNotesCollapsed = !isNotesCollapsed;
+  const body = document.getElementById('speakerNotesContent');
+  const btn = document.getElementById('snToggleBtn');
+  if (body) {
+    if (isNotesCollapsed) body.classList.add('collapsed');
+    else body.classList.remove('collapsed');
+  }
+  if (btn) btn.textContent = isNotesCollapsed ? '▲ 展開' : '▼ 收合';
+}
+
+
+/* =========================================================
+   通用講師備忘錄引擎（同時支援網頁即時連動與 PPTX 備忘稿寫入）
+   ========================================================= */
+function getFullSpeakerNotes(type, info) {
+  let speech = '';
+  let question = '';
+  let action = '';
+  let pitfall = '';
+
+  const topicName = info.topicName || 'Apple 智慧生活';
+  const pageTitle = info.pageTitle || '';
+
+  switch(type) {
+    case 'cover':
+      speech = `「各位朋友大家午安！歡迎來到我們 Apple Shop 小教室。今天的主題是【${topicName}】。大家千萬不用把這當成生硬的科技課，今天我們不背複雜規格，只講最實用的生活技巧，並且帶大家親自用手機做一次。下課後每個人一定都能學會幾招回去跟家人炫耀！」`;
+      question = `「在開始前想先調查一下：大家平常使用手機時，最常遇到的困擾是什麼？是容量常常滿出來、拍照抓不到感覺，還是很多功能想用卻不知道藏在哪裡？大家可以跟我點個頭或舉個手！」`;
+      action = `面帶微笑環視全場學員；眼神與前排長輩對視，確認大家坐得舒適；請大家先將手機拿出來放在桌上，營造輕鬆自在、隨時準備動手的氛圍。`;
+      pitfall = `剛開場時學員通常比較害羞拘謹，切忌一開場就大談硬體晶片或規格代號，多從生活瑣事破冰拉近距離。`;
+      break;
+
+    case 'agenda':
+      speech = `「大家看大螢幕，今天我們的節奏很輕鬆，主要分成三段：第一段先認識這幾項核心功能在生活裡有多好用；第二段是大家拿起手機親自一步一步做；最後一段是看怎麼用在家庭與工作裡。中間有任何疑問隨時舉手，我們慢慢來不用急！」`;
+      question = `「今天這幾個環節，大家最期待哪一個功能的實作呢？等一下實作時間我會把大家最想學的放在最前面！」`;
+      action = `側身站在投影螢幕右側，右手指向目錄流程，切勿擋住投影光束；說到『動手實作』時加重語氣，讓學員知道等一下會有充足時間練習。`;
+      pitfall = `強調『等一下有專屬的實作時間』，避免部分學員現在就低頭忙著滑手機找按鈕而漏聽了整體的架構。`;
+      break;
+
+    case 'overview':
+    case 'why':
+      speech = `「很多人常會問：『這個新機型或新功能，到底跟以前差在哪裡？』其實核心就一句話：它幫我們把生活中最麻煩的這幾件事變簡單了。今天把這幾個主題放在一起，看它們在日常生活裡怎麼搭起來，讓家人的聯繫與工作都更順心。」`;
+      question = `「大家是不是也曾經遇過出門到下午手機就亮紅燈，或者開幾個 App 就卡住的情況？這時候是不是覺得很心累？」`;
+      action = `以抑揚頓挫的語氣強調數字或主題整合帶來的真實改變（如不用帶行動電源、不卡頓）；手指大螢幕上的關鍵重點。`;
+      pitfall = `不要生硬念出規格術語，轉換為『大太陽底下看導航清清楚楚』或『未來 4 到 5 年都不會卡』的生活語言。`;
+      break;
+
+    case 'features':
+    case 'highlight':
+      speech = `「現在我們來看這幾項精選功能：${info.featuresSummary || '這幾項重要特色'}。這幾招都是平常大家最常用到、但最容易被忽略的神技。大家先看大螢幕我的示範，看一下它的位置藏在哪裡...」`;
+      question = `「現場有學員以前發現過這個小功能嗎？知道它在哪裡操作的請舉手跟我們分享一下！」`;
+      action = `手持示範機面向學員，操作手勢放慢放大；操作完成後將螢幕畫面轉向台下學員，確保大家看到即時變化。`;
+      pitfall = `若有學員手上的 iOS 版本不同或機型不同導致介面稍有差異，立刻提醒大家『不同系統位置略有不同，先看我示範，等一下實作時我過去幫您看』。`;
+      break;
+
+    case 'handsOn':
+      speech = `「現在進入今天最核心的【動手試一試】時間！自己親自做一次，印象最深刻。我們總共準備了這幾個小任務，大家現在拿起手機，跟著大螢幕上的步驟，我們一起做第一個任務...」`;
+      question = `「大家的螢幕上有成功跳出這個選單嗎？有成功的請舉手或跟隔壁同學點個頭！」`;
+      action = `【關鍵動作】立刻走下講台巡場！主動走向表情猶豫或動作較慢的長輩身邊，輕聲提示，鼓勵學員大膽點擊螢幕，排解不安感。`;
+      pitfall = `入門手勢課：提醒手掌不要壓到螢幕邊緣導致誤觸；相機課：提醒鏡頭擦拭乾淨，對焦時點擊主體人臉；備份課：提醒切勿點到『重置或清除』！`;
+      break;
+
+    case 'scenarios':
+      speech = `「功能學會了，最重要的是在生活裡怎麼用！想想看這些情境：過年過節全家聚餐拍大合照、出門旅遊不迷路、或是跟出國工作的孩子視訊連線。把今天學到的用上去，生活立刻更順手。」`;
+      question = `「大家最近一次出遊或聚餐是什麼時候？最想把今天學到的哪一招用在家人身上？」`;
+      action = `眼神溫暖，分享一則自己門市顧客的真實生活小故事，引發現場學員強烈的心理共鳴與認同感。`;
+      pitfall = `避免只講科技情境，多著重在『親情、家庭連結、生活便利與回憶保存』，學員接受度最高。`;
+      break;
+
+    case 'quickStart':
+    case 'handbook':
+      speech = `「大家看這一頁的快速查閱清單，把我們今天聊到的關鍵步驟整理成 5 個核心重點。大家可以用手機把這頁拍下來，回家後只要照著清單操作，就不怕忘記！」`;
+      question = `「大家看這張清單，有沒有哪一步是覺得回家可能容易忘記的？我們現場再複習一次！」`;
+      action = `條理分明地逐點點出核心步驟，鼓勵學員用手機將這頁拍下來帶回家看。`;
+      pitfall = `步調切忌過快，給學員留出足夠時間記錄或提問。`;
+      break;
+
+    case 'accessories':
+    case 'closing':
+      speech = `「大家今天表現太棒了，所有任務都順利達標！如果平時想用得更省心，門市現場展示的這三款配件非常推薦一起搭配。另外，如果大家今天帶來的舊手機想換新，我們門市現場有專人可以免費檢測估價直折新機，還會免費協助把照片和 LINE 完整搬移！下課後如果有任何問題，請不要客氣，留下來找我一對一慢慢聊！」`;
+      question = `「大家平時出門最怕手機沒電，還是最怕手滑摔裂螢幕呢？」`;
+      action = `手指指向門市展示櫃與配件陳列區，熱情邀請大家課後留步體驗實機；帶領全場學員為彼此的認真學習熱烈鼓掌！`;
+      pitfall = `態度始終保持貼心顧問與協助解決問題的角度，絕不給予推銷壓力，讓學員感受到滿滿的專業與信任感。`;
+      break;
+
+    default:
+      speech = `「這一頁是為大家準備的重點整理，把關鍵精華濃縮在此。跟著步驟走，隨時都能輕鬆回顧。」`;
+      question = `「大家對這個部分有沒有什麼疑問或想進一步了解的？」`;
+      action = `觀察全場反應，適時停頓留白，解答個別學員的疑難。`;
+      pitfall = `確保全場學員進度一致，不要漏掉任何一位舉手發問的朋友。`;
+      break;
+  }
+
+  return { speech, question, action, pitfall };
+}
+
+function formatNotesText(notes, pageTitle) {
+  return `【Apple Shop 小教室講師備忘錄 · ${pageTitle}】
+
+` +
+         `🗣️ 參考講法與轉場話術（口語可直接照唸）：
+${notes.speech}
+
+` +
+         `🙋‍♂️ 現場互動提問句（破冰活躍氣氛）：
+${notes.question}
+
+` +
+         `💡 講師動作指引（站位與手勢）：
+${notes.action}
+
+` +
+         `⚠️ 常見卡關與避坑提醒：
+${notes.pitfall}`;
+}
+
+function updateSpeakerNotes(idx) {
+  const body = document.getElementById('speakerNotesContent');
+  const sub = document.getElementById('snPageSub');
+  if (!body) return;
+  if (!SLIDES || !SLIDES.length || idx < 0 || idx >= SLIDES.length) {
+    if (sub) sub.textContent = '第 00 / 00 頁 · 準備就緒';
+    body.innerHTML = '<div class="sn-empty-hint">左側勾選主題並點擊「生成簡報」後，此處將同步呈現當前頁面的講師口語講法、轉場話術、互動提問句與動作提示。</div>';
+    return;
+  }
+
+  const slideEl = SLIDES[idx];
+  const total = SLIDES.length;
+  const pNum = idx + 1;
+  const topicList = [...SELECTED_T].map(i => TOPICS[i]);
+  const currentTopic = topicList[0] || { n: 'Apple 智慧生活', features: [], scenarios: [] };
+  const topicNames = topicList.map(t => t.n).join(' ＋ ');
+
+  const titleEl = slideEl.querySelector('.title') || slideEl.querySelector('h1') || slideEl.querySelector('.big');
+  const titleText = titleEl ? titleEl.textContent.trim() : (topicList.length > 1 ? '多主題綜合講座' : currentTopic.n);
+  const labelEl = slideEl.querySelector('.label');
+  const labelText = labelEl ? labelEl.textContent.trim() : '';
+  const slideHtml = slideEl.innerHTML;
+
+  let slideType = 'general';
+  if (idx === 0) slideType = 'cover';
+  else if (labelText.includes('學習地圖') || titleText.includes('學習地圖') || titleText.includes('安排')) slideType = 'agenda';
+  else if (labelText.includes('整體主軸') || labelText.includes('先給您') || labelText.includes('為什麼') || slideHtml.includes('整體主軸') || slideHtml.includes('同一段生活')) slideType = 'overview';
+  else if (labelText.includes('換您試試看') || labelText.includes('動手') || slideHtml.includes('動手實作')) slideType = 'handsOn';
+  else if (labelText.includes('生活好幫手') || labelText.includes('生活應用') || slideHtml.includes('生活好幫手') || slideHtml.includes('日常裡會遇到的時刻')) slideType = 'scenarios';
+  else if (labelText.includes('回家快速查') || labelText.includes('快速上手') || slideHtml.includes('五個重點')) slideType = 'quickStart';
+  else if (labelText.includes('今天試一個') || labelText.includes('小挑戰')) slideType = 'homework';
+  else if (idx === total - 1 || labelText.includes('小東西') || labelText.includes('配件') || slideHtml.includes('現場專屬四大貼心服務')) slideType = 'accessories';
+  else if (labelText.includes('亮點') || labelText.includes('值得看') || slideHtml.includes('值得一看的功能') || slideHtml.includes('核心功能')) slideType = 'highlight';
+
+  if (sub) sub.textContent = `第 ${String(pNum).padStart(2,'0')} / ${String(total).padStart(2,'0')} 頁 · ${titleText.slice(0, 24)}`;
+
+  // 提取該頁功能名稱列表（若有）
+  const featItems = slideEl.querySelectorAll('.feat-t, .fcard-t, .af-t, .task-t');
+  const fNames = Array.from(featItems).map(el => el.textContent.trim()).slice(0, 3).join('、');
+
+  const notes = getFullSpeakerNotes(slideType, {
+    topicName: topicNames,
+    pageTitle: titleText,
+    featuresSummary: fNames
+  });
+
+  body.innerHTML = `
+    <div class="sn-card primary">
+      <div class="sn-hd blue">🗣️ 參考講法與轉場話術（口語可直接照唸）</div>
+      <div class="sn-text">${notes.speech}</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="sn-card accent">
+        <div class="sn-hd green">🙋‍♂️ 現場互動提問句（破冰活躍氣氛）</div>
+        <div class="sn-text">${notes.question}</div>
+      </div>
+      <div class="sn-card warm">
+        <div class="sn-hd amber">💡 講師動作指引（站位與手勢）</div>
+        <div class="sn-text">${notes.action}</div>
+      </div>
+      <div class="sn-card alert">
+        <div class="sn-hd red">⚠️ 常見卡關與避坑提醒</div>
+        <div class="sn-text">${notes.pitfall}</div>
+      </div>
+    </div>
+  `;
+}
+
+function copyCurrentNote() {
+  const panel = document.getElementById('speakerNotesPanel');
+  const sub = document.getElementById('snPageSub') ? document.getElementById('snPageSub').textContent : '';
+  const cards = panel ? panel.querySelectorAll('.sn-card') : [];
+  if (!cards.length) {
+    alert('目前尚無備忘錄內容可複製');
+    return;
+  }
+  let text = `【Apple Shop 小教室講師備忘錄 · ${sub}】\n\n`;
+  cards.forEach(c => {
+    const hd = c.querySelector('.sn-hd') ? c.querySelector('.sn-hd').textContent.trim() : '';
+    const txt = c.querySelector('.sn-text') ? c.querySelector('.sn-text').textContent.trim() : '';
+    text += `${hd}\n${txt}\n\n`;
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    alert('✓ 本頁講稿備忘錄已複製到剪貼簿！可直接貼至手機備忘錄查看。');
+  }).catch(() => {
+    prompt('請複製以下備忘錄內容：', text);
+  });
+}
+
 function renderTopics(filterCat = null){
-  // 群組 by category (持續新增主題分類用)
   const groups = {};
   TOPICS.forEach((t, i) => {
     let cat = t.category || '其他';
-    // 簡單推斷未分類的核心主題 (for 現有硬編碼資料)
-    // 注意：AI 檢查必須在 App 檢查之前，避免 "apple" 內的 "app" 誤判；App 檢查避免寬鬆 "app" 以防 "apple xxx" 誤入
     if (!t.category && !t.custom) {
       const n = t.n.toLowerCase();
       if (n.includes('iphone')) cat = 'iPhone';
@@ -3092,6 +3989,14 @@ function renderTopics(filterCat = null){
       else cat = '其他';
     }
     if (filterCat && cat !== filterCat) return;
+
+    // 難易度快速篩選 (Menu 推薦邏輯)
+    if (currentDiffFilter === 'beginner' && (!t.badges || !t.badges.includes('⭐ 新手首選'))) return;
+    if (currentDiffFilter === 'hot' && (!t.badges || !t.badges.includes('🔥 門市超熱門'))) return;
+    if (currentDiffFilter === 'easy' && (t.difficulty > 2)) return;
+    if (currentDiffFilter === 'mid' && (t.difficulty !== 3)) return;
+    if (currentDiffFilter === 'pro' && (t.difficulty < 4)) return;
+
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push({t, i});
   });
@@ -3111,8 +4016,24 @@ function renderTopics(filterCat = null){
       const removeBtn = t.custom ? `<span class="chip-remove" onclick="event.stopPropagation();removeCustomTopic(${i})" title="移除自訂主題">✕</span>` : '';
       const catBadge = t.category ? `<span class="cat-badge">${t.category}</span>` : '';
       const tagsStr = (t.tags && t.tags.length) ? ` <span style="font-size:9px;opacity:.6;">${t.tags.slice(0,2).join(',')}</span>` : '';
+            const diffStars = `<span class="diff-stars" title="難易度：${t.difficulty} 星">${'⭐'.repeat(t.difficulty || 2)}</span>`;
+      const badgesHtml = (t.badges || []).map(b => {
+        const cls = b.includes('新手') ? 'badge-beginner' : b.includes('熱門') ? 'badge-hot' : 'badge-neutral';
+        return `<span class="t-badge ${cls}">${b}</span>`;
+      }).join('');
+
       html += `<div class="chip${customClass} ${on?'on':''}" onclick="toggleT(${i})">
-        <span class="e">${t.ico}</span><span>${t.n}</span>${catBadge}${tagsStr}${removeBtn}<span class="num">${ord}</span>
+        <span class="e">${t.ico}</span>
+        <div class="chip-main">
+          <div class="chip-title">
+            <span>${t.n}</span>
+            ${catBadge}
+            ${diffStars}
+          </div>
+          <div class="chip-badges">${badgesHtml}</div>
+        </div>
+        ${removeBtn}
+        <span class="num">${ord}</span>
       </div>`;
     });
     html += `</div></div>`;
@@ -3205,12 +4126,12 @@ function updateSummary(){
   const ageArr = [...SELECTED_A].map(i=>AGES[i]);
   const effectiveForList = (ageArr.length > 1) ? ageArr.map(a=>a.k).join('、') : (ageArr[0] ? ageArr[0].k : '');
   [...SELECTED_T].forEach(ti=>{
-    list.push(`<div class="mini"><span>${TOPICS[ti].ico} ${TOPICS[ti].n}</span><span class="a">${effectiveForList || '—'}</span></div>`);
+    list.push(`<div class="mini"><span>${TOPICS[ti].ico} ${TOPICS[ti].n}</span><span class="a">${effectiveForList || ' · '}</span></div>`);
   });
   if (an > 1) {
     list.push(`<div class="mini" style="font-size:10px;color:#0c4a6e">頁數維持一份，內容已智慧調整涵蓋多個年齡層</div>`);
   }
-  $('#sumList').innerHTML = list.join('') || '<div style="font-size:11px;color:#a8a39a;font-weight:600">— 尚未選擇 —</div>';
+  $('#sumList').innerHTML = list.join('') || '<div style="font-size:11px;color:#a8a39a;font-weight:600"> ·  尚未選擇  · </div>';
 
   // 讓生成按鈕清楚顯示當前模式（點選兩個主題後按鈕文字會變，明確進入融合模式）
   const genBtn = $('#genBtn');
@@ -3219,7 +4140,7 @@ function updateSummary(){
   }
 }
 
-/* ============ 八種頁面類型 — 每個主題自動產生 8 頁 ============
+/* ============ 八種頁面類型 · 每個主題自動產生 8 頁 ============
    ① 歡迎開場   ② 今日學習地圖   ③ 為什麼選它
    ④ 核心功能 (上)   ⑤ 核心功能 (下)
    ⑥ 動手實作時間   ⑦ 生活應用情境   ⑧ 配件搭配 + 收尾
@@ -3267,7 +4188,7 @@ function buildAgenda(topic, age, pNum, tNum){
   ];
   const outcomes = topic.outcomes || [
     `了解 ${topic.n} 跟您現在用的有什麼不同`,
-    `學會操作「${topic.features[0].ft.replace(/[—·].*/,'').trim()}」這類常用功能`,
+    `學會操作「${topic.features[0].ft.replace(/[ · ·].*/,'').trim()}」這類常用功能`,
     `判斷它是不是適合您現在的需求`
   ];
   return `<div class="slide light">
@@ -3315,7 +4236,7 @@ function buildAgenda(topic, age, pNum, tNum){
 function buildWhy(topic, age, pNum, tNum){
   const compare = topic.compare || `如果您現在用的是 3-5 年前的舊機型，換到 ${topic.n} 在「速度」、「相機」、「續航」這幾個地方應該會比較有感。`;
   const r = topic.requirements || {};
-  const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || '—');
+  const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || ' · ');
   return `<div class="slide warm">
     <div class="chrome">
       <div>${topic.n} · 產品定位</div>
@@ -3323,7 +4244,7 @@ function buildWhy(topic, age, pNum, tNum){
     </div>
     <div class="slide-hd">
       <div class="label">先聊聊</div>
-      <div class="title">${topic.n} — 為什麼想跟您分享</div>
+      <div class="title">${topic.n} · 為什麼想跟您分享</div>
       <div class="sub">進入細節之前，先說說它適合什麼樣的使用情境。</div>
     </div>
     <div class="rule"></div>
@@ -3335,11 +4256,11 @@ function buildWhy(topic, age, pNum, tNum){
     <div class="specs-card">
       <div class="specs-hd">📋 快速看一下規格</div>
       <div class="specs-grid">
-        <div class="spec-row"><div class="spec-k">💻 系統版本</div><div class="spec-v">${r.os||'—'}</div></div>
+        <div class="spec-row"><div class="spec-k">💻 系統版本</div><div class="spec-v">${r.os||' · '}</div></div>
         <div class="spec-row"><div class="spec-k">📦 容量／版本</div><div class="spec-v">${capStr}</div></div>
-        <div class="spec-row"><div class="spec-k">📱 SIM／連線</div><div class="spec-v">${r.sim||'—'}</div></div>
-        <div class="spec-row"><div class="spec-k">⚙️ 相容性</div><div class="spec-v">${r.compat||'—'}</div></div>
-        <div class="spec-row"><div class="spec-k">☁️ iCloud 建議</div><div class="spec-v">${r.icloud||'—'}</div></div>
+        <div class="spec-row"><div class="spec-k">📱 SIM／連線</div><div class="spec-v">${r.sim||' · '}</div></div>
+        <div class="spec-row"><div class="spec-k">⚙️ 相容性</div><div class="spec-v">${r.compat||' · '}</div></div>
+        <div class="spec-row"><div class="spec-k">☁️ iCloud 建議</div><div class="spec-v">${r.icloud||' · '}</div></div>
       </div>
     </div>
 
@@ -3355,7 +4276,7 @@ function buildWhy(topic, age, pNum, tNum){
 
     <div class="pitch-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:rgba(217,119,6,.3);margin-bottom:0">
       <div class="pl" style="color:#b45309">🎯 一句話的話</div>
-      <div class="pt"><b>${topic.tagline}</b> — 不管您是想升級使用體驗、第一次接觸這個 App，或想深入了解它的功能，都可以多花幾分鐘看看。</div>
+      <div class="pt"><b>${topic.tagline}</b> · 不管您是想升級使用體驗、第一次接觸這個 App，或想深入了解它的功能，都可以多花幾分鐘看看。</div>
     </div>
 
     <div class="foot">
@@ -3373,7 +4294,7 @@ function chunk(arr, size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.p
 function buildFeaturesPage(topic, age, items, startIdx, pageIdx, pageCount, pNum, tNum){
   const part = pageCount>1 ? `（${pageIdx+1}/${pageCount}）` : '';
   const sub = pageIdx===0
-    ? `${topic.tagline} — 先從最有感的開始聊。`
+    ? `${topic.tagline} · 先從最有感的開始聊。`
     : '接著這幾個比較細，但用久了會發現很重要。';
   return `<div class="slide light">
     <div class="chrome">
@@ -3439,21 +4360,42 @@ function buildHandsOn(topic, age, pNum, tNum){
   const demoMin = Math.max(1, Math.round(perTask * 0.25));
   const operateMin = Math.max(2, Math.round(perTask * 0.55));
   const shareMin = Math.max(1, perTask - demoMin - operateMin);
-  const getPracticeSteps = (f) => (f && f.practice) ? f.practice : [
-    "跟講師一起看一次操作示範",
-    "自己獨立操作一次 (不會的隨時舉手問)",
-    "完成後跟旁邊的人分享一個心得或問題"
-  ];
+    const getSmartPracticeSteps = (f, topic) => {
+    if (f && f.practice && f.practice.length > 0) return f.practice;
+    const ftText = f.ft ? f.ft.replace(/[ ··].*/, '').trim() : (f.t || '功能練習');
+    const pathText = f.path || `打開「${ftText}」對應畫面或設定選項`;
+    const feedbackText = f.feedback || '螢幕呈現對應選單與即時反應';
+    return [
+      `【步驟 1 · 前往】${pathText}`,
+      `【步驟 2 · 操作】依照講師示範親手執行一次，觀察「${feedbackText}」`,
+      `【步驟 3 · 熟練】自己獨立嘗試操作一次，向旁邊同學分享操作手感`
+    ];
+  };
+
+  const getSmartPitfall = (f, topic) => {
+    if (f && f.pitfall) return f.pitfall;
+    if (topic && topic.n && (topic.n.includes('相機') || topic.n.includes('拍照'))) {
+      return '拍照時手指切勿擋到後方鏡頭；對焦時輕點人臉，滑動旁邊小太陽微調曝光。';
+    }
+    if (topic && topic.n && (topic.n.includes('入門') || topic.n.includes('長輩'))) {
+      return '手指在螢幕上輕觸即可，切勿用力按壓過久導致誤入次層選單。';
+    }
+    if (topic && topic.n && (topic.n.includes('換機') || topic.n.includes('備份'))) {
+      return '請確認彼此 Wi-Fi 與藍牙已開啟，切勿點選到「清除所有內容與設定」。';
+    }
+    return '若手勢滑動無反應，請確認手掌未壓到螢幕外圍邊緣造成誤觸。';
+  };
   const tasks = hands_items.map((item, i) => {
     const is_feat = !!item.ft;
-    const ft_text = is_feat ? item.ft.replace(/[—·].*/,'').trim() : (item.t || '實作練習');
+    const ft_text = is_feat ? item.ft.replace(/[ · ·].*/,'').trim() : (item.t || '實作練習');
     const fd_text = is_feat ? item.fd : (item.d || '');
     return {
       n: String(i+1).padStart(2,'0'),
       t: is_feat ? `試試「${ft_text}」` : ft_text,
       d: fd_text,
       time: taskMins[i] + " 分鐘",
-      steps: getPracticeSteps(item)
+      steps: getSmartPracticeSteps(item, topic),
+      pitfall: getSmartPitfall(item, topic)
     };
   });
   return `<div class="slide warm">
@@ -3494,6 +4436,7 @@ function buildHandsOn(topic, age, pNum, tNum){
               return `<div class="step-line"><span class="step-i">步驟 ${i+1}${timePart? ' ('+timePart+')':''}</span>${text}</div>`;
             }).join('')}
           </div>
+          <div class="pitfall-box">⚠️ <b>避坑提醒：</b>${t.pitfall || "操作時放慢動作，遇到不確定的提示可先舉手詢問講師"}</div>
         </div>
         <div class="task-time">⏱ ${t.time}</div>
       </div>`).join('')}
@@ -3641,7 +4584,7 @@ const RESOURCES = {
       {t:"人物居中 (Center Stage)", d:"鏡頭自動追蹤您的臉，移動時也保持在畫面中央"},
       {t:"視訊背景", d:"內建多種精美背景，或用個人照片，保護居家隱私"},
       {t:"反應特效", d:"愛心、煙火、雷射等手勢觸發特效，讓視訊更有趣"},
-      {t:"FaceTime 連結", d:"傳連結給 Android 或 Windows 用戶也能加入通話"},
+      {t:"FaceTime 連結", d:"傳連結給 Android 或 Windows 使用者也能加入通話"},
       {t:"通話錄影", d:"重要會議可錄製整段通話與螢幕分享（雙方同意後）"}
     ]
   },
@@ -3752,11 +4695,11 @@ function getHandbookContext(tipTitle, idx){
   return contexts[idx % contexts.length];
 }
 
-/* —— 快速上手・五個步驟整理（回顧今天學到的重點） —— */
+/*  ·  ·  快速上手・五個步驟整理（回顧今天學到的重點）  ·  ·  */
 function buildQuickStart(topic, age, pNum, tNum){
   // 從 features 抽出前 5 個產生簡易步驟
   const steps = topic.features.slice(0,5).map((f,i)=>{
-    const title = f.ft.replace(/[—·].*/,'').trim();
+    const title = f.ft.replace(/[ · ·].*/,'').trim();
     return { n:String(i+1).padStart(2,'0'), t:title, fi:f.fi };
   });
 
@@ -3795,7 +4738,7 @@ function buildQuickStart(topic, age, pNum, tNum){
   </div>`;
 }
 
-/* —— 第 10 站・給您的回家功課（小目標 + Q&A 互動） —— */
+/*  ·  ·  第 10 站・給您的回家功課（小目標 + Q&A 互動）  ·  ·  */
 function buildHomework(topic, age, pNum, tNum){
   return `<div class="slide warm">
     <div class="chrome">
@@ -3879,14 +4822,44 @@ function buildAccessories(topic, age, pNum, tNum){
       <div class="acc-foot">💰 詳細價格、現場庫存與優惠請洽門市同仁</div>
     </div>
 
+    <!-- Apple Shop 門市現場專屬四大貼心服務 -->
+    <div class="services-section">
+      <div class="services-hd">🏬 ${(typeof SETTINGS !== 'undefined' && SETTINGS.store) ? SETTINGS.store : 'Apple Shop 門市'} 現場專屬四大貼心服務</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-ico">🔄</div>
+          <div class="service-t">現場舊換新折抵</div>
+          <div class="service-d">專員現場 5 分鐘快速檢測，舊機金額現場全額直折新機，免漫長等待。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">📲</div>
+          <div class="service-t">專人無痛資料轉移</div>
+          <div class="service-d">門市專員一對一協助照片、通訊錄與 LINE 聊天紀錄完整搬家，新機開箱免煩惱。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">🛡️</div>
+          <div class="service-t">原廠鋼化貼現場代貼</div>
+          <div class="service-d">嚴選高透耐刮鋼化玻璃與保護殼，專員現場精準無塵貼膜，離店享滿版防護。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">💳</div>
+          <div class="service-t">指定銀行分期 0 利率</div>
+          <div class="service-d">配合主流銀行信用卡，提供多期 0 利率分期付款，輕鬆入手無負擔。</div>
+        </div>
+      </div>
+      <div class="after-class-tip">
+        <span>💬</span> <b>課後一對一諮詢：</b>今天現場操作有任何沒按懂的、忘記密碼或舊機備份問題，下課後請留下來，講師與門市同仁在現場為您一對一貼心解答！
+      </div>
+    </div>
+
     <div class="pitch-card blue" style="margin-top:18px">
       <div class="pl">🎓 今天聊到的內容</div>
       <div class="pt">這 ${DUR} 分鐘大概聊了：<br>
-      &nbsp;&nbsp;① <b>它適合什麼情境</b> — 您是不是這樣的使用者<br>
-      &nbsp;&nbsp;② <b>幾個值得一看的功能</b> — 從外觀到續航<br>
-      &nbsp;&nbsp;③ <b>實際操作</b> — 您剛剛親手試過的<br>
-      &nbsp;&nbsp;④ <b>生活上怎麼用</b> — 跟您日常的連結<br>
-      &nbsp;&nbsp;⑤ <b>可以搭配的小東西</b> — 讓使用更順手</div>
+      &nbsp;&nbsp;① <b>它適合什麼情境</b> · 您是不是這樣的使用者<br>
+      &nbsp;&nbsp;② <b>幾個值得一看的功能</b> · 從外觀到續航<br>
+      &nbsp;&nbsp;③ <b>實際操作</b> · 您剛剛親手試過的<br>
+      &nbsp;&nbsp;④ <b>生活上怎麼用</b> · 跟您日常的連結<br>
+      &nbsp;&nbsp;⑤ <b>可以搭配的小東西</b> · 讓使用更順手</div>
     </div>
 
     <div class="pitch-card" style="margin-bottom:0">
@@ -3990,7 +4963,7 @@ function downloadPodcastScript(){
 
     if (t.stats && t.stats.length) {
       add('上台可以直接報的三大數據（數字最吸睛）：');
-      t.stats.forEach(s => add(`${s.n}${s.u ? ' ' + s.u : ''} — ${s.l}`, 1));
+      t.stats.forEach(s => add(`${s.n}${s.u ? ' ' + s.u : ''} · ${s.l}`, 1));
     }
 
     if (t.features && t.features.length) {
@@ -4083,10 +5056,10 @@ function downloadPptx(){
   // 智慧型年齡調整：多選時內容合併調整，產生一份（頁數固定）
   const effectiveAge = (typeof getEffectiveAge === 'function') ? getEffectiveAge(ageList) : (ageList[0] || AGES[0]);
 
-  /* —— 單一主題：完整 9+ 頁流程（內容智慧調整涵蓋所選年齡層） —— */
+  /*  ·  ·  單一主題：完整 9+ 頁流程（內容智慧調整涵蓋所選年齡層）  ·  ·  */
   function pptxSingle(t, a){
     const r = t.requirements || {};
-    const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || '—');
+    const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || ' · ');
     const resources = getTopicResources(t.n);
 
     // 封面
@@ -4098,6 +5071,7 @@ function downloadPptx(){
     s1.addText(t.sub, { x:0.5, y:4.0, w:12, h:0.6, fontSize:20, color:'FFFFFF', fontFace:FONT });
     s1.addText(t.welcome, { x:0.5, y:5.0, w:12, h:1.5, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
     s1.addText(`✨ ${t.tagline}    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    s1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: t.n }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const s2 = pptx.addSlide();
@@ -4108,7 +5082,7 @@ function downloadPptx(){
       ['01', '認識 '+t.n, '產品定位、目標族群、與市場其他選擇的差異', M[0]+' 分鐘'],
       ['02', '核心功能完整解析', `${t.features.length} 個重點功能逐一介紹，搭配實機展示`, M[1]+' 分鐘'],
       ['03', '🙌 動手實作時間', '親自體驗重要功能，講師逐桌協助（依任務內容調整）', M[2]+' 分鐘'],
-      ['04', '生活應用情境', '看看它如何融入您的日常 — 工作、家庭、娛樂', M[3]+' 分鐘'],
+      ['04', '生活應用情境', '看看它如何融入您的日常 · 工作、家庭、娛樂', M[3]+' 分鐘'],
       ['05', '進階技巧 + 配件 + Q&A', '多學幾招進階用法、完美搭配的配件、現場回答疑問', (M[4]+M[5])+' 分鐘']
     ];
     agendaItems.forEach((it,i)=>{
@@ -4118,6 +5092,7 @@ function downloadPptx(){
       s2.addText(it[2], { x:1.2, y:y+0.4, w:8, h:0.3, fontSize:12, color:C.muted, fontFace:FONT });
       s2.addText(it[3], { x:11, y:y+0.15, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
+    s2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: t.n }), '第 2 頁：學習地圖'));
 
     // 為什麼是它 + 規格
     const s3 = pptx.addSlide();
@@ -4129,12 +5104,13 @@ function downloadPptx(){
       s3.addText(st.l, { x:0.5+i*4.2, y:2.7, w:4, h:0.4, fontSize:12, color:C.ink, fontFace:FONT, align:'center' });
     });
     s3.addText('📋 規格與系統需求', { x:0.5, y:3.4, w:12, h:0.4, fontSize:14, color:C.accent, fontFace:FONT, bold:true });
-    [['💻 系統版本', r.os||'—'],['📦 容量／版本', capStr],['📱 SIM／連線', r.sim||'—'],['⚙️ 相容性', r.compat||'—'],['☁️ iCloud 建議', r.icloud||'—']].forEach((sp,i)=>{
+    [['💻 系統版本', r.os||' · '],['📦 容量／版本', capStr],['📱 SIM／連線', r.sim||' · '],['⚙️ 相容性', r.compat||' · '],['☁️ iCloud 建議', r.icloud||' · ']].forEach((sp,i)=>{
       const y = 3.9 + i*0.5;
       s3.addText(sp[0], { x:0.5, y:y, w:2.5, h:0.4, fontSize:12, color:'555555', fontFace:FONT, bold:true });
       s3.addText(sp[1], { x:3.1, y:y, w:9.5, h:0.4, fontSize:12, color:C.ink, fontFace:FONT });
     });
     s3.addText(`💡 ${a.pitch.replace(/<\/?b>/g,'')}`, { x:0.5, y:6.6, w:12, h:0.6, fontSize:12, color:C.green, fontFace:FONT, italic:true });
+    s3.addNotes(formatNotesText(getFullSpeakerNotes('why', { topicName: t.n }), '第 3 頁：核心定位與規格'));
 
     // 核心功能（每 3 個一頁）
     const fChunks = chunk(t.features, 3);
@@ -4150,6 +5126,7 @@ function downloadPptx(){
         sf.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
         sf.addText(f.fd + (f.req?`\n⚙️ 系統需求：${f.req}`:''), { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
+      sf.addNotes(formatNotesText(getFullSpeakerNotes('features', { topicName: t.n, featuresSummary: ch.map(f=>f.ft).join('、') }), `重點功能 ${part}`));
     });
 
     // 動手實作
@@ -4159,8 +5136,8 @@ function downloadPptx(){
     s6.addText(`換您試試看 · ${M[2]} 分鐘實機體驗`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:28, color:C.ink, fontFace:FONT, bold:true });
     s6.addText(a.handsNote, { x:0.5, y:1.5, w:12, h:0.4, fontSize:14, color:C.muted, fontFace:FONT });
     const hEach = Math.round(M[2]/3), hMins = [hEach, hEach, M[2]-hEach*2];
-    [[`認識並開啟「${t.features[0].ft.replace(/[—·].*/,'').trim()}」`, t.features[0].fd, hMins[0]+' 分鐘'],
-     [`親手體驗「${(t.features[2]||t.features[t.features.length-1]).ft.replace(/[—·].*/,'').trim()}」`, (t.features[2]||t.features[t.features.length-1]).fd, hMins[1]+' 分鐘'],
+    [[`認識並開啟「${t.features[0].ft.replace(/[ · ·].*/,'').trim()}」`, t.features[0].fd, hMins[0]+' 分鐘'],
+     [`親手體驗「${(t.features[2]||t.features[t.features.length-1]).ft.replace(/[ · ·].*/,'').trim()}」`, (t.features[2]||t.features[t.features.length-1]).fd, hMins[1]+' 分鐘'],
      [`日常情境模擬：${t.scenarios[0].t}`, t.scenarios[0].d, hMins[2]+' 分鐘']].forEach((tk,i)=>{
       const y = 2.2 + i*1.65;
       s6.addText(String(i+1).padStart(2,'0'), { x:0.5, y:y, w:0.8, h:1.2, fontSize:36, color:C.warm, fontFace:FONT, bold:true });
@@ -4168,6 +5145,7 @@ function downloadPptx(){
       s6.addText(tk[1], { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
       s6.addText(`⏱ ${tk[2]}`, { x:11, y:y+0.2, w:1.8, h:0.5, fontSize:12, color:C.warm, fontFace:FONT, bold:true, align:'right' });
     });
+    s6.addNotes(formatNotesText(getFullSpeakerNotes('handsOn', { topicName: t.n }), '動手實作時間'));
 
     // 生活情境
     const s7 = pptx.addSlide();
@@ -4180,6 +5158,7 @@ function downloadPptx(){
       s7.addText(sc.t, { x:x+0.9, y:y, w:5, h:0.5, fontSize:17, color:C.ink, fontFace:FONT, bold:true });
       s7.addText(sc.d, { x:x+0.9, y:y+0.55, w:5, h:1.8, fontSize:12, color:'555555', fontFace:FONT, valign:'top' });
     });
+    s7.addNotes(formatNotesText(getFullSpeakerNotes('scenarios', { topicName: t.n }), '融入您的日常'));
 
     // 進階技巧
     const s8 = pptx.addSlide();
@@ -4215,7 +5194,7 @@ function downloadPptx(){
     s9.addText('下次小教室再見！', { x:0.5, y:6.0, w:12, h:0.5, fontSize:14, color:'FFFFFF', fontFace:FONT });
   }
 
-  /* —— 多主題融合：與螢幕版 buildFusedDeck 同結構（保證每個主題都出現） —— */
+  /*  ·  ·  多主題融合：與螢幕版 buildFusedDeck 同結構（保證每個主題都出現）  ·  ·  */
   function pptxFused(topics, a){
     const title = getSmartTitle(topics, lastSmartSentence);
     const featPool = roundRobin(topics, 'features');
@@ -4232,6 +5211,7 @@ function downloadPptx(){
     c1.addText(title, { x:0.5, y:2.6, w:12, h:1.2, fontSize:46, color:'FFFFFF', fontFace:FONT, bold:true });
     c1.addText(`今天把 ${topics.length} 個有關聯的主題放在一起聊，看它們在生活裡怎麼搭起來、讓日子更順手。`, { x:0.5, y:4.2, w:12, h:1.4, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
     c1.addText(`✨ ${topics.length} 個主題一起聊    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    c1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: title }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const c2 = pptx.addSlide();
@@ -4251,6 +5231,7 @@ function downloadPptx(){
       c2.addText(it[2], { x:1.2, y:y+0.38, w:8.5, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
       c2.addText(it[3]+' 分鐘', { x:11, y:y+0.1, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
+    c2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: title }), '第 2 頁：今日學習地圖'));
 
     // 整體主軸（列出每個主題）
     const c3 = pptx.addSlide();
@@ -4264,6 +5245,7 @@ function downloadPptx(){
       c3.addText(t.n, { x:x+0.8, y:y, w:5.2, h:0.4, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
       c3.addText(t.tagline || t.sub || '', { x:x+0.8, y:y+0.38, w:5.2, h:0.45, fontSize:10, color:'555555', fontFace:FONT });
     });
+    c3.addNotes(formatNotesText(getFullSpeakerNotes('overview', { topicName: title }), '第 3 頁：整體主軸與生活面向'));
 
     // 精選亮點（每 3 個一頁，跨主題打散）
     const hChunks = chunk(highlights, 3);
@@ -4279,6 +5261,7 @@ function downloadPptx(){
         sh.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
         sh.addText(f.fd + `\n📦 來自：${f.topic.ico} ${f.topic.n}`, { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
+      sh.addNotes(formatNotesText(getFullSpeakerNotes('highlight', { topicName: title, featuresSummary: ch.map(f=>f.ft).join('、') }), `精選亮點 ${part}`));
     });
 
     // 動手實作
@@ -4291,10 +5274,11 @@ function downloadPptx(){
     featPool.slice(0,3).forEach((f,i)=>{
       const y = 2.0 + i*1.65;
       c6.addText(String(i+1).padStart(2,'0'), { x:0.5, y:y, w:0.8, h:1.2, fontSize:36, color:C.warm, fontFace:FONT, bold:true });
-      c6.addText(`試試 ${f.topic.ico}「${f.ft.replace(/[—·].*/,'').trim()}」`, { x:1.5, y:y, w:9, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
+      c6.addText(`試試 ${f.topic.ico}「${f.ft.replace(/[ · ·].*/,'').trim()}」`, { x:1.5, y:y, w:9, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
       c6.addText(`【來自 ${f.topic.n}】${f.fd}`, { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
       c6.addText(`⏱ ${fhMins[i]} 分鐘`, { x:11, y:y+0.2, w:1.8, h:0.5, fontSize:12, color:C.warm, fontFace:FONT, bold:true, align:'right' });
     });
+    c6.addNotes(formatNotesText(getFullSpeakerNotes('handsOn', { topicName: title }), '動手實作時間'));
 
     // 生活情境（跨主題挑 4 個）
     const c7 = pptx.addSlide();
@@ -4307,6 +5291,7 @@ function downloadPptx(){
       c7.addText(`${sc.topic.ico} ${sc.t}`, { x:x+0.9, y:y, w:5, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
       c7.addText(sc.d, { x:x+0.9, y:y+0.55, w:5, h:1.8, fontSize:12, color:'555555', fontFace:FONT, valign:'top' });
     });
+    c7.addNotes(formatNotesText(getFullSpeakerNotes('scenarios', { topicName: title }), '日常情境融入'));
 
     // 快速上手（跨主題抽 5 個重點）
     const c8 = pptx.addSlide();
@@ -4316,9 +5301,10 @@ function downloadPptx(){
     featPool.slice(0,5).forEach((f,i)=>{
       const y = 1.9 + i*0.95;
       c8.addText(String(i+1).padStart(2,'0'), { x:0.5, y:y, w:0.6, h:0.6, fontSize:22, color:C.accent, fontFace:FONT, bold:true });
-      c8.addText(`${f.fi} ${f.ft.replace(/[—·].*/,'').trim()}`, { x:1.2, y:y, w:9, h:0.45, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
+      c8.addText(`${f.fi} ${f.ft.replace(/[ · ·].*/,'').trim()}`, { x:1.2, y:y, w:9, h:0.45, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
       c8.addText(`來自 ${f.topic.n}`, { x:1.2, y:y+0.42, w:9, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
     });
+    c8.addNotes(formatNotesText(getFullSpeakerNotes('quickStart', { topicName: title }), '快速上手回家清單'));
 
     // 配件搭配（跨主題挑最多 6 款）+ 收尾
     const c9 = pptx.addSlide();
@@ -4332,6 +5318,7 @@ function downloadPptx(){
       c9.addText(`💬 ${ac.why}`, { x:x, y:y+0.9, w:3.9, h:0.55, fontSize:10, color:'FFFFFF', fontFace:FONT, italic:true, valign:'top' });
     });
     c9.addText('🙏 謝謝您今天的參與，下次小教室再見！', { x:0.5, y:6.6, w:12, h:0.5, fontSize:15, color:'FFFFFF', fontFace:FONT, bold:true });
+    c9.addNotes(formatNotesText(getFullSpeakerNotes('accessories', { topicName: title }), '配件搭配與門市專屬服務'));
   }
 
   if(topicList.length === 1){
@@ -4408,7 +5395,7 @@ function getSmartTitle(topics, userSentence){
       .replace(/\s*系列$/, '')
       .replace(/\s*神器$/, '')
       .replace(/\s*中階首選$/, '')
-      .replace(/\s*性價比之選$/, '')
+      .replace(/\s*CP 值之選$/, '')
       .replace(/\s*全新登場$/, '')
       .replace(/\s*全新升級$/, '')
       .replace(/\s*App 整理術$/, '整理術')
@@ -4562,9 +5549,9 @@ function getEffectiveAge(ageList) {
 function generate(){
   const dur = +$('#dur').value || 60;
   DUR = dur;
-  $('#mDate').textContent = $('#date').value || '—';
+  $('#mDate').textContent = $('#date').value || ' · ';
   $('#mDur').textContent = dur;
-  $('#mPpl').textContent = $('#ppl').value || '—';
+  $('#mPpl').textContent = $('#ppl').value || ' · ';
   if(!SELECTED_T.size || !SELECTED_A.size){
     alert('請至少選擇一個主題與一個年齡層');
     return;
@@ -4582,7 +5569,7 @@ function generate(){
 
   try {
     if(topicList.length === 1){
-      /* 單一主題 — 產生一份簡報，內容已智慧調整涵蓋所選年齡層 */
+      /* 單一主題 · 產生一份簡報，內容已智慧調整涵蓋所選年齡層 */
       const t = topicList[0];
       const a = effectiveAge;
       const featChunks = chunk(t.features, 3);
@@ -4603,7 +5590,7 @@ function generate(){
       SLIDES.push(buildHomework(t, a, ++p, total));
       SLIDES.push(buildAccessories(t, a, ++p, total));
     } else {
-      /* 🔀 多主題融合模式 — 產生一份簡報，內容智慧調整涵蓋所選年齡層 */
+      /* 🔀 多主題融合模式 · 產生一份簡報，內容智慧調整涵蓋所選年齡層 */
       const fused = buildFusedDeck(topicList, effectiveAge);
       fused.forEach(s=>SLIDES.push(s));
     }
@@ -4643,7 +5630,7 @@ function generate(){
 }
 
 /* ============================================
-   🔀 多主題融合模式 — 智慧融合成「一場主題式講座」
+   🔀 多主題融合模式 · 智慧融合成「一場主題式講座」
    不再一個產品一頁，而是依選取主題的共同主軸（getSmartTitle）
    把所有亮點/情境/配件跨主題打散重組。
    頁面：封面→學習地圖→整體主軸→精選亮點×N（隨主題數動態，每頁3個，
@@ -4693,7 +5680,7 @@ function buildFusedDeck(topics, age, pageOffset = 0, grandTotal = null){
   return deck;
 }
 
-/* —— 融合・總封面 —— */
+/*  ·  ·  融合・總封面  ·  ·  */
 function buildFusedCover(topics, age, pNum, tNum){
   const icos = topics.map(t=>t.ico).join(' ');
   const smartTitle = getSmartTitle(topics, lastSmartSentence);
@@ -4709,7 +5696,7 @@ function buildFusedCover(topics, age, pNum, tNum){
       <div class="cover-sub">幾個放在一起聊會更有意思的主題</div>
       <div class="cover-welcome">
         <div class="ww">歡迎您 · WELCOME</div>
-        今天想跟大家聊 ${topics.length} 件有點關聯的事。各自看都還滿有趣，但放在一起會發現生活上其實是連著的 — 就像家裡的東西，分開用都好用，但搭起來會讓日子過得更順一點。今天就帶大家看看這些連結。
+        今天想跟大家聊 ${topics.length} 件有點關聯的事。各自看都還滿有趣，但放在一起會發現生活上其實是連著的 · 就像家裡的東西，分開用都好用，但搭起來會讓日子過得更順一點。今天就帶大家看看這些連結。
       </div>
       <div class="cover-tags">
         <span>✨ ${topics.length} 個主題一起聊</span>
@@ -4725,7 +5712,7 @@ function buildFusedCover(topics, age, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・學習地圖（主題式流程 + 今天會聊到的主題） —— */
+/*  ·  ·  融合・學習地圖（主題式流程 + 今天會聊到的主題）  ·  ·  */
 function buildFusedAgenda(topics, age, pNum, tNum){
   const M = planMinutes(DUR);
   const items = [
@@ -4769,7 +5756,7 @@ function buildFusedAgenda(topics, age, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・整體主軸（用智慧標題串起所有主題，取代逐一產品頁） —— */
+/*  ·  ·  融合・整體主軸（用智慧標題串起所有主題，取代逐一產品頁）  ·  ·  */
 function buildFusedOverview(topics, age, title, pNum, tNum){
   const cards = topics.map(t=>`<div class="feat feat-big">
       <div class="feat-num">${t.ico}</div>
@@ -4792,7 +5779,7 @@ function buildFusedOverview(topics, age, title, pNum, tNum){
 
     <div class="pitch-card blue" style="margin-bottom:18px">
       <div class="pl">🎯 為什麼放在一起</div>
-      <div class="pt">今天會用「${title}」這個角度，把下面這些主題串成一條線來看 — 不是要您每個都買，而是看它們怎麼互相搭配，讓日常更順手。${age.pitch}</div>
+      <div class="pt">今天會用「${title}」這個角度，把下面這些主題串成一條線來看 · 不是要您每個都買，而是看它們怎麼互相搭配，讓日常更順手。${age.pitch}</div>
     </div>
 
     <div class="features features-single">${cards}</div>
@@ -4804,7 +5791,7 @@ function buildFusedOverview(topics, age, title, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・精選亮點（跨主題打散，每頁 3 個，共 3 頁） —— */
+/*  ·  ·  融合・精選亮點（跨主題打散，每頁 3 個，共 3 頁）  ·  ·  */
 function buildFusedHighlights(highlights, group, label, pNum, tNum){
   const items = highlights.slice(group*3, group*3+3);
   return `<div class="slide light">
@@ -4838,7 +5825,7 @@ function buildFusedHighlights(highlights, group, label, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・動手實作（跨主題挑 3 個功能練習） —— */
+/*  ·  ·  融合・動手實作（跨主題挑 3 個功能練習）  ·  ·  */
 function buildFusedHandsOn(topics, featPool, age, pNum, tNum){
   const hm = planMinutes(DUR)[2];
   // 照任務(跨主題內容)智慧調整比例：依 hm 決定建議任務數，挑對應數量的 feature 練習
@@ -4853,19 +5840,40 @@ function buildFusedHandsOn(topics, featPool, age, pNum, tNum){
   const demoMin = Math.max(1, Math.round(perTask * 0.25));
   const operateMin = Math.max(2, Math.round(perTask * 0.55));
   const shareMin = Math.max(1, perTask - demoMin - operateMin);
-  const getPracticeSteps = (f) => (f && f.practice) ? f.practice : [
-    "跟講師一起看一次操作示範",
-    "自己獨立操作一次 (不會的隨時舉手問)",
-    "完成後跟旁邊的人分享一個心得或問題"
-  ];
+    const getSmartPracticeSteps = (f, topic) => {
+    if (f && f.practice && f.practice.length > 0) return f.practice;
+    const ftText = f.ft ? f.ft.replace(/[ ··].*/, '').trim() : (f.t || '功能練習');
+    const pathText = f.path || `打開「${ftText}」對應畫面或設定選項`;
+    const feedbackText = f.feedback || '螢幕呈現對應選單與即時反應';
+    return [
+      `【步驟 1 · 前往】${pathText}`,
+      `【步驟 2 · 操作】依照講師示範親手執行一次，觀察「${feedbackText}」`,
+      `【步驟 3 · 熟練】自己獨立嘗試操作一次，向旁邊同學分享操作手感`
+    ];
+  };
+
+  const getSmartPitfall = (f, topic) => {
+    if (f && f.pitfall) return f.pitfall;
+    if (topic && topic.n && (topic.n.includes('相機') || topic.n.includes('拍照'))) {
+      return '拍照時手指切勿擋到後方鏡頭；對焦時輕點人臉，滑動旁邊小太陽微調曝光。';
+    }
+    if (topic && topic.n && (topic.n.includes('入門') || topic.n.includes('長輩'))) {
+      return '手指在螢幕上輕觸即可，切勿用力按壓過久導致誤入次層選單。';
+    }
+    if (topic && topic.n && (topic.n.includes('換機') || topic.n.includes('備份'))) {
+      return '請確認彼此 Wi-Fi 與藍牙已開啟，切勿點選到「清除所有內容與設定」。';
+    }
+    return '若手勢滑動無反應，請確認手掌未壓到螢幕外圍邊緣造成誤觸。';
+  };
   const tasks = picks.map((f,i)=>({
     n:String(i+1).padStart(2,'0'),
-    t:`試試 ${f.topic.ico}「${f.ft.replace(/[—·].*/,'').trim()}」`,
+    t:`試試 ${f.topic.ico}「${f.ft.replace(/[ · ·].*/,'').trim()}」`,
     d:`${f.fd}`,
     source: f.topic.n,
     sourceIco: f.topic.ico,
     time:taskMins[i]+" 分鐘 (現場實測)",
-    steps: getPracticeSteps(f)
+    steps: getSmartPracticeSteps(f, f.topic || topics[0]),
+      pitfall: getSmartPitfall(f, f.topic || topics[0])
   }));
   return `<div class="slide warm">
     <div class="chrome">
@@ -4904,6 +5912,7 @@ function buildFusedHandsOn(topics, featPool, age, pNum, tNum){
             if(m){ timePart = m[1]; text = m[2]; }
             return `<div class="step-line"><span class="step-i">步驟 ${i+1}${timePart? ' ('+timePart+')':''}</span>${text}</div>`;
           }).join('')}</div>
+          <div class="pitfall-box">⚠️ <b>避坑提醒：</b>${t.pitfall || "操作時放慢動作，遇到不確定的提示可先舉手詢問講師"}</div>
         </div>
         <div class="task-time">⏱ ${t.time}</div>
       </div>`).join('')}
@@ -4921,9 +5930,9 @@ function buildFusedHandsOn(topics, featPool, age, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・快速上手（跨主題抽 5 個重點整理成回家清單） —— */
+/*  ·  ·  融合・快速上手（跨主題抽 5 個重點整理成回家清單）  ·  ·  */
 function buildFusedQuickAdv(topics, featPool, pNum, tNum){
-  const steps = featPool.slice(0,5).map((f,i)=>({ n:String(i+1).padStart(2,'0'), t:`${f.fi} ${f.ft.replace(/[—·].*/,'').trim()}`, src:f.topic.n }));
+  const steps = featPool.slice(0,5).map((f,i)=>({ n:String(i+1).padStart(2,'0'), t:`${f.fi} ${f.ft.replace(/[ · ·].*/,'').trim()}`, src:f.topic.n }));
   return `<div class="slide light">
     <div class="chrome">
       <div>快速上手</div>
@@ -4959,7 +5968,7 @@ function buildFusedQuickAdv(topics, featPool, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・配件搭配（跨主題挑最多 6 款） —— */
+/*  ·  ·  融合・配件搭配（跨主題挑最多 6 款）  ·  ·  */
 function buildFusedAccessories(topics, accPool, pNum, tNum){
   const accs = accPool.slice(0, Math.min(6, accPool.length));
   return `<div class="slide dark">
@@ -4990,6 +5999,36 @@ function buildFusedAccessories(topics, accPool, pNum, tNum){
       <div class="acc-foot">💰 詳細價格、現場庫存與優惠請洽門市同仁</div>
     </div>
 
+    <!-- Apple Shop 門市現場專屬四大貼心服務 -->
+    <div class="services-section">
+      <div class="services-hd">🏬 ${(typeof SETTINGS !== 'undefined' && SETTINGS.store) ? SETTINGS.store : 'Apple Shop 門市'} 現場專屬四大貼心服務</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-ico">🔄</div>
+          <div class="service-t">現場舊換新折抵</div>
+          <div class="service-d">專員現場 5 分鐘快速檢測，舊機金額現場全額直折新機，免漫長等待。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">📲</div>
+          <div class="service-t">專人無痛資料轉移</div>
+          <div class="service-d">門市專員一對一協助照片、通訊錄與 LINE 聊天紀錄完整搬家，新機開箱免煩惱。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">🛡️</div>
+          <div class="service-t">原廠鋼化貼現場代貼</div>
+          <div class="service-d">嚴選高透耐刮鋼化玻璃與保護殼，專員現場精準無塵貼膜，離店享滿版防護。</div>
+        </div>
+        <div class="service-card">
+          <div class="service-ico">💳</div>
+          <div class="service-t">指定銀行分期 0 利率</div>
+          <div class="service-d">配合主流銀行信用卡，提供多期 0 利率分期付款，輕鬆入手無負擔。</div>
+        </div>
+      </div>
+      <div class="after-class-tip">
+        <span>💬</span> <b>課後一對一諮詢：</b>今天現場操作有任何沒按懂的、忘記密碼或舊機備份問題，下課後請留下來，講師與門市同仁在現場為您一對一貼心解答！
+      </div>
+    </div>
+
     <div class="foot">
       <div>第 ${pNum} 站 · 配件搭配</div>
       <div>Apple Shop · Grok 協助版</div>
@@ -4997,7 +6036,7 @@ function buildFusedAccessories(topics, accPool, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・共通情境（跨主題打散，挑 4 個生活場景） —— */
+/*  ·  ·  融合・共通情境（跨主題打散，挑 4 個生活場景）  ·  ·  */
 function buildFusedScenarios(topics, scnPool, pNum, tNum){
   const scenes = scnPool.slice(0,4);
   return `<div class="slide light">
@@ -5033,7 +6072,7 @@ function buildFusedScenarios(topics, scnPool, pNum, tNum){
   </div>`;
 }
 
-/* —— 融合・收尾（總結 + Q&A） —— */
+/*  ·  ·  融合・收尾（總結 + Q&A）  ·  ·  */
 function buildFusedClosing(topics, age, pNum, tNum){
   return `<div class="slide dark">
     <div class="chrome">
@@ -5125,12 +6164,14 @@ function showSlide(){
   if(!SLIDES.length){
     wrap.innerHTML = `<div class="slide empty"><div class="big">準備您的小教室簡報</div><div style="font-size:13px">左側勾選主題 · 右側選擇年齡層 · 按下「生成簡報」<br><span style="font-size:10px;opacity:.6">Grok 獨立版 · 實作步驟已更新為實際 App 操作邏輯</span></div></div>`;
     $('#pageInfo').textContent = '00 / 00';
+    updateSpeakerNotes(-1);
     return;
   }
   wrap.innerHTML = '';
   wrap.appendChild(SLIDES[IDX]);
   wrap.scrollTop = 0;
   $('#pageInfo').textContent = `${String(IDX+1).padStart(2,'0')} / ${String(SLIDES.length).padStart(2,'0')}`;
+  updateSpeakerNotes(IDX);
 }
 function prevSlide(){ if(SLIDES.length){ IDX=(IDX-1+SLIDES.length)%SLIDES.length; showSlide(); } }
 function nextSlide(){ if(SLIDES.length){ IDX=(IDX+1)%SLIDES.length; showSlide(); } }
@@ -5141,7 +6182,7 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ============================================
-   自訂主題 — 新增/移除/儲存
+   自訂主題 · 新增/移除/儲存
    ============================================ */
 function openTopicModal(){
   document.getElementById('topicModal').classList.add('show');
@@ -5311,11 +6352,11 @@ function saveCustomTopic(){
   for(let i=0;i<3;i++){
     if(stN[i]) stats.push({ n: stN[i], u: stU[i]||'', l: stL[i]||'' });
   }
-  while(stats.length < 3) stats.push({ n:'—', u:'', l:'待補充' });
+  while(stats.length < 3) stats.push({ n:' · ', u:'', l:'待補充' });
 
   // 容量陣列轉換
   const capStr = _val('f_cap');
-  const capacity = capStr ? capStr.split('/').map(s=>s.trim()).filter(Boolean) : '—';
+  const capacity = capStr ? capStr.split('/').map(s=>s.trim()).filter(Boolean) : ' · ';
 
   // 分類與標籤 (持續性新增用)
   const category = _val('f_category') || '其他';
@@ -5430,10 +6471,10 @@ function importTopics(event){
           sub: t.sub || '',
           tagline: t.tagline || t.n,
           welcome: t.welcome || `今天想跟大家分享「${t.n}」，接下來會帶大家認識它的功能與應用。`,
-          requirements: t.requirements || { os:'—', capacity:'—', sim:'—', compat:'—', icloud:'—' },
+          requirements: t.requirements || { os:' · ', capacity:' · ', sim:' · ', compat:' · ', icloud:' · ' },
           stats: (t.stats && t.stats.length>=3) ? t.stats : [
             ...(t.stats||[]),
-            ...Array(Math.max(0, 3-(t.stats||[]).length)).fill({n:'—',u:'',l:'待補充'})
+            ...Array(Math.max(0, 3-(t.stats||[]).length)).fill({n:' · ',u:'',l:'待補充'})
           ],
           features: t.features.length>=6 ? t.features : [
             ...t.features,
@@ -5765,6 +6806,19 @@ function findRecommendedTopics(sentence, maxN=3){
     const scenarios = new Set();
     const t = text.toLowerCase();
 
+    // 摺疊新旗艦 / 雙螢幕
+    if (t.includes('duo') || t.includes('摺疊') || t.includes('折疊') || t.includes('雙螢幕') || t.includes('大螢幕') && t.includes('手機')) {
+      scenarios.add('folding');
+    }
+    // iPhone 18 Pro / 旗艦攝影
+    if (t.includes('18') || t.includes('18 pro') || t.includes('可變光圈') || t.includes('旗艦') && (t.includes('相機') || t.includes('拍照'))) {
+      scenarios.add('flagship_photo');
+    }
+    // iOS 27 / 系統大升級 / 全新 Siri
+    if (t.includes('ios 27') || t.includes('ios27') || t.includes('siri ai') || t.includes('全新 siri') || t.includes('升級') && (t.includes('系統') || t.includes('ios') || t.includes('手機'))) {
+      scenarios.add('system_upgrade');
+    }
+
     // 旅行 / 旅遊 / 出國 / 達人級旅行
     if (t.includes('旅遊') || t.includes('旅行') || t.includes('出國') || t.includes('出遊') || t.includes('達人') && (t.includes('旅') || t.includes('路') || t.includes('導航'))) {
       scenarios.add('travel');
@@ -5808,6 +6862,14 @@ function findRecommendedTopics(sentence, maxN=3){
 
   // 清理重複 key（第二個 capcut 會蓋掉第一個，這是 bug）
   const intentBoosts = {
+    duo: ['duo', 'iphone duo', '摺疊', '折疊', '雙螢幕', '內螢幕', '外螢幕', '大螢幕', '免腳架', '雙面', '7.6吋', 'app配對', '並排'],
+    iphone18: ['18 pro', 'iphone 18', '可變光圈', 'a20 pro', '均溫板', '蒸發冷卻', '勃根地紅', '光圈', '動態島', '43小時'],
+    iphone17e: ['17e', 'iphone 17e', '超值', '入門', '21900', '嫩粉色', '動作按鈕', '256gb'],
+    ipadmini: ['ipad mini', 'mini', '8.5吋', '掌中', 'oled', 'a20 pro mini', '小平板'],
+    macbookneo: ['neo', 'macbook neo', '羽量', '1.05kg', '無風扇', '繽紛', '胭粉', '青橘黃', '靛青', '24900'],
+    mbppooled: ['proled', 'xdr', '觸控螢幕', 'macbook pro 觸控', 'm5 pro', 'm5 max', 'thunderbolt 5', '120gb/s'],
+    watch12: ['series 12', 'watch 12', '準備指數', 'readiness', '5秒心率', '高頻 hrv', '精密陶瓷'],
+    ios27: ['ios 27', 'ios27', '全新 siri', 'siri ai', '空間重構', '清除工具', '延伸工具', 'liquid glass', '透明度滑桿', '升級變快', '兒少安全', '詢問可否瀏覽', '新系統'],
     ipad: ['平板', 'ipad', 'i pad', '小幫手', '幫手', '助理', '筆記', '學習', '創作', '簡報', '文書', 'pencil', '鍵盤', '生產力', '學生', '上課', '記錄', '草稿', '效率', '提醒'],
     line: ['line', '社群', '群組', '分享', '傳給', '家人', '回憶', '溫馨', '出遊', '旅行', '旅遊', '手機', '照片', '拍', '記錄', '製造', '創造', '好回憶', '家庭', '視訊'],
     gemini: ['gemini', 'ai', '智能', '規劃', '研究', '生成', '問', '幫忙', '建議', '行程', '旅行', '旅遊', '活動', '整理', '分析', '照片問', '生活', '小幫手'],
@@ -5833,7 +6895,7 @@ function findRecommendedTopics(sentence, maxN=3){
     youtube: ['youtube', '影片', 'shorts', '訂閱', '直播', '教學', '創作'],
     canva: ['canva', '設計', '海報', '簡報', '模板', '排版', '協作'],
     notion: ['notion', '筆記', '資料庫', '協作', '模板', '知識管理', '專案'],
-    spotify: ['spotify', '音樂', '播放清單', '發現', '離線', '播客'],
+    spotify: ['spotify', '音樂', '播放清單', '發現', '離線', 'Podcast'],
     translate: ['翻譯', '即時翻譯', '語言', '旅行', '旅遊', '外語', '對話', '菜單', '商務', '學習', '達人']
   };
 
@@ -5868,6 +6930,14 @@ function findRecommendedTopics(sentence, maxN=3){
     const topicIntents = [];
     const nLower = t.n.toLowerCase();
 
+    if (t.n.includes('iPhone Duo')) topicIntents.push('duo');
+    if (t.n.includes('iPhone 18 Pro')) topicIntents.push('iphone18');
+    if (t.n.includes('iPhone 17e')) topicIntents.push('iphone17e');
+    if (t.n.includes('iPad mini')) topicIntents.push('ipadmini', 'ipad');
+    if (t.n.includes('MacBook Neo')) topicIntents.push('macbookneo', 'mac');
+    if (t.n.includes('MacBook Pro')) topicIntents.push('mbppooled', 'mac');
+    if (t.n.includes('Series 12')) topicIntents.push('watch12', 'watch', 'health');
+    if (t.n.includes('iOS 27')) topicIntents.push('ios27');
     if (nLower.includes('ipad') || t.n.includes('平板') || t.n.includes('備忘錄') || t.n.includes('keynote') || t.n.includes('pages')) topicIntents.push('ipad');
     if (t.n.includes('Line') || t.n.includes('LINE')) topicIntents.push('line');
     if (t.n.includes('Gemini')) topicIntents.push('gemini');
@@ -5929,6 +6999,18 @@ function findRecommendedTopics(sentence, maxN=3){
     // 4. 日常生活使用情境加成（最重要：讓推薦符合真實門市小教室的「一個生活故事」）
     // 根據 detectScenarios 偵測到的情境，給屬於該情境的主題額外分數，確保同一情境的主題會一起被選中，形成邏輯連貫的組合。
     // 例如 travel 情境 → 地圖 + 照片/相機 + 翻譯 + LINE 分享 會互相加分，遠高於不相關的 iPad 筆記。
+    if (detectedScenarios.includes('folding')) {
+      if (t.n.includes('iPhone Duo')) { score += 18; boostSources.push('scenario:folding-專屬機型'); }
+      if (t.n.includes('iOS 27')) { score += 7; boostSources.push('scenario:folding-系統多工'); }
+    }
+    if (detectedScenarios.includes('flagship_photo')) {
+      if (t.n.includes('iPhone 18 Pro')) { score += 18; boostSources.push('scenario:flagship-可變光圈'); }
+      if (t.n.includes('iPhone 相機進階') || t.n.includes('鏡頭與構圖')) { score += 6; boostSources.push('scenario:flagship-攝影技巧'); }
+    }
+    if (detectedScenarios.includes('system_upgrade')) {
+      if (t.n.includes('iOS 27')) { score += 18; boostSources.push('scenario:upgrade-新系統'); }
+      if (t.n.includes('iOS 26')) { score += 5; boostSources.push('scenario:upgrade-前代比對'); }
+    }
     if (detectedScenarios.includes('travel')) {
       if (t.n.includes('地圖') || t.n.includes('Maps')) { score += 10; boostSources.push('scenario:travel-導航'); }
       if (t.n.includes('翻譯')) { score += 9; boostSources.push('scenario:travel-溝通'); }
@@ -6044,8 +7126,23 @@ function getWhyThisTopic(t, sentence) {
   const name = t.n;
   let why = '';
 
-  // 優先用情境導向的理由，讓門市人員一看就知道「這堂課教的是哪個日常生活使用情境」
-  if (name.toLowerCase().includes('ipad') || name.includes('平板')) {
+  if (name.includes('iPhone Duo')) {
+    why = 'iPhone Duo 是 Apple 首款摺疊手機：7.6 吋奈米紋理大螢幕展開即看、分割並排雙 App、半摺免腳架即可拍照通話，滿足大螢幕與便攜雙重需求。';
+  } else if (name.includes('iPhone 18 Pro')) {
+    why = 'iPhone 18 Pro 配備四段可變光圈主相機、A20 Pro 蒸發冷卻散熱與全新動態島，出廠預載 iOS 27，是追求極致影像創作與 AI 效能的最佳旗艦選擇。';
+  } else if (name.includes('iPhone 17e')) {
+    why = 'iPhone 17e 是超值入門新標竿：A19 晶片、4800 萬像素融合相機（2倍光學品質變焦）、超瓷晶盾 2 防護與動作按鈕，256GB 起跳售價僅 NT$21,900 起，實用首選！';
+  } else if (name.includes('iPad mini')) {
+    why = '全新 iPad mini 搭載 8.5 吋極窄邊框 OLED 螢幕、頂級 A20 Pro 晶片與 Apple Pencil Pro 雙擊旋轉感應，單手輕鬆掌握，掌上筆記與娛樂全能。';
+  } else if (name.includes('MacBook Neo')) {
+    why = 'MacBook Neo 專為輕量隨身打造：A18 Pro 晶片、1.05kg 極致羽量、無風扇安靜運作與 22 小時長效續航，四款潮流新色、NT$24,900 起超親民入手！';
+  } else if (name.includes('MacBook Pro')) {
+    why = '全新 MacBook Pro 首次導入 PROLED XDR 串聯式 OLED 觸控螢幕與動態島，搭載 M5 Pro/Max 晶片與 Thunderbolt 5，是極致影音剪輯與專業算圖王者。';
+  } else if (name.includes('Series 12')) {
+    why = 'Apple Watch Series 12 配備 S11 晶片與全新健康感測器，首度支援每日『準備指數』能量評估與每 5 秒高頻心率追蹤，全方位守護身心健康。';
+  } else if (name.includes('iOS 27')) {
+    why = 'iOS 27 正式推出！全新對話式 Siri AI、照片空間重構與清除增強、Liquid Glass 外觀調節滑桿與大幅提速的系統底層，升級後立刻有感。';
+  } else if (name.toLowerCase().includes('ipad') || name.includes('平板')) {
     if (s.includes('小幫手') || s.includes('幫手') || s.includes('助理')) {
       why = '你說「平板成為小幫手」，這個主題正好講 iPad 搭配 Apple Pencil / 鍵盤，變成上課記筆記、做簡報、創作的超強助手。';
     } else if (s.includes('學習') || s.includes('筆記') || s.includes('學生')) {
@@ -6095,7 +7192,7 @@ function getWhyThisTopic(t, sentence) {
     }
   } else if (name.includes('地圖') || name.includes('Maps')) {
     if (s.includes('旅遊') || s.includes('旅行') || s.includes('達人')) {
-      why = '「旅遊達人就是你」—— 地圖 App 的即時交通、Look Around 街景、精選美食指南、位置分享，正是規劃路線、路上找餐廳、跟家人報平安的專業日常工具。';
+      why = '「旅遊達人就是你」 ·  ·  地圖 App 的即時交通、Look Around 街景、精選美食指南、位置分享，正是規劃路線、路上找餐廳、跟家人報平安的專業日常工具。';
     } else {
       why = '地圖 App 精準導航、位置分享和探索指南，適合旅行規劃和日常移動教學。';
     }
@@ -6115,7 +7212,7 @@ function getWhyThisTopic(t, sentence) {
     why = 'Spotify 免費音樂串流，適合教您用 iPhone / AirPods 建立播放清單、發現新歌和離線聆聽。';
   } else if (name.includes('即時翻譯') || name.includes('翻譯')) {
     if (s.includes('旅遊') || s.includes('旅行') || s.includes('達人')) {
-      why = '「旅遊達人就是你」—— 即時翻譯的對話模式、相機掃菜單、離線支援，搭配 AirPods 聽翻譯語音，正是出國問路、點餐、購物時最實用的溝通神器。';
+      why = '「旅遊達人就是你」 ·  ·  即時翻譯的對話模式、相機掃菜單、離線支援，搭配 AirPods 聽翻譯語音，正是出國問路、點餐、購物時最實用的溝通神器。';
     } else {
       why = 'Apple 即時翻譯結合對話、相機和系統整合，適合教您在旅行、商務或日常與外語人士溝通，支援多款最新 iPhone / iPad / Mac 機型。';
     }
@@ -6129,7 +7226,7 @@ function getWhyThisTopic(t, sentence) {
 
   // 額外附上主題最有感的 1 個核心亮點（讓門市更清楚要教什麼）
   if (t.features && t.features[0]) {
-    const firstFt = t.features[0].ft.replace(/[—·].*/, '').trim();
+    const firstFt = t.features[0].ft.replace(/[ · ·].*/, '').trim();
     why += `（最有感亮點：${firstFt}）`;
   }
 
@@ -6250,7 +7347,7 @@ function doSmartRecommend(opts = {}){
         listParent.appendChild(dbgEl);
       }
       const top = dbg.scored.slice(0, 5).map(d =>
-        `${d.name} <span style="color:#0369a1;">${d.score}</span> <span style="color:#64748b;">[${(d.matches||[]).slice(0,4).join(',') || '—'}]</span>`
+        `${d.name} <span style="color:#0369a1;">${d.score}</span> <span style="color:#64748b;">[${(d.matches||[]).slice(0,4).join(',') || ' · '}]</span>`
       ).join('<br>');
       const scenStr = (dbg.detectedScenarios && dbg.detectedScenarios.length) ? dbg.detectedScenarios.join(' + ') : 'daily_life';
       dbgEl.innerHTML = `
@@ -6476,7 +7573,7 @@ function renderSocial(){
   const ppl=$('#ppl').value;
   const ageStr=ages.length?ages.map(a=>a.k).join('、'):'';
   const topicLines=topics.map(t=>t.ico+' '+t.n).join('\n');
-  const bullets=topics.slice(0,3).map(t=>'✓ '+t.features[0].ft.replace(/[—·].*/,'').trim()).join('\n');
+  const bullets=topics.slice(0,3).map(t=>'✓ '+t.features[0].ft.replace(/[ · ·].*/,'').trim()).join('\n');
   const hashtags='#'+store.replace(/\s/g,'')+' #Apple小教室 '+topics.slice(0,3).map(t=>'#'+t.n.split(/[\s·]/)[0]).join(' ');
   const info=[date?('🗓 '+date):'', '⏱ 約 '+dur+' 分鐘', ppl?('👥 限額 '+ppl+' 位'):''].filter(Boolean).join('　');
 

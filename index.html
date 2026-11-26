@@ -590,6 +590,54 @@
   .custom-dropdown-item{padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .12s ease}
   .custom-dropdown-item:hover{background:#f1f5f9}
   .custom-dropdown-item.selected{background:#e0f2fe;color:#0369a1;font-weight:800}
+
+  /* ===== 步驟精靈工作流導航條 (Wizard Stepper Bar) ===== */
+  .wizard-stepper-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 20px;background:#ffffff;border-bottom:1.5px solid var(--ui-bd);box-shadow:0 2px 6px rgba(0,0,0,.03);z-index:9;flex-wrap:wrap;gap:8px}
+  .wizard-steps-track{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .wizard-step-node{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:700;color:#64748b;background:#f1f5f9;cursor:pointer;transition:all .18s ease;border:1px solid transparent;user-select:none}
+  .wizard-step-node:hover{background:#e2e8f0;color:#1e293b}
+  .wizard-step-node.active{background:#0284c7;color:#ffffff;box-shadow:0 2px 8px rgba(2,132,199,.28)}
+  .wizard-step-node.completed{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
+  .step-node-badge{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:rgba(0,0,0,.08)}
+  .wizard-step-node.active .step-node-badge{background:rgba(255,255,255,.25);color:#fff}
+  .wizard-step-node.completed .step-node-badge{background:#047857;color:#fff}
+  .wizard-divider{font-size:10px;color:#cbd5e1}
+  .wizard-tip-box{font-size:11px;color:#0369a1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:3px 9px;display:inline-flex;align-items:center;gap:5px;font-weight:600}
+  .wizard-nav-actions{display:flex;align-items:center;gap:6px}
+  .wizard-btn{padding:5px 13px;border-radius:7px;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s ease;font-family:inherit;border:1.5px solid transparent}
+  .wizard-btn.prev{background:#f8fafc;border-color:#cbd5e1;color:#475569}
+  .wizard-btn.prev:hover:not(:disabled){background:#f1f5f9;border-color:#94a3b8}
+  .wizard-btn.prev:disabled{opacity:.4;cursor:not-allowed}
+  .wizard-btn.next{background:#0284c7;color:#fff;border-color:#0284c7}
+  .wizard-btn.next:hover{background:#0369a1;transform:translateY(-1px)}
+  .wizard-btn.finalize{background:#059669;color:#fff;border-color:#059669;box-shadow:0 2px 8px rgba(5,150,105,.3)}
+  .wizard-btn.finalize:hover{background:#047857;transform:scale(1.02)}
+
+  /* 步驟焦點高亮光暈 */
+  .step-focus-highlight{box-shadow:0 0 0 3px rgba(2,132,199,.35) !important;transition:box-shadow .25s ease !important}
+
+  /* 一鍵連動直達按鈕與浮動提示 */
+  .ai-direct-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1}
+  .btn-direct-agent{padding:7px 13px;border-radius:7px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s ease;border:none;color:#fff}
+  .btn-direct-agent.grok-btn{background:#09090b;border:1px solid #27272a}
+  .btn-direct-agent.grok-btn:hover{background:#18181b;transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.25)}
+  .btn-direct-agent.gemini-btn{background:#1a73e8;border:1px solid #1557b0}
+  .btn-direct-agent.gemini-btn:hover{background:#1557b0;transform:translateY(-1px);box-shadow:0 3px 8px rgba(26,115,232,.3)}
+  .btn-direct-agent.gpt-btn{background:#10a37f;border:1px solid #0d8265}
+  .btn-direct-agent.gpt-btn:hover{background:#0d8265;transform:translateY(-1px);box-shadow:0 3px 8px rgba(16,163,127,.3)}
+  .flow-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:#0f172a;color:#ffffff;padding:9px 18px;border-radius:999px;font-size:12.5px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:99999;opacity:0;pointer-events:none;transition:all .25s ease}
+  .flow-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  /* 定案中心 Hub Modal 樣式 */
+  .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .hub-card{background:#ffffff;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;transition:all .15s ease}
+  .hub-card:hover{border-color:#0284c7;box-shadow:0 3px 10px rgba(2,132,199,.1)}
+  .hub-card-hd{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:#0f172a;margin-bottom:3px}
+  .hub-card-desc{font-size:11px;color:#64748b;line-height:1.4;margin-bottom:10px}
+  .hub-card-btn{padding:6px 11px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;transition:.15s}
+  .hub-card-btn:hover{background:#0284c7;color:#fff;border-color:#0284c7}
+  .hub-card-btn.primary{background:#0284c7;color:#fff;border-color:#0284c7}
+  .hub-card-btn.primary:hover{background:#0369a1}
 </style>
 </head>
 <body>
@@ -614,6 +662,40 @@
     <button class="btn ghost" onclick="downloadPptx()" id="pptxBtn" disabled>📥 下載 .pptx</button>
     <button class="btn" id="genBtn" onclick="generate()">生成簡報</button>
     <span style="font-size:9px;color:#b91c1c;margin-left:8px;font-weight:600;align-self:center;white-space:nowrap;">此為內部共用工具，請勿外傳連結</span>
+  </div>
+</div>
+
+<!-- ===== 步驟式工作流引導條 (Step-by-Step Flow 到最後定案) ===== -->
+<div class="wizard-stepper-bar" id="wizardStepperBar">
+  <div class="wizard-steps-track">
+    <div class="wizard-step-node active" id="stepNode1" onclick="goToWizardStep(1)">
+      <span class="step-node-badge">1</span>
+      <span>挑選課綱主題</span>
+    </div>
+    <span class="wizard-divider">➔</span>
+    <div class="wizard-step-node" id="stepNode2" onclick="goToWizardStep(2)">
+      <span class="step-node-badge">2</span>
+      <span>學員對象與時長</span>
+    </div>
+    <span class="wizard-divider">➔</span>
+    <div class="wizard-step-node" id="stepNode3" onclick="goToWizardStep(3)">
+      <span class="step-node-badge">3</span>
+      <span>活動時間地點</span>
+    </div>
+    <span class="wizard-divider">➔</span>
+    <div class="wizard-step-node" id="stepNode4" onclick="goToWizardStep(4)">
+      <span class="step-node-badge">4</span>
+      <span>完成定案產出</span>
+    </div>
+  </div>
+
+  <div class="wizard-tip-box" id="wizardTipBox">
+    💡 步驟 1 / 4：請在左側主題庫挑選想帶的主題（推薦 1 到 2 門，或點「⭐ 新手首選」挑安全牌）
+  </div>
+
+  <div class="wizard-nav-actions">
+    <button type="button" class="wizard-btn prev" id="wizardPrevBtn" onclick="wizardStepPrev()" disabled>‹ 上一步</button>
+    <button type="button" class="wizard-btn next" id="wizardNextBtn" onclick="wizardStepNext()">下一步：設定學員 ➔</button>
   </div>
 </div>
 
@@ -1021,7 +1103,8 @@
           <div class="ai-control-group">
             <span class="ai-ctl-label">目標 Agent：</span>
             <div class="ai-btn-group" id="aiAgentTabs">
-              <button type="button" class="ai-tab-btn active" onclick="switchAiAgent('gemini', this)">💎 Google Gemini</button>
+              <button type="button" class="ai-tab-btn active" onclick="switchAiAgent('grok', this)">⚡ xAI Grok (首選)</button>
+              <button type="button" class="ai-tab-btn" onclick="switchAiAgent('gemini', this)">💎 Google Gemini</button>
               <button type="button" class="ai-tab-btn" onclick="switchAiAgent('chatgpt', this)">💬 OpenAI ChatGPT</button>
               <button type="button" class="ai-tab-btn" onclick="switchAiAgent('universal', this)">🎨 通用生圖 Prompt</button>
             </div>
@@ -1042,9 +1125,15 @@
 
         <div class="ai-panel-footer">
           <div style="font-size:11px;color:#64748b;">
-            💡 提示：點擊複製後，可直接貼至 <a href="https://gemini.google.com" target="_blank" style="color:#0284c7;font-weight:600;text-decoration:underline;">Gemini</a> 或 <a href="https://chatgpt.com" target="_blank" style="color:#0284c7;font-weight:600;text-decoration:underline;">ChatGPT</a> 產出高畫質海報或版面提案！
+            💡 提示：點擊下方「一鍵連動」，自動複製超精準指令並打開該平台，新分頁直接貼上即可生成！
           </div>
-          <button type="button" class="btn-copy-prompt" onclick="copyAiPrompt(this)">📋 複製指令至剪貼簿</button>
+          <button type="button" class="btn-copy-prompt" onclick="copyAiPrompt(this)">📋 單純複製指令</button>
+        </div>
+
+        <div class="ai-direct-actions">
+          <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="一鍵複製指令並開啟 Grok">⚡ 一鍵連動 Grok (最主要推薦)</button>
+          <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="一鍵複製指令並開啟 Gemini">💎 一鍵連動 Gemini</button>
+          <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')" title="一鍵複製指令並開啟 ChatGPT">💬 一鍵連動 ChatGPT</button>
         </div>
       </div>
       <div class="hint-box" style="margin:0 0 12px">✏️ <b>海報上的文字可直接點擊修改</b>（標題、主題、報名方式等）。改完按「📥 存成圖片」就會存成您編輯後的版本；切換版型／配色也會保留修改。日期、時間、地點、名額請用上方欄位調整。</div>
@@ -1192,6 +1281,92 @@
     </div>
   </div>
 </div>
+
+<!-- ===== 課程全套教材定案中心 Modal (Finalized Hub Modal) ===== -->
+<div id="finalizedHubModal" class="modal-mask" onclick="if(event.target===this)closeModal('finalizedHubModal')">
+  <div class="modal-box" style="max-width:760px;">
+    <div class="modal-hd">
+      <div>
+        <div style="display:inline-block;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;">✓ 步驟 4 / 4 流程定案成功</div>
+        <h2 style="color:#0f172a;">🎉 課程全套教材已完整定案！</h2>
+        <div class="modal-sub">已為您根據當前課綱主題、學員設定與活動時間，自動生成專屬簡報、講師備忘錄、速覽卡與宣傳文案。</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('finalizedHubModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#0369a1;display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>課程主題：</strong><span id="hubTopicName">已選取主題</span></div>
+        <div><strong>預計時長：</strong><span id="hubDuration">60</span> 分鐘</div>
+      </div>
+
+      <div class="hub-grid">
+        <!-- 卡片 1：演練簡報 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>📺</span> 演練投影片簡報</div>
+            <div class="hub-card-desc">已在中間畫布渲染完成，支援鍵盤左右箭頭或下方按鈕翻頁演練。</div>
+          </div>
+          <button type="button" class="hub-card-btn primary" onclick="closeModal('finalizedHubModal')">▶ 開始演練簡報</button>
+        </div>
+
+        <!-- 卡片 2：本頁講師備忘錄 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>🎙️</span> 本頁講師備忘錄</div>
+            <div class="hub-card-desc">每頁切換同步顯示口語講法、轉場話術、互動提問句與動作提示。</div>
+          </div>
+          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');focusSpeakerNotes();">👀 查看講師備忘錄</button>
+        </div>
+
+        <!-- 卡片 3：課前 3 分鐘速覽卡 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>📋</span> 課前 3 分鐘速覽卡</div>
+            <div class="hub-card-desc">新手上台定心丸：現場配速時間表、器材環境 3 分鐘速檢與三大救援話術。</div>
+          </div>
+          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');openRunDownModal();">⏱ 開啟課前速覽卡</button>
+        </div>
+
+        <!-- 卡片 4：開課宣傳海報 ＋ AI 一鍵連動 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>📣</span> 宣傳海報 ＋ AI 一鍵生圖</div>
+            <div class="hub-card-desc">可直接存成 A4/方形海報圖片，或一鍵直連 Grok、Gemini、ChatGPT 生圖！</div>
+          </div>
+          <button type="button" class="hub-card-btn primary" onclick="closeModal('finalizedHubModal');openPosterModal();">🎨 開啟海報與 AI 連動</button>
+        </div>
+
+        <!-- 卡片 5：社群推廣文案 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>✍️</span> 社群開課文案</div>
+            <div class="hub-card-desc">一鍵產生短版快貼、長版貼文與親切邀請版，直接貼到 LINE@ 或社群。</div>
+          </div>
+          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');openSocialModal();">💬 複製社群文案</button>
+        </div>
+
+        <!-- 卡片 6：下載簡報與講稿 -->
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-hd"><span>📥</span> 下載 .pptx 與講稿</div>
+            <div class="hub-card-desc">下載 Keynote/PowerPoint 簡報檔（含備忘稿），或單人旁白備課文字檔。</div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button type="button" class="hub-card-btn" style="flex:1;" onclick="downloadPptx()">📥 下載 PPTX</button>
+            <button type="button" class="hub-card-btn" style="flex:1;" onclick="downloadPodcastScript()">📻 下載講稿</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot" style="justify-content:space-between;">
+      <button class="btn ghost" onclick="goToWizardStep(1);closeModal('finalizedHubModal');">↩︎ 返回重新挑選主題</button>
+      <button class="btn" onclick="closeModal('finalizedHubModal')" style="background:#0284c7;color:#fff;font-weight:700;">✓ 關閉視窗，開始備課</button>
+    </div>
+  </div>
+</div>
+
+<!-- 浮動提示 Toast -->
+<div id="flowToast" class="flow-toast"></div>
 
 
 <script>
@@ -4310,7 +4485,7 @@ function renderAges(){
   $('#aCount').textContent = String(SELECTED_A.size).padStart(2,'0');
   updateSummary();
 }
-function toggleT(i){ SELECTED_T.has(i)?SELECTED_T.delete(i):SELECTED_T.add(i); renderTopics(); }
+function toggleT(i){ SELECTED_T.has(i)?SELECTED_T.delete(i):SELECTED_T.add(i); renderTopics(); if(typeof updateWizardStepFromSelection==="function") updateWizardStepFromSelection(); }
 function clearSelectedTopics(){ 
   SELECTED_T.clear(); 
   const note = $('#genToneNote');
@@ -7821,8 +7996,8 @@ function renderSocial(){
     '<div class="hint-box" style="margin-top:4px">💡 文案中的門市名稱與報名方式來自「⚙️ 門市設定」。日期／時長／人數取自中間欄上方欄位，可先填好再產生。</div>';
 }
 
-/* ---------- AI 海報生成指令轉換器 (Gemini ✕ ChatGPT ✕ Midjourney) ---------- */
-let CURRENT_AI_AGENT = 'gemini';
+/* ---------- AI 海報生成指令轉換器 (xAI Grok 首選 ✕ Gemini ✕ ChatGPT ✕ 通用) ---------- */
+let CURRENT_AI_AGENT = 'grok';
 let CURRENT_AI_STYLE = 'minimal';
 
 function toggleAiPromptPanel(forceOpen) {
@@ -7877,13 +8052,14 @@ function fallbackCopy(textarea, btn) {
   textarea.select();
   try {
     document.execCommand('copy');
-    showCopyFeedback(btn);
+    if (btn) showCopyFeedback(btn);
   } catch (e) {
     alert('已全選文字，請按 Cmd+C 複製！');
   }
 }
 
 function showCopyFeedback(btn) {
+  if (!btn) return;
   const origText = btn.innerHTML;
   btn.innerHTML = '✓ 已成功複製到剪貼簿！';
   btn.classList.add('copied');
@@ -7893,6 +8069,53 @@ function showCopyFeedback(btn) {
   }, 2200);
 }
 
+/* 一鍵連動直達 Grok / Gemini / ChatGPT */
+function directLaunchAgent(agent) {
+  if (['grok', 'gemini', 'chatgpt'].includes(agent)) {
+    CURRENT_AI_AGENT = agent;
+    const tabBtn = document.querySelector(`#aiAgentTabs .ai-tab-btn[onclick*="'${agent}'"]`);
+    if (tabBtn) {
+      document.querySelectorAll('#aiAgentTabs .ai-tab-btn').forEach(b => b.classList.remove('active'));
+      tabBtn.classList.add('active');
+    }
+  }
+  updateAiPromptOutput();
+  const textarea = document.getElementById('aiPromptTextarea');
+  const promptText = textarea ? textarea.value : buildAiPosterPrompt(agent, CURRENT_AI_STYLE);
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(promptText).catch(() => {});
+  } else if (textarea) {
+    fallbackCopy(textarea, null);
+  }
+
+  let url = 'https://grok.com';
+  let agentName = 'xAI Grok';
+  if (agent === 'gemini') {
+    url = 'https://gemini.google.com';
+    agentName = 'Google Gemini';
+  } else if (agent === 'chatgpt') {
+    url = 'https://chatgpt.com';
+    agentName = 'ChatGPT';
+  }
+
+  window.open(url, '_blank');
+  showToast(`⚡ 已成功複製 ${agentName} 專用超精準指令！已為您在新分頁開啟 ${agentName}，直接貼上（Cmd+V）即可開始生圖！`, 4000);
+}
+
+/* 浮動提示 Toast 訊息 */
+function showToast(msg, duration = 3500) {
+  const toast = document.getElementById('flowToast');
+  if (!toast) return;
+  toast.innerHTML = msg;
+  toast.classList.add('show');
+  if (window._flowToastTimer) clearTimeout(window._flowToastTimer);
+  window._flowToastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
+
+/* 超精準海報生圖與活動文案指令生成演算法 */
 function buildAiPosterPrompt(agent, style) {
   const topics = selectedTopics();
   const ages = selectedAges();
@@ -7908,80 +8131,155 @@ function buildAiPosterPrompt(agent, style) {
   // 整理主題要點
   const topicDetails = topics.map((t, idx) => {
     const fts = (t.features || []).slice(0, 3).map(f => f.ft).join('、');
-    return `主題 ${idx + 1}：【${t.n}】\n  - 核心特色：${t.tagline || t.sub || ''}\n  - 重點實作：${fts || '現場真機實作帶練'}`;
+    return `主題 ${idx + 1}：【${t.n}】
+  · 核心特色：${t.tagline || t.sub || ''}
+  · 重點實作：${fts || '現場真機實作帶練'}`;
   }).join('\n');
 
-  if (agent === 'gemini') {
+  // 硬體特徵辨識演算法
+  const fullTopicText = topics.map(t => t.n + ' ' + (t.sub||'') + ' ' + (t.features||[]).map(f=>f.ft).join(' ')).join(' ');
+  let hwFeature = '';
+  if (/iPhone 18|18 Pro|雙光圈|機械光圈/i.test(fullTopicText)) {
+    hwFeature = 'iPhone 18 Pro in desert titanium finish, featuring micro-mechanical dual-aperture diaphragm camera system, quad-lens array with anti-reflective nano-coating, precision brushed titanium chassis with subtle chamfered edges, studio lighting reflecting off camera glass';
+  } else if (/Duo|折疊|雙螢幕|雙螢/i.test(fullTopicText)) {
+    hwFeature = 'iPhone Duo in 120-degree dynamic tent angle, dual Ultra Retina XDR flexible displays with zero-gap crease, precision titanium dual-gear hinge visible at the seam, running multi-window iPadOS-inspired interface';
+  } else if (/Mac|MacBook|Neo/i.test(fullTopicText)) {
+    hwFeature = 'MacBook Neo in featherweight anodized aluminum chassis, edge-to-edge PROLED display showing creative workspace, slim profile with tactile keyboard and precision trackpad';
+  } else if (/iPad|Pencil|筆記/i.test(fullTopicText)) {
+    hwFeature = 'iPad Pro with symmetrical thin bezels, Apple Pencil Pro hovering with tactile shadow, Liquid Retina XDR screen with vivid creative notes';
+  } else {
+    hwFeature = 'Flagship Apple device with precision-machined aerospace-grade aluminum and glass body, ceramic shield front, exquisite edge reflections, iconic minimalist industrial design';
+  }
+
+  if (agent === 'grok') {
+    // xAI Grok (首選測試目標)
+    if (style === 'minimal') {
+      return `【xAI Grok / Aurora 專用超精準指令：Apple 官方簡約高質感活動海報】
+
+請扮演一位兼具科技美學與頂級雜誌排版素養的 Apple 視覺設計總監。請為即將舉辦的門市「Apple 小教室」活動，設計一張具備高階雜誌感與極簡通透美學的宣傳海報，並產出精確生圖 Prompt 與完整文案排版規劃：
+
+📌 活動核心資訊：
+· 主辦單位：${store}
+· 活動主題：【${title}】
+· 涵蓋內容：
+${topicDetails}
+· 目標受眾：${ageStr}
+· 活動時間：${date} ｜ ${time}
+· 活動地點：${place}
+· 報名方式：${signup}（${seats}）
+
+🎨 視覺生圖指令（精準硬體、燈光與負空間規劃）：
+請使用 Grok / Aurora 圖像生成模型生成海報背景主視覺：
+[Image Generation Prompt]
+Ultra-minimalist Apple Workshop advertising poster, featuring ${hwFeature}. Clean editorial layout with ample macro-whitespace (top 35% empty negative space for typography), subject positioned at the bottom golden ratio. High-end studio lighting setup (5200K daylight-balanced softbox key light, gentle rim light, subtle metallic edge highlights, soft studio ground shadow). Canvas color: warm off-white (#FAFAF8) with a single sophisticated accent tone (Apple Deep Indigo #1F3A5F or Warm Amber #F5A623). Ultra-sharp focus, 8k resolution, photorealistic industrial design photography, Hasselblad medium format camera aesthetic.
+[Negative Prompt]
+no text clutter, no low-resolution artifacts, no unrealistic plastic skin, no distorted fingers or hands, no heavy gradients, no gaudy 3D renders, no blurry lenses, no oversaturation, no messy backgrounds.
+
+📄 繁體中文海報文案與排版配置：
+1. 頂部大標題：【${title}】
+2. 情感引導金句：不只是規格介紹，更帶您實機上手，讓科技無縫融入生活。
+3. 三大上手精華：
+${topics.slice(0, 3).map((t, idx) => `   [0${idx+1}] ${t.n} · ${t.tagline || '真機動手演練'}`).join('\n')}
+4. 底部資訊列：${date} ｜ ${time} ｜ ${place}（${signup}，${seats}）`;
+    } else {
+      return `【xAI Grok / Aurora 專用超精準指令：年輕活力新粗獷社群海報】
+
+請扮演一位引領潮流的當代科技視覺設計師。請為即將舉辦的「Apple 小教室」活動，設計一張充滿年輕活力、高吸睛度與生活感的新粗獷風格宣傳海報（適合 Instagram / LINE@ 社群分享與實體立牌）：
+
+📌 活動核心資訊：
+· 主辦單位：${store}
+· 活動主題：【${title}】
+· 涵蓋內容：
+${topicDetails}
+· 目標受眾：${ageStr}（主打年輕族群、大學生、生活創作者）
+· 活動時間：${date} ｜ ${time}
+· 活動地點：${place}
+· 報名方式：${signup}（${seats}）
+
+🎨 視覺生圖指令（潮流新粗獷、明快動態與色塊）：
+[Image Generation Prompt]
+Modern trendy Apple Workshop event poster, Neo-brutalist and contemporary pop art style. Warm cream background (#FDEFD4) with bold energetic accent color (signature bright orange #ED6702) and deep charcoal details (#18181B). Featuring ${hwFeature} blended with clean 2D flat vector lifestyle illustration, playful geometric badges, dynamic flow line. High contrast, sharp vector edges, crisp graphic design, clean negative space for headline text.
+[Negative Prompt]
+no photorealistic human clutter, no 3D shiny plastic rendering, no blurry gradients, no text gibberish, no chaotic neon colors, no muddy textures.
+
+📄 社群傳播與立牌文案排版：
+1. 醒目標籤：[⭐ 新手友善] [🙌 帶機動手練] [🔥 限額體驗]
+2. 主標題：【${title}】
+3. 亮點內容：
+${topics.slice(0, 3).map((t, idx) => `   ▶ ${t.n}：${t.tagline || '實機操作學到會'}`).join('\n')}
+4. 現場資訊：${date} ${time} ｜ ${place}（${signup}）`;
+    }
+  } else if (agent === 'gemini') {
+    // Google Gemini / Imagen 3
     if (style === 'minimal') {
       return `【Google Gemini / Imagen 3 專用指令：Apple 官方簡約高質感宣傳海報】
 
-請扮演一位頂尖的 Apple 視覺設計總監與資深平面設計師。請為即將舉辦的門市「Apple 小教室」活動，設計一張具備高階雜誌感與極簡通透美學的活動宣傳海報（或產出 Imagen 3 高畫質生圖與排版規格）：
+請扮演一位頂尖的 Apple 視覺設計總監與資深平面設計師。請為即將舉辦的門市「Apple 小教室」活動，設計一張具備高階雜誌感與極簡通透美學的活動宣傳海報：
 
 📌 活動核心資訊：
-- 主辦單位：${store}
-- 活動主題：【${title}】
-- 涵蓋內容：
+· 主辦單位：${store}
+· 活動主題：【${title}】
+· 涵蓋內容：
 ${topicDetails}
-- 目標受眾：${ageStr}
-- 活動時間：${date} ｜ ${time}
-- 活動地點：${place}
-- 報名方式：${signup}（${seats}）
+· 目標受眾：${ageStr}
+· 活動時間：${date} ｜ ${time}
+· 活動地點：${place}
+· 報名方式：${signup}（${seats}）
 
 🎨 視覺與生圖風格指導（Apple Minimalist Aesthetic）：
-1. 構圖與排版：維持極簡、通透的版面空間感（Macro-whitespace），大膽留白，避免任何視覺擁擠。文字階層分明，主標題優雅大器，副標題與活動要點清晰易讀。
-2. 背景與色彩：高質感暖骨白或米白色畫布底色（Warm Off-white, #FAFAF8），搭配 Apple 經典單一強調點綴色（如科技深靛藍 #1F3A5F 或經典琥珀橘 #F5A623），嚴禁混亂雜色、嚴禁浮誇漸層或廉價玻璃光。
-3. 主視覺焦點：以精緻純粹的產品極簡線條或高品質向量插畫呈現（如精密的相機鏡頭輪廓、極簡裝置外型或生活科技互動手勢），展現「科技融入日常生活」的溫暖質感。
-4. 文字標註規範：文字採用標準繁體中文（台灣習慣用語），排版兼具現代無襯線（Sans-serif）字體之俐落洗鍊。
+1. 構圖與排版：維持極簡、通透的版面空間感（Macro-whitespace），大膽留白，頂部預留 35% 負空間。文字階層分明，主標題優雅大器。
+2. 背景與色彩：高質感暖骨白畫布底色（Warm Off-white, #FAFAF8），搭配 Apple 經典單一強調點綴色（深靛藍 #1F3A5F 或琥珀橘 #F5A623），嚴禁混亂雜色或漸層。
+3. 主視覺焦點：以精緻純粹的產品微細節呈現：${hwFeature}。
 
-請根據上述資訊，產出：
-1. 適用於 Imagen 3 的英文高解析度生圖 Prompt（以 Clean, Minimalist, Apple Editorial Style, high-end studio lighting, 8k resolution 呈現）。
+請根據上述資訊產出：
+1. 適用於 Imagen 3 的英文高解析度生圖 Prompt（包含 studio lighting 5200K, Hasselblad medium format camera aesthetic, clean macro-whitespace, 8k resolution）。
 2. 繁體中文海報文案排版架構建議（包含主標題、引言金句、三項重點、時間地點排版）。`;
     } else {
       return `【Google Gemini / Imagen 3 專用指令：年輕活力新粗獷社群海報】
 
-請扮演一位潮流科技品牌的資深視覺設計師。請為即將舉辦的「Apple 小教室」活動，設計一張充滿年輕活力、高吸睛度與生活感的新粗獷風格宣傳海報（或產出 Imagen 3 生圖與排版規格）：
+請扮演一位潮流科技品牌的資深視覺設計師。請為即將舉辦的「Apple 小教室」活動，設計一張充滿年輕活力、高吸睛度與生活感的新粗獷風格宣傳海報：
 
 📌 活動核心資訊：
-- 主辦單位：${store}
-- 活動主題：【${title}】
-- 涵蓋內容：
+· 主辦單位：${store}
+· 活動主題：【${title}】
+· 涵蓋內容：
 ${topicDetails}
-- 目標對象：${ageStr}（主打年輕族群、大學生、生活創作者）
-- 活動時間：${date} ｜ ${time}
-- 活動地點：${place}
-- 報名方式：${signup}（${seats}）
+· 目標對象：${ageStr}（主打年輕族群、大學生、生活創作者）
+· 活動時間：${date} ｜ ${time}
+· 活動地點：${place}
+· 報名方式：${signup}（${seats}）
 
 🎨 視覺與生圖風格指導（Vibrant & Pop Modern Style）：
 1. 構圖調性：年輕、明快、充滿互動與生活節奏感，適合 Instagram / LINE@ 社群推廣與實體立牌。
-2. 色彩計畫：大膽吸睛的經典亮橘色（#ED6702）作為核心基調，搭配清爽暖奶油卡片（#FDEFD4）與深炭灰文字（#18181B），視覺對比鮮明。
-3. 插畫風格：扁平手繪感向量插畫、輕微等角幾何視角，帶有道路、圖標、探索符號等趣味動線串聯版面，絕無油膩 3D 或雜亂漸層。
-4. 排版與標籤：大粗體英文搭配圓潤正體中文字體，搭配小膠囊標籤（如「⭐ 新手首選」、「🙌 真機動手做」），資訊清晰好閱讀。
+2. 色彩計畫：大膽吸睛的經典亮橘色（#ED6702）作為核心基調，搭配清爽暖奶油卡片（#FDEFD4）與深炭灰文字（#18181B）。
+3. 插畫風格：扁平手繪感向量插畫、輕微等角幾何視角，搭配 ${hwFeature}。
 
-請根據上述需求，產出：
+請產出：
 1. 適用於 Imagen 3 的英文潮流生圖 Prompt（包含 Vibrant flat vector illustration, bold clean layout, bright warm palette, modern pop aesthetics, crisp details）。
 2. 適合 Instagram / Threads 社群傳播的繁體中文海報文案與版面配置。`;
     }
   } else if (agent === 'chatgpt') {
+    // OpenAI ChatGPT / DALL-E 3
     if (style === 'minimal') {
       return `You are an elite graphic designer and creative director specialized in Apple's iconic design language and editorial print aesthetics.
 
 Create a comprehensive design plan and DALL-E 3 image generation prompt for an upcoming Apple Workshop event poster.
 
 [Event Information]
-- Host: ${store}
-- Workshop Title: "${title}"
-- Topics Covered:
+· Host: ${store}
+· Workshop Title: "${title}"
+· Topics Covered:
 ${topicDetails}
-- Target Audience: ${ageStr}
-- Date & Time: ${date} | ${time}
-- Location: ${place}
-- Admission & RSVP: ${signup} (${seats})
+· Target Audience: ${ageStr}
+· Date & Time: ${date} | ${time}
+· Location: ${place}
+· Admission & RSVP: ${signup} (${seats})
 
 [Visual & Aesthetic Guidelines]
 1. Concept: Clean, spacious, and ultra-refined editorial poster layout.
-2. Canvas & Color: Premium warm off-white background (#FAFAF8), charcoal black typography (#18181B), and a single subtle accent tone (Deep Indigo #1F3A5F or Warm Amber #F5A623). No heavy gradients, no harsh dropshadows.
-3. Visual Element: Minimalist line-art vector illustration or elegant product silhouette representing modern Apple lifestyle, ample negative space (macro-whitespace).
-4. Typography Hierarchy: Elegant modern sans-serif typography, crisp layout optimized for Traditional Chinese (繁體中文).
+2. Hardware Detail: ${hwFeature}.
+3. Canvas & Color: Premium warm off-white background (#FAFAF8), charcoal black typography (#18181B), and a single subtle accent tone (Deep Indigo #1F3A5F or Warm Amber #F5A623). Top 35% negative space for typography.
+4. Lighting: 5200K studio softbox lighting with soft shadow.
 
 [Required Output]
 1. Exact DALL-E 3 image generation prompt in English, focusing on studio-quality lighting, minimalist composition, and high-end editorial graphic design.
@@ -7992,20 +8290,20 @@ ${topicDetails}
 Create a striking poster design plan and DALL-E 3 generation prompt for an Apple Store Workshop.
 
 [Event Information]
-- Host: ${store}
-- Workshop Title: "${title}"
-- Topics Covered:
+· Host: ${store}
+· Workshop Title: "${title}"
+· Topics Covered:
 ${topicDetails}
-- Target Audience: ${ageStr} (Young creators, students, tech enthusiasts)
-- Date & Time: ${date} | ${time}
-- Location: ${place}
-- Admission: ${signup} (${seats})
+· Target Audience: ${ageStr} (Young creators, students, tech enthusiasts)
+· Date & Time: ${date} | ${time}
+· Location: ${place}
+· Admission: ${signup} (${seats})
 
 [Visual & Aesthetic Guidelines]
 1. Style: Modern Pop & Neo-Brutalist inspired layout with warm vibrant energy.
-2. Color Scheme: Bold energetic orange (#ED6702) accent, warm cream cards (#FDEFD4), crisp dark typography, highly legible with great contrast.
-3. Graphic Elements: Flat 2D vector tech illustrations, playful geometric badges (e.g., "Hands-on", "Beginner Friendly"), dynamic visual flow.
-4. Mood: Youthful, friendly, engaging, inviting attendees to explore and create.
+2. Hardware Integration: ${hwFeature}.
+3. Color Scheme: Bold energetic orange (#ED6702) accent, warm cream cards (#FDEFD4), crisp dark typography.
+4. Graphic Elements: Flat 2D vector tech illustrations, playful geometric badges.
 
 [Required Output]
 1. English DALL-E 3 prompt crafted for bold, clean vector poster art without text clutter.
@@ -8014,9 +8312,165 @@ ${topicDetails}
   } else {
     // Universal 生圖 Prompt (Midjourney / Imagen / 通用 AI 繪圖)
     const engTopics = topics.map(t => t.n).join(', ');
-    return `Minimalist Apple Workshop promotional event poster, featuring "${title}", themes of ${engTopics}, clean editorial layout, sophisticated warm off-white background #FAFAF8, single elegant accent color, refined vector outline illustration of modern Apple technology and creative lifestyle, vast negative space, balanced macro-whitespace, studio lighting, Swiss graphic design influence, high contrast clean lines, elegant typography placeholder, 8k resolution, vector art style --ar ${POSTER_FMT==='sq'?'1:1':'3:4'}`;
+    return `Minimalist Apple Workshop promotional event poster, featuring ${hwFeature}, themes of "${title}" (${engTopics}), clean editorial layout, sophisticated warm off-white background #FAFAF8, single elegant accent color, refined vector outline illustration of modern Apple technology and creative lifestyle, vast negative space, balanced macro-whitespace, 5200K studio softbox lighting, Swiss graphic design influence, high contrast clean lines, elegant typography placeholder, 8k resolution, photorealistic industrial design --ar ${POSTER_FMT==='sq'?'1:1':'3:4'} --style raw --v 6.1`;
   }
 }
+
+/* ---------- 步驟精靈導覽工作流 (Step-by-Step Wizard Flow) ---------- */
+let CURRENT_WIZARD_STEP = 1;
+
+function updateWizardStepFromSelection() {
+  if (CURRENT_WIZARD_STEP === 1) {
+    goToWizardStep(1);
+  }
+}
+
+function goToWizardStep(step) {
+  if (step < 1) step = 1;
+  if (step > 4) step = 4;
+
+  const topicCount = selectedTopics().length;
+
+  // 阻擋：若要前進到步驟 2、3、4，但尚未勾選任何主題
+  if (step > 1 && topicCount === 0) {
+    showToast('⚠️ 請先在步驟 1 勾選至少一個感興趣的課綱主題喔！');
+    step = 1;
+  }
+
+  CURRENT_WIZARD_STEP = step;
+
+  // 更新導覽節點外觀
+  for (let i = 1; i <= 4; i++) {
+    const node = document.getElementById(`stepNode${i}`);
+    if (node) {
+      node.classList.remove('active', 'completed');
+      if (i === step) node.classList.add('active');
+      else if (i < step) node.classList.add('completed');
+    }
+  }
+
+  // 更新導覽提示文字與按鈕
+  const hintEl = document.getElementById('wizardTipBox') || document.getElementById('wizardStepHint');
+  const btnPrev = document.getElementById('wizardPrevBtn') || document.getElementById('wizardBtnPrev');
+  const btnNext = document.getElementById('wizardNextBtn') || document.getElementById('wizardBtnNext');
+
+  if (step === 1) {
+    if (hintEl) {
+      hintEl.innerHTML = topicCount > 0 
+        ? `💡 <strong>步驟 1 / 4：</strong> 已選取 <strong>${topicCount}</strong> 個課綱主題！可點擊右側「下一步」設定學員對象與時長。`
+        : `💡 <strong>步驟 1 / 4：</strong> 請在左側主題庫挑選想帶的主題（可點擊星級篩選或自訂主題）。`;
+    }
+    if (btnPrev) { btnPrev.disabled = true; btnPrev.style.opacity = '0.5'; btnPrev.innerHTML = '‹ 上一步'; }
+    if (btnNext) {
+      btnNext.innerHTML = '下一步：設定學員 ➔';
+      btnNext.className = 'wizard-btn next';
+    }
+    highlightPanel('left');
+  } else if (step === 2) {
+    if (hintEl) {
+      hintEl.innerHTML = `💡 <strong>步驟 2 / 4：</strong> 請在右側面板設定學員年齡層，並在中欄上方確認預計時長（預設 60 分鐘），系統將自動配速。`;
+    }
+    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：選主題'; }
+    if (btnNext) {
+      btnNext.innerHTML = '下一步：時間與地點 ➔';
+      btnNext.className = 'wizard-btn next';
+    }
+    highlightPanel('right');
+  } else if (step === 3) {
+    if (hintEl) {
+      hintEl.innerHTML = `💡 <strong>步驟 3 / 4：</strong> 請確認中欄上方的開課日期、人數限額與門市名稱，資訊將自動帶入宣傳海報與宣傳文案。`;
+    }
+    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：學員時長'; }
+    if (btnNext) {
+      btnNext.innerHTML = '下一步：定案教材 ➔';
+      btnNext.className = 'wizard-btn next';
+    }
+    highlightPanel('center-top');
+  } else if (step === 4) {
+    if (hintEl) {
+      hintEl.innerHTML = `🎉 <strong>步驟 4 / 4：</strong> 內容已就緒！點擊下方按鈕即可產出全套簡報、講師備忘錄與 AI 海報！`;
+    }
+    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：時間地點'; }
+    if (btnNext) {
+      btnNext.innerHTML = '🎉 完成並定案全套教材！';
+      btnNext.className = 'wizard-btn next finish';
+    }
+    clearPanelHighlights();
+  }
+}
+
+function wizardStepNext() {
+  if (CURRENT_WIZARD_STEP < 4) {
+    goToWizardStep(CURRENT_WIZARD_STEP + 1);
+  } else {
+    finalizeWorkshop();
+  }
+}
+
+function wizardStepPrev() {
+  if (CURRENT_WIZARD_STEP > 1) {
+    goToWizardStep(CURRENT_WIZARD_STEP - 1);
+  }
+}
+
+function highlightPanel(target) {
+  clearPanelHighlights();
+  if (target === 'left') {
+    const leftPanel = document.querySelector('.panel.left');
+    if (leftPanel) leftPanel.classList.add('step-focus-highlight');
+  } else if (target === 'right') {
+    const rightPanel = document.querySelector('.panel.right');
+    const durField = document.getElementById('dur');
+    if (rightPanel) rightPanel.classList.add('step-focus-highlight');
+    if (durField) durField.style.boxShadow = '0 0 0 3px rgba(245,166,35,0.45)';
+  } else if (target === 'center-top') {
+    const bar = document.querySelector('.panel.center .center-top') || document.getElementById('date')?.parentElement;
+    if (bar) bar.classList.add('step-focus-highlight');
+  }
+}
+
+function clearPanelHighlights() {
+  document.querySelectorAll('.step-focus-highlight').forEach(el => el.classList.remove('step-focus-highlight'));
+  const durField = document.getElementById('dur');
+  if (durField) durField.style.boxShadow = '';
+}
+
+function finalizeWorkshop() {
+  const topics = selectedTopics();
+  if (topics.length === 0) {
+    showToast('⚠️ 尚未選取主題，請先在步驟 1 勾選課綱主題！');
+    goToWizardStep(1);
+    return;
+  }
+
+  // 執行主生成邏輯
+  generate();
+
+  // 更新定案 Modal 的資訊
+  const hubTitle = document.getElementById('hubTopicName');
+  const hubDur = document.getElementById('hubDuration');
+  if (hubTitle) hubTitle.textContent = getSmartTitle(topics, lastSmartSentence);
+  if (hubDur) hubDur.textContent = document.getElementById('dur')?.value || '60';
+
+  // 標記步驟 4 completed
+  const step4Node = document.getElementById('stepNode4');
+  if (step4Node) step4Node.classList.add('completed');
+
+  // 開啟定案成果中心 Modal
+  openModal('finalizedHubModal');
+  showToast('🎉 全套教材已定案產出！可隨時開始演練、查看備忘錄或一鍵連動 AI 生成海報！', 4000);
+}
+
+function focusSpeakerNotes() {
+  const noteBox = document.querySelector('.notes-card') || document.querySelector('.speaker-notes-box') || document.getElementById('speakerNotesBox');
+  if (noteBox) {
+    noteBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    noteBox.style.transition = 'box-shadow 0.4s ease';
+    noteBox.style.boxShadow = '0 0 0 4px #f59e0b';
+    setTimeout(() => { noteBox.style.boxShadow = ''; }, 2500);
+  }
+}
+
 
 /* ---------- 初始化 ---------- */
 loadSettings();

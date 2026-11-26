@@ -1048,22 +1048,13 @@
             <div class="ai-panel-title">
               <span class="ai-icon">🤖</span>
               <div>
-                <strong style="font-size:13px;color:#0f172a;">AI 海報超精準指令（xAI Grok 首選 ✕ 一鍵連動）</strong>
-                <div style="font-size:11px;color:#64748b;margin-top:1px;">已自動帶入硬體細節、5200K 燈光與 35% 留白構圖，點擊下方即可一鍵連動生圖！</div>
+                <strong style="font-size:13px;color:#0f172a;">一鍵開啟 AI 生圖（直接畫出海報，免自己寫指令）</strong>
+                <div style="font-size:11px;color:#64748b;margin-top:1px;">選好風格後，直接點下方平台按鈕，自動複製「直接生圖指令」並開啟新分頁貼上即可！</div>
               </div>
             </div>
           </div>
 
-          <div class="ai-controls-bar">
-            <div class="ai-control-group">
-              <span class="ai-ctl-label">目標 Agent：</span>
-              <div class="ai-btn-group" id="aiAgentTabs">
-                <button type="button" class="ai-tab-btn active" onclick="switchAiAgent('grok', this)">⚡ xAI Grok (首選)</button>
-                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('gemini', this)">💎 Google Gemini</button>
-                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('chatgpt', this)">💬 OpenAI ChatGPT</button>
-                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('universal', this)">🎨 通用 Prompt</button>
-              </div>
-            </div>
+          <div class="ai-controls-bar" style="flex-direction:column;align-items:stretch;gap:10px;">
             <div class="ai-control-group">
               <span class="ai-ctl-label">視覺風格：</span>
               <div class="ai-btn-group" id="aiStyleTabs">
@@ -1071,21 +1062,20 @@
                 <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pop', this)">🔥 年輕活力新粗獷</button>
               </div>
             </div>
+
+            <div class="ai-direct-actions" style="margin-top:0;padding-top:10px;border-top:1px dashed #cbd5e1;">
+              <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="複製 Grok 直接生圖指令並開啟 Grok">⚡ 一鍵開啟 Grok (首選)</button>
+              <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="複製 Gemini 直接生圖指令並開啟 Gemini">💎 一鍵開啟 Gemini</button>
+              <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')" title="複製 ChatGPT 直接生圖指令並開啟 ChatGPT">💬 一鍵開啟 ChatGPT</button>
+              <button type="button" class="btn-copy-prompt" style="padding:8px 12px;font-size:12px;" onclick="CURRENT_AI_AGENT='universal';updateAiPromptOutput();copyAiPrompt(this);" title="複製 Midjourney / 通用純英文生圖 Prompt">🎨 複製通用 Prompt</button>
+            </div>
           </div>
 
-          <div class="ai-prompt-box-wrap">
-            <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false" style="min-height:160px;"></textarea>
-          </div>
-
-          <div class="ai-panel-footer">
-            <div style="font-size:11px;color:#64748b;">💡 點擊下方一鍵連動，自動複製並開啟新分頁貼上！</div>
-            <button type="button" class="btn-copy-prompt" onclick="copyAiPrompt(this)">📋 單純複製指令</button>
-          </div>
-
-          <div class="ai-direct-actions">
-            <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')">⚡ 一鍵連動 Grok (最主要推薦)</button>
-            <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')">💎 一鍵連動 Gemini</button>
-            <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')">💬 一鍵連動 ChatGPT</button>
+          <div class="ai-prompt-box-wrap" style="margin-top:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span id="aiPreviewLabel" style="font-size:11px;font-weight:700;color:#475569;">📋 目前指令預覽：xAI Grok（點擊上方任一按鈕即自動切換、複製並開啟）</span>
+            </div>
+            <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false" style="min-height:135px;"></textarea>
           </div>
         </div>
       </div>
@@ -8136,6 +8126,11 @@ function updateAiPromptOutput() {
   const textarea = document.getElementById('aiPromptTextarea');
   if (!textarea) return;
   textarea.value = buildAiPosterPrompt(CURRENT_AI_AGENT, CURRENT_AI_STYLE);
+  const lbl = document.getElementById('aiPreviewLabel');
+  if (lbl) {
+    const names = { grok: 'xAI Grok (直接生圖)', gemini: 'Google Gemini (直接生圖)', chatgpt: 'OpenAI ChatGPT (直接生圖)', universal: '通用英文 Prompt' };
+    lbl.textContent = '📋 目前指令預覽：' + (names[CURRENT_AI_AGENT] || CURRENT_AI_AGENT) + '（點擊上方任一按鈕即自動切換、複製並開啟）';
+  }
 }
 
 function copyAiPrompt(btn) {
@@ -8175,11 +8170,6 @@ function showCopyFeedback(btn) {
 function directLaunchAgent(agent) {
   if (['grok', 'gemini', 'chatgpt'].includes(agent)) {
     CURRENT_AI_AGENT = agent;
-    const tabBtn = document.querySelector(`#aiAgentTabs .ai-tab-btn[onclick*="'${agent}'"]`);
-    if (tabBtn) {
-      document.querySelectorAll('#aiAgentTabs .ai-tab-btn').forEach(b => b.classList.remove('active'));
-      tabBtn.classList.add('active');
-    }
   }
   updateAiPromptOutput();
   const textarea = document.getElementById('aiPromptTextarea');
@@ -8202,7 +8192,7 @@ function directLaunchAgent(agent) {
   }
 
   window.open(url, '_blank');
-  showToast(`⚡ 已成功複製 ${agentName} 專用超精準指令！已為您在新分頁開啟 ${agentName}，直接貼上（Cmd+V）即可開始生圖！`, 4000);
+  showToast(`⚡ 已複製 ${agentName}「直接生圖」指令！新分頁貼上（Cmd+V）即可直接畫出海報！`, 4000);
 }
 
 /* 浮動提示 Toast 訊息 */
@@ -8217,204 +8207,84 @@ function showToast(msg, duration = 3500) {
   }, duration);
 }
 
-/* 超精準海報生圖與活動文案指令生成演算法 */
+/* 超精準「直接生圖」海報指令生成演算法 (Direct Image Generation) */
 function buildAiPosterPrompt(agent, style) {
   const topics = selectedTopics();
-  const ages = selectedAges();
   const title = getSmartTitle(topics, lastSmartSentence);
-  const date = (document.getElementById('po_date')?.value || '').trim() || '近期舉辦（依門市公告）';
+  const date = (document.getElementById('po_date')?.value || '').trim() || '近期舉辦';
   const time = (document.getElementById('po_time')?.value || '').trim() || '14:00 - 15:00';
-  const place = (document.getElementById('po_place')?.value || '').trim() || 'Apple Shop 門市體驗區';
-  const seats = (document.getElementById('po_seats')?.value || '').trim() || '限額 8 位・免費參加';
+  const place = (document.getElementById('po_place')?.value || '').trim() || '門市體驗區';
+  const seats = (document.getElementById('po_seats')?.value || '').trim() || '限額 8 位';
   const store = SETTINGS.store || 'Apple Shop 門市專櫃';
-  const signup = SETTINGS.signup || '門市櫃台現場報名 或 洽現場專員';
-  const ageStr = ages.length ? ages.map(a => a.k).join('、') : '各年齡層顧客、新機換機學員';
-
-  // 整理主題要點
-  const topicDetails = topics.map((t, idx) => {
-    const fts = (t.features || []).slice(0, 3).map(f => f.ft).join('、');
-    return `主題 ${idx + 1}：【${t.n}】
-  · 核心特色：${t.tagline || t.sub || ''}
-  · 重點實作：${fts || '現場真機實作帶練'}`;
-  }).join('\n');
+  const ratioStr = (typeof POSTER_FMT !== 'undefined' && POSTER_FMT === 'sq') ? '1:1 正方形社群海報' : '3:4 直式活動海報';
+  const ratioEng = (typeof POSTER_FMT !== 'undefined' && POSTER_FMT === 'sq') ? '1:1 square' : '3:4 vertical';
 
   // 硬體特徵辨識演算法
   const fullTopicText = topics.map(t => t.n + ' ' + (t.sub||'') + ' ' + (t.features||[]).map(f=>f.ft).join(' ')).join(' ');
   let hwFeature = '';
   if (/iPhone 18|18 Pro|雙光圈|機械光圈/i.test(fullTopicText)) {
-    hwFeature = 'iPhone 18 Pro in desert titanium finish, featuring micro-mechanical dual-aperture diaphragm camera system, quad-lens array with anti-reflective nano-coating, precision brushed titanium chassis with subtle chamfered edges, studio lighting reflecting off camera glass';
+    hwFeature = 'iPhone 18 Pro in desert titanium finish, featuring micro-mechanical dual-aperture diaphragm camera system, quad-lens array with anti-reflective nano-coating, precision brushed titanium chassis with chamfered edges';
   } else if (/Duo|折疊|雙螢幕|雙螢/i.test(fullTopicText)) {
-    hwFeature = 'iPhone Duo in 120-degree dynamic tent angle, dual Ultra Retina XDR flexible displays with zero-gap crease, precision titanium dual-gear hinge visible at the seam, running multi-window iPadOS-inspired interface';
+    hwFeature = 'iPhone Duo folded in a 120-degree tent angle, dual Ultra Retina XDR flexible displays with zero-gap crease, precision titanium dual-gear hinge';
   } else if (/Mac|MacBook|Neo/i.test(fullTopicText)) {
-    hwFeature = 'MacBook Neo in featherweight anodized aluminum chassis, edge-to-edge PROLED display showing creative workspace, slim profile with tactile keyboard and precision trackpad';
+    hwFeature = 'MacBook Neo in featherweight anodized aluminum chassis, edge-to-edge PROLED display showing creative workspace, slim profile with tactile keyboard';
   } else if (/iPad|Pencil|筆記/i.test(fullTopicText)) {
-    hwFeature = 'iPad Pro with symmetrical thin bezels, Apple Pencil Pro hovering with tactile shadow, Liquid Retina XDR screen with vivid creative notes';
+    hwFeature = 'iPad Pro with symmetrical thin bezels, Apple Pencil Pro hovering with tactile shadow, Liquid Retina XDR screen';
   } else {
-    hwFeature = 'Flagship Apple device with precision-machined aerospace-grade aluminum and glass body, ceramic shield front, exquisite edge reflections, iconic minimalist industrial design';
+    hwFeature = 'Flagship Apple device with precision-machined aerospace-grade aluminum and glass body, iconic minimalist industrial design';
   }
 
+  const styleDescMinimal = `Apple 官方極簡雜誌風（暖骨白畫布底色 #FAFAF8，單一深靛藍 #1F3A5F 點綴，頂部預留 35% 乾淨留白放主標題，5200K 商業攝影棚柔光箱主光與金屬倒角微反光，Hasselblad 中片幅質感，畫面乾淨無雜物）`;
+  const styleDescMinimalEng = `Ultra-minimalist Apple editorial poster, warm off-white background (#FAFAF8), single deep indigo (#1F3A5F) accent, top 35% clean negative space for typography, 5200K studio softbox key light, metallic highlights, Hasselblad medium format aesthetic`;
+
+  const styleDescPop = `年輕活力潮流新粗獷風（暖奶油色底 #FDEFD4，高飽和亮橘色 #ED6702 重點色塊，深炭灰細框 #18181B，扁平手繪感向量生活插畫與小巧幾何徽章，無油膩 3D 塑膠感）`;
+  const styleDescPopEng = `Trendy Neo-Brutalist pop tech poster, warm cream background (#FDEFD4), energetic bright orange (#ED6702) accent, crisp dark charcoal borders (#18181B), flat 2D vector illustration, playful geometric badges, clean layout`;
+
+  const chosenStyleZh = (style === 'minimal') ? styleDescMinimal : styleDescPop;
+  const chosenStyleEng = (style === 'minimal') ? styleDescMinimalEng : styleDescPopEng;
+
   if (agent === 'grok') {
-    // xAI Grok (首選測試目標)
-    if (style === 'minimal') {
-      return `【xAI Grok / Aurora 專用超精準指令：Apple 官方簡約高質感活動海報】
+    return `請直接使用圖像生成功能，為我畫出一張【${ratioStr}】的圖片（請直接生成圖片，不要只回覆文字描述或英文 Prompt）。
 
-請扮演一位兼具科技美學與頂級雜誌排版素養的 Apple 視覺設計總監。請為即將舉辦的門市「Apple 小教室」活動，設計一張具備高階雜誌感與極簡通透美學的宣傳海報，並產出精確生圖 Prompt 與完整文案排版規劃：
+🎨 圖片視覺與構圖要求：
+· 畫布比例：${ratioEng}
+· 風格定位：${chosenStyleZh}
+· 核心硬體主視覺：${hwFeature}，置於畫面視覺重心，細節清晰銳利。
+· 避坑要求：禁止出現文字亂碼、扭曲手指、多餘雜物、暗沉濾鏡或廉價 3D 塑膠感。
 
-📌 活動核心資訊：
-· 主辦單位：${store}
-· 活動主題：【${title}】
-· 涵蓋內容：
-${topicDetails}
-· 目標受眾：${ageStr}
-· 活動時間：${date} ｜ ${time}
-· 活動地點：${place}
-· 報名方式：${signup}（${seats}）
-
-🎨 視覺生圖指令（精準硬體、燈光與負空間規劃）：
-請使用 Grok / Aurora 圖像生成模型生成海報背景主視覺：
-[Image Generation Prompt]
-Ultra-minimalist Apple Workshop advertising poster, featuring ${hwFeature}. Clean editorial layout with ample macro-whitespace (top 35% empty negative space for typography), subject positioned at the bottom golden ratio. High-end studio lighting setup (5200K daylight-balanced softbox key light, gentle rim light, subtle metallic edge highlights, soft studio ground shadow). Canvas color: warm off-white (#FAFAF8) with a single sophisticated accent tone (Apple Deep Indigo #1F3A5F or Warm Amber #F5A623). Ultra-sharp focus, 8k resolution, photorealistic industrial design photography, Hasselblad medium format camera aesthetic.
-[Negative Prompt]
-no text clutter, no low-resolution artifacts, no unrealistic plastic skin, no distorted fingers or hands, no heavy gradients, no gaudy 3D renders, no blurry lenses, no oversaturation, no messy backgrounds.
-
-📄 繁體中文海報文案與排版配置：
-1. 頂部大標題：【${title}】
-2. 情感引導金句：不只是規格介紹，更帶您實機上手，讓科技無縫融入生活。
-3. 三大上手精華：
-${topics.slice(0, 3).map((t, idx) => `   [0${idx+1}] ${t.n} · ${t.tagline || '真機動手演練'}`).join('\n')}
-4. 底部資訊列：${date} ｜ ${time} ｜ ${place}（${signup}，${seats}）`;
-    } else {
-      return `【xAI Grok / Aurora 專用超精準指令：年輕活力新粗獷社群海報】
-
-請扮演一位引領潮流的當代科技視覺設計師。請為即將舉辦的「Apple 小教室」活動，設計一張充滿年輕活力、高吸睛度與生活感的新粗獷風格宣傳海報（適合 Instagram / LINE@ 社群分享與實體立牌）：
-
-📌 活動核心資訊：
-· 主辦單位：${store}
-· 活動主題：【${title}】
-· 涵蓋內容：
-${topicDetails}
-· 目標受眾：${ageStr}（主打年輕族群、大學生、生活創作者）
-· 活動時間：${date} ｜ ${time}
-· 活動地點：${place}
-· 報名方式：${signup}（${seats}）
-
-🎨 視覺生圖指令（潮流新粗獷、明快動態與色塊）：
-[Image Generation Prompt]
-Modern trendy Apple Workshop event poster, Neo-brutalist and contemporary pop art style. Warm cream background (#FDEFD4) with bold energetic accent color (signature bright orange #ED6702) and deep charcoal details (#18181B). Featuring ${hwFeature} blended with clean 2D flat vector lifestyle illustration, playful geometric badges, dynamic flow line. High contrast, sharp vector edges, crisp graphic design, clean negative space for headline text.
-[Negative Prompt]
-no photorealistic human clutter, no 3D shiny plastic rendering, no blurry gradients, no text gibberish, no chaotic neon colors, no muddy textures.
-
-📄 社群傳播與立牌文案排版：
-1. 醒目標籤：[⭐ 新手友善] [🙌 帶機動手練] [🔥 限額體驗]
-2. 主標題：【${title}】
-3. 亮點內容：
-${topics.slice(0, 3).map((t, idx) => `   ▶ ${t.n}：${t.tagline || '實機操作學到會'}`).join('\n')}
-4. 現場資訊：${date} ${time} ｜ ${place}（${signup}）`;
-    }
+📝 海報畫面中需清晰排版以下繁體中文文字（台灣標準正體）：
+· 頂部大標題：${title}
+· 小標 / 主辦：${store} · 體驗小教室
+· 底部資訊欄：${date} ${time} ｜ ${place}（${seats}）`;
   } else if (agent === 'gemini') {
-    // Google Gemini / Imagen 3
-    if (style === 'minimal') {
-      return `【Google Gemini / Imagen 3 專用指令：Apple 官方簡約高質感宣傳海報】
+    return `請直接為我生成一張「活動宣傳海報」圖片（Generate the poster image directly right now. DO NOT output a text prompt, code block, or layout guide）。
 
-請扮演一位頂尖的 Apple 視覺設計總監與資深平面設計師。請為即將舉辦的門市「Apple 小教室」活動，設計一張具備高階雜誌感與極簡通透美學的活動宣傳海報：
+🎨 繪圖規格與視覺構圖：
+· 圖片比例：${ratioEng}
+· 視覺風格：${chosenStyleZh}
+· 產品主視覺：${hwFeature}
+· 畫面要求：結構乾淨俐落，不可出現亂碼文字、扭曲手指或雜亂背景。
 
-📌 活動核心資訊：
-· 主辦單位：${store}
-· 活動主題：【${title}】
-· 涵蓋內容：
-${topicDetails}
-· 目標受眾：${ageStr}
-· 活動時間：${date} ｜ ${time}
-· 活動地點：${place}
-· 報名方式：${signup}（${seats}）
-
-🎨 視覺與生圖風格指導（Apple Minimalist Aesthetic）：
-1. 構圖與排版：維持極簡、通透的版面空間感（Macro-whitespace），大膽留白，頂部預留 35% 負空間。文字階層分明，主標題優雅大器。
-2. 背景與色彩：高質感暖骨白畫布底色（Warm Off-white, #FAFAF8），搭配 Apple 經典單一強調點綴色（深靛藍 #1F3A5F 或琥珀橘 #F5A623），嚴禁混亂雜色或漸層。
-3. 主視覺焦點：以精緻純粹的產品微細節呈現：${hwFeature}。
-
-請根據上述資訊產出：
-1. 適用於 Imagen 3 的英文高解析度生圖 Prompt（包含 studio lighting 5200K, Hasselblad medium format camera aesthetic, clean macro-whitespace, 8k resolution）。
-2. 繁體中文海報文案排版架構建議（包含主標題、引言金句、三項重點、時間地點排版）。`;
-    } else {
-      return `【Google Gemini / Imagen 3 專用指令：年輕活力新粗獷社群海報】
-
-請扮演一位潮流科技品牌的資深視覺設計師。請為即將舉辦的「Apple 小教室」活動，設計一張充滿年輕活力、高吸睛度與生活感的新粗獷風格宣傳海報：
-
-📌 活動核心資訊：
-· 主辦單位：${store}
-· 活動主題：【${title}】
-· 涵蓋內容：
-${topicDetails}
-· 目標對象：${ageStr}（主打年輕族群、大學生、生活創作者）
-· 活動時間：${date} ｜ ${time}
-· 活動地點：${place}
-· 報名方式：${signup}（${seats}）
-
-🎨 視覺與生圖風格指導（Vibrant & Pop Modern Style）：
-1. 構圖調性：年輕、明快、充滿互動與生活節奏感，適合 Instagram / LINE@ 社群推廣與實體立牌。
-2. 色彩計畫：大膽吸睛的經典亮橘色（#ED6702）作為核心基調，搭配清爽暖奶油卡片（#FDEFD4）與深炭灰文字（#18181B）。
-3. 插畫風格：扁平手繪感向量插畫、輕微等角幾何視角，搭配 ${hwFeature}。
-
-請產出：
-1. 適用於 Imagen 3 的英文潮流生圖 Prompt（包含 Vibrant flat vector illustration, bold clean layout, bright warm palette, modern pop aesthetics, crisp details）。
-2. 適合 Instagram / Threads 社群傳播的繁體中文海報文案與版面配置。`;
-    }
+📝 請直接在海報圖片中設計並呈現以下簡潔繁體中文文字：
+· 主標題：${title}
+· 副標題：${store}｜免費體驗小教室
+· 底部活動資訊：${date} ${time} · ${place}（${seats}）`;
   } else if (agent === 'chatgpt') {
-    // OpenAI ChatGPT / DALL-E 3
-    if (style === 'minimal') {
-      return `You are an elite graphic designer and creative director specialized in Apple's iconic design language and editorial print aesthetics.
+    return `Generate a high-resolution promotional event poster image directly right now using your image generation tool (DO NOT output a text prompt, markdown block, or written instructions).
 
-Create a comprehensive design plan and DALL-E 3 image generation prompt for an upcoming Apple Workshop event poster.
+[Image Specification]
+· Aspect Ratio: ${ratioEng}
+· Visual Style: ${chosenStyleEng}
+· Hero Product: ${hwFeature}, crisp studio details, clean composition.
+· Negative Constraint: NO gibberish text, NO distorted fingers, NO messy background, NO cheap glossy 3D look.
 
-[Event Information]
-· Host: ${store}
-· Workshop Title: "${title}"
-· Topics Covered:
-${topicDetails}
-· Target Audience: ${ageStr}
-· Date & Time: ${date} | ${time}
-· Location: ${place}
-· Admission & RSVP: ${signup} (${seats})
-
-[Visual & Aesthetic Guidelines]
-1. Concept: Clean, spacious, and ultra-refined editorial poster layout.
-2. Hardware Detail: ${hwFeature}.
-3. Canvas & Color: Premium warm off-white background (#FAFAF8), charcoal black typography (#18181B), and a single subtle accent tone (Deep Indigo #1F3A5F or Warm Amber #F5A623). Top 35% negative space for typography.
-4. Lighting: 5200K studio softbox lighting with soft shadow.
-
-[Required Output]
-1. Exact DALL-E 3 image generation prompt in English, focusing on studio-quality lighting, minimalist composition, and high-end editorial graphic design.
-2. Full poster layout structure and copywriting in Traditional Chinese (繁體中文), ready for distribution.`;
-    } else {
-      return `You are a modern, trendy visual designer specialized in contemporary pop tech aesthetics and vibrant social campaign posters.
-
-Create a striking poster design plan and DALL-E 3 generation prompt for an Apple Store Workshop.
-
-[Event Information]
-· Host: ${store}
-· Workshop Title: "${title}"
-· Topics Covered:
-${topicDetails}
-· Target Audience: ${ageStr} (Young creators, students, tech enthusiasts)
-· Date & Time: ${date} | ${time}
-· Location: ${place}
-· Admission: ${signup} (${seats})
-
-[Visual & Aesthetic Guidelines]
-1. Style: Modern Pop & Neo-Brutalist inspired layout with warm vibrant energy.
-2. Hardware Integration: ${hwFeature}.
-3. Color Scheme: Bold energetic orange (#ED6702) accent, warm cream cards (#FDEFD4), crisp dark typography.
-4. Graphic Elements: Flat 2D vector tech illustrations, playful geometric badges.
-
-[Required Output]
-1. English DALL-E 3 prompt crafted for bold, clean vector poster art without text clutter.
-2. Complete Traditional Chinese (繁體中文) promotional poster copy and section layout for social media sharing.`;
-    }
+[Clean Typography on Poster (Traditional Chinese 繁體中文)]
+· Headline: "${title}"
+· Subheadline: "${store} · Apple 小教室"
+· Footer Info: "${date} ${time} | ${place} (${seats})"`;
   } else {
-    // Universal 生圖 Prompt (Midjourney / Imagen / 通用 AI 繪圖)
     const engTopics = topics.map(t => t.n).join(', ');
-    return `Minimalist Apple Workshop promotional event poster, featuring ${hwFeature}, themes of "${title}" (${engTopics}), clean editorial layout, sophisticated warm off-white background #FAFAF8, single elegant accent color, refined vector outline illustration of modern Apple technology and creative lifestyle, vast negative space, balanced macro-whitespace, 5200K studio softbox lighting, Swiss graphic design influence, high contrast clean lines, elegant typography placeholder, 8k resolution, photorealistic industrial design --ar ${POSTER_FMT==='sq'?'1:1':'3:4'} --style raw --v 6.1`;
+    return `Promotional event poster for "${title}" (${engTopics}), ${chosenStyleEng}, featuring ${hwFeature}, ample negative space, 8k resolution, sharp focus, no text clutter --ar ${POSTER_FMT==='sq'?'1:1':'3:4'} --style raw --v 6.1`;
   }
 }
 

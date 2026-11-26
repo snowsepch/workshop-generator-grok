@@ -591,53 +591,105 @@
   .custom-dropdown-item:hover{background:#f1f5f9}
   .custom-dropdown-item.selected{background:#e0f2fe;color:#0369a1;font-weight:800}
 
-  /* ===== 步驟精靈工作流導航條 (Wizard Stepper Bar) ===== */
-  .wizard-stepper-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 20px;background:#ffffff;border-bottom:1.5px solid var(--ui-bd);box-shadow:0 2px 6px rgba(0,0,0,.03);z-index:9;flex-wrap:wrap;gap:8px}
-  .wizard-steps-track{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .wizard-step-node{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:700;color:#64748b;background:#f1f5f9;cursor:pointer;transition:all .18s ease;border:1px solid transparent;user-select:none}
-  .wizard-step-node:hover{background:#e2e8f0;color:#1e293b}
-  .wizard-step-node.active{background:#0284c7;color:#ffffff;box-shadow:0 2px 8px rgba(2,132,199,.28)}
-  .wizard-step-node.completed{background:#ecfdf5;color:#047857;border-color:#a7f3d0}
-  .step-node-badge{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:rgba(0,0,0,.08)}
-  .wizard-step-node.active .step-node-badge{background:rgba(255,255,255,.25);color:#fff}
-  .wizard-step-node.completed .step-node-badge{background:#047857;color:#fff}
-  .wizard-divider{font-size:10px;color:#cbd5e1}
-  .wizard-tip-box{font-size:11px;color:#0369a1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:3px 9px;display:inline-flex;align-items:center;gap:5px;font-weight:600}
-  .wizard-nav-actions{display:flex;align-items:center;gap:6px}
-  .wizard-btn{padding:5px 13px;border-radius:7px;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s ease;font-family:inherit;border:1.5px solid transparent}
-  .wizard-btn.prev{background:#f8fafc;border-color:#cbd5e1;color:#475569}
-  .wizard-btn.prev:hover:not(:disabled){background:#f1f5f9;border-color:#94a3b8}
-  .wizard-btn.prev:disabled{opacity:.4;cursor:not-allowed}
-  .wizard-btn.next{background:#0284c7;color:#fff;border-color:#0284c7}
-  .wizard-btn.next:hover{background:#0369a1;transform:translateY(-1px)}
-  .wizard-btn.finalize{background:#059669;color:#fff;border-color:#059669;box-shadow:0 2px 8px rgba(5,150,105,.3)}
-  .wizard-btn.finalize:hover{background:#047857;transform:scale(1.02)}
+  /* ===== 6 步驟分頁精靈版樣式 (6-Step Full-Page Wizard) ===== */
+  .summary-pills-bar{background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .summary-pills-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .sum-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;background:#ffffff;border:1px solid #cbd5e1;color:#334155}
+  .sum-pill.highlight{background:#e0f2fe;border-color:#7dd3fc;color:#0369a1}
+  .summary-guide-text{font-size:12px;color:#64748b;font-weight:500}
 
-  /* 步驟焦點高亮光暈 */
-  .step-focus-highlight{box-shadow:0 0 0 3px rgba(2,132,199,.35) !important;transition:box-shadow .25s ease !important}
+  .wizard-stepper-bar{display:flex;align-items:center;justify-content:center;padding:10px 20px;background:#ffffff;border-bottom:1.5px solid #e2e8f0;z-index:9}
+  .wizard-steps-track{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+  .wizard-step-node{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:10px;font-size:12.5px;font-weight:700;color:#64748b;background:#ffffff;cursor:pointer;transition:all .15s ease;border:1.5px solid #e2e8f0;user-select:none}
+  .wizard-step-node:hover{border-color:#94a3b8;color:#0f172a;background:#f8fafc}
+  .wizard-step-node.active{background:#0284c7;color:#ffffff;border-color:#0284c7}
+  .wizard-step-node.completed{background:#f0fdf4;color:#15803d;border-color:#86efac}
+  .step-node-badge{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:#e2e8f0;color:#475569}
+  .wizard-step-node.active .step-node-badge{background:rgba(255,255,255,.25);color:#ffffff}
+  .wizard-step-node.completed .step-node-badge{background:#16a34a;color:#ffffff}
+  .wizard-divider{font-size:12px;color:#cbd5e1;font-weight:700}
+
+  /* 全頁分頁舞台 */
+  .wizard-pages-stage{max-width:1240px;margin:0 auto;padding:20px 20px 60px;min-height:calc(100vh - 165px)}
+  .wizard-step-page{display:none}
+  .wizard-step-page.active{display:block}
+  .page-header-row{margin-bottom:16px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .page-header-title{font-size:20px;font-weight:800;color:#0f172a;margin:0;line-height:1.35}
+  .page-header-sub{font-size:13px;color:#64748b;margin-top:4px;line-height:1.6}
+
+  .page-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:16px}
+  .page-card-title{font-size:15px;font-weight:800;color:#0f172a;margin:0 0 12px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+
+  /* Step 1 表單網格 */
+  .step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .s1-field{display:flex;flex-direction:column;gap:6px}
+  .s1-field label{font-size:13px;font-weight:700;color:#1e293b}
+  .s1-field input,.s1-field select{padding:10px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:14px;font-family:inherit;color:#0f172a;background:#ffffff;transition:border-color .15s}
+  .s1-field input:focus{outline:none;border-color:#0284c7}
+  .s1-benefit-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px;font-size:13px;color:#166534;line-height:1.75;margin-top:16px}
+
+  /* Step 2 雙欄選題 */
+  .step2-layout{display:grid;grid-template-columns:1.35fr 0.85fr;gap:18px;align-items:start}
+  .step2-layout .panel{border:1px solid #e2e8f0;border-radius:12px;padding:18px;background:#ffffff;max-height:none;height:auto;overflow:visible}
+
+  /* Step 3 全幅簡報預覽 */
+  .step3-toolbar{background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .step3-slide-stage{display:flex;justify-content:center;align-items:center;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:24px;min-height:540px}
+  .step3-slide-stage .slide-wrap{width:100%;max-width:960px;min-height:500px;display:flex;justify-content:center;align-items:center;padding:0;background:transparent}
+  .step3-slide-stage .slide{width:100%;max-width:920px;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+
+  /* Step 4 備忘錄與課前速覽 */
+  .step4-layout{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+  .p4-slide-nav-list{display:flex;flex-direction:column;gap:8px;max-height:600px;overflow-y:auto;padding-right:4px}
+  .p4-slide-nav-item{padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;background:#ffffff;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
+  .p4-slide-nav-item:hover{border-color:#94a3b8;background:#f8fafc}
+  .p4-slide-nav-item.active{border-color:#0284c7;background:#f0f9ff;color:#0369a1}
+  .p4-slide-nav-num{font-size:11px;font-weight:800;color:#64748b;margin-bottom:2px}
+  .p4-slide-nav-item.active .p4-slide-nav-num{color:#0284c7}
+  .p4-slide-nav-title{font-size:12.5px;font-weight:700;color:#0f172a;line-height:1.4}
+
+  /* Step 5 海報設計雙欄 */
+  .step5-layout{display:grid;grid-template-columns:1.05fr 0.95fr;gap:20px;align-items:start}
+  .step5-preview-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;display:flex;justify-content:center;overflow-x:auto}
+
+  /* Step 6 社群貼文與完成清單 */
+  .step6-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;align-items:start}
+  .checklist-card{background:#ffffff;border:1.5px solid #86efac;border-radius:12px;padding:20px}
+  .checklist-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px;background:#f8fafc}
+  .checklist-item-info{display:flex;flex-direction:column;gap:2px}
+  .checklist-item-title{font-size:13.5px;font-weight:800;color:#0f172a}
+  .checklist-item-sub{font-size:12px;color:#16a34a;font-weight:600}
+  .checklist-btn{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:700;border:1px solid #cbd5e1;background:#ffffff;color:#0f172a;cursor:pointer;white-space:nowrap;transition:.15s}
+  .checklist-btn:hover{border-color:#0284c7;color:#0284c7}
+  .checklist-btn.primary{background:#0284c7;color:#ffffff;border-color:#0284c7}
+  .checklist-btn.primary:hover{background:#0369a1}
+
+  /* 底部換頁導覽列 */
+  .page-footer-nav{display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid #e2e8f0}
+  .wizard-btn{padding:10px 20px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .15s ease;font-family:inherit;border:1.5px solid transparent}
+  .wizard-btn.prev{background:#ffffff;border-color:#cbd5e1;color:#475569}
+  .wizard-btn.prev:hover:not(:disabled){background:#f8fafc;border-color:#94a3b8}
+  .wizard-btn.prev:disabled{opacity:.45;cursor:not-allowed}
+  .wizard-btn.next{background:#0284c7;color:#ffffff;border-color:#0284c7}
+  .wizard-btn.next:hover{background:#0369a1}
+  .wizard-btn.finish{background:#16a34a;color:#ffffff;border-color:#16a34a}
+  .wizard-btn.finish:hover{background:#15803d}
 
   /* 一鍵連動直達按鈕與浮動提示 */
   .ai-direct-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1}
-  .btn-direct-agent{padding:7px 13px;border-radius:7px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s ease;border:none;color:#fff}
-  .btn-direct-agent.grok-btn{background:#09090b;border:1px solid #27272a}
-  .btn-direct-agent.grok-btn:hover{background:#18181b;transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.25)}
-  .btn-direct-agent.gemini-btn{background:#1a73e8;border:1px solid #1557b0}
-  .btn-direct-agent.gemini-btn:hover{background:#1557b0;transform:translateY(-1px);box-shadow:0 3px 8px rgba(26,115,232,.3)}
-  .btn-direct-agent.gpt-btn{background:#10a37f;border:1px solid #0d8265}
-  .btn-direct-agent.gpt-btn:hover{background:#0d8265;transform:translateY(-1px);box-shadow:0 3px 8px rgba(16,163,127,.3)}
-  .flow-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:#0f172a;color:#ffffff;padding:9px 18px;border-radius:999px;font-size:12.5px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:99999;opacity:0;pointer-events:none;transition:all .25s ease}
+  .btn-direct-agent{padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s ease;border:none;color:#ffffff}
+  .btn-direct-agent.grok-btn{background:#09090b}
+  .btn-direct-agent.grok-btn:hover{background:#27272a}
+  .btn-direct-agent.gemini-btn{background:#1a73e8}
+  .btn-direct-agent.gemini-btn:hover{background:#1557b0}
+  .btn-direct-agent.gpt-btn{background:#10a37f}
+  .btn-direct-agent.gpt-btn:hover{background:#0d8265}
+  .flow-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);background:#0f172a;color:#ffffff;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:99999;opacity:0;pointer-events:none;transition:all .25s ease}
   .flow-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-  /* 定案中心 Hub Modal 樣式 */
-  .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-  .hub-card{background:#ffffff;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;transition:all .15s ease}
-  .hub-card:hover{border-color:#0284c7;box-shadow:0 3px 10px rgba(2,132,199,.1)}
-  .hub-card-hd{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:#0f172a;margin-bottom:3px}
-  .hub-card-desc{font-size:11px;color:#64748b;line-height:1.4;margin-bottom:10px}
-  .hub-card-btn{padding:6px 11px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;transition:.15s}
-  .hub-card-btn:hover{background:#0284c7;color:#fff;border-color:#0284c7}
-  .hub-card-btn.primary{background:#0284c7;color:#fff;border-color:#0284c7}
-  .hub-card-btn.primary:hover{background:#0369a1}
+  @media (max-width: 960px){
+    .step1-grid,.step2-layout,.step4-layout,.step5-layout,.step6-layout{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -645,187 +697,496 @@
 <div class="edit-banner">✏️ 編輯模式 · 點擊任何文字即可修改 · 修改完成後可下載 .pptx</div>
 
 <div class="topbar">
-  <div class="brand"><span style="white-space:nowrap">Apple Shop 小教室專案</span> <span style="font-size:10px;font-weight:600;color:var(--grok-accent);margin-left:6px">GROK 版</span></div>
+  <div class="brand">
+    <span style="white-space:nowrap">Apple Shop 小教室專案</span>
+    <span style="font-size:11px;font-weight:700;background:#e0f2fe;color:#0369a1;padding:3px 10px;border-radius:999px;margin-left:8px;border:1px solid #bae6fd">6 步驟分頁精靈版</span>
+  </div>
   <div class="meta">
-    <span>日期<b id="mDate">-</b></span>
-    <span>時長<b id="mDur">60</b> 分</span>
-    <span>人數<b id="mPpl">8</b></span>
-    <span>頁數<b id="mCnt">0</b></span>
+    <span>日期 <b id="mDate">-</b></span>
+    <span>時長 <b id="mDur">60</b> 分</span>
+    <span>人數 <b id="mPpl">8</b></span>
+    <span>頁數 <b id="mCnt">0</b></span>
   </div>
   <div class="top-actions">
-    <button class="btn ghost" onclick="openSettingsModal()" id="settingsBtn" title="設定門市名稱與報名方式">⚙️ 門市設定</button>
-    <button class="btn ghost" onclick="openPosterModal()" title="依當次選取主題產生宣傳海報">📣 宣傳海報</button>
-    <button class="btn ghost" onclick="openSocialModal()" title="依當次選取主題產生社群開課文案">✍️ 社群文案</button>
-    <button class="btn ghost" onclick="toggleEditMode()" id="editBtn" disabled>✏️ 編輯</button>
-    <button class="btn ghost" onclick="openRunDownModal()" id="rundownBtn" title="課前 3 分鐘速覽卡：時間配速表、器材檢查與現場常見救援 Q&A">📋 課前速覽</button>
-    <button class="btn ghost" onclick="downloadPodcastScript()" title="把選取主題轉成單人旁白備課講稿(.txt)下載，可直接照著練口條">📻 備課講稿</button>
-    <button class="btn ghost" onclick="downloadPptx()" id="pptxBtn" disabled>📥 下載 .pptx</button>
-    <button class="btn" id="genBtn" onclick="generate()">生成簡報</button>
-    <span style="font-size:9px;color:#b91c1c;margin-left:8px;font-weight:600;align-self:center;white-space:nowrap;">此為內部共用工具，請勿外傳連結</span>
+    <span style="font-size:11px;color:#b91c1c;font-weight:700;align-self:center;white-space:nowrap;">此為內部共用工具，請勿外傳連結</span>
   </div>
 </div>
 
-<!-- ===== 步驟式工作流引導條 (Step-by-Step Flow 到最後定案) ===== -->
+<!-- 第二層：即時摘要膠囊列 -->
+<div class="summary-pills-bar">
+  <div class="summary-pills-group">
+    <span class="sum-pill">🏪 <span id="pillStore">Apple Shop 門市專櫃</span></span>
+    <span class="sum-pill">📅 <span id="pillDate">未填日期</span></span>
+    <span class="sum-pill highlight">📚 <span id="pillTopics">尚未挑選主題</span></span>
+    <span class="sum-pill">👥 <span id="pillAges">全齡適用</span></span>
+  </div>
+  <div class="summary-guide-text">照著上方 1 → 6 步驟操作，即可一次完成簡報、講稿、海報與宣傳貼文</div>
+</div>
+
+<!-- 第三層：6 步驟分頁進度條 -->
 <div class="wizard-stepper-bar" id="wizardStepperBar">
   <div class="wizard-steps-track">
     <div class="wizard-step-node active" id="stepNode1" onclick="goToWizardStep(1)">
       <span class="step-node-badge">1</span>
-      <span>挑選課綱主題</span>
+      <span>基本設定</span>
     </div>
-    <span class="wizard-divider">➔</span>
+    <span class="wizard-divider">›</span>
     <div class="wizard-step-node" id="stepNode2" onclick="goToWizardStep(2)">
       <span class="step-node-badge">2</span>
-      <span>學員對象與時長</span>
+      <span>選題與對象</span>
     </div>
-    <span class="wizard-divider">➔</span>
+    <span class="wizard-divider">›</span>
     <div class="wizard-step-node" id="stepNode3" onclick="goToWizardStep(3)">
       <span class="step-node-badge">3</span>
-      <span>活動時間地點</span>
+      <span>簡報預覽</span>
     </div>
-    <span class="wizard-divider">➔</span>
+    <span class="wizard-divider">›</span>
     <div class="wizard-step-node" id="stepNode4" onclick="goToWizardStep(4)">
       <span class="step-node-badge">4</span>
-      <span>完成定案產出</span>
+      <span>講稿與速覽</span>
     </div>
-  </div>
-
-  <div class="wizard-tip-box" id="wizardTipBox">
-    💡 步驟 1 / 4：請在左側主題庫挑選想帶的主題（推薦 1 到 2 門，或點「⭐ 新手首選」挑安全牌）
-  </div>
-
-  <div class="wizard-nav-actions">
-    <button type="button" class="wizard-btn prev" id="wizardPrevBtn" onclick="wizardStepPrev()" disabled>‹ 上一步</button>
-    <button type="button" class="wizard-btn next" id="wizardNextBtn" onclick="wizardStepNext()">下一步：設定學員 ➔</button>
+    <span class="wizard-divider">›</span>
+    <div class="wizard-step-node" id="stepNode5" onclick="goToWizardStep(5)">
+      <span class="step-node-badge">5</span>
+      <span>宣傳海報</span>
+    </div>
+    <span class="wizard-divider">›</span>
+    <div class="wizard-step-node" id="stepNode6" onclick="goToWizardStep(6)">
+      <span class="step-node-badge">6</span>
+      <span>貼文與打包</span>
+    </div>
   </div>
 </div>
 
-<div class="stage">
-  <div class="panel left">
-    <h3><span>主題庫</span><span class="t-hd-right"><span class="count" id="tCount">0</span><button id="clearTBtn" class="t-clear" onclick="clearSelectedTopics()" title="一鍵清除所有已選主題" disabled>清除</button></span></h3>
-    <!-- 一鍵清除：放在主題列表最上方，選取後立即可見，無需捲動 -->
-    <div id="tClearBar" style="margin:6px 0 10px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--ui-bd);border-radius:10px;padding:8px 10px;">
-      <div style="flex:1;font-size:12px;color:var(--ui-mut);">
-        已選 <b id="tSelNum" style="color:var(--ui-line);">00</b> 個
+<!-- ===== 6 步驟全頁分頁精靈內容區 ===== -->
+<div class="wizard-pages-stage" id="wizardPagesStage">
+
+  <!-- 第 1 頁：門市與場次基本設定 -->
+  <div class="wizard-step-page active" id="stepPage1">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 1：門市與場次基本設定</h2>
+        <div class="page-header-sub">一次集中填寫門市與場次基本資訊，後續的簡報封面、海報與社群文案將全面自動帶入。</div>
       </div>
-      <button id="clearTTopBtn" onclick="clearSelectedTopics()" style="background:#fee2e2;border:1.5px solid #fecaca;color:#b91c1c;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;" disabled title="清除左側所有已選取的主題">🗑 一鍵清除</button>
     </div>
 
-    <!-- 分類篩選 (自訂下拉 + 快捷藥丸，永不卡死、點擊即收) -->
-    <div class="cat-filter-wrap">
-      <!-- 快捷藥丸：最常用的兩個選項，點一下直接過濾，免展開選單 -->
-      <div class="cat-quick-pills">
-        <button type="button" class="cat-pill-btn active" id="pillCatAll" onclick="selectCategoryFilter('', '全部分類 (61)')">🏷 全部分類</button>
-        <button type="button" class="cat-pill-btn beginner-pill" id="pillCatBeginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')">⭐ 新手首選</button>
+    <div class="page-card">
+      <div class="step1-grid">
+        <div class="s1-field">
+          <label>門市名稱（自動記憶於本機瀏覽器）</label>
+          <input id="set_store" placeholder="例：Apple Shop 門市專櫃" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>報名／洽詢方式（顯示於海報與貼文結尾）</label>
+          <input id="set_signup" placeholder="例：門市櫃台現場報名 或 洽現場專員" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>上課日期</label>
+          <input id="date" placeholder="例：6/15 (週六)" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>上課時間</label>
+          <input id="p1_time" placeholder="例：14:00 - 15:00" value="14:00 - 15:00" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>預計時長（分鐘）</label>
+          <input id="dur" type="number" value="60" placeholder="60" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>名額限制（人數）</label>
+          <input id="ppl" type="number" value="8" placeholder="8" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field" style="grid-column:1 / -1;">
+          <label>上課地點</label>
+          <input id="p1_place" placeholder="例：門市體驗區" value="門市體驗區" oninput="syncBasicInfo()">
+        </div>
       </div>
 
-      <!-- 自訂下拉選單 (點選即收合、點外部即收合、按 ESC 即收合) -->
-      <div class="custom-dropdown" id="customCatDropdown">
-        <input type="hidden" id="catFilter" value="">
-        <button type="button" class="custom-dropdown-btn" onclick="toggleCustomCategoryDropdown(event)">
-          <span id="customCatBtnLabel">📂 全部分類 (61)</span>
-          <span class="custom-dropdown-arrow">▼</span>
-        </button>
-        <div class="custom-dropdown-menu" id="customCatMenu">
-          <div class="custom-dropdown-item selected" data-val="" onclick="selectCategoryFilter('', '全部分類 (61)')">
-            <span>🏷 全部分類</span><span style="font-size:10.5px;opacity:.65">61 門</span>
+      <div class="s1-benefit-box">
+        ✅ <strong>為什麼先填這裡？</strong> 填寫一次後，系統會自動把資訊同步帶入後面的<strong>簡報封面、活動海報與社群宣傳貼文</strong>，不用重複輸入兩次！門市名稱與報名方式會安全存在您這台電腦的瀏覽器裡，下次開啟免重填。
+      </div>
+    </div>
+
+    <div class="page-footer-nav">
+      <div></div>
+      <button type="button" class="wizard-btn next" onclick="goToWizardStep(2)">下一步：挑選主題與對象 ➔</button>
+    </div>
+  </div>
+
+  <!-- 第 2 頁：挑選主題與學員對象 -->
+  <div class="wizard-step-page" id="stepPage2">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 2：挑選主題與學員對象</h2>
+        <div class="page-header-sub">左側挑選想帶領的課綱主題（推薦先看「⭐ 新手首選」），右側勾選學員年齡層。</div>
+      </div>
+    </div>
+
+    <div class="step2-layout">
+      <!-- 左側主題庫 -->
+      <div class="panel left">
+        <h3><span>主題庫</span><span class="t-hd-right"><span class="count" id="tCount">0</span><button id="clearTBtn" class="t-clear" onclick="clearSelectedTopics()" title="一鍵清除所有已選主題" disabled>清除</button></span></h3>
+        <div id="tClearBar" style="margin:6px 0 10px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--ui-bd);border-radius:10px;padding:8px 10px;">
+          <div style="flex:1;font-size:12px;color:var(--ui-mut);">
+            已選 <b id="tSelNum" style="color:var(--ui-line);">00</b> 個
           </div>
-          <div class="custom-dropdown-item" data-val="beginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')" style="color:#b45309">
-            <span>⭐ 新手首選 · 安全牌</span><span style="font-size:10.5px;opacity:.85">10 門</span>
+          <button id="clearTTopBtn" onclick="clearSelectedTopics()" style="background:#fee2e2;border:1.5px solid #fecaca;color:#b91c1c;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;" disabled>🗑 一鍵清除</button>
+        </div>
+
+        <div class="cat-filter-wrap">
+          <div class="cat-quick-pills">
+            <button type="button" class="cat-pill-btn active" id="pillCatAll" onclick="selectCategoryFilter('', '全部分類 (61)')">🏷 全部分類</button>
+            <button type="button" class="cat-pill-btn beginner-pill" id="pillCatBeginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')">⭐ 新手首選</button>
           </div>
-          <div class="custom-dropdown-item" data-val="iPhone" onclick="selectCategoryFilter('iPhone', '📱 iPhone 系列 (12)')">
-            <span>📱 iPhone 系列</span><span style="font-size:10.5px;opacity:.65">12 門</span>
+
+          <div class="custom-dropdown" id="customCatDropdown">
+            <input type="hidden" id="catFilter" value="">
+            <button type="button" class="custom-dropdown-btn" onclick="toggleCustomCategoryDropdown(event)">
+              <span id="customCatBtnLabel">📂 全部分類 (61)</span>
+              <span class="custom-dropdown-arrow">▼</span>
+            </button>
+            <div class="custom-dropdown-menu" id="customCatMenu">
+              <div class="custom-dropdown-item selected" data-val="" onclick="selectCategoryFilter('', '全部分類 (61)')"><span>🏷 全部分類</span><span style="font-size:10.5px;opacity:.65">61 門</span></div>
+              <div class="custom-dropdown-item" data-val="beginner" onclick="selectCategoryFilter('beginner', '⭐ 新手首選 · 安全牌 (10)')" style="color:#b45309"><span>⭐ 新手首選 · 安全牌</span><span style="font-size:10.5px;opacity:.85">10 門</span></div>
+              <div class="custom-dropdown-item" data-val="iPhone" onclick="selectCategoryFilter('iPhone', '📱 iPhone 系列 (12)')"><span>📱 iPhone 系列</span><span style="font-size:10.5px;opacity:.65">12 門</span></div>
+              <div class="custom-dropdown-item" data-val="iPad" onclick="selectCategoryFilter('iPad', '📟 iPad 系列 (3)')"><span>📟 iPad 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span></div>
+              <div class="custom-dropdown-item" data-val="Mac" onclick="selectCategoryFilter('Mac', '💻 Mac 系列 (5)')"><span>💻 Mac 系列</span><span style="font-size:10.5px;opacity:.65">5 門</span></div>
+              <div class="custom-dropdown-item" data-val="Watch" onclick="selectCategoryFilter('Watch', '⌚ Watch 系列 (3)')"><span>⌚ Watch 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span></div>
+              <div class="custom-dropdown-item" data-val="App / 服務" onclick="selectCategoryFilter('App / 服務', '📲 App 與生活服務 (11)')"><span>📲 App 與生活服務</span><span style="font-size:10.5px;opacity:.65">11 門</span></div>
+              <div class="custom-dropdown-item" data-val="AI" onclick="selectCategoryFilter('AI', '⚡ AI 智慧功能 (3)')"><span>⚡ AI 智慧功能</span><span style="font-size:10.5px;opacity:.65">3 門</span></div>
+              <div class="custom-dropdown-item" data-val="其他" onclick="selectCategoryFilter('其他', '📦 其他好用技巧 (24)')"><span>📦 其他好用技巧</span><span style="font-size:10.5px;opacity:.65">24 門</span></div>
+            </div>
           </div>
-          <div class="custom-dropdown-item" data-val="iPad" onclick="selectCategoryFilter('iPad', '📟 iPad 系列 (3)')">
-            <span>📟 iPad 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span>
-          </div>
-          <div class="custom-dropdown-item" data-val="Mac" onclick="selectCategoryFilter('Mac', '💻 Mac 系列 (5)')">
-            <span>💻 Mac 系列</span><span style="font-size:10.5px;opacity:.65">5 門</span>
-          </div>
-          <div class="custom-dropdown-item" data-val="Watch" onclick="selectCategoryFilter('Watch', '⌚ Watch 系列 (3)')">
-            <span>⌚ Watch 系列</span><span style="font-size:10.5px;opacity:.65">3 門</span>
-          </div>
-          <div class="custom-dropdown-item" data-val="App / 服務" onclick="selectCategoryFilter('App / 服務', '📲 App 與生活服務 (11)')">
-            <span>📲 App 與生活服務</span><span style="font-size:10.5px;opacity:.65">11 門</span>
-          </div>
-          <div class="custom-dropdown-item" data-val="AI" onclick="selectCategoryFilter('AI', '⚡ AI 智慧功能 (3)')">
-            <span>⚡ AI 智慧功能</span><span style="font-size:10.5px;opacity:.65">3 門</span>
-          </div>
-          <div class="custom-dropdown-item" data-val="其他" onclick="selectCategoryFilter('其他', '📦 其他好用技巧 (24)')">
-            <span>📦 其他好用技巧</span><span style="font-size:10.5px;opacity:.65">24 門</span>
-          </div>
+        </div>
+
+        <div class="quick-filter-bar">
+          <button type="button" class="q-filter-btn active" onclick="setDiffFilter('all', this)">全部</button>
+          <button type="button" class="q-filter-btn beginner" onclick="setDiffFilter('beginner', this)">⭐ 新手首選</button>
+          <button type="button" class="q-filter-btn hot" onclick="setDiffFilter('hot', this)">🔥 門市熱門</button>
+          <button type="button" class="q-filter-btn" onclick="setDiffFilter('easy', this)">🌱 入門</button>
+          <button type="button" class="q-filter-btn" onclick="setDiffFilter('mid', this)">🌿 進階</button>
+          <button type="button" class="q-filter-btn" onclick="setDiffFilter('pro', this)">🔥 專業</button>
+        </div>
+
+        <div id="topics" style="max-height:420px;overflow-y:auto;padding-right:4px;"></div>
+        <div class="topic-actions" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+          <button class="add-topic-btn" style="flex:1;min-width:130px;margin:0;" onclick="openTopicModal()">＋ 新增單一主題</button>
+          <button class="add-topic-btn" style="flex:1;min-width:130px;margin:0;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openQuickOfficialModal()">🔗 從官網快速新增</button>
+          <button class="add-topic-btn" style="flex:1;min-width:130px;margin:0;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openSmartModal()">🤖 一句話智能組合</button>
+        </div>
+      </div>
+
+      <!-- 右側年齡層與即時摘要 -->
+      <div class="panel right">
+        <h3><span>學員對象（年齡層）</span><span class="count" id="aCount">0</span></h3>
+        <div id="ages"></div>
+        <h3 style="margin-top:22px">預計生成摘要</h3>
+        <div class="stat-big">
+          <div class="n" id="sCnt">0</div>
+          <div class="l">將生成的投影片頁數</div>
+        </div>
+        <div id="sumList"></div>
+      </div>
+    </div>
+
+    <div class="page-footer-nav">
+      <button type="button" class="wizard-btn prev" onclick="goToWizardStep(1)">‹ 上一步：基本設定</button>
+      <button type="button" class="wizard-btn next" onclick="generateAndGoStep3()">下一步：生成簡報與備課內容 ➔</button>
+    </div>
+  </div>
+
+  <!-- 第 3 頁：簡報預覽與文字微調 -->
+  <div class="wizard-step-page" id="stepPage3">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 3：簡報預覽與文字微調</h2>
+        <div class="page-header-sub">把整個大畫面留給投影片預覽與編輯，不再被左右欄與下方備忘錄擠壓，一眼看完每頁排版。</div>
+      </div>
+    </div>
+
+    <div class="step3-toolbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="nav">
+          <button onclick="prevSlide()">‹</button>
+          <span class="pageinfo" id="pageInfo">00 / 00</span>
+          <button onclick="nextSlide()">›</button>
+        </div>
+        <span id="genToneNote" style="font-size:11px;color:#0c4a6e;background:#e0f2fe;border:1px solid #bae6fd;border-radius:999px;padding:3px 10px;"></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn ghost" onclick="toggleEditMode()" id="editBtn" disabled>✏️ 直接修改文字</button>
+        <button class="btn" onclick="downloadPptx()" id="pptxBtn" disabled>📥 下載 .pptx 簡報檔</button>
+      </div>
+    </div>
+
+    <div class="step3-slide-stage">
+      <div class="slide-wrap" id="slideWrap">
+        <div class="slide empty">
+          <div class="big">尚未生成簡報</div>
+          <div style="font-size:13px;font-weight:500">請先在步驟 2 挑選課綱主題並點擊「生成簡報與備課內容」</div>
         </div>
       </div>
     </div>
 
-    <!-- 難易度與推薦快速篩選 (如飲料 Menu 推薦) -->
-    <div class="quick-filter-bar">
-      <button type="button" class="q-filter-btn active" onclick="setDiffFilter('all', this)">全部</button>
-      <button type="button" class="q-filter-btn beginner" onclick="setDiffFilter('beginner', this)">⭐ 新手首選</button>
-      <button type="button" class="q-filter-btn hot" onclick="setDiffFilter('hot', this)">🔥 門市熱門</button>
-      <button type="button" class="q-filter-btn" onclick="setDiffFilter('easy', this)">🌱 入門</button>
-      <button type="button" class="q-filter-btn" onclick="setDiffFilter('mid', this)">🌿 進階</button>
-      <button type="button" class="q-filter-btn" onclick="setDiffFilter('pro', this)">🔥 專業</button>
-    </div>
-
-
-
-    <div id="topics"></div>
-    <div class="topic-actions">
-      <button class="add-topic-btn" onclick="openTopicModal()">＋ 新增單一主題</button>
-      <button class="add-topic-btn" style="margin-top:8px;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openQuickOfficialModal()">🔗 從官網快速新增</button>
-      <button class="add-topic-btn" style="margin-top:8px;background:#e0f2fe;border-color:#0ea5e9;color:#0c4a6e;font-weight:700" onclick="openSmartModal()">🤖 一句話智能組合</button>
+    <div class="page-footer-nav">
+      <button type="button" class="wizard-btn prev" onclick="goToWizardStep(2)">‹ 上一步：重新選題</button>
+      <button type="button" class="wizard-btn next" onclick="goToWizardStep(4)">下一步：講稿與課前準備 ➔</button>
     </div>
   </div>
 
-  <div class="center">
-    <div class="ctrls">
-      <input id="date" placeholder="日期 6/15 週六">
-      <input id="dur" type="number" value="60" placeholder="分鐘">
-      <input id="ppl" type="number" value="8" placeholder="人數">
-      <div class="nav">
-        <button onclick="prevSlide()">‹</button>
-        <span class="pageinfo" id="pageInfo">00 / 00</span>
-        <button onclick="nextSlide()">›</button>
-      </div>
-      <span id="genToneNote" style="margin-left:10px;font-size:10px;color:#0c4a6e;background:#e0f2fe;border:1px solid #bae6fd;border-radius:999px;padding:2px 8px;white-space:nowrap;max-width:320px;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:middle;"></span>
-    </div>
-    <div class="slide-wrap" id="slideWrap">
-      <div class="slide empty">
-        <div class="big">準備您的小教室簡報</div>
-        <div style="font-size:13px;font-weight:500">左側勾選主題 · 右側選擇年齡層 · 按下「生成簡報」 <span style="font-size:10px;opacity:.5">(Grok 版 · 實作已優化為實際可操作步驟)</span></div>
-        <div style="font-size:11px;color:#b91c1c;margin-top:8px;font-weight:600;">此為內部共用工具，請勿外傳連結</div>
+  <!-- 第 4 頁：講師備忘錄與課前速覽 -->
+  <div class="wizard-step-page" id="stepPage4">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 4：講師備忘錄與課前速覽</h2>
+        <div class="page-header-sub">左側切換投影片頁碼，右側專心檢視該頁逐字參考講稿、互動提問與課前 3 分鐘速覽卡。</div>
       </div>
     </div>
 
-    <!-- 🎙️ 本頁講師備忘錄（Speaker Notes） -->
-    <div class="speaker-notes-panel" id="speakerNotesPanel">
-      <div class="speaker-notes-hd">
-        <div class="sn-title">
-          <span class="sn-badge">🎙️ 講師備忘錄</span>
-          <span class="sn-sub" id="snPageSub">第 00 / 00 頁 · 準備就緒</span>
+    <div class="step4-layout">
+      <!-- 左側投影片縮圖列表 + 講稿下載 -->
+      <div class="page-card" style="padding:16px;">
+        <div class="page-card-title" style="font-size:14px;">
+          <span>📑 投影片分頁切換</span>
         </div>
-        <div class="sn-actions">
-          <button class="sn-btn" onclick="toggleNotesSize()" id="snSizeBtn" title="切換備忘錄字級大小">🔠 字級: 中</button>
-          <button class="sn-btn" onclick="copyCurrentNote()" title="複製本頁講稿備忘錄">📋 複製本頁講稿</button>
-          <button class="sn-btn" onclick="toggleNotesPanel()" id="snToggleBtn" title="收合或展開備忘錄">▼ 收合</button>
+        <div id="p4SlideNav" class="p4-slide-nav-list">
+          <div style="font-size:12px;color:#64748b;padding:12px 0;">請先生成簡報後即可在此快速切換各頁講稿。</div>
+        </div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:8px;">
+          <button type="button" class="checklist-btn primary" style="width:100%;padding:9px;" onclick="downloadPodcastScript()">📥 下載完整講稿 (.txt)</button>
+          <button type="button" class="checklist-btn" style="width:100%;padding:8px;" onclick="copyCurrentNote()">📋 複製本頁講稿</button>
         </div>
       </div>
-      <div class="speaker-notes-body font-md" id="speakerNotesContent">
-        <div class="sn-empty-hint">產生簡報後，此處將同步呈現當前頁面的講師口語講法、轉場話術、互動提問句與動作提示。</div>
+
+      <!-- 右側專心看講稿與速覽卡 -->
+      <div>
+        <div class="speaker-notes-panel" id="speakerNotesPanel" style="margin-top:0;border:1px solid #e2e8f0;border-radius:12px;">
+          <div class="speaker-notes-hd">
+            <div class="sn-title">
+              <span class="sn-badge">🎙️ 本頁逐字參考講稿</span>
+              <span class="sn-sub" id="snPageSub">第 00 / 00 頁 · 準備就緒</span>
+            </div>
+            <div class="sn-actions">
+              <button class="sn-btn" onclick="toggleNotesSize()" id="snSizeBtn">🔠 字級: 中</button>
+              <button class="sn-btn" onclick="copyCurrentNote()">📋 複製本頁</button>
+            </div>
+          </div>
+          <div class="speaker-notes-body font-md" id="speakerNotesContent" style="max-height:none;">
+            <div class="sn-empty-hint">產生簡報後，此處將同步呈現當前頁面的講師口語講法、轉場話術、互動提問句與避坑提醒。</div>
+          </div>
+        </div>
+
+        <div class="page-card" style="margin-top:16px;">
+          <div class="page-card-title">
+            <span>📋 課前 3 分鐘速覽卡（現場配速、器材檢查、救援 Q&A）</span>
+            <button type="button" class="checklist-btn" onclick="copyRunDownCard()">📋 複製速覽卡</button>
+          </div>
+          <div id="p4RunDownWrap"></div>
+        </div>
       </div>
+    </div>
+
+    <div class="page-footer-nav">
+      <button type="button" class="wizard-btn prev" onclick="goToWizardStep(3)">‹ 上一步：簡報預覽</button>
+      <button type="button" class="wizard-btn next" onclick="goToWizardStep(5)">下一步：設計宣傳海報 ➔</button>
     </div>
   </div>
 
-  <div class="panel right">
-    <h3><span>年齡層</span><span class="count" id="aCount">0</span></h3>
-    <div id="ages"></div>
-    <h3 style="margin-top:22px">本次摘要</h3>
-    <div class="stat-big">
-      <div class="n" id="sCnt">0</div>
-      <div class="l">將生成的頁數</div>
+  <!-- 第 5 頁：宣傳海報設計（含 Grok 首選 AI 指令與一鍵連動） -->
+  <div class="wizard-step-page" id="stepPage5">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 5：宣傳海報設計</h2>
+        <div class="page-header-sub">已自動帶入步驟 1 的時間地點與步驟 2 的主題，可直接存成圖片，或一鍵連動 Grok、Gemini、ChatGPT 生圖！</div>
+      </div>
     </div>
-    <div id="sumList"></div>
+
+    <div class="step5-layout">
+      <!-- 左側海報控制與 AI 指令面板 -->
+      <div>
+        <div class="page-card">
+          <div class="page-card-title"><span>🎨 尺寸、配色與欄位微調</span></div>
+          <div class="field-grid" style="margin-bottom:10px">
+            <div class="field-row"><label>日期</label><input id="po_date" placeholder="6/15 (週六)" oninput="renderPoster()"></div>
+            <div class="field-row"><label>時間</label><input id="po_time" placeholder="14:00 - 15:00" oninput="renderPoster()"></div>
+            <div class="field-row"><label>地點</label><input id="po_place" placeholder="門市體驗區" oninput="renderPoster()"></div>
+            <div class="field-row"><label>名額</label><input id="po_seats" placeholder="限額 8 位" oninput="renderPoster()"></div>
+          </div>
+          <div class="field-row" style="margin-bottom:12px">
+            <label>報名／QR 連結（選填，填入後海報右下角會出現 QR Code）</label>
+            <input id="po_qr" placeholder="https://line.me/... 或報名表單連結" oninput="renderPoster()">
+          </div>
+
+          <div class="poster-toolbar" style="margin-bottom:10px;">
+            <div class="seg" id="po_seg">
+              <button class="on" onclick="setPosterFormat('a4', this)">A4 直式（列印）</button>
+              <button onclick="setPosterFormat('sq', this)">正方形（社群）</button>
+            </div>
+            <div class="theme-sw" id="po_theme">
+              <div class="sw on" style="background:#F5A623" title="橘 Orange" onclick="setPosterTheme('#F5A623',this)"></div>
+              <div class="sw" style="background:#F06030" title="珊瑚橘 Coral" onclick="setPosterTheme('#F06030',this)"></div>
+              <div class="sw" style="background:#1F3A5F" title="海軍藍 Navy" onclick="setPosterTheme('#1F3A5F',this)"></div>
+              <div class="sw" style="background:#9C2A2A" title="磚紅 Brick" onclick="setPosterTheme('#9C2A2A',this)"></div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="copy-btn" onclick="renderPoster()">🔄 更新海報</button>
+            <button class="copy-btn" style="background:#0ea5e9" onclick="renderDualPoster()" title="使用已選的 2 個主題產生雙主題海報">📣 雙主題海報</button>
+            <button class="copy-btn" style="background:#8a6d3b" onclick="resetPosterEdits()">↩︎ 還原文字</button>
+            <button class="copy-btn" style="background:var(--green);font-weight:700;" onclick="downloadPosterImage()">📥 存成圖片</button>
+          </div>
+          <div style="font-size:11.5px;color:#64748b;margin-top:8px;">✏️ 提示：右側海報上的文字都可以直接點擊修改！</div>
+        </div>
+
+        <!-- Grok 首選 AI 海報指令轉換器（預設展開） -->
+        <div id="aiPromptPanel" class="ai-prompt-panel" style="display:block;margin-bottom:0;">
+          <div class="ai-panel-header">
+            <div class="ai-panel-title">
+              <span class="ai-icon">🤖</span>
+              <div>
+                <strong style="font-size:13px;color:#0f172a;">AI 海報超精準指令（xAI Grok 首選 ✕ 一鍵連動）</strong>
+                <div style="font-size:11px;color:#64748b;margin-top:1px;">已自動帶入硬體細節、5200K 燈光與 35% 留白構圖，點擊下方即可一鍵連動生圖！</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-controls-bar">
+            <div class="ai-control-group">
+              <span class="ai-ctl-label">目標 Agent：</span>
+              <div class="ai-btn-group" id="aiAgentTabs">
+                <button type="button" class="ai-tab-btn active" onclick="switchAiAgent('grok', this)">⚡ xAI Grok (首選)</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('gemini', this)">💎 Google Gemini</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('chatgpt', this)">💬 OpenAI ChatGPT</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiAgent('universal', this)">🎨 通用 Prompt</button>
+              </div>
+            </div>
+            <div class="ai-control-group">
+              <span class="ai-ctl-label">視覺風格：</span>
+              <div class="ai-btn-group" id="aiStyleTabs">
+                <button type="button" class="ai-tab-btn active" onclick="switchAiStyle('minimal', this)">🍎 經典 Apple 極簡風</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pop', this)">🔥 年輕活力新粗獷</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-prompt-box-wrap">
+            <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false" style="min-height:160px;"></textarea>
+          </div>
+
+          <div class="ai-panel-footer">
+            <div style="font-size:11px;color:#64748b;">💡 點擊下方一鍵連動，自動複製並開啟新分頁貼上！</div>
+            <button type="button" class="btn-copy-prompt" onclick="copyAiPrompt(this)">📋 單純複製指令</button>
+          </div>
+
+          <div class="ai-direct-actions">
+            <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')">⚡ 一鍵連動 Grok (最主要推薦)</button>
+            <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')">💎 一鍵連動 Gemini</button>
+            <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')">💬 一鍵連動 ChatGPT</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側海報預覽畫布 -->
+      <div class="step5-preview-box">
+        <div id="posterCanvas"></div>
+      </div>
+    </div>
+
+    <div class="page-footer-nav">
+      <button type="button" class="wizard-btn prev" onclick="goToWizardStep(4)">‹ 上一步：講稿與速覽</button>
+      <button type="button" class="wizard-btn next" onclick="goToWizardStep(6)">下一步：宣傳貼文與一鍵打包 ➔</button>
+    </div>
   </div>
+
+  <!-- 第 6 頁：宣傳貼文與「完成清單」總匯 -->
+  <div class="wizard-step-page" id="stepPage6">
+    <div class="page-header-row">
+      <div>
+        <h2 class="page-header-title">步驟 6：宣傳貼文與備課完成總覽</h2>
+        <div class="page-header-sub">左側複製宣傳貼文與 LINE 行前提醒，右側一次確認並打包下載所有備課檔案！</div>
+      </div>
+    </div>
+
+    <div class="step6-layout">
+      <!-- 左側社群貼文與 LINE 行前提醒 -->
+      <div>
+        <div class="page-card">
+          <div class="page-card-title"><span>✍️ 開課社群貼文（短版 / 長版 / 親切邀請版）</span></div>
+          <div id="socialBody"></div>
+        </div>
+
+        <div class="page-card">
+          <div class="page-card-title">
+            <span>💬 課前一天 LINE 行前提醒範本</span>
+            <button type="button" class="copy-btn" onclick="copyText('lineReminderPre', this)">📋 一鍵複製</button>
+          </div>
+          <pre id="lineReminderPre" style="white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.7;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin:0;color:#1e293b;"></pre>
+        </div>
+      </div>
+
+      <!-- 右側準備完成總覽打包清單 -->
+      <div class="checklist-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <span style="font-size:22px;">✅</span>
+          <div>
+            <h3 style="margin:0;font-size:16px;font-weight:800;color:#0f172a;">本次小教室準備完成總覽</h3>
+            <div style="font-size:12px;color:#15803d;font-weight:600;">所有備課資料已齊全，點擊右側按鈕即可下載或複製</div>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-item-info">
+            <div class="checklist-item-title">1. 教學簡報檔 (.pptx)</div>
+            <div class="checklist-item-sub" id="chkSlideStatus">已就緒</div>
+          </div>
+          <button type="button" class="checklist-btn primary" onclick="downloadPptx()">📥 下載 .pptx</button>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-item-info">
+            <div class="checklist-item-title">2. 完整逐字備課講稿 (.txt)</div>
+            <div class="checklist-item-sub">含口語講法、轉場話術與互動提問</div>
+          </div>
+          <button type="button" class="checklist-btn" onclick="downloadPodcastScript()">📥 下載 .txt</button>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-item-info">
+            <div class="checklist-item-title">3. 活動宣傳海報圖檔</div>
+            <div class="checklist-item-sub">已帶入日期、地點與主題</div>
+          </div>
+          <button type="button" class="checklist-btn" onclick="downloadPosterImage()">📥 存成圖片</button>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-item-info">
+            <div class="checklist-item-title">4. 課前 3 分鐘速覽卡</div>
+            <div class="checklist-item-sub">現場配速時間表、器材檢核與救援 Q&A</div>
+          </div>
+          <button type="button" class="checklist-btn" onclick="copyRunDownCard()">📋 複製速覽卡</button>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-item-info">
+            <div class="checklist-item-title">5. LINE 課前一天行前提醒</div>
+            <div class="checklist-item-sub">一鍵貼上發送給報名學員</div>
+          </div>
+          <button type="button" class="checklist-btn" onclick="copyText('lineReminderPre', this)">💬 複製提醒</button>
+        </div>
+
+        <div style="margin-top:16px;padding:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12.5px;color:#166534;line-height:1.6;">
+          🎉 <strong>準備完成！</strong> 上台前建議再看一次步驟 4 的「課前 3 分鐘速覽卡」，預祝您這次小教室順利成功！
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer-nav">
+      <button type="button" class="wizard-btn prev" onclick="goToWizardStep(5)">‹ 上一步：設計宣傳海報</button>
+      <button type="button" class="wizard-btn finish" onclick="goToWizardStep(1);showToast('🎉 已回到第 1 頁，準備好規劃下一場小教室囉！');">🎉 全部完成！回到第 1 頁</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===== 新增自訂主題 Modal ===== -->
@@ -977,6 +1338,7 @@
   </div>
 </div>
 
+
 <!-- ===== 從官網快速新增 Modal (極簡流程，給多人高量使用) -->
 <div id="quickOfficialModal" class="modal-mask" onclick="if(event.target===this)closeQuickOfficialModal()">
   <div class="modal-box" style="max-width:520px">
@@ -1013,148 +1375,6 @@
   </div>
 </div>
 
-<!-- ===== 門市設定 Modal ===== -->
-<div id="settingsModal" class="modal-mask" onclick="if(event.target===this)closeModal('settingsModal')">
-  <div class="modal-box">
-    <div class="modal-hd">
-      <div>
-        <h2>⚙️ 門市設定</h2>
-        <div class="modal-sub">每間門市各自設定一次，資料只存在這台電腦的瀏覽器。</div>
-        <div style="font-size:10px;color:#b91c1c;margin-top:4px;font-weight:600;">此為內部共用工具，請勿外傳連結</div>
-      </div>
-      <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="field-row">
-        <label>門市名稱（會顯示在海報、文案上）</label>
-        <input id="set_store" placeholder="例：Apple Shop 門市專櫃">
-      </div>
-      <div class="field-row">
-        <label>報名／洽詢方式（顯示於海報、文案結尾）</label>
-        <input id="set_signup" placeholder="例：門市櫃台報名・LINE@ 私訊「小教室」">
-      </div>
-      <div class="hint-box" style="margin-top:6px">💡 這些設定只存在這台電腦的瀏覽器，<b>每間門市第一次使用時各自設定一次即可</b>，之後產生的海報與文案都會自動帶入。</div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn ghost" onclick="closeModal('settingsModal')">取消</button>
-      <button class="btn" onclick="saveSettings()">✓ 儲存設定</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ===== 宣傳海報 Modal ===== -->
-<div id="posterModal" class="modal-mask" onclick="if(event.target===this)closeModal('posterModal')">
-  <div class="modal-box" style="max-width:920px">
-    <div class="modal-hd">
-      <div>
-        <h2>📣 開課宣傳海報</h2>
-        <div class="modal-sub">依當次選取的主題自動生成。可存成社群圖片或 A4 海報張貼。</div>
-      </div>
-      <button class="modal-close" onclick="closeModal('posterModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="field-grid" style="margin-bottom:8px">
-        <div class="field-row"><label>日期</label><input id="po_date" placeholder="6/15 (週六)"></div>
-        <div class="field-row"><label>時間</label><input id="po_time" placeholder="14:00 - 15:00"></div>
-        <div class="field-row"><label>地點</label><input id="po_place" placeholder="門市體驗區"></div>
-        <div class="field-row"><label>名額</label><input id="po_seats" placeholder="限額 8 位"></div>
-      </div>
-
-      <div style="margin-top:12px; padding-top:8px; border-top:1px dashed #ccc; font-size:12px;">
-        <div style="font-weight:700; margin-bottom:4px;">雙主題海報（規劃兩堂課）</div>
-        <div style="color:#666; margin-bottom:6px;">如果已想好下次兩堂課的主題，點下方按鈕使用目前選取的兩個主題產生專屬宣傳海報（標題會自動融合）。</div>
-        <button class="copy-btn" onclick="renderDualPoster()" style="background:#0ea5e9;">📣 產生雙主題海報</button>
-        <span style="font-size:11px; color:#888; margin-left:8px;">（需先在左側選取恰好兩個主題）</span>
-      </div>
-      <div class="field-row" style="margin-bottom:10px"><label>報名／QR 連結（選填，填入後海報右下角會出現 QR Code）</label><input id="po_qr" placeholder="https://line.me/... 或報名表單連結"></div>
-      <div class="poster-toolbar">
-        <div class="seg" id="po_seg">
-          <button class="on" onclick="setPosterFormat('a4', this)">A4 直式（列印）</button>
-          <button onclick="setPosterFormat('sq', this)">正方形（社群）</button>
-        </div>
-        <span style="font-size:12px;color:#6e6e73;font-weight:700;margin-left:4px">風格</span>
-        <div class="theme-sw" id="po_theme">
-          <div class="sw on" style="background:#F5A623" title="橘 Orange" onclick="setPosterTheme('#F5A623',this)"></div>
-          <div class="sw" style="background:#F06030" title="珊瑚橘 Coral" onclick="setPosterTheme('#F06030',this)"></div>
-          <div class="sw" style="background:#1F3A5F" title="海軍藍 Navy" onclick="setPosterTheme('#1F3A5F',this)"></div>
-          <div class="sw" style="background:#9C2A2A" title="磚紅 Brick" onclick="setPosterTheme('#9C2A2A',this)"></div>
-        </div>
-        <button class="copy-btn" onclick="renderPoster()">🔄 更新海報</button>
-        <button class="copy-btn" style="background:#8a6d3b" onclick="resetPosterEdits()" title="清除手動修改的文字，回到自動產生的內容">↩︎ 還原文字</button>
-        <button class="copy-btn" style="background:var(--green)" onclick="downloadPosterImage()">📥 存成圖片</button>
-        <button class="copy-btn" style="background:#4f46e5;font-weight:700" onclick="toggleAiPromptPanel()" id="btnAiPrompt" title="轉換為 Gemini / ChatGPT 等 AI Agent 海報生成提示詞">🤖 轉為 AI 海報指令</button>
-      </div>
-
-      <!-- ===== AI 海報生成指令面板 (AI Poster Prompt Panel) ===== -->
-      <div id="aiPromptPanel" class="ai-prompt-panel" style="display:none;">
-        <div class="ai-panel-header">
-          <div class="ai-panel-title">
-            <span class="ai-icon">🤖</span>
-            <div>
-              <strong style="font-size:13px;color:#0f172a;">AI 海報生成指令轉換器（Gemini ✕ ChatGPT ✕ Midjourney）</strong>
-              <div style="font-size:11px;color:#64748b;margin-top:1px;">已將目前選取的課綱內容自動轉換為結構化 Prompt，可直接貼給 AI Agent 生成海報視覺！</div>
-            </div>
-          </div>
-          <button type="button" class="ai-close-btn" onclick="toggleAiPromptPanel(false)" title="收合面板">✕</button>
-        </div>
-
-        <div class="ai-controls-bar">
-          <div class="ai-control-group">
-            <span class="ai-ctl-label">目標 Agent：</span>
-            <div class="ai-btn-group" id="aiAgentTabs">
-              <button type="button" class="ai-tab-btn active" onclick="switchAiAgent('grok', this)">⚡ xAI Grok (首選)</button>
-              <button type="button" class="ai-tab-btn" onclick="switchAiAgent('gemini', this)">💎 Google Gemini</button>
-              <button type="button" class="ai-tab-btn" onclick="switchAiAgent('chatgpt', this)">💬 OpenAI ChatGPT</button>
-              <button type="button" class="ai-tab-btn" onclick="switchAiAgent('universal', this)">🎨 通用生圖 Prompt</button>
-            </div>
-          </div>
-
-          <div class="ai-control-group">
-            <span class="ai-ctl-label">視覺風格：</span>
-            <div class="ai-btn-group" id="aiStyleTabs">
-              <button type="button" class="ai-tab-btn active" onclick="switchAiStyle('minimal', this)">🍎 經典 Apple 極簡風</button>
-              <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pop', this)">🔥 年輕活力新粗獷</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="ai-prompt-box-wrap">
-          <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false" placeholder="點擊更新或切換上方選項以產生指令..."></textarea>
-        </div>
-
-        <div class="ai-panel-footer">
-          <div style="font-size:11px;color:#64748b;">
-            💡 提示：點擊下方「一鍵連動」，自動複製超精準指令並打開該平台，新分頁直接貼上即可生成！
-          </div>
-          <button type="button" class="btn-copy-prompt" onclick="copyAiPrompt(this)">📋 單純複製指令</button>
-        </div>
-
-        <div class="ai-direct-actions">
-          <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="一鍵複製指令並開啟 Grok">⚡ 一鍵連動 Grok (最主要推薦)</button>
-          <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="一鍵複製指令並開啟 Gemini">💎 一鍵連動 Gemini</button>
-          <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')" title="一鍵複製指令並開啟 ChatGPT">💬 一鍵連動 ChatGPT</button>
-        </div>
-      </div>
-      <div class="hint-box" style="margin:0 0 12px">✏️ <b>海報上的文字可直接點擊修改</b>（標題、主題、報名方式等）。改完按「📥 存成圖片」就會存成您編輯後的版本；切換版型／配色也會保留修改。日期、時間、地點、名額請用上方欄位調整。</div>
-      <div class="poster-preview"><div id="posterCanvas"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 社群文案 Modal ===== -->
-<div id="socialModal" class="modal-mask" onclick="if(event.target===this)closeModal('socialModal')">
-  <div class="modal-box">
-    <div class="modal-hd">
-      <div>
-        <h2>✍️ 開課社群文案</h2>
-        <div class="modal-sub">依當次選取主題生成，可直接複製貼到 LINE@／社群。</div>
-      </div>
-      <button class="modal-close" onclick="closeModal('socialModal')">✕</button>
-    </div>
-    <div class="modal-body" id="socialBody"></div>
-  </div>
-</div>
 
 <!-- ===== Grok 智能推薦 Modal ===== -->
 <div id="smartModal" class="modal-mask" onclick="if(event.target===this)closeSmartModal()">
@@ -1260,114 +1480,10 @@
     </div>
   </div>
 </div>
-<!-- ===== 課前 3 分鐘速覽卡 Modal ===== -->
-<div id="runDownModal" class="modal-mask" onclick="if(event.target===this)closeRunDownModal()">
-  <div class="modal-box" style="max-width:720px;">
-    <div class="modal-hd">
-      <div>
-        <h2>📋 課前 3 分鐘準備速覽卡</h2>
-        <div class="modal-sub">新手講師定心丸：現場配速時間表、器材環境 3 分鐘速檢、以及現場三大常見救援話術。</div>
-      </div>
-      <button class="modal-close" onclick="closeRunDownModal()">✕</button>
-    </div>
-    <div class="modal-body" id="runDownModalBody">
-      <!-- 動態產生速覽卡內容 -->
-    </div>
-    <div class="modal-foot" style="justify-content:space-between;">
-      <button class="btn ghost" onclick="closeRunDownModal()">關閉</button>
-      <div style="display:flex; gap:8px;">
-        <button class="btn" onclick="copyRunDownCard()" style="background:#0284c7; color:#fff; font-weight:700;">📋 一鍵複製速覽卡到備忘錄</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ===== 課程全套教材定案中心 Modal (Finalized Hub Modal) ===== -->
-<div id="finalizedHubModal" class="modal-mask" onclick="if(event.target===this)closeModal('finalizedHubModal')">
-  <div class="modal-box" style="max-width:760px;">
-    <div class="modal-hd">
-      <div>
-        <div style="display:inline-block;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;">✓ 步驟 4 / 4 流程定案成功</div>
-        <h2 style="color:#0f172a;">🎉 課程全套教材已完整定案！</h2>
-        <div class="modal-sub">已為您根據當前課綱主題、學員設定與活動時間，自動生成專屬簡報、講師備忘錄、速覽卡與宣傳文案。</div>
-      </div>
-      <button class="modal-close" onclick="closeModal('finalizedHubModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#0369a1;display:flex;justify-content:space-between;align-items:center;">
-        <div><strong>課程主題：</strong><span id="hubTopicName">已選取主題</span></div>
-        <div><strong>預計時長：</strong><span id="hubDuration">60</span> 分鐘</div>
-      </div>
-
-      <div class="hub-grid">
-        <!-- 卡片 1：演練簡報 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>📺</span> 演練投影片簡報</div>
-            <div class="hub-card-desc">已在中間畫布渲染完成，支援鍵盤左右箭頭或下方按鈕翻頁演練。</div>
-          </div>
-          <button type="button" class="hub-card-btn primary" onclick="closeModal('finalizedHubModal')">▶ 開始演練簡報</button>
-        </div>
-
-        <!-- 卡片 2：本頁講師備忘錄 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>🎙️</span> 本頁講師備忘錄</div>
-            <div class="hub-card-desc">每頁切換同步顯示口語講法、轉場話術、互動提問句與動作提示。</div>
-          </div>
-          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');focusSpeakerNotes();">👀 查看講師備忘錄</button>
-        </div>
-
-        <!-- 卡片 3：課前 3 分鐘速覽卡 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>📋</span> 課前 3 分鐘速覽卡</div>
-            <div class="hub-card-desc">新手上台定心丸：現場配速時間表、器材環境 3 分鐘速檢與三大救援話術。</div>
-          </div>
-          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');openRunDownModal();">⏱ 開啟課前速覽卡</button>
-        </div>
-
-        <!-- 卡片 4：開課宣傳海報 ＋ AI 一鍵連動 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>📣</span> 宣傳海報 ＋ AI 一鍵生圖</div>
-            <div class="hub-card-desc">可直接存成 A4/方形海報圖片，或一鍵直連 Grok、Gemini、ChatGPT 生圖！</div>
-          </div>
-          <button type="button" class="hub-card-btn primary" onclick="closeModal('finalizedHubModal');openPosterModal();">🎨 開啟海報與 AI 連動</button>
-        </div>
-
-        <!-- 卡片 5：社群推廣文案 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>✍️</span> 社群開課文案</div>
-            <div class="hub-card-desc">一鍵產生短版快貼、長版貼文與親切邀請版，直接貼到 LINE@ 或社群。</div>
-          </div>
-          <button type="button" class="hub-card-btn" onclick="closeModal('finalizedHubModal');openSocialModal();">💬 複製社群文案</button>
-        </div>
-
-        <!-- 卡片 6：下載簡報與講稿 -->
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-hd"><span>📥</span> 下載 .pptx 與講稿</div>
-            <div class="hub-card-desc">下載 Keynote/PowerPoint 簡報檔（含備忘稿），或單人旁白備課文字檔。</div>
-          </div>
-          <div style="display:flex;gap:6px;">
-            <button type="button" class="hub-card-btn" style="flex:1;" onclick="downloadPptx()">📥 下載 PPTX</button>
-            <button type="button" class="hub-card-btn" style="flex:1;" onclick="downloadPodcastScript()">📻 下載講稿</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-foot" style="justify-content:space-between;">
-      <button class="btn ghost" onclick="goToWizardStep(1);closeModal('finalizedHubModal');">↩︎ 返回重新挑選主題</button>
-      <button class="btn" onclick="closeModal('finalizedHubModal')" style="background:#0284c7;color:#fff;font-weight:700;">✓ 關閉視窗，開始備課</button>
-    </div>
-  </div>
-</div>
 
 <!-- 浮動提示 Toast -->
 <div id="flowToast" class="flow-toast"></div>
-
 
 <script>
 /* =========================================================
@@ -3941,10 +4057,7 @@ function applySafeCombo(comboId) {
 /* =========================================================
    課前 3 分鐘準備速覽卡 (Run-down + 設備檢查 + 救援 Q&A)
    ========================================================= */
-function openRunDownModal() {
-  renderRunDownContent();
-  document.getElementById('runDownModal').classList.add('show');
-}
+function openRunDownModal(){ goToWizardStep(4); }
 function closeRunDownModal() {
   document.getElementById('runDownModal').classList.remove('show');
 }
@@ -4196,6 +4309,9 @@ ${notes.pitfall}`;
 }
 
 function updateSpeakerNotes(idx) {
+  if (typeof renderStep4SlideNav === 'function' && typeof CURRENT_WIZARD_STEP !== 'undefined' && CURRENT_WIZARD_STEP === 4) {
+    renderStep4SlideNav();
+  }
   const body = document.getElementById('speakerNotesContent');
   const sub = document.getElementById('snPageSub');
   if (!body) return;
@@ -4492,7 +4608,7 @@ function clearSelectedTopics(){
   if (note) note.textContent = '';
   renderTopics(); 
 }
-function toggleA(i){ SELECTED_A.has(i)?SELECTED_A.delete(i):SELECTED_A.add(i); renderAges(); }
+function toggleA(i){ SELECTED_A.has(i)?SELECTED_A.delete(i):SELECTED_A.add(i); renderAges(); if(typeof syncBasicInfo==='function') syncBasicInfo(); }
 
 function updateSummary(){
   const tn = SELECTED_T.size;
@@ -7066,11 +7182,7 @@ function printNodeViaCanvas(node, title){
 const SETTINGS_KEY='appleShopSettings';
 let SETTINGS={ store:'', signup:'' };
 function loadSettings(){ try{ const raw=localStorage.getItem(SETTINGS_KEY); if(raw) SETTINGS=Object.assign(SETTINGS, JSON.parse(raw)); }catch(e){} }
-function openSettingsModal(){
-  document.getElementById('set_store').value=SETTINGS.store||'';
-  document.getElementById('set_signup').value=SETTINGS.signup||'';
-  openModal('settingsModal');
-}
+function openSettingsModal(){ goToWizardStep(1); }
 function saveSettings(){
   SETTINGS.store=document.getElementById('set_store').value.trim();
   SETTINGS.signup=document.getElementById('set_signup').value.trim();
@@ -7803,23 +7915,7 @@ function harvestPosterEdits(){
   pe.querySelectorAll('[data-edit]').forEach(el=>{ POSTER_EDITS[el.dataset.edit]=el.innerText.replace(/\s*\n\s*/g,' ').trim(); });
 }
 function ed(key, def){ const v=POSTER_EDITS[key]; return escapeHtml((v!=null && v!=='')?v:def); }
-function openPosterModal(){
-  if(!requireTopics()) return;
-  const ev=loadEvent();
-  document.getElementById('po_date').value=$('#date').value.trim()||ev.date||'';
-  document.getElementById('po_time').value=ev.time||'';
-  document.getElementById('po_place').value=ev.place||((SETTINGS.store?SETTINGS.store+' ':'')+'門市體驗區');
-  document.getElementById('po_seats').value=($('#ppl').value?('限額 '+$('#ppl').value+' 位'):(ev.seats||'限額 8 位'));
-  document.getElementById('po_qr').value=ev.qr||'';
-  POSTER_AC=ev.ac||'#F5A623';
-  document.querySelectorAll('#po_theme .sw').forEach(s=>{
-    const c=(s.getAttribute('style').match(/background:(#[0-9A-Fa-f]{6})/)||[])[1];
-    s.classList.toggle('on', c && c.toUpperCase()===POSTER_AC.toUpperCase());
-  });
-  POSTER_EDITS={};              // 每次開啟視為新海報，清掉舊覆寫
-  openModal('posterModal');
-  renderPoster(true);
-}
+function openPosterModal(){ if(!requireTopics()) return; goToWizardStep(5); }
 function setPosterFormat(fmt, btn){
   POSTER_FMT=fmt;
   document.querySelectorAll('#po_seg button').forEach(b=>b.classList.remove('on'));
@@ -7964,7 +8060,7 @@ function buildDualPosterHTML(topics){
 }
 
 /* ---------- 社群文案 ---------- */
-function openSocialModal(){ if(!requireTopics()) return; renderSocial(); openModal('socialModal'); }
+function openSocialModal(){ if(!requireTopics()) return; goToWizardStep(6); }
 function renderSocial(){
   const topics=selectedTopics(), ages=selectedAges();
   const title=getSmartTitle(topics, lastSmartSentence);
@@ -8316,164 +8412,232 @@ ${topicDetails}
   }
 }
 
-/* ---------- 步驟精靈導覽工作流 (Step-by-Step Wizard Flow) ---------- */
+/* ---------- 6 步驟分頁精靈導覽工作流 (6-Step Full-Page Wizard Flow) ---------- */
 let CURRENT_WIZARD_STEP = 1;
 
-function updateWizardStepFromSelection() {
-  if (CURRENT_WIZARD_STEP === 1) {
-    goToWizardStep(1);
+function syncBasicInfo() {
+  const storeEl = document.getElementById('set_store');
+  const signupEl = document.getElementById('set_signup');
+  const dateEl = document.getElementById('date');
+  const timeEl = document.getElementById('p1_time');
+  const durEl = document.getElementById('dur');
+  const pplEl = document.getElementById('ppl');
+  const placeEl = document.getElementById('p1_place');
+
+  if (storeEl) SETTINGS.store = storeEl.value.trim();
+  if (signupEl) SETTINGS.signup = signupEl.value.trim();
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(SETTINGS)); } catch (e) {}
+
+  const dateVal = dateEl ? dateEl.value.trim() : '';
+  const timeVal = timeEl ? timeEl.value.trim() : '14:00 - 15:00';
+  const durVal = durEl ? (durEl.value || '60') : '60';
+  const pplVal = pplEl ? (pplEl.value || '8') : '8';
+  const placeVal = placeEl ? placeEl.value.trim() : '門市體驗區';
+
+  // 更新 Topbar 數值
+  if (document.getElementById('mDate')) document.getElementById('mDate').textContent = dateVal || '-';
+  if (document.getElementById('mDur')) document.getElementById('mDur').textContent = durVal;
+  if (document.getElementById('mPpl')) document.getElementById('mPpl').textContent = pplVal;
+
+  // 更新第二層摘要膠囊
+  const pillStore = document.getElementById('pillStore');
+  const pillDate = document.getElementById('pillDate');
+  const pillTopics = document.getElementById('pillTopics');
+  const pillAges = document.getElementById('pillAges');
+
+  if (pillStore) pillStore.textContent = SETTINGS.store || 'Apple Shop 門市專櫃';
+  if (pillDate) pillDate.textContent = dateVal || '未填日期';
+
+  const topics = selectedTopics();
+  if (pillTopics) {
+    pillTopics.textContent = topics.length ? topics.map(t => t.n).join(' ＋ ') : '尚未挑選主題';
   }
+  const ages = selectedAges();
+  if (pillAges) {
+    pillAges.textContent = ages.length ? ages.map(a => a.k).join('、') : '全齡適用';
+  }
+
+  // 同步至海報欄位
+  const poDate = document.getElementById('po_date');
+  const poTime = document.getElementById('po_time');
+  const poPlace = document.getElementById('po_place');
+  const poSeats = document.getElementById('po_seats');
+  if (poDate && dateVal) poDate.value = dateVal;
+  if (poTime && timeVal) poTime.value = timeVal;
+  if (poPlace && placeVal) poPlace.value = placeVal;
+  if (poSeats) poSeats.value = '限額 ' + pplVal + ' 位';
+}
+
+function updateWizardStepFromSelection() {
+  syncBasicInfo();
+}
+
+function generateAndGoStep3() {
+  if (selectedTopics().length === 0) {
+    showToast('⚠️ 請先在左側主題庫勾選至少一個課綱主題！');
+    return;
+  }
+  generate();
+  goToWizardStep(3);
+  showToast('✓ 已為您生成專屬簡報與講師備忘錄！');
 }
 
 function goToWizardStep(step) {
   if (step < 1) step = 1;
-  if (step > 4) step = 4;
+  if (step > 6) step = 6;
 
-  const topicCount = selectedTopics().length;
+  // 若前往步驟 3~6 但尚未選主題，阻擋並引導回步驟 2
+  if (step >= 3 && selectedTopics().length === 0) {
+    showToast('⚠️ 請先在步驟 2 勾選至少一個課綱主題喔！');
+    step = 2;
+  }
 
-  // 阻擋：若要前進到步驟 2、3、4，但尚未勾選任何主題
-  if (step > 1 && topicCount === 0) {
-    showToast('⚠️ 請先在步驟 1 勾選至少一個感興趣的課綱主題喔！');
-    step = 1;
+  // 若前往步驟 3~6 但尚未生成簡報，自動幫忙生成
+  if (step >= 3 && (!SLIDES || SLIDES.length === 0)) {
+    generate();
   }
 
   CURRENT_WIZARD_STEP = step;
 
-  // 更新導覽節點外觀
-  for (let i = 1; i <= 4; i++) {
-    const node = document.getElementById(`stepNode${i}`);
+  // 更新上方 6 步驟進度條
+  for (let i = 1; i <= 6; i++) {
+    const node = document.getElementById('stepNode' + i);
     if (node) {
       node.classList.remove('active', 'completed');
       if (i === step) node.classList.add('active');
       else if (i < step) node.classList.add('completed');
     }
+    const page = document.getElementById('stepPage' + i);
+    if (page) {
+      page.classList.toggle('active', i === step);
+    }
   }
 
-  // 更新導覽提示文字與按鈕
-  const hintEl = document.getElementById('wizardTipBox') || document.getElementById('wizardStepHint');
-  const btnPrev = document.getElementById('wizardPrevBtn') || document.getElementById('wizardBtnPrev');
-  const btnNext = document.getElementById('wizardNextBtn') || document.getElementById('wizardBtnNext');
+  // 各步驟專屬初始化與資料連動
+  syncBasicInfo();
 
-  if (step === 1) {
-    if (hintEl) {
-      hintEl.innerHTML = topicCount > 0 
-        ? `💡 <strong>步驟 1 / 4：</strong> 已選取 <strong>${topicCount}</strong> 個課綱主題！可點擊右側「下一步」設定學員對象與時長。`
-        : `💡 <strong>步驟 1 / 4：</strong> 請在左側主題庫挑選想帶的主題（可點擊星級篩選或自訂主題）。`;
-    }
-    if (btnPrev) { btnPrev.disabled = true; btnPrev.style.opacity = '0.5'; btnPrev.innerHTML = '‹ 上一步'; }
-    if (btnNext) {
-      btnNext.innerHTML = '下一步：設定學員 ➔';
-      btnNext.className = 'wizard-btn next';
-    }
-    highlightPanel('left');
-  } else if (step === 2) {
-    if (hintEl) {
-      hintEl.innerHTML = `💡 <strong>步驟 2 / 4：</strong> 請在右側面板設定學員年齡層，並在中欄上方確認預計時長（預設 60 分鐘），系統將自動配速。`;
-    }
-    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：選主題'; }
-    if (btnNext) {
-      btnNext.innerHTML = '下一步：時間與地點 ➔';
-      btnNext.className = 'wizard-btn next';
-    }
-    highlightPanel('right');
-  } else if (step === 3) {
-    if (hintEl) {
-      hintEl.innerHTML = `💡 <strong>步驟 3 / 4：</strong> 請確認中欄上方的開課日期、人數限額與門市名稱，資訊將自動帶入宣傳海報與宣傳文案。`;
-    }
-    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：學員時長'; }
-    if (btnNext) {
-      btnNext.innerHTML = '下一步：定案教材 ➔';
-      btnNext.className = 'wizard-btn next';
-    }
-    highlightPanel('center-top');
-  } else if (step === 4) {
-    if (hintEl) {
-      hintEl.innerHTML = `🎉 <strong>步驟 4 / 4：</strong> 內容已就緒！點擊下方按鈕即可產出全套簡報、講師備忘錄與 AI 海報！`;
-    }
-    if (btnPrev) { btnPrev.disabled = false; btnPrev.style.opacity = '1'; btnPrev.innerHTML = '‹ 上一步：時間地點'; }
-    if (btnNext) {
-      btnNext.innerHTML = '🎉 完成並定案全套教材！';
-      btnNext.className = 'wizard-btn next finish';
-    }
-    clearPanelHighlights();
+  if (step === 4) {
+    renderStep4SlideNav();
+    renderStep4RunDown();
+  } else if (step === 5) {
+    syncBasicInfo();
+    POSTER_EDITS = {};
+    renderPoster(true);
+    updateAiPromptOutput();
+  } else if (step === 6) {
+    renderSocial();
+    renderLineReminder();
+    updateCompletionChecklist();
   }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function wizardStepNext() {
-  if (CURRENT_WIZARD_STEP < 4) {
-    goToWizardStep(CURRENT_WIZARD_STEP + 1);
-  } else {
-    finalizeWorkshop();
-  }
-}
-
-function wizardStepPrev() {
-  if (CURRENT_WIZARD_STEP > 1) {
-    goToWizardStep(CURRENT_WIZARD_STEP - 1);
-  }
-}
-
-function highlightPanel(target) {
-  clearPanelHighlights();
-  if (target === 'left') {
-    const leftPanel = document.querySelector('.panel.left');
-    if (leftPanel) leftPanel.classList.add('step-focus-highlight');
-  } else if (target === 'right') {
-    const rightPanel = document.querySelector('.panel.right');
-    const durField = document.getElementById('dur');
-    if (rightPanel) rightPanel.classList.add('step-focus-highlight');
-    if (durField) durField.style.boxShadow = '0 0 0 3px rgba(245,166,35,0.45)';
-  } else if (target === 'center-top') {
-    const bar = document.querySelector('.panel.center .center-top') || document.getElementById('date')?.parentElement;
-    if (bar) bar.classList.add('step-focus-highlight');
-  }
-}
-
-function clearPanelHighlights() {
-  document.querySelectorAll('.step-focus-highlight').forEach(el => el.classList.remove('step-focus-highlight'));
-  const durField = document.getElementById('dur');
-  if (durField) durField.style.boxShadow = '';
-}
-
-function finalizeWorkshop() {
-  const topics = selectedTopics();
-  if (topics.length === 0) {
-    showToast('⚠️ 尚未選取主題，請先在步驟 1 勾選課綱主題！');
-    goToWizardStep(1);
+function renderStep4SlideNav() {
+  const box = document.getElementById('p4SlideNav');
+  if (!box) return;
+  if (!SLIDES || SLIDES.length === 0) {
+    box.innerHTML = '<div style="font-size:12px;color:#64748b;">尚未生成簡報</div>';
     return;
   }
-
-  // 執行主生成邏輯
-  generate();
-
-  // 更新定案 Modal 的資訊
-  const hubTitle = document.getElementById('hubTopicName');
-  const hubDur = document.getElementById('hubDuration');
-  if (hubTitle) hubTitle.textContent = getSmartTitle(topics, lastSmartSentence);
-  if (hubDur) hubDur.textContent = document.getElementById('dur')?.value || '60';
-
-  // 標記步驟 4 completed
-  const step4Node = document.getElementById('stepNode4');
-  if (step4Node) step4Node.classList.add('completed');
-
-  // 開啟定案成果中心 Modal
-  openModal('finalizedHubModal');
-  showToast('🎉 全套教材已定案產出！可隨時開始演練、查看備忘錄或一鍵連動 AI 生成海報！', 4000);
+  box.innerHTML = SLIDES.map((s, idx) => {
+    const isAct = (idx === CUR);
+    const title = s.title || s.h || s.n || ('第 ' + (idx + 1) + ' 頁');
+    return `<button type="button" class="p4-slide-nav-item ${isAct ? 'active' : ''}" onclick="CUR=${idx};renderSlide();renderStep4SlideNav();">
+      <div class="p4-slide-nav-num">第 ${String(idx + 1).padStart(2, '0')} 頁</div>
+      <div class="p4-slide-nav-title">${escapeHtml(title)}</div>
+    </button>`;
+  }).join('');
 }
 
-function focusSpeakerNotes() {
-  const noteBox = document.querySelector('.notes-card') || document.querySelector('.speaker-notes-box') || document.getElementById('speakerNotesBox');
-  if (noteBox) {
-    noteBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    noteBox.style.transition = 'box-shadow 0.4s ease';
-    noteBox.style.boxShadow = '0 0 0 4px #f59e0b';
-    setTimeout(() => { noteBox.style.boxShadow = ''; }, 2500);
+function renderStep4RunDown() {
+  const wrap = document.getElementById('p4RunDownWrap');
+  if (!wrap) return;
+  if (typeof renderRunDownContent === 'function') {
+    renderRunDownContent();
+    const modalBody = document.getElementById('runDownModalBody');
+    if (modalBody) wrap.innerHTML = modalBody.innerHTML;
+  }
+  // 如果原本 modalBody 不存在，自行構建乾淨版速覽卡
+  if (!wrap.innerHTML.trim()) {
+    const dur = parseInt(document.getElementById('dur')?.value || '60', 10);
+    const tOpen = Math.round(dur * 0.1), tFeat = Math.round(dur * 0.25), tHands = Math.round(dur * 0.45);
+    const topicNames = selectedTopics().map(t => t.n).join(' ＋ ') || '體驗課程';
+    wrap.innerHTML = `
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#1e40af;">
+        <b>當前設定：</b>【${escapeHtml(topicNames)}】｜ 總時長：<b>${dur} 分鐘</b>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;">
+          <div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#0f172a;">⏱️ 現場配速時間表</div>
+          <div style="font-size:12.5px;line-height:1.7;color:#334155;">
+            · 00-${tOpen} 分：開場破冰與破題（${tOpen} 分）<br>
+            · ${tOpen}-${tOpen+tFeat} 分：核心功能亮點示範（${tFeat} 分）<br>
+            · ${tOpen+tFeat}-${tOpen+tFeat+tHands} 分：學員實機操作帶練（${tHands} 分）<br>
+            · ${tOpen+tFeat+tHands}-${dur} 分：Q&A 與原廠配件推薦
+          </div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;">
+          <div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#0f172a;">🔧 器材檢核與三大救援</div>
+          <div style="font-size:12.5px;line-height:1.7;color:#334155;">
+            ✓ 展示機電量 > 70%、連上門市 Wi-Fi<br>
+            ✓ 救援 1：忘記 Apple ID 改用受信任電話重設<br>
+            ✓ 救援 2：舊機找不到新按鈕改由控制中心進入
+          </div>
+        </div>
+      </div>`;
   }
 }
 
+function copyRunDownCard() {
+  const wrap = document.getElementById('p4RunDownWrap');
+  if (!wrap) return;
+  const text = wrap.innerText || '';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showToast('✓ 已複製「課前 3 分鐘速覽卡」內容！'));
+  }
+}
+
+function renderLineReminder() {
+  const pre = document.getElementById('lineReminderPre');
+  if (!pre) return;
+  const store = SETTINGS.store || 'Apple Shop 門市專櫃';
+  const topics = selectedTopics();
+  const title = getSmartTitle(topics, lastSmartSentence);
+  const date = (document.getElementById('date')?.value || '').trim() || '明日';
+  const time = (document.getElementById('p1_time')?.value || '').trim() || '14:00 - 15:00';
+  const place = (document.getElementById('p1_place')?.value || '').trim() || '門市體驗區';
+
+  pre.textContent = `哈囉您好！提醒您有報名參加【${store}｜Apple 小教室】✨\n\n`
+    + `📌 課程主題：${title}\n`
+    + `🗓 活動時間：${date} ${time}\n`
+    + `📍 活動地點：${place}\n\n`
+    + `💡 貼心行前小提醒：\n`
+    + `1. 建議先將手邊的 iPhone / iPad 充飽電（電量 50% 以上最佳），現場操作更順暢！\n`
+    + `2. 課程為現場實機手把手教學，若忘記 Apple ID 密碼也可提早 5 分鐘到場讓專員協助確認喔！\n\n`
+    + `期待明天見，若有臨時變動歡迎隨時回覆告訴我們～`;
+}
+
+function updateCompletionChecklist() {
+  const chkSlide = document.getElementById('chkSlideStatus');
+  if (chkSlide) {
+    const cnt = SLIDES ? SLIDES.length : 0;
+    chkSlide.textContent = cnt > 0 ? `✓ 已成功生成 ${cnt} 頁簡報` : '尚未生成';
+  }
+}
+
+/* 覆寫初始化：從 localStorage 載入設定到 Step 1 輸入框 */
+function initStep1FromSettings() {
+  const storeEl = document.getElementById('set_store');
+  const signupEl = document.getElementById('set_signup');
+  if (storeEl && SETTINGS.store) storeEl.value = SETTINGS.store;
+  if (signupEl && SETTINGS.signup) signupEl.value = SETTINGS.signup;
+  syncBasicInfo();
+}
 
 /* ---------- 初始化 ---------- */
 loadSettings();
+if(typeof initStep1FromSettings==='function') initStep1FromSettings();
 </script>
 </body>
 </html>

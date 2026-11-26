@@ -23,7 +23,7 @@
     --grok-accent:#0ea5e9; /* Grok 藍點綴 */
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden}
+  html,body{min-height:100%;overflow-x:hidden;overflow-y:auto}
   body{font-family:var(--sans);background:var(--ui-bg);color:var(--ink);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 
   /* TOP BAR */
@@ -649,8 +649,11 @@
   .p4-slide-nav-title{font-size:12.5px;font-weight:700;color:#0f172a;line-height:1.4}
 
   /* Step 5 海報設計雙欄 */
-  .step5-layout{display:grid;grid-template-columns:1.05fr 0.95fr;gap:20px;align-items:start}
-  .step5-preview-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;display:flex;justify-content:center;overflow-x:auto}
+  .step5-layout{display:grid;grid-template-columns:480px 1fr;gap:20px;align-items:start}
+  .step5-preview-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;display:flex;justify-content:center;align-items:flex-start;overflow-x:auto;min-width:0}
+  .step5-preview-box #posterCanvas{zoom:0.68}
+  @media (max-width: 1180px){ .step5-preview-box #posterCanvas{zoom:0.58} }
+  @media (max-width: 960px){ .step5-preview-box #posterCanvas{zoom:0.75} }
 
   /* Step 6 社群貼文與完成清單 */
   .step6-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;align-items:start}
@@ -7981,18 +7984,21 @@ function buildPosterHTML(){
 }
 function downloadPosterImage(){
   const node=document.getElementById('posterEl');
+  const canvasBox=document.getElementById('posterCanvas');
   if(!node){ alert('請先按「更新海報」'); return; }
   if(typeof html2canvas==='undefined'){ alert('截圖元件載入中，請稍候再試'); return; }
   harvestPosterEdits();
   if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  if(canvasBox) canvasBox.style.zoom='1';
   html2canvas(node, {scale:3, backgroundColor:'#F5F3EE', useCORS:true}).then(canvas=>{
+    if(canvasBox) canvasBox.style.zoom='';
     const a=document.createElement('a');
     a.href=canvas.toDataURL('image/png');
     a.download='Apple小教室_宣傳海報_'+(POSTER_FMT==='sq'?'方形':'A4')+'.png';
     a.click();
-  }).catch(e=>{ alert('產生圖片失敗：'+e.message); });
+  }).catch(e=>{ if(canvasBox) canvasBox.style.zoom=''; alert('產生圖片失敗：'+e.message); });
 }
-function printPoster(){ const n=document.getElementById('posterEl'); if(!n){ alert('請先按「更新海報」'); return; } harvestPosterEdits(); if(document.activeElement&&document.activeElement.blur) document.activeElement.blur(); printNodeViaCanvas(n,'宣傳海報'); }
+function printPoster(){ const n=document.getElementById('posterEl'); const cb=document.getElementById('posterCanvas'); if(!n){ alert('請先按「更新海報」'); return; } harvestPosterEdits(); if(document.activeElement&&document.activeElement.blur) document.activeElement.blur(); if(cb) cb.style.zoom='1'; printNodeViaCanvas(n,'宣傳海報'); if(cb) setTimeout(()=>{ cb.style.zoom=''; }, 500); }
 
 function renderDualPoster(){
   const topics=selectedTopics();

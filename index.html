@@ -8166,33 +8166,56 @@ function showCopyFeedback(btn) {
   }, 2200);
 }
 
-/* 一鍵連動直達 Grok / Gemini / ChatGPT */
+/* 一鍵連動直達 Grok / Gemini / ChatGPT (先同步複製、再帶入 ?q= 預填開啟) */
 function directLaunchAgent(agent) {
   if (['grok', 'gemini', 'chatgpt'].includes(agent)) {
     CURRENT_AI_AGENT = agent;
   }
   updateAiPromptOutput();
+
+  // 高亮目前點擊的按鈕
+  document.querySelectorAll('.ai-direct-actions .btn-direct-agent').forEach(b => {
+    b.style.outline = '';
+    b.style.boxShadow = '';
+  });
+  const activeClass = agent === 'grok' ? '.grok-btn' : (agent === 'gemini' ? '.gemini-btn' : '.gpt-btn');
+  const activeBtn = document.querySelector('.ai-direct-actions ' + activeClass);
+  if (activeBtn) {
+    activeBtn.style.outline = '2.5px solid #f59e0b';
+    activeBtn.style.boxShadow = '0 0 0 4px rgba(245,158,11,0.25)';
+  }
+
   const textarea = document.getElementById('aiPromptTextarea');
   const promptText = textarea ? textarea.value : buildAiPosterPrompt(agent, CURRENT_AI_STYLE);
 
+  // 步驟 A：先在當前焦點同步寫入剪貼簿（避免 window.open 切走焦點導致寫入失敗）
+  if (textarea) {
+    textarea.focus();
+    textarea.select();
+    try { document.execCommand('copy'); } catch (e) {}
+  }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(promptText).catch(() => {});
-  } else if (textarea) {
-    fallbackCopy(textarea, null);
   }
 
-  let url = 'https://grok.com';
+  // 步驟 B：組合目標平台連結（Grok 與 ChatGPT 支援 ?q= 自動帶入對話框）
+  const encodedQ = encodeURIComponent(promptText);
+  let url = 'https://grok.com/?q=' + encodedQ;
   let agentName = 'xAI Grok';
+  let extraTip = '（已自動帶入對話框＋複製到剪貼簿，按下送出即可！）';
+
   if (agent === 'gemini') {
-    url = 'https://gemini.google.com';
+    url = 'https://gemini.google.com/app';
     agentName = 'Google Gemini';
+    extraTip = '（已複製到剪貼簿！切換視窗直接按 Cmd+V 貼上並送出即可！）';
   } else if (agent === 'chatgpt') {
-    url = 'https://chatgpt.com';
+    url = 'https://chatgpt.com/?q=' + encodedQ;
     agentName = 'ChatGPT';
+    extraTip = '（已自動帶入對話框＋複製到剪貼簿！）';
   }
 
   window.open(url, '_blank');
-  showToast(`⚡ 已複製 ${agentName}「直接生圖」指令！新分頁貼上（Cmd+V）即可直接畫出海報！`, 4000);
+  showToast(`⚡ 已切換為「${agentName} 專屬指令」並開啟分頁！${extraTip}`, 4500);
 }
 
 /* 浮動提示 Toast 訊息 */
@@ -8399,6 +8422,7 @@ function goToWizardStep(step) {
     syncBasicInfo();
     POSTER_EDITS = {};
     renderPoster(true);
+    if (CURRENT_AI_AGENT === 'universal' || !CURRENT_AI_AGENT) CURRENT_AI_AGENT = 'grok';
     updateAiPromptOutput();
   } else if (step === 6) {
     renderSocial();

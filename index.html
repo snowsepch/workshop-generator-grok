@@ -1055,11 +1055,15 @@
           </div>
 
           <div class="ai-controls-bar" style="flex-direction:column;align-items:stretch;gap:10px;">
-            <div class="ai-control-group">
-              <span class="ai-ctl-label">視覺風格：</span>
-              <div class="ai-btn-group" id="aiStyleTabs">
-                <button type="button" class="ai-tab-btn active" onclick="switchAiStyle('minimal', this)">🍎 經典 Apple 極簡風</button>
-                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pop', this)">🔥 年輕活力新粗獷</button>
+            <div class="ai-control-group" style="align-items:flex-start;">
+              <span class="ai-ctl-label" style="margin-top:6px;">視覺風格：</span>
+              <div class="ai-btn-group" id="aiStyleTabs" style="display:flex;flex-wrap:wrap;gap:6px;background:transparent;border:none;padding:0;">
+                <button type="button" class="ai-tab-btn active" onclick="switchAiStyle('minimal', this)">🍎 Apple 極簡風</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pop', this)">🔥 年輕新粗獷</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('cozy', this)">🌿 暖心生活咖啡廳</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('pro', this)">🖤 暗黑 Pro 電影感</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('editorial', this)">🎨 日系清新雜誌</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiStyle('futuristic', this)">✨ 未來 AI 科技感</button>
               </div>
             </div>
 
@@ -8257,14 +8261,26 @@ function buildAiPosterPrompt(agent, style) {
     hwFeature = 'Flagship Apple device with precision-machined aerospace-grade aluminum and glass body, iconic minimalist industrial design';
   }
 
-  const styleDescMinimal = `Apple 官方極簡雜誌風（暖骨白畫布底色 #FAFAF8，單一深靛藍 #1F3A5F 點綴，頂部預留 35% 乾淨留白放主標題，5200K 商業攝影棚柔光箱主光與金屬倒角微反光，Hasselblad 中片幅質感，畫面乾淨無雜物）`;
-  const styleDescMinimalEng = `Ultra-minimalist Apple editorial poster, warm off-white background (#FAFAF8), single deep indigo (#1F3A5F) accent, top 35% clean negative space for typography, 5200K studio softbox key light, metallic highlights, Hasselblad medium format aesthetic`;
+  const styleMapZh = {
+    minimal: `Apple 官方極簡雜誌風（暖骨白畫布底色 #FAFAF8，單一深靛藍 #1F3A5F 點綴，頂部預留 35% 乾淨留白放主標題，5200K 商業攝影棚柔光箱主光與金屬倒角微反光，Hasselblad 中片幅質感，畫面乾淨無雜物）`,
+    pop: `年輕活力潮流新粗獷風（暖奶油色底 #FDEFD4，高飽和亮橘色 #ED6702 重點色塊，深炭灰細框 #18181B，扁平手繪感向量生活插畫與小巧幾何徽章，充滿年輕街頭潮感）`,
+    cozy: `暖心生活咖啡廳風格（柔和燕麥奶暖白背景 #F5EFE6，搭配鼠尾草綠 #3F6B54 點綴，溫煦午後窗邊斜射自然暖陽，木質咖啡桌生活氛圍，親切零距離感，適合長輩與家庭族群）`,
+    pro: `暗黑 Pro 電影大片風格（極致深曜石黑背景 #0B0D12，俐落冷冽鈦金屬邊緣輪廓光 rim lighting，微細科技冷藍光澤，Apple Keynote 發表會級高級硬體大片質感，文字採用高對比純白）`,
+    editorial: `日系清新生活雜誌風格（清透柔霧米白畫布 #FAF7F2，低飽和灰藍與暖杏色點綴，自然空氣感大量留白，如 Kinfolk 與日系設計誌般的溫潤排版與柔和自然散景）`,
+    futuristic: `未來 AI 智慧科技風格（純淨冰川銀白背景 #F2F5F9，極細微且優雅的 Siri 多彩微光光弧環繞裝置邊緣，通透幾何細線與乾淨現代科技美學，凸顯智慧效率感）`
+  };
 
-  const styleDescPop = `年輕活力潮流新粗獷風（暖奶油色底 #FDEFD4，高飽和亮橘色 #ED6702 重點色塊，深炭灰細框 #18181B，扁平手繪感向量生活插畫與小巧幾何徽章，無油膩 3D 塑膠感）`;
-  const styleDescPopEng = `Trendy Neo-Brutalist pop tech poster, warm cream background (#FDEFD4), energetic bright orange (#ED6702) accent, crisp dark charcoal borders (#18181B), flat 2D vector illustration, playful geometric badges, clean layout`;
+  const styleMapEng = {
+    minimal: `Ultra-minimalist Apple editorial poster, warm off-white background (#FAFAF8), single deep indigo (#1F3A5F) accent, top 35% clean negative space for typography, 5200K studio softbox key light, metallic highlights, Hasselblad medium format aesthetic`,
+    pop: `Trendy Neo-Brutalist pop tech poster, warm cream background (#FDEFD4), energetic bright orange (#ED6702) accent, crisp dark charcoal borders (#18181B), flat 2D vector illustration, playful geometric badges, clean layout`,
+    cozy: `Warm cozy lifestyle cafe aesthetic poster, soft oat milk beige background (#F5EFE6) with sage green (#3F6B54) accents, gentle afternoon golden hour sunlight casting soft window shadows on warm wooden desk, approachable and friendly atmosphere`,
+    pro: `Sleek dark mode Pro cinematic poster, deep obsidian black background (#0B0D12), sharp titanium rim lighting and subtle cool blue reflections, Apple Keynote hardware showcase aesthetic, crisp pure white typography`,
+    editorial: `Fresh Japanese lifestyle magazine editorial poster, airy soft warm ivory (#FAF7F2), muted slate blue and soft apricot accents, generous breathing whitespace, Kinfolk-inspired gentle natural bokeh and refined typography`,
+    futuristic: `Clean futuristic AI tech poster, pure glacier silver-white background (#F2F5F9), delicate luminous Siri-inspired subtle light arc surrounding the device, ultra-thin geometric grid accents, modern intelligent technology vibe`
+  };
 
-  const chosenStyleZh = (style === 'minimal') ? styleDescMinimal : styleDescPop;
-  const chosenStyleEng = (style === 'minimal') ? styleDescMinimalEng : styleDescPopEng;
+  const chosenStyleZh = styleMapZh[style] || styleMapZh.minimal;
+  const chosenStyleEng = styleMapEng[style] || styleMapEng.minimal;
 
   if (agent === 'grok') {
     return `請直接使用圖像生成功能，為我畫出一張【${ratioStr}】的圖片（請直接生成圖片，不要只回覆文字描述或英文 Prompt）。

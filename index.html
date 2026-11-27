@@ -793,8 +793,16 @@
           <input id="set_store" placeholder="例：Apple Shop 門市專櫃" oninput="syncBasicInfo()">
         </div>
         <div class="s1-field">
+          <label>門市聯絡電話（顯示於海報與宣傳文案）</label>
+          <input id="set_phone" placeholder="例：(07) 123-4567" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
           <label>報名／洽詢方式（顯示於海報與貼文結尾）</label>
           <input id="set_signup" placeholder="例：門市櫃台現場報名 或 洽現場專員" oninput="syncBasicInfo()">
+        </div>
+        <div class="s1-field">
+          <label>上課地點</label>
+          <input id="p1_place" placeholder="例：門市體驗區" value="門市體驗區" oninput="syncBasicInfo()">
         </div>
         <div class="s1-field">
           <label>上課日期</label>
@@ -813,8 +821,20 @@
           <input id="ppl" type="number" value="8" placeholder="8" oninput="syncBasicInfo()">
         </div>
         <div class="s1-field" style="grid-column:1 / -1;">
-          <label>上課地點</label>
-          <input id="p1_place" placeholder="例：門市體驗區" value="門市體驗區" oninput="syncBasicInfo()">
+          <label>門市 LINE@ 官方帳號 QR Code 圖片（選填，上傳後自動記憶於本機，海報會直接帶出）</label>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:10px;padding:12px 14px;">
+            <input type="file" id="set_qr_file" accept="image/*" style="display:none" onchange="handleQrUpload(this)">
+            <button type="button" class="wizard-btn prev" style="border-color:#0284c7;color:#0284c7;font-weight:700;" onclick="document.getElementById('set_qr_file').click()">📷 上傳門市 LINE@ QR Code</button>
+            <div id="qrUploadPreviewWrap" style="display:none;align-items:center;gap:12px;">
+              <img id="qrUploadThumb" src="" style="width:54px;height:54px;object-fit:contain;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:2px;">
+              <div>
+                <div style="font-size:12.5px;font-weight:700;color:#15803d;">✓ 已儲存門市 LINE@ QR Code</div>
+                <div style="font-size:11px;color:#64748b;">步驟 5 生成海報時將自動放上右下角</div>
+              </div>
+              <button type="button" class="wizard-btn prev" style="padding:4px 10px;font-size:11px;color:#b91c1c;border-color:#fecaca;background:#fee2e2;" onclick="removeQrImage()">🗑 移除</button>
+            </div>
+            <span id="qrUploadEmptyHint" style="font-size:12px;color:#64748b;">尚未上傳圖片（若無圖片，也可在步驟 5 改填網址產生 QR Code）</span>
+          </div>
         </div>
       </div>
 
@@ -7177,10 +7197,16 @@ function renderQRInto(elId, text, size){
   const el = document.getElementById(elId);
   if(!el) return;
   el.innerHTML='';
-  if(!text){ el.style.display='none'; return; }
-  el.style.display='';
-  if(typeof QRCode==='undefined'){ el.innerHTML='<div style="font-size:11px;color:#c00">QR 元件載入失敗，請檢查網路後重開</div>'; return; }
-  new QRCode(el, { text:text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M });
+  if(text){
+    el.style.display='';
+    if(typeof QRCode==='undefined'){ el.innerHTML='<div style="font-size:11px;color:#c00">QR 元件載入失敗，請檢查網路後重開</div>'; return; }
+    new QRCode(el, { text:text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M });
+  } else if(typeof SETTINGS!=='undefined' && SETTINGS.qrImg){
+    el.style.display='';
+    el.innerHTML = `<img src="${SETTINGS.qrImg}" style="width:${size}px;height:${size}px;object-fit:contain;display:block;border-radius:6px;" alt="門市 LINE@ QR Code"><div style="font-size:10px;font-weight:700;color:#475569;margin-top:4px;text-align:center;">門市官方 LINE</div>`;
+  } else {
+    el.style.display='none';
+  }
 }
 /* 用 html2canvas 把節點轉成圖片再列印（高解析度，確保 QR / emoji 完整呈現）
    走隱藏 iframe 列印，不開彈出視窗、不讓主視窗進入列印模式；圖片依節點實際寬高比換算成 mm，
@@ -7988,7 +8014,8 @@ function buildPosterHTML(){
   const place=document.getElementById('po_place').value.trim()||'門市體驗區';
   const seats=document.getElementById('po_seats').value.trim()||'名額有限';
   const store=SETTINGS.store||'Apple Shop';
-  const signup=SETTINGS.signup||'門市櫃台報名';
+  const phone=(SETTINGS.phone||'').trim();
+  const signup=(SETTINGS.signup||'門市櫃台報名') + (phone ? ' ｜ 📞 ' + phone : '');
   const ageStr=ages.length?ages.map(a=>a.k).join('、'):'一般顧客';
   const cls=POSTER_FMT==='sq'?'sq':'a4';
   const heroEmoji=topics[0].ico;
@@ -8054,7 +8081,8 @@ function buildDualPosterHTML(topics){
   const place=document.getElementById('po_place').value.trim()||'門市體驗區';
   const seats=document.getElementById('po_seats').value.trim()||'名額有限';
   const store=SETTINGS.store||'Apple Shop';
-  const signup=SETTINGS.signup||'門市櫃台報名';
+  const phone=(SETTINGS.phone||'').trim();
+  const signup=(SETTINGS.signup||'門市櫃台報名') + (phone ? ' ｜ 📞 ' + phone : '');
   const ageStr=ages.length?ages.map(a=>a.k).join('、'):'一般顧客';
   const cls=POSTER_FMT==='sq'?'sq':'a4';
   const E=' contenteditable="true" spellcheck="false"';
@@ -8109,7 +8137,8 @@ function renderSocial(){
   const topics=selectedTopics(), ages=selectedAges();
   const title=getSmartTitle(topics, lastSmartSentence);
   const store=SETTINGS.store||'Apple Shop';
-  const signup=SETTINGS.signup||'門市櫃台報名／私訊我們';
+  const phone=(SETTINGS.phone||'').trim();
+  const signup=(SETTINGS.signup||'門市櫃台報名／私訊我們') + (phone ? '\n📞 門市專線：' + phone : '');
   const date=$('#date').value.trim();
   const dur=$('#dur').value||60;
   const ppl=$('#ppl').value;
@@ -8377,6 +8406,7 @@ let CURRENT_WIZARD_STEP = 1;
 
 function syncBasicInfo() {
   const storeEl = document.getElementById('set_store');
+  const phoneEl = document.getElementById('set_phone');
   const signupEl = document.getElementById('set_signup');
   const dateEl = document.getElementById('date');
   const timeEl = document.getElementById('p1_time');
@@ -8385,6 +8415,7 @@ function syncBasicInfo() {
   const placeEl = document.getElementById('p1_place');
 
   if (storeEl) SETTINGS.store = storeEl.value.trim();
+  if (phoneEl) SETTINGS.phone = phoneEl.value.trim();
   if (signupEl) SETTINGS.signup = signupEl.value.trim();
   try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(SETTINGS)); } catch (e) {}
 
@@ -8604,6 +8635,7 @@ function renderLineReminder() {
   const pre = document.getElementById('lineReminderPre');
   if (!pre) return;
   const store = SETTINGS.store || 'Apple Shop 門市專櫃';
+  const phoneLine = (SETTINGS.phone || '').trim() ? `\n📞 若有臨時變動歡迎來電：${SETTINGS.phone.trim()}` : '';
   const topics = selectedTopics();
   const title = getSmartTitle(topics, lastSmartSentence);
   const date = (document.getElementById('date')?.value || '').trim() || '明日';
@@ -8617,7 +8649,7 @@ function renderLineReminder() {
     + `💡 貼心行前小提醒：\n`
     + `1. 建議先將手邊的 iPhone / iPad 充飽電（電量 50% 以上最佳），現場操作更順暢！\n`
     + `2. 課程為現場實機手把手教學，若忘記 Apple ID 密碼也可提早 5 分鐘到場讓專員協助確認喔！\n\n`
-    + `期待明天見，若有臨時變動歡迎隨時回覆告訴我們～`;
+    + `期待明天見，若有臨時變動歡迎隨時回覆告訴我們～${phoneLine}`;
 }
 
 function updateCompletionChecklist() {
@@ -8629,11 +8661,67 @@ function updateCompletionChecklist() {
 }
 
 /* 覆寫初始化：從 localStorage 載入設定到 Step 1 輸入框 */
+function updateQrUploadUI() {
+  const wrap = document.getElementById('qrUploadPreviewWrap');
+  const thumb = document.getElementById('qrUploadThumb');
+  const hint = document.getElementById('qrUploadEmptyHint');
+  if (SETTINGS && SETTINGS.qrImg) {
+    if (thumb) thumb.src = SETTINGS.qrImg;
+    if (wrap) wrap.style.display = 'flex';
+    if (hint) hint.style.display = 'none';
+  } else {
+    if (thumb) thumb.src = '';
+    if (wrap) wrap.style.display = 'none';
+    if (hint) hint.style.display = 'inline';
+  }
+}
+
+function handleQrUpload(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const maxDim = 320;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w >= h) { h = Math.round(h * maxDim / w); w = maxDim; }
+        else { w = Math.round(w * maxDim / h); h = maxDim; }
+      }
+      const cv = document.createElement('canvas');
+      cv.width = w; cv.height = h;
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      SETTINGS.qrImg = cv.toDataURL('image/png');
+      try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(SETTINGS)); } catch (err) {}
+      updateQrUploadUI();
+      if (typeof showToast === 'function') showToast('✓ 已成功上傳並記憶門市 LINE@ QR Code！');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeQrImage() {
+  delete SETTINGS.qrImg;
+  const inp = document.getElementById('set_qr_file');
+  if (inp) inp.value = '';
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(SETTINGS)); } catch (err) {}
+  updateQrUploadUI();
+  if (typeof showToast === 'function') showToast('已移除門市 LINE@ QR Code 圖片');
+}
+
 function initStep1FromSettings() {
   const storeEl = document.getElementById('set_store');
+  const phoneEl = document.getElementById('set_phone');
   const signupEl = document.getElementById('set_signup');
   if (storeEl && SETTINGS.store) storeEl.value = SETTINGS.store;
+  if (phoneEl && SETTINGS.phone) phoneEl.value = SETTINGS.phone;
   if (signupEl && SETTINGS.signup) signupEl.value = SETTINGS.signup;
+  updateQrUploadUI();
   syncBasicInfo();
 }
 

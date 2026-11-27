@@ -369,7 +369,12 @@
   body.editing .slide [contenteditable]:hover{outline-color:rgba(16,185,129,.7);background:rgba(16,185,129,.04)}
   body.editing .slide [contenteditable]:focus{outline:2px solid #10b981;outline-offset:3px;background:rgba(16,185,129,.06)}
   /* 編輯模式提示條 */
-  .edit-banner{display:none;position:fixed;top:64px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:8px 18px;border-radius:980px;font-size:12px;font-weight:600;z-index:50;box-shadow:0 6px 20px rgba(16,185,129,.4);font-family:var(--sans)}
+  .edit-banner{display:none;background:#ecfdf5;border:1.5px solid #6ee7b7;color:#047857;padding:8px 16px;border-radius:10px;font-size:12.5px;font-weight:700;margin-bottom:12px;text-align:center}
+  .step3-page-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
+  .step3-pill-btn{padding:4px 10px;border-radius:6px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;font-size:12px;font-weight:700;cursor:pointer;transition:all .12s}
+  .step3-pill-btn:hover{border-color:#0284c7;color:#0284c7}
+  .step3-pill-btn.active{background:#0284c7;color:#ffffff;border-color:#0284c7}
+  .demo-starter-card{background:#f0f9ff;border:1.5px solid #7dd3fc;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
   body.editing .edit-banner{display:block}
 
   /* ===== 新功能共用：分頁 / 複製鈕 / 提示 ===== */
@@ -697,7 +702,6 @@
 </head>
 <body>
 
-<div class="edit-banner">✏️ 編輯模式 · 點擊任何文字即可修改 · 修改完成後可下載 .pptx</div>
 
 <div class="topbar">
   <div class="brand">
@@ -771,6 +775,15 @@
         <h2 class="page-header-title">步驟 1：門市與場次基本設定</h2>
         <div class="page-header-sub">一次集中填寫門市與場次基本資訊，後續的簡報封面、海報與社群文案將全面自動帶入。</div>
       </div>
+      <button type="button" class="wizard-btn next" onclick="goToWizardStep(2)">下一步：挑選主題與對象 ➔</button>
+    </div>
+
+    <div class="demo-starter-card">
+      <div>
+        <div style="font-size:14px;font-weight:800;color:#0369a1;">👋 第一次使用、想先看看做出來的樣子？</div>
+        <div style="font-size:12.5px;color:#0c4a6e;margin-top:2px;">一鍵自動帶入「新手安全牌範例課綱 ＋ 上班族對象」，10 秒直接預覽完整簡報、講稿與海報！</div>
+      </div>
+      <button type="button" class="wizard-btn next" style="background:#0369a1;border-color:#0369a1;white-space:nowrap;" onclick="loadDemoAndPreview()">⚡ 我是新手，先看範例成品</button>
     </div>
 
     <div class="page-card">
@@ -821,7 +834,7 @@
     <div class="page-header-row">
       <div>
         <h2 class="page-header-title">步驟 2：挑選主題與學員對象</h2>
-        <div class="page-header-sub">左側挑選想帶領的課綱主題（推薦先看「⭐ 新手首選」），右側勾選學員年齡層。</div>
+        <div class="page-header-sub">在「主題庫」挑選想帶領的課綱主題（推薦先看「⭐ 新手首選」），並在「學員對象」勾選年齡層。</div>
       </div>
     </div>
 
@@ -863,8 +876,7 @@
         </div>
 
         <div class="quick-filter-bar">
-          <button type="button" class="q-filter-btn active" onclick="setDiffFilter('all', this)">全部</button>
-          <button type="button" class="q-filter-btn beginner" onclick="setDiffFilter('beginner', this)">⭐ 新手首選</button>
+          <button type="button" class="q-filter-btn active" onclick="setDiffFilter('all', this)">全部難度</button>
           <button type="button" class="q-filter-btn hot" onclick="setDiffFilter('hot', this)">🔥 門市熱門</button>
           <button type="button" class="q-filter-btn" onclick="setDiffFilter('easy', this)">🌱 入門</button>
           <button type="button" class="q-filter-btn" onclick="setDiffFilter('mid', this)">🌿 進階</button>
@@ -921,6 +933,8 @@
         <button class="btn" onclick="downloadPptx()" id="pptxBtn" disabled>📥 下載 .pptx 簡報檔</button>
       </div>
     </div>
+    <div class="edit-banner">✏️ 編輯模式已開啟 · 直接點擊下方投影片任意文字即可修改 · 修改完可直接下載 .pptx</div>
+    <div id="step3PagePills" class="step3-page-pills"></div>
 
     <div class="step3-slide-stage">
       <div class="slide-wrap" id="slideWrap">
@@ -942,7 +956,7 @@
     <div class="page-header-row">
       <div>
         <h2 class="page-header-title">步驟 4：講師備忘錄與課前速覽</h2>
-        <div class="page-header-sub">左側切換投影片頁碼，右側專心檢視該頁逐字參考講稿、互動提問與課前 3 分鐘速覽卡。</div>
+        <div class="page-header-sub">在「投影片分頁切換」選擇頁碼，即可檢視該頁的逐字參考講稿、互動提問與課前 3 分鐘速覽卡。</div>
       </div>
     </div>
 
@@ -1039,7 +1053,7 @@
             <button class="copy-btn" style="background:#8a6d3b" onclick="resetPosterEdits()">↩︎ 還原文字</button>
             <button class="copy-btn" style="background:var(--green);font-weight:700;" onclick="downloadPosterImage()">📥 存成圖片</button>
           </div>
-          <div style="font-size:11.5px;color:#64748b;margin-top:8px;">✏️ 提示：右側海報上的文字都可以直接點擊修改！</div>
+          <div style="font-size:11.5px;color:#64748b;margin-top:8px;">✏️ 提示：預覽海報上的文字都可以直接點擊修改！</div>
         </div>
 
         <!-- Grok 首選 AI 海報指令轉換器（預設展開） -->
@@ -1101,7 +1115,7 @@
     <div class="page-header-row">
       <div>
         <h2 class="page-header-title">步驟 6：宣傳貼文與備課完成總覽</h2>
-        <div class="page-header-sub">左側複製宣傳貼文與 LINE 行前提醒，右側一次確認並打包下載所有備課檔案！</div>
+        <div class="page-header-sub">複製宣傳貼文與 LINE 行前提醒，並在「準備完成總覽」一次確認並打包下載所有備課檔案！</div>
       </div>
     </div>
 
@@ -4047,8 +4061,10 @@ function applySafeCombo(comboId) {
 
   renderTopics();
   renderAges();
+  if (typeof syncBasicInfo === 'function') syncBasicInfo();
   closeSmartModal();
   generate();
+  showToast('✓ 已套用安全牌組合與時長設定！點擊「下一步」即可預覽簡報！');
 }
 
 /* =========================================================
@@ -4060,7 +4076,7 @@ function closeRunDownModal() {
 }
 
 function renderRunDownContent() {
-  const dur = DUR || 60;
+  const dur = parseInt(document.getElementById('dur')?.value || DUR || 60, 10);
   const topicList = [...SELECTED_T].map(i => TOPICS[i]);
   const topicNames = topicList.length ? topicList.map(t => t.n).join(' ＋ ') : '未選取主題（預設體驗課程）';
   
@@ -4129,7 +4145,7 @@ function renderRunDownContent() {
       </div>
     </div>
   `;
-  document.getElementById('runDownModalBody').innerHTML = html;
+  const rdTarget = document.getElementById('p4RunDownWrap') || document.getElementById('runDownModalBody'); if (rdTarget) rdTarget.innerHTML = html;
 }
 
 function copyRunDownCard() {
@@ -4659,9 +4675,13 @@ function updateSummary(){
 
 function buildCover(topic, age, pNum, tNum){
   const smartTitle = getSmartTitle([topic]);
+  const storeName = escapeHtml(SETTINGS.store || 'Apple Shop 小教室');
+  const dateStr = ($('#date')?.value || '').trim();
+  const timeStr = ($('#p1_time')?.value || '').trim();
+  const dateBadge = dateStr ? `<span>🗓 ${escapeHtml(dateStr)}${timeStr ? ' ' + escapeHtml(timeStr) : ''}</span>` : '';
   return `<div class="slide cover">
     <div class="chrome">
-      <div>Apple Shop 小教室</div>
+      <div>${storeName}</div>
       <div>第 ${pNum} / ${tNum} 頁 · 開場</div>
     </div>
     <div class="cover-body">
@@ -4674,6 +4694,7 @@ function buildCover(topic, age, pNum, tNum){
         ${topic.welcome}
       </div>
       <div class="cover-tags">
+        ${dateBadge}
         <span>✨ ${topic.tagline}</span>
         <span>🎯 ${age.hook}</span>
         <span>⏱ 約 ${DUR} 分鐘</span>
@@ -5934,10 +5955,23 @@ function getSmartTitle(topics, userSentence){
   });
   allScenariosText = allScenariosText.toLowerCase();
 
-  // 偵測主要生活情境（依台灣大眾日常使用優先）
+  // 判斷選中主題的裝置系列（避免全是 iPhone 卻被誤判成家庭數位生活）
+  const selectedCats = [...new Set(topics.map(t => t.cat || ''))];
+  const isAllIphone = selectedCats.length === 1 && selectedCats[0] === 'iPhone';
+  const curAges = (typeof selectedAges === 'function') ? selectedAges() : [];
+  const ageText = curAges.map(a => a.k).join(' ');
+
+  // 偵測主要生活情境（優先考量主題名稱與學員對象）
+  const topicNamesOnly = names.join(' ');
   let mainScenario = '';
-  if(/家庭|家人|孩子|銀髮|長輩|親子/.test(allScenariosText)){
+  if(/家庭|親子|兒童|長輩/.test(topicNamesOnly) || /家庭|家長|長輩|銀髮/.test(ageText)){
     mainScenario = '家庭數位生活';
+  } else if(/旅行|出國|導航|地圖/.test(topicNamesOnly)){
+    mainScenario = '旅行智慧生活';
+  } else if(/上班|效率|辦公|工作/.test(ageText) || /上班|工作|效率|生產力/.test(topicNamesOnly)){
+    mainScenario = isAllIphone ? 'iPhone 實用與拍攝攻略' : '智慧效率生活';
+  } else if(isAllIphone){
+    mainScenario = 'iPhone 智慧生活攻略';
   } else if(/旅行|出國|導航|地圖|出門/.test(allScenariosText)){
     mainScenario = '旅行智慧生活';
   } else if(/上班|工作|效率|辦公|生產力|商務/.test(allScenariosText)){
@@ -6196,9 +6230,13 @@ function buildFusedDeck(topics, age, pageOffset = 0, grandTotal = null){
 function buildFusedCover(topics, age, pNum, tNum){
   const icos = topics.map(t=>t.ico).join(' ');
   const smartTitle = getSmartTitle(topics, lastSmartSentence);
+  const storeName = escapeHtml(SETTINGS.store || 'Apple Shop 小教室');
+  const dateStr = ($('#date')?.value || '').trim();
+  const timeStr = ($('#p1_time')?.value || '').trim();
+  const dateBadge = dateStr ? `<span>🗓 ${escapeHtml(dateStr)}${timeStr ? ' ' + escapeHtml(timeStr) : ''}</span>` : '';
   return `<div class="slide cover">
     <div class="chrome">
-      <div>Apple Shop 小教室</div>
+      <div>${storeName}</div>
       <div>第 ${pNum} / ${tNum} 頁 · 開場</div>
     </div>
     <div class="cover-body">
@@ -6211,6 +6249,7 @@ function buildFusedCover(topics, age, pNum, tNum){
         今天想跟大家聊 ${topics.length} 件有點關聯的事。各自看都還滿有趣，但放在一起會發現生活上其實是連著的 · 就像家裡的東西，分開用都好用，但搭起來會讓日子過得更順一點。今天就帶大家看看這些連結。
       </div>
       <div class="cover-tags">
+        ${dateBadge}
         <span>✨ ${topics.length} 個主題一起聊</span>
         <span>🎯 ${age.hook}</span>
         <span>⏱ 約 ${DUR} 分鐘</span>
@@ -6683,6 +6722,11 @@ function showSlide(){
   wrap.appendChild(SLIDES[IDX]);
   wrap.scrollTop = 0;
   $('#pageInfo').textContent = `${String(IDX+1).padStart(2,'0')} / ${String(SLIDES.length).padStart(2,'0')}`;
+  const pillsBox = document.getElementById('step3PagePills');
+  if (pillsBox) {
+    pillsBox.innerHTML = '<span style="font-size:12px;color:#64748b;font-weight:700;margin-right:4px;">快速跳頁：</span>' +
+      SLIDES.map((_, i) => `<button type="button" class="step3-pill-btn ${i===IDX?'active':''}" onclick="IDX=${i};showSlide();">${i+1}</button>`).join('');
+  }
   updateSpeakerNotes(IDX);
 }
 function prevSlide(){ if(SLIDES.length){ IDX=(IDX-1+SLIDES.length)%SLIDES.length; showSlide(); } }
@@ -8072,7 +8116,8 @@ function renderSocial(){
   const ageStr=ages.length?ages.map(a=>a.k).join('、'):'';
   const topicLines=topics.map(t=>t.ico+' '+t.n).join('\n');
   const bullets=topics.slice(0,3).map(t=>'✓ '+t.features[0].ft.replace(/[ · ·].*/,'').trim()).join('\n');
-  const hashtags='#'+store.replace(/\s/g,'')+' #Apple小教室 '+topics.slice(0,3).map(t=>'#'+t.n.split(/[\s·]/)[0]).join(' ');
+  const tagList = Array.from(new Set(['#'+store.replace(/\s/g,''), '#Apple小教室', ...topics.slice(0,3).map(t=>'#'+t.n.split(/[\s·]/)[0])]));
+  const hashtags = tagList.join(' ');
   const info=[date?('🗓 '+date):'', '⏱ 約 '+dur+' 分鐘', ppl?('👥 限額 '+ppl+' 位'):''].filter(Boolean).join('　');
 
   // 如果有來自智能組合的原句，優先在文案中帶入，讓「一句話」真正吃進去
@@ -8089,7 +8134,7 @@ function renderSocial(){
 
   document.getElementById('socialBody').innerHTML=
     variants.map((v,i)=>'<div class="copy-card"><div class="copy-card-hd"><span class="cc-t">'+v.title+'</span><button class="copy-btn" onclick="copyText(\'soc_'+i+'\', this)">📋 複製</button></div><pre id="soc_'+i+'">'+escapeHtml(v.text)+'</pre></div>').join('')+
-    '<div class="hint-box" style="margin-top:4px">💡 文案中的門市名稱與報名方式來自「⚙️ 門市設定」。日期／時長／人數取自中間欄上方欄位，可先填好再產生。</div>';
+    '<div class="hint-box" style="margin-top:8px">💡 文案中的門市名稱、報名方式、日期、時長與人數皆自動帶入自「步驟 1 基本設定」，可隨時回步驟 1 修改。</div>';
 }
 
 /* ---------- AI 海報生成指令轉換器 (xAI Grok 首選 ✕ Gemini ✕ ChatGPT ✕ 通用) ---------- */
@@ -8457,13 +8502,54 @@ function renderStep4SlideNav() {
     return;
   }
   box.innerHTML = SLIDES.map((s, idx) => {
-    const isAct = (idx === CUR);
-    const title = s.title || s.h || s.n || ('第 ' + (idx + 1) + ' 頁');
-    return `<button type="button" class="p4-slide-nav-item ${isAct ? 'active' : ''}" onclick="CUR=${idx};renderSlide();renderStep4SlideNav();">
+    const isAct = (idx === IDX);
+    let title = '第 ' + (idx + 1) + ' 頁';
+    if (s && typeof s.querySelector === 'function') {
+      const el = s.querySelector('.cover-title, .h, .title, h1, h2');
+      if (el && el.textContent) title = el.textContent.trim();
+    }
+    return `<button type="button" class="p4-slide-nav-item ${isAct ? 'active' : ''}" onclick="IDX=${idx};showSlide();renderStep4SlideNav();">
       <div class="p4-slide-nav-num">第 ${String(idx + 1).padStart(2, '0')} 頁</div>
       <div class="p4-slide-nav-title">${escapeHtml(title)}</div>
     </button>`;
   }).join('');
+}
+
+/* 新手 10 秒快速體驗範例成品 */
+function loadDemoAndPreview() {
+  const storeEl = document.getElementById('set_store');
+  const signupEl = document.getElementById('set_signup');
+  const dateEl = document.getElementById('date');
+  const timeEl = document.getElementById('p1_time');
+  const placeEl = document.getElementById('p1_place');
+
+  if (storeEl && !storeEl.value.trim()) storeEl.value = 'Apple Shop 示範門市';
+  if (signupEl && !signupEl.value.trim()) signupEl.value = '門市櫃台現場報名 或 洽現場專員';
+  if (dateEl && !dateEl.value.trim()) dateEl.value = '本週六';
+  if (timeEl && !timeEl.value.trim()) timeEl.value = '14:00 - 15:00';
+  if (placeEl && !placeEl.value.trim()) placeEl.value = '門市體驗區';
+
+  SELECTED_T.clear();
+  SELECTED_A.clear();
+  const t1 = TOPICS.findIndex(t => t.n.includes('iPhone 入門必學十招'));
+  const t2 = TOPICS.findIndex(t => t.n.includes('iPhone 拍照變強'));
+  if (t1 !== -1) SELECTED_T.add(t1);
+  if (t2 !== -1) SELECTED_T.add(t2);
+  if (SELECTED_T.size === 0) SELECTED_T.add(0);
+
+  const aIdx = AGES.findIndex(a => a.k.includes('30-55') || a.k.includes('上班族'));
+  if (aIdx !== -1) SELECTED_A.add(aIdx); else SELECTED_A.add(0);
+
+  const durInput = document.getElementById('dur');
+  if (durInput) durInput.value = '60';
+  DUR = 60;
+
+  renderTopics();
+  renderAges();
+  syncBasicInfo();
+  generate();
+  goToWizardStep(3);
+  showToast('🎉 已載入「新手範例成品」！您可自由瀏覽簡報、講稿與海報，隨時回步驟 1 改成您的門市資訊！', 4500);
 }
 
 function renderStep4RunDown() {

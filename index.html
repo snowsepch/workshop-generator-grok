@@ -1102,16 +1102,17 @@
             </div>
 
             <div class="ai-direct-actions" style="margin-top:0;padding-top:10px;border-top:1px dashed #cbd5e1;">
-              <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="複製 Grok 直接生圖指令並開啟 Grok">⚡ 一鍵開啟 Grok (首選)</button>
-              <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="複製 Gemini 直接生圖指令並開啟 Gemini">💎 一鍵開啟 Gemini</button>
-              <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')" title="複製 ChatGPT 直接生圖指令並開啟 ChatGPT">💬 一鍵開啟 ChatGPT</button>
+              <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="自動帶入對話框並開啟 Grok">⚡ 一鍵開啟 Grok (首選)</button>
+              <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="複製 Gemini 指令並開啟 Gemini，切換過去按 Cmd+V 貼上即可">💎 開啟 Gemini（複製＋按 Cmd+V 貼上）</button>
+              <button type="button" class="btn-direct-agent gpt-btn" onclick="directLaunchAgent('chatgpt')" title="自動帶入對話框並開啟 ChatGPT">💬 一鍵開啟 ChatGPT</button>
               <button type="button" class="btn-copy-prompt" style="padding:8px 12px;font-size:12px;" onclick="CURRENT_AI_AGENT='universal';updateAiPromptOutput();copyAiPrompt(this);" title="複製 Midjourney / 通用純英文生圖 Prompt">🎨 複製通用 Prompt</button>
             </div>
           </div>
 
           <div class="ai-prompt-box-wrap" style="margin-top:8px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;flex-wrap:wrap;">
               <span id="aiPreviewLabel" style="font-size:11px;font-weight:700;color:#475569;">📋 目前指令預覽：xAI Grok（點擊上方任一按鈕即自動切換、複製並開啟）</span>
+              <button type="button" class="copy-btn" style="padding:3px 10px;font-size:11px;" onclick="copyAiPrompt(this)">📋 再複製一次</button>
             </div>
             <textarea id="aiPromptTextarea" class="ai-prompt-textarea" readonly spellcheck="false" style="min-height:135px;"></textarea>
           </div>
@@ -8266,11 +8267,15 @@ function directLaunchAgent(agent) {
   const textarea = document.getElementById('aiPromptTextarea');
   const promptText = textarea ? textarea.value : buildAiPosterPrompt(agent, CURRENT_AI_STYLE);
 
-  // 步驟 A：先在當前焦點同步寫入剪貼簿（避免 window.open 切走焦點導致寫入失敗）
+  // 步驟 A：先在當前焦點同步寫入剪貼簿（Safari 需暫時取消 readonly 並用 setSelectionRange 確保複製成功）
   if (textarea) {
+    const wasRO = textarea.readOnly;
+    textarea.readOnly = false;
     textarea.focus();
     textarea.select();
+    textarea.setSelectionRange(0, 99999);
     try { document.execCommand('copy'); } catch (e) {}
+    textarea.readOnly = wasRO;
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(promptText).catch(() => {});

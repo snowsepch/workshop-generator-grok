@@ -1101,6 +1101,15 @@
               </div>
             </div>
 
+            <div class="ai-control-group" style="align-items:flex-start;">
+              <span class="ai-ctl-label" style="margin-top:6px;">主視覺構成：</span>
+              <div class="ai-btn-group" id="aiVisualTabs" style="display:flex;flex-wrap:wrap;gap:6px;background:transparent;border:none;padding:0;">
+                <button type="button" class="ai-tab-btn active" onclick="switchAiVisual('lifestyle', this)">🎨 生活插畫 / 無手機 (推薦)</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiVisual('sticker', this)">🏷 可愛扁平小貼紙點綴</button>
+                <button type="button" class="ai-tab-btn" onclick="switchAiVisual('typo', this)">🔤 純字體極簡排版</button>
+              </div>
+            </div>
+
             <div class="ai-direct-actions" style="margin-top:0;padding-top:10px;border-top:1px dashed #cbd5e1;">
               <button type="button" class="btn-direct-agent grok-btn" onclick="directLaunchAgent('grok')" title="自動帶入對話框並開啟 Grok">⚡ 一鍵開啟 Grok (首選)</button>
               <button type="button" class="btn-direct-agent gemini-btn" onclick="directLaunchAgent('gemini')" title="複製 Gemini 指令並開啟 Gemini，切換過去按 Cmd+V 貼上即可">💎 開啟 Gemini（複製＋按 Cmd+V 貼上）</button>
@@ -8194,6 +8203,8 @@ function switchAiAgent(agent, btn) {
   updateAiPromptOutput();
 }
 
+let CURRENT_AI_VISUAL = 'lifestyle';
+
 function switchAiStyle(style, btn) {
   CURRENT_AI_STYLE = style;
   document.querySelectorAll('#aiStyleTabs .ai-tab-btn').forEach(b => b.classList.remove('active'));
@@ -8201,10 +8212,17 @@ function switchAiStyle(style, btn) {
   updateAiPromptOutput();
 }
 
+function switchAiVisual(vis, btn) {
+  CURRENT_AI_VISUAL = vis;
+  document.querySelectorAll('#aiVisualTabs .ai-tab-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  updateAiPromptOutput();
+}
+
 function updateAiPromptOutput() {
   const textarea = document.getElementById('aiPromptTextarea');
   if (!textarea) return;
-  textarea.value = buildAiPosterPrompt(CURRENT_AI_AGENT, CURRENT_AI_STYLE);
+  textarea.value = buildAiPosterPrompt(CURRENT_AI_AGENT, CURRENT_AI_STYLE, CURRENT_AI_VISUAL);
   const lbl = document.getElementById('aiPreviewLabel');
   if (lbl) {
     const names = { grok: 'xAI Grok (直接生圖)', gemini: 'Google Gemini (直接生圖)', chatgpt: 'OpenAI ChatGPT (直接生圖)', universal: '通用英文 Prompt' };
@@ -8313,8 +8331,9 @@ function showToast(msg, duration = 3500) {
   }, duration);
 }
 
-/* 超精準「直接生圖」海報指令生成演算法 (Direct Image Generation) */
-function buildAiPosterPrompt(agent, style) {
+/* 超精準「直接生圖」海報指令生成演算法 (Direct Image Generation - 無寫實畸形手機版) */
+function buildAiPosterPrompt(agent, style, visual) {
+  const visMode = visual || (typeof CURRENT_AI_VISUAL !== 'undefined' ? CURRENT_AI_VISUAL : 'lifestyle');
   const topics = selectedTopics();
   const title = getSmartTitle(topics, lastSmartSentence);
   const date = (document.getElementById('po_date')?.value || '').trim() || '近期舉辦';
@@ -8325,37 +8344,57 @@ function buildAiPosterPrompt(agent, style) {
   const ratioStr = (typeof POSTER_FMT !== 'undefined' && POSTER_FMT === 'sq') ? '1:1 正方形社群海報' : '3:4 直式活動海報';
   const ratioEng = (typeof POSTER_FMT !== 'undefined' && POSTER_FMT === 'sq') ? '1:1 square' : '3:4 vertical';
 
-  // 硬體特徵辨識演算法
+  // 依據主題與選擇的「主視覺構成」決定畫面元素（徹底避開寫實大手機）
   const fullTopicText = topics.map(t => t.n + ' ' + (t.sub||'') + ' ' + (t.features||[]).map(f=>f.ft).join(' ')).join(' ');
-  let hwFeature = '';
-  if (/iPhone 18|18 Pro|雙光圈|機械光圈/i.test(fullTopicText)) {
-    hwFeature = 'iPhone 18 Pro in desert titanium finish, featuring micro-mechanical dual-aperture diaphragm camera system, quad-lens array with anti-reflective nano-coating, precision brushed titanium chassis with chamfered edges';
-  } else if (/Duo|折疊|雙螢幕|雙螢/i.test(fullTopicText)) {
-    hwFeature = 'iPhone Duo folded in a 120-degree tent angle, dual Ultra Retina XDR flexible displays with zero-gap crease, precision titanium dual-gear hinge';
-  } else if (/Mac|MacBook|Neo/i.test(fullTopicText)) {
-    hwFeature = 'MacBook Neo in featherweight anodized aluminum chassis, edge-to-edge PROLED display showing creative workspace, slim profile with tactile keyboard';
-  } else if (/iPad|Pencil|筆記/i.test(fullTopicText)) {
-    hwFeature = 'iPad Pro with symmetrical thin bezels, Apple Pencil Pro hovering with tactile shadow, Liquid Retina XDR screen';
+  let sceneHintZh = '溫暖陽光、室內植栽與手沖咖啡桌景的極簡生活插畫';
+  let sceneHintEng = 'warm sunlight, minimalist botanical plants, and cozy lifestyle desk illustration';
+
+  if (/拍|攝影|照片|相簿|光圈|相機/i.test(fullTopicText)) {
+    sceneHintZh = '極簡幾何相機取景框線條、底片相框、金色陽光光影與生活回憶剪影插畫';
+    sceneHintEng = 'minimalist camera viewfinder frame lines, polaroid photo frames, golden sunlight rays, and warm memory aesthetic illustration';
+  } else if (/旅行|出國|地圖|導航|出門/i.test(fullTopicText)) {
+    sceneHintZh = '優雅的極簡旅行地圖虛線、小飛機圖標、登機證與陽光樹影插畫';
+    sceneHintEng = 'minimalist travel route dotted lines, tiny paper plane icon, boarding pass motif, and sunlit foliage illustration';
+  } else if (/工作|效率|筆記|Mac|iPad|AI|Siri/i.test(fullTopicText)) {
+    sceneHintZh = '乾淨俐落的極簡幾何線條、靈感燈泡、手繪筆記本與咖啡杯桌面插畫';
+    sceneHintEng = 'clean geometric lines, creative lightbulb motif, minimalist notebook and coffee cup flat-lay illustration';
+  } else if (/長輩|家人|家庭|健康|運動/i.test(fullTopicText)) {
+    sceneHintZh = '溫馨的客廳暖陽、微笑對話泡泡與柔和圓潤的生活感向量插畫';
+    sceneHintEng = 'warm sunlit living room atmosphere, friendly chat bubble icons, and gentle rounded lifestyle vector illustration';
+  }
+
+  let heroVisualZh = '';
+  let heroVisualEng = '';
+  let negativeZh = '嚴禁出現大型寫實手機特寫、怪異的多鏡頭模組、文字亂碼、扭曲手指或廉價 3D 塑膠感。';
+  let negativeEng = 'NO large realistic smartphone in the center, NO close-up camera lenses, NO photorealistic mobile phone product shot, NO gibberish text, NO distorted fingers, NO messy background, NO cheap glossy 3D look.';
+
+  if (visMode === 'lifestyle') {
+    heroVisualZh = `${sceneHintZh}（完全不要畫出寫實手機或 3C 裝置特寫，純粹以生活場景插畫與質感光影營造氛圍）`;
+    heroVisualEng = `${sceneHintEng}, purely lifestyle graphic art and atmospheric lighting, NO smartphone or realistic tech hardware`;
+  } else if (visMode === 'sticker') {
+    heroVisualZh = `主視覺以大氣乾淨的海報排版為主，只在標題旁或邊角點綴「小小可愛的 2D 扁平手繪小貼紙」（例如迷你相機貼紙、微笑圖標、星星徽章、極小可愛的 Q 版裝置小貼紙），絕不把大台寫實手機放中間`;
+    heroVisualEng = `clean poster typography as the hero, decorated with tiny cute flat 2D vector sticker badges (mini camera sticker, smile icon, star badge, tiny cute doodle stickers) scattered playfully around the corners, NO giant realistic phone`;
   } else {
-    hwFeature = 'Flagship Apple device with precision-machined aerospace-grade aluminum and glass body, iconic minimalist industrial design';
+    heroVisualZh = `純字體排版與極簡幾何色塊設計（Swiss Graphic Design 風格），畫面完全不放任何手機或 3C 產品圖片，純靠比例、留白與字體美感取勝`;
+    heroVisualEng = `pure Swiss graphic design typography poster with bold geometric color blocks and generous negative space, ZERO devices, ZERO illustrations of phones`;
   }
 
   const styleMapZh = {
-    minimal: `Apple 官方極簡雜誌風（暖骨白畫布底色 #FAFAF8，單一深靛藍 #1F3A5F 點綴，頂部預留 35% 乾淨留白放主標題，5200K 商業攝影棚柔光箱主光與金屬倒角微反光，Hasselblad 中片幅質感，畫面乾淨無雜物）`,
+    minimal: `Apple 官方極簡雜誌風（暖骨白畫布底色 #FAFAF8，單一深靛藍 #1F3A5F 點綴，頂部預留 35% 乾淨留白放主標題，5200K 柔和棚拍自然光感，畫面乾淨無雜物）`,
     pop: `年輕活力潮流新粗獷風（暖奶油色底 #FDEFD4，高飽和亮橘色 #ED6702 重點色塊，深炭灰細框 #18181B，扁平手繪感向量生活插畫與小巧幾何徽章，充滿年輕街頭潮感）`,
-    cozy: `暖心生活咖啡廳風格（柔和燕麥奶暖白背景 #F5EFE6，搭配鼠尾草綠 #3F6B54 點綴，溫煦午後窗邊斜射自然暖陽，木質咖啡桌生活氛圍，親切零距離感，適合長輩與家庭族群）`,
-    pro: `暗黑 Pro 電影大片風格（極致深曜石黑背景 #0B0D12，俐落冷冽鈦金屬邊緣輪廓光 rim lighting，微細科技冷藍光澤，Apple Keynote 發表會級高級硬體大片質感，文字採用高對比純白）`,
-    editorial: `日系清新生活雜誌風格（清透柔霧米白畫布 #FAF7F2，低飽和灰藍與暖杏色點綴，自然空氣感大量留白，如 Kinfolk 與日系設計誌般的溫潤排版與柔和自然散景）`,
-    futuristic: `未來 AI 智慧科技風格（純淨冰川銀白背景 #F2F5F9，極細微且優雅的 Siri 多彩微光光弧環繞裝置邊緣，通透幾何細線與乾淨現代科技美學，凸顯智慧效率感）`
+    cozy: `暖心生活咖啡廳風格（柔和燕麥奶暖白背景 #F5EFE6，搭配鼠尾草綠 #3F6B54 點綴，溫煦午後窗邊斜射自然暖陽，親切零距離感，適合長輩與家庭族群）`,
+    pro: `暗黑 Pro 電影大片風格（極致深曜石黑背景 #0B0D12，俐落冷冽微光邊緣線條，微細科技冷藍光澤，高級平面設計大片質感，文字採用高對比純白）`,
+    editorial: `日系清新生活雜誌風格（清透柔霧米白畫布 #FAF7F2，低飽和灰藍與暖杏色點綴，自然空氣感大量留白，如 Kinfolk 與日系設計誌般的溫潤排版）`,
+    futuristic: `未來 AI 智慧科技風格（純淨冰川銀白背景 #F2F5F9，極細微且優雅的 Siri 多彩微光光弧，通透幾何細線與乾淨現代設計美學）`
   };
 
   const styleMapEng = {
-    minimal: `Ultra-minimalist Apple editorial poster, warm off-white background (#FAFAF8), single deep indigo (#1F3A5F) accent, top 35% clean negative space for typography, 5200K studio softbox key light, metallic highlights, Hasselblad medium format aesthetic`,
-    pop: `Trendy Neo-Brutalist pop tech poster, warm cream background (#FDEFD4), energetic bright orange (#ED6702) accent, crisp dark charcoal borders (#18181B), flat 2D vector illustration, playful geometric badges, clean layout`,
-    cozy: `Warm cozy lifestyle cafe aesthetic poster, soft oat milk beige background (#F5EFE6) with sage green (#3F6B54) accents, gentle afternoon golden hour sunlight casting soft window shadows on warm wooden desk, approachable and friendly atmosphere`,
-    pro: `Sleek dark mode Pro cinematic poster, deep obsidian black background (#0B0D12), sharp titanium rim lighting and subtle cool blue reflections, Apple Keynote hardware showcase aesthetic, crisp pure white typography`,
-    editorial: `Fresh Japanese lifestyle magazine editorial poster, airy soft warm ivory (#FAF7F2), muted slate blue and soft apricot accents, generous breathing whitespace, Kinfolk-inspired gentle natural bokeh and refined typography`,
-    futuristic: `Clean futuristic AI tech poster, pure glacier silver-white background (#F2F5F9), delicate luminous Siri-inspired subtle light arc surrounding the device, ultra-thin geometric grid accents, modern intelligent technology vibe`
+    minimal: `Ultra-minimalist Apple editorial poster, warm off-white background (#FAFAF8), single deep indigo (#1F3A5F) accent, top 35% clean negative space for typography, soft natural studio lighting`,
+    pop: `Trendy Neo-Brutalist pop poster, warm cream background (#FDEFD4), energetic bright orange (#ED6702) accent, crisp dark charcoal borders (#18181B), flat 2D vector illustration, clean layout`,
+    cozy: `Warm cozy lifestyle cafe aesthetic poster, soft oat milk beige background (#F5EFE6) with sage green (#3F6B54) accents, gentle afternoon golden hour sunlight shadows, friendly atmosphere`,
+    pro: `Sleek dark mode Pro cinematic poster, deep obsidian black background (#0B0D12), subtle cool blue rim light accents, high-end editorial graphic design, crisp pure white typography`,
+    editorial: `Fresh Japanese lifestyle magazine editorial poster, airy soft warm ivory (#FAF7F2), muted slate blue and soft apricot accents, generous breathing whitespace, Kinfolk-inspired design`,
+    futuristic: `Clean futuristic AI aesthetic poster, pure glacier silver-white background (#F2F5F9), delicate luminous Siri-inspired subtle light arc, ultra-thin geometric grid accents, modern design`
   };
 
   const chosenStyleZh = styleMapZh[style] || styleMapZh.minimal;
@@ -8367,8 +8406,8 @@ function buildAiPosterPrompt(agent, style) {
 🎨 圖片視覺與構圖要求：
 · 畫布比例：${ratioEng}
 · 風格定位：${chosenStyleZh}
-· 核心硬體主視覺：${hwFeature}，置於畫面視覺重心，細節清晰銳利。
-· 避坑要求：禁止出現文字亂碼、扭曲手指、多餘雜物、暗沉濾鏡或廉價 3D 塑膠感。
+· 主視覺構成：${heroVisualZh}。
+· 避坑要求：${negativeZh}
 
 📝 海報畫面中需清晰排版以下繁體中文文字（台灣標準正體）：
 · 頂部大標題：${title}
@@ -8380,8 +8419,8 @@ function buildAiPosterPrompt(agent, style) {
 🎨 繪圖規格與視覺構圖：
 · 圖片比例：${ratioEng}
 · 視覺風格：${chosenStyleZh}
-· 產品主視覺：${hwFeature}
-· 畫面要求：結構乾淨俐落，不可出現亂碼文字、扭曲手指或雜亂背景。
+· 主視覺構成：${heroVisualZh}
+· 避坑要求：${negativeZh}
 
 📝 請直接在海報圖片中設計並呈現以下簡潔繁體中文文字：
 · 主標題：${title}
@@ -8393,8 +8432,8 @@ function buildAiPosterPrompt(agent, style) {
 [Image Specification]
 · Aspect Ratio: ${ratioEng}
 · Visual Style: ${chosenStyleEng}
-· Hero Product: ${hwFeature}, crisp studio details, clean composition.
-· Negative Constraint: NO gibberish text, NO distorted fingers, NO messy background, NO cheap glossy 3D look.
+· Hero Visual Composition: ${heroVisualEng}, clean composition.
+· Negative Constraint: ${negativeEng}
 
 [Clean Typography on Poster (Traditional Chinese 繁體中文)]
 · Headline: "${title}"
@@ -8402,7 +8441,7 @@ function buildAiPosterPrompt(agent, style) {
 · Footer Info: "${date} ${time} | ${place} (${seats})"`;
   } else {
     const engTopics = topics.map(t => t.n).join(', ');
-    return `Promotional event poster for "${title}" (${engTopics}), ${chosenStyleEng}, featuring ${hwFeature}, ample negative space, 8k resolution, sharp focus, no text clutter --ar ${POSTER_FMT==='sq'?'1:1':'3:4'} --style raw --v 6.1`;
+    return `Promotional event poster for "${title}" (${engTopics}), ${chosenStyleEng}, ${heroVisualEng}, ample negative space, 8k resolution, sharp graphic design, ${negativeEng} --ar ${POSTER_FMT==='sq'?'1:1':'3:4'} --style raw --v 6.1`;
   }
 }
 

@@ -5597,9 +5597,40 @@ function downloadPptx(){
     alert('簡報匯出元件載入中，請稍候再試');
     return;
   }
+  // 確保正在編輯的文字框失去焦點並提交進 DOM
+  if (document.activeElement && document.activeElement.blur) {
+    document.activeElement.blur();
+  }
   const btn = document.getElementById('pptxBtn');
-  btn.textContent = '⏳ 產生中…';
-  btn.disabled = true;
+  const origBtnTxt = btn ? btn.textContent : '📥 下載 .pptx 簡報檔';
+  if (btn) { btn.textContent = '⏳ 產生中…'; btn.disabled = true; }
+
+  // 從網頁上已被使用者編輯過的 SLIDES DOM 即時擷取最新文字
+  function domTxt(slideEl, sel, fallback) {
+    if (!slideEl || typeof slideEl.querySelector !== 'function') return fallback;
+    const el = slideEl.querySelector(sel);
+    if (!el) return fallback;
+    const txt = (el.innerText || el.textContent || '').trim();
+    return txt || fallback;
+  }
+  function domAllTxt(slideEl, sel) {
+    if (!slideEl || typeof slideEl.querySelectorAll !== 'function') return [];
+    return [...slideEl.querySelectorAll(sel)].map(el => (el.innerText || el.textContent || '').trim());
+  }
+  function domWelcome(slideEl, fallback) {
+    if (!slideEl || typeof slideEl.querySelector !== 'function') return fallback;
+    const w = slideEl.querySelector('.cover-welcome');
+    if (!w) return fallback;
+    const clone = w.cloneNode(true);
+    const ww = clone.querySelector('.ww');
+    if (ww) ww.remove();
+    const txt = (clone.innerText || clone.textContent || '').trim();
+    return txt || fallback;
+  }
+  function findSlideDom(keyword, fallbackIdx) {
+    const found = SLIDES.find(el => el && (el.innerText || '').includes(keyword));
+    return found || SLIDES[fallbackIdx] || null;
+  }
 
   const pptx = new PptxGenJS();
   pptx.layout = 'LAYOUT_WIDE';  // 16:9 寬螢幕
@@ -5624,22 +5655,32 @@ function downloadPptx(){
     const capStr = Array.isArray(r.capacity) ? r.capacity.join(' / ') : (r.capacity || ' · ');
     const resources = getTopicResources(t.n);
 
-    // 封面
+    // 封面（同步讀取網頁編輯後內容）
+    const d0 = SLIDES[0];
+    const s1Title = domTxt(d0, '.cover-title', t.n);
+    const s1Sub = domTxt(d0, '.cover-sub', t.sub);
+    const s1Wel = domWelcome(d0, t.welcome);
+    const s1Ico = domTxt(d0, '.cover-emoji', t.ico);
+    const s1Kick = domTxt(d0, '.cover-kicker', '主題分享 · 顧客體驗講座');
+    const s1Tags = domAllTxt(d0, '.cover-tags span').join('    ') || `✨ ${t.tagline}    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`;
     const s1 = pptx.addSlide();
     s1.background = { color: C.dark };
-    s1.addText(t.ico, { x:0.5, y:0.5, w:2, h:1.5, fontSize:80, color:'FFFFFF', fontFace:FONT });
-    s1.addText('主題分享 · 顧客體驗講座', { x:0.5, y:2.2, w:12, h:0.4, fontSize:14, color:'93C5FD', fontFace:FONT, bold:true });
-    s1.addText(t.n, { x:0.5, y:2.7, w:12, h:1.2, fontSize:52, color:'FFFFFF', fontFace:FONT, bold:true });
-    s1.addText(t.sub, { x:0.5, y:4.0, w:12, h:0.6, fontSize:20, color:'FFFFFF', fontFace:FONT });
-    s1.addText(t.welcome, { x:0.5, y:5.0, w:12, h:1.5, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
-    s1.addText(`✨ ${t.tagline}    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
-    s1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: t.n }), '第 1 頁：封面開場'));
+    s1.addText(s1Ico, { x:0.5, y:0.5, w:2, h:1.5, fontSize:80, color:'FFFFFF', fontFace:FONT });
+    s1.addText(s1Kick, { x:0.5, y:2.2, w:12, h:0.4, fontSize:14, color:'93C5FD', fontFace:FONT, bold:true });
+    s1.addText(s1Title, { x:0.5, y:2.7, w:12, h:1.2, fontSize:52, color:'FFFFFF', fontFace:FONT, bold:true });
+    s1.addText(s1Sub, { x:0.5, y:4.0, w:12, h:0.6, fontSize:20, color:'FFFFFF', fontFace:FONT });
+    s1.addText(s1Wel, { x:0.5, y:5.0, w:12, h:1.5, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
+    s1.addText(s1Tags, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    s1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: s1Title }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const s2 = pptx.addSlide();
     s2.background = { color: 'FFFFFF' };
     s2.addText('今日學習地圖', { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.accent, fontFace:FONT, bold:true });
-    s2.addText(`接下來 ${DUR} 分鐘，您會學到這些`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+    const d1 = SLIDES[1];
+    s2.addText(domTxt(d1, '.h', `接下來 ${DUR} 分鐘，您會學到這些`), { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+    const d1Titles = domAllTxt(d1, '.ag-t');
+    const d1Descs = domAllTxt(d1, '.ag-d');
     const agendaItems = [
       ['01', '認識 '+t.n, '產品定位、目標族群、與市場其他選擇的差異', M[0]+' 分鐘'],
       ['02', '核心功能完整解析', `${t.features.length} 個重點功能逐一介紹，搭配實機展示`, M[1]+' 分鐘'],
@@ -5650,8 +5691,8 @@ function downloadPptx(){
     agendaItems.forEach((it,i)=>{
       const y = 1.8 + i*0.9;
       s2.addText(it[0], { x:0.5, y:y, w:0.6, h:0.7, fontSize:24, color:C.accent, fontFace:FONT, bold:true });
-      s2.addText(it[1], { x:1.2, y:y, w:8, h:0.4, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
-      s2.addText(it[2], { x:1.2, y:y+0.4, w:8, h:0.3, fontSize:12, color:C.muted, fontFace:FONT });
+      s2.addText(d1Titles[i] || it[1], { x:1.2, y:y, w:8, h:0.4, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
+      s2.addText(d1Descs[i] || it[2], { x:1.2, y:y+0.4, w:8, h:0.3, fontSize:12, color:C.muted, fontFace:FONT });
       s2.addText(it[3], { x:11, y:y+0.15, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
     s2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: t.n }), '第 2 頁：學習地圖'));
@@ -5660,7 +5701,8 @@ function downloadPptx(){
     const s3 = pptx.addSlide();
     s3.background = { color: 'FFF7ED' };
     s3.addText('為什麼是它', { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.warm, fontFace:FONT, bold:true });
-    s3.addText(`${t.n} 為您解決了什麼？`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:28, color:C.ink, fontFace:FONT, bold:true });
+    const d2 = SLIDES[2];
+    s3.addText(domTxt(d2, '.h', `${t.n} 為您解決了什麼？`), { x:0.5, y:0.7, w:12, h:0.8, fontSize:28, color:C.ink, fontFace:FONT, bold:true });
     t.stats.forEach((st,i)=>{
       s3.addText(st.n + (st.u||''), { x:0.5+i*4.2, y:1.8, w:4, h:0.8, fontSize:36, color:C.accent, fontFace:FONT, bold:true, align:'center' });
       s3.addText(st.l, { x:0.5+i*4.2, y:2.7, w:4, h:0.4, fontSize:12, color:C.ink, fontFace:FONT, align:'center' });
@@ -5678,15 +5720,20 @@ function downloadPptx(){
     const fChunks = chunk(t.features, 3);
     fChunks.forEach((ch, pi)=>{
       const part = fChunks.length>1 ? `（${pi+1}/${fChunks.length}）` : '';
+      const dFeat = SLIDES[3 + pi];
+      const fTitles = domAllTxt(dFeat, '.f-t');
+      const fDescs = domAllTxt(dFeat, '.f-d');
       const sf = pptx.addSlide();
       sf.background = { color: 'FFFFFF' };
       sf.addText('核心功能'+part, { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.accent, fontFace:FONT, bold:true });
-      sf.addText(`重點功能${part}`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+      sf.addText(domTxt(dFeat, '.h', `重點功能${part}`), { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
       ch.forEach((f,i)=>{
         const y = 1.8 + i*1.7;
+        const ftText = fTitles[i] || `${f.fi} ${f.ft}`;
+        const fdText = fDescs[i] || (f.fd + (f.req?`\n⚙️ 系統需求：${f.req}`:''));
         sf.addText(String(pi*3+i+1).padStart(2,'0'), { x:0.5, y:y, w:0.8, h:1.4, fontSize:42, color:C.accent, fontFace:FONT, bold:true });
-        sf.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
-        sf.addText(f.fd + (f.req?`\n⚙️ 系統需求：${f.req}`:''), { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
+        sf.addText(ftText, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
+        sf.addText(fdText, { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
       sf.addNotes(formatNotesText(getFullSpeakerNotes('features', { topicName: t.n, featuresSummary: ch.map(f=>f.ft).join('、') }), `重點功能 ${part}`));
     });
@@ -5695,7 +5742,10 @@ function downloadPptx(){
     const s6 = pptx.addSlide();
     s6.background = { color: 'FFF7ED' };
     s6.addText('🙌 動手實作時間', { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.warm, fontFace:FONT, bold:true });
-    s6.addText(`換您試試看 · ${M[2]} 分鐘實機體驗`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:28, color:C.ink, fontFace:FONT, bold:true });
+    const dHands = findSlideDom('動手實作', 3 + fChunks.length);
+    const hoTitles = domAllTxt(dHands, '.ho-t');
+    const hoDescs = domAllTxt(dHands, '.ho-d');
+    s6.addText(domTxt(dHands, '.h', `換您試試看 · ${M[2]} 分鐘實機體驗`), { x:0.5, y:0.7, w:12, h:0.8, fontSize:28, color:C.ink, fontFace:FONT, bold:true });
     s6.addText(a.handsNote, { x:0.5, y:1.5, w:12, h:0.4, fontSize:14, color:C.muted, fontFace:FONT });
     const hEach = Math.round(M[2]/3), hMins = [hEach, hEach, M[2]-hEach*2];
     [[`認識並開啟「${t.features[0].ft.replace(/[ · ·].*/,'').trim()}」`, t.features[0].fd, hMins[0]+' 分鐘'],
@@ -5703,8 +5753,8 @@ function downloadPptx(){
      [`日常情境模擬：${t.scenarios[0].t}`, t.scenarios[0].d, hMins[2]+' 分鐘']].forEach((tk,i)=>{
       const y = 2.2 + i*1.65;
       s6.addText(String(i+1).padStart(2,'0'), { x:0.5, y:y, w:0.8, h:1.2, fontSize:36, color:C.warm, fontFace:FONT, bold:true });
-      s6.addText(tk[0], { x:1.5, y:y, w:9, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
-      s6.addText(tk[1], { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
+      s6.addText(hoTitles[i] || tk[0], { x:1.5, y:y, w:9, h:0.5, fontSize:16, color:C.ink, fontFace:FONT, bold:true });
+      s6.addText(hoDescs[i] || tk[1], { x:1.5, y:y+0.5, w:9.5, h:1.0, fontSize:11, color:'555555', fontFace:FONT, valign:'top' });
       s6.addText(`⏱ ${tk[2]}`, { x:11, y:y+0.2, w:1.8, h:0.5, fontSize:12, color:C.warm, fontFace:FONT, bold:true, align:'right' });
     });
     s6.addNotes(formatNotesText(getFullSpeakerNotes('handsOn', { topicName: t.n }), '動手實作時間'));
@@ -5765,21 +5815,32 @@ function downloadPptx(){
     const want = Math.min(featPool.length, Math.max(topics.length, 9));
     const highlights = featPool.slice(0, want);
 
-    // 封面
+    // 封面（同步讀取網頁編輯後內容）
+    const d0 = SLIDES[0];
+    const c1Title = domTxt(d0, '.cover-title', title);
+    const c1Sub = domTxt(d0, '.cover-sub', '');
+    const c1Wel = domWelcome(d0, `今天把 ${topics.length} 個有關聯的主題放在一起聊，看它們在生活裡怎麼搭起來、讓日子更順手。`);
+    const c1Ico = domTxt(d0, '.cover-emoji', topics.map(t=>t.ico).join(' '));
+    const c1Kick = domTxt(d0, '.cover-kicker', '小教室分享 · 主題式講座');
+    const c1Tags = domAllTxt(d0, '.cover-tags span').join('    ') || `✨ ${topics.length} 個主題一起聊    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`;
     const c1 = pptx.addSlide();
     c1.background = { color: C.dark };
-    c1.addText(topics.map(t=>t.ico).join(' '), { x:0.5, y:0.6, w:12, h:1.2, fontSize:54, color:'FFFFFF', fontFace:FONT });
-    c1.addText('小教室分享 · 主題式講座', { x:0.5, y:2.1, w:12, h:0.4, fontSize:14, color:'93C5FD', fontFace:FONT, bold:true });
-    c1.addText(title, { x:0.5, y:2.6, w:12, h:1.2, fontSize:46, color:'FFFFFF', fontFace:FONT, bold:true });
-    c1.addText(`今天把 ${topics.length} 個有關聯的主題放在一起聊，看它們在生活裡怎麼搭起來、讓日子更順手。`, { x:0.5, y:4.2, w:12, h:1.4, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
-    c1.addText(`✨ ${topics.length} 個主題一起聊    🎯 ${a.hook}    ⏱ 約 ${DUR} 分鐘`, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
-    c1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: title }), '第 1 頁：封面開場'));
+    c1.addText(c1Ico, { x:0.5, y:0.6, w:12, h:1.2, fontSize:54, color:'FFFFFF', fontFace:FONT });
+    c1.addText(c1Kick, { x:0.5, y:2.1, w:12, h:0.4, fontSize:14, color:'93C5FD', fontFace:FONT, bold:true });
+    c1.addText(c1Title, { x:0.5, y:2.6, w:12, h:1.2, fontSize:46, color:'FFFFFF', fontFace:FONT, bold:true });
+    if (c1Sub) c1.addText(c1Sub, { x:0.5, y:3.7, w:12, h:0.5, fontSize:18, color:'CBD5E1', fontFace:FONT });
+    c1.addText(c1Wel, { x:0.5, y:4.3, w:12, h:1.4, fontSize:14, color:'FFFFFF', fontFace:FONT, valign:'top', fill:{ color:'FFFFFF', transparency:88 } });
+    c1.addText(c1Tags, { x:0.5, y:6.8, w:12, h:0.4, fontSize:12, color:'FFFFFF', fontFace:FONT });
+    c1.addNotes(formatNotesText(getFullSpeakerNotes('cover', { topicName: c1Title }), '第 1 頁：封面開場'));
 
     // 今日學習地圖
     const c2 = pptx.addSlide();
     c2.background = { color: 'FFFFFF' };
     c2.addText('今日學習地圖', { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.accent, fontFace:FONT, bold:true });
-    c2.addText(`這 ${DUR} 分鐘的安排`, { x:0.5, y:0.7, w:12, h:0.7, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+    const df1 = SLIDES[1];
+    c2.addText(domTxt(df1, '.h', `這 ${DUR} 分鐘的安排`), { x:0.5, y:0.7, w:12, h:0.7, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+    const df1Titles = domAllTxt(df1, '.ag-t');
+    const df1Descs = domAllTxt(df1, '.ag-d');
     c2.addText('今天會聊：' + topics.map(t=>t.ico+' '+t.n).join('   '), { x:0.5, y:1.5, w:12, h:0.5, fontSize:12, color:C.muted, fontFace:FONT });
     [['01','先聊聊整體主軸','為什麼把這些主題放在一起、它們怎麼串起來',M[0]],
      ['02','精選亮點','從各主題挑出最有感、最實用的功能一次看',M[1]],
@@ -5789,8 +5850,8 @@ function downloadPptx(){
      ['06','配件搭配 + Q&A','常見搭配選擇、現場回答疑問',M[5]]].forEach((it,i)=>{
       const y = 2.1 + i*0.82;
       c2.addText(it[0], { x:0.5, y:y, w:0.6, h:0.6, fontSize:22, color:C.accent, fontFace:FONT, bold:true });
-      c2.addText(it[1], { x:1.2, y:y, w:8, h:0.4, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
-      c2.addText(it[2], { x:1.2, y:y+0.38, w:8.5, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
+      c2.addText(df1Titles[i] || it[1], { x:1.2, y:y, w:8, h:0.4, fontSize:15, color:C.ink, fontFace:FONT, bold:true });
+      c2.addText(df1Descs[i] || it[2], { x:1.2, y:y+0.38, w:8.5, h:0.3, fontSize:11, color:C.muted, fontFace:FONT });
       c2.addText(it[3]+' 分鐘', { x:11, y:y+0.1, w:1.8, h:0.4, fontSize:12, color:C.accent, fontFace:FONT, bold:true, align:'right' });
     });
     c2.addNotes(formatNotesText(getFullSpeakerNotes('agenda', { topicName: title }), '第 2 頁：今日學習地圖'));
@@ -5813,15 +5874,20 @@ function downloadPptx(){
     const hChunks = chunk(highlights, 3);
     hChunks.forEach((ch, pi)=>{
       const part = hChunks.length>1 ? `（${pi+1}/${hChunks.length}）` : '';
+      const dFFeat = SLIDES[3 + pi];
+      const ffTitles = domAllTxt(dFFeat, '.f-t');
+      const ffDescs = domAllTxt(dFFeat, '.f-d');
       const sh = pptx.addSlide();
       sh.background = { color: 'FFFFFF' };
       sh.addText('精選亮點'+part, { x:0.5, y:0.3, w:12, h:0.4, fontSize:14, color:C.accent, fontFace:FONT, bold:true });
-      sh.addText(`值得一看的功能${part}`, { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
+      sh.addText(domTxt(dFFeat, '.h', `值得一看的功能${part}`), { x:0.5, y:0.7, w:12, h:0.8, fontSize:30, color:C.ink, fontFace:FONT, bold:true });
       ch.forEach((f,i)=>{
         const y = 1.8 + i*1.7;
+        const ftText = ffTitles[i] || `${f.fi} ${f.ft}`;
+        const fdText = ffDescs[i] || (f.fd + `\n📦 來自：${f.topic.ico} ${f.topic.n}`);
         sh.addText(String(pi*3+i+1).padStart(2,'0'), { x:0.5, y:y, w:0.8, h:1.4, fontSize:42, color:C.accent, fontFace:FONT, bold:true });
-        sh.addText(`${f.fi} ${f.ft}`, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
-        sh.addText(f.fd + `\n📦 來自：${f.topic.ico} ${f.topic.n}`, { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
+        sh.addText(ftText, { x:1.5, y:y, w:11, h:0.5, fontSize:18, color:C.ink, fontFace:FONT, bold:true });
+        sh.addText(fdText, { x:1.5, y:y+0.55, w:11, h:1.1, fontSize:13, color:'555555', fontFace:FONT, valign:'top' });
       });
       sh.addNotes(formatNotesText(getFullSpeakerNotes('highlight', { topicName: title, featuresSummary: ch.map(f=>f.ft).join('、') }), `精選亮點 ${part}`));
     });
@@ -5895,15 +5961,13 @@ function downloadPptx(){
 
   pptx.writeFile({ fileName: filename })
     .then(()=>{
-      btn.textContent = '📥 下載 .pptx';
-      btn.disabled = false;
+      if (btn) { btn.textContent = origBtnTxt; btn.disabled = false; }
       alert(`🎉 簡報下載成功！\n\n檔案名稱：${filename}\n\n💡 講師重要備課提醒：\n以 PowerPoint 或 Keynote 開啟後，請點選視窗最下方的【備忘稿】（或在上方選單點選【檢視】→【備忘稿頁】／放映時開啟【簡報者檢視畫面】），每一頁投影片都有完整的「口語講法、轉場話術、破冰問句與動作提示」喔！\n\n（提醒：微軟 PowerPoint 右側的「註解」為多人共同編輯審閱功能，講師講稿均已寫入每頁的「備忘稿」中）。`);
     })
     .catch(e=>{
       console.error(e);
       alert('下載失敗：' + e.message);
-      btn.textContent = '📥 下載 .pptx';
-      btn.disabled = false;
+      if (btn) { btn.textContent = origBtnTxt; btn.disabled = false; }
     });
 }
 
